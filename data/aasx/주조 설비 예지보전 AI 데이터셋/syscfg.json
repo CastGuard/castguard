@@ -1,0 +1,23 @@
+{
+	"namespaces":
+	[
+		{ "ns_index":1, "ns":"urn:open62541.server.application", "aas_id":"-" },
+		{ "ns_index":2, "ns":"https://www.smart-factory.kr/datasolution", "aas_id":"-" }
+	],
+	"system":
+	[
+		{
+			"GatewayName": "EdgeGW",
+			"NetworkConnection": "opc.tcp://192.168.0.72:4840",
+			"SamplingInterval": "100.0",
+			"FieldDevices" :
+			[
+				{
+					"DeviceName": "DieCastingLine",
+					"NetworkConnection": "opc.tcp://192.168.0.117:48420",
+					"SamplingInterval": "100.0"
+				}
+			]
+		}
+	]
+}

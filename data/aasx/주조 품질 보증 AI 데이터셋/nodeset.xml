@@ -1,0 +1,2077 @@
+<?xml version='1.0' encoding='utf-8'?>
+<UANodeSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd">
+  <NamespaceUris>
+    <Uri>urn:open62541.server.application</Uri>
+    <Uri>https://www.smart-factory.kr/datasolution</Uri>
+  </NamespaceUris>
+  <Aliases>
+    <Alias Alias="Boolean">i=1</Alias>
+    <Alias Alias="Int32">i=6</Alias>
+    <Alias Alias="Float">i=10</Alias>
+    <Alias Alias="String">i=12</Alias>
+    <Alias Alias="QualifiedName">i=20</Alias>
+    <Alias Alias="Organizes">i=35</Alias>
+    <Alias Alias="HasTypeDefinition">i=40</Alias>
+    <Alias Alias="HasComponent">i=47</Alias>
+  </Aliases>
+  <UAObject NodeId="ns=1;s=vNS" BrowseName="1:vNS" ParentNodeId="i=85">
+    <DisplayName>vNS</DisplayName>
+    <Description>vNS</Description>
+    <References>
+      <Reference ReferenceType="Organizes" IsForward="false">i=85</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+    </References>
+  </UAObject>
+  <UAObject NodeId="ns=2;s=CloudDataSolution" BrowseName="2:CloudDataSolution" ParentNodeId="i=85">
+    <DisplayName>CloudDataSolution</DisplayName>
+    <Description>CloudDataSolution</Description>
+    <References>
+      <Reference ReferenceType="Organizes" IsForward="false">i=85</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=CloudDataSolution.CloudSolution</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=CloudDataSolution.EdgeGWSolution</Reference>
+    </References>
+  </UAObject>
+  <UAObject NodeId="ns=2;s=CloudDataSolution.CloudSolution" BrowseName="2:CloudSolution" ParentNodeId="ns=2;s=CloudDataSolution">
+    <DisplayName>CloudSolution</DisplayName>
+    <Description>CloudSolution</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=CloudDataSolution</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=CloudDataSolution.CloudSolution.BasicConfiguration</Reference>
+    </References>
+  </UAObject>
+  <UAObject NodeId="ns=2;s=CloudDataSolution.CloudSolution.BasicConfiguration" BrowseName="2:BasicConfiguration" ParentNodeId="ns=2;s=CloudDataSolution.CloudSolution">
+    <DisplayName>BasicConfiguration</DisplayName>
+    <Description>BasicConfiguration</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=CloudDataSolution.CloudSolution</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=CloudDataSolution.CloudSolution.BasicConfiguration.InternetAddress</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=CloudDataSolution.CloudSolution.BasicConfiguration.SamplingInterval</Reference>
+    </References>
+  </UAObject>
+  <UAVariable NodeId="ns=2;s=CloudDataSolution.CloudSolution.BasicConfiguration.InternetAddress" BrowseName="2:InternetAddress" ParentNodeId="ns=2;s=CloudDataSolution.CloudSolution.BasicConfiguration" DataType="String">
+    <DisplayName>InternetAddress</DisplayName>
+    <Description>InternetAddress</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=CloudDataSolution.CloudSolution.BasicConfiguration</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>192.168.0.71</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=CloudDataSolution.CloudSolution.BasicConfiguration.SamplingInterval" BrowseName="2:SamplingInterval" ParentNodeId="ns=2;s=CloudDataSolution.CloudSolution.BasicConfiguration" DataType="Float">
+    <DisplayName>SamplingInterval</DisplayName>
+    <Description>SamplingInterval</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=CloudDataSolution.CloudSolution.BasicConfiguration</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>100.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAObject NodeId="ns=2;s=CloudDataSolution.EdgeGWSolution" BrowseName="2:EdgeGWSolution" ParentNodeId="ns=2;s=CloudDataSolution">
+    <DisplayName>EdgeGWSolution</DisplayName>
+    <Description>EdgeGWSolution</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=CloudDataSolution</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=CloudDataSolution.EdgeGWSolution.EdgeGW</Reference>
+    </References>
+  </UAObject>
+  <UAObject NodeId="ns=2;s=CloudDataSolution.EdgeGWSolution.EdgeGW" BrowseName="2:EdgeGW" ParentNodeId="ns=2;s=CloudDataSolution.EdgeGWSolution">
+    <DisplayName>EdgeGW</DisplayName>
+    <Description>EdgeGW</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=CloudDataSolution.EdgeGWSolution</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=CloudDataSolution.EdgeGWSolution.EdgeGW.BasicConfiguration</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=CloudDataSolution.EdgeGWSolution.EdgeGW.DieCastingLine</Reference>
+    </References>
+  </UAObject>
+  <UAObject NodeId="ns=2;s=CloudDataSolution.EdgeGWSolution.EdgeGW.BasicConfiguration" BrowseName="2:BasicConfiguration" ParentNodeId="ns=2;s=CloudDataSolution.EdgeGWSolution.EdgeGW">
+    <DisplayName>BasicConfiguration</DisplayName>
+    <Description>BasicConfiguration</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=CloudDataSolution.EdgeGWSolution.EdgeGW</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=CloudDataSolution.EdgeGWSolution.EdgeGW.BasicConfiguration.NetworkConnection</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=CloudDataSolution.EdgeGWSolution.EdgeGW.BasicConfiguration.SamplingInterval</Reference>
+    </References>
+  </UAObject>
+  <UAVariable NodeId="ns=2;s=CloudDataSolution.EdgeGWSolution.EdgeGW.BasicConfiguration.NetworkConnection" BrowseName="2:NetworkConnection" ParentNodeId="ns=2;s=CloudDataSolution.EdgeGWSolution.EdgeGW.BasicConfiguration" DataType="String">
+    <DisplayName>NetworkConnection</DisplayName>
+    <Description>NetworkConnection</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=CloudDataSolution.EdgeGWSolution.EdgeGW.BasicConfiguration</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>opc.tcp://192.168.0.72:4840</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=CloudDataSolution.EdgeGWSolution.EdgeGW.BasicConfiguration.SamplingInterval" BrowseName="2:SamplingInterval" ParentNodeId="ns=2;s=CloudDataSolution.EdgeGWSolution.EdgeGW.BasicConfiguration" DataType="Float">
+    <DisplayName>SamplingInterval</DisplayName>
+    <Description>SamplingInterval</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=CloudDataSolution.EdgeGWSolution.EdgeGW.BasicConfiguration</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>100.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAObject NodeId="ns=2;s=CloudDataSolution.EdgeGWSolution.EdgeGW.DieCastingLine" BrowseName="2:DieCastingLine" ParentNodeId="ns=2;s=CloudDataSolution.EdgeGWSolution.EdgeGW">
+    <DisplayName>DieCastingLine</DisplayName>
+    <Description>DieCastingLine</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=CloudDataSolution.EdgeGWSolution.EdgeGW</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=CloudDataSolution.EdgeGWSolution.EdgeGW.DieCastingLine.BasicConfiguration</Reference>
+    </References>
+  </UAObject>
+  <UAObject NodeId="ns=2;s=CloudDataSolution.EdgeGWSolution.EdgeGW.DieCastingLine.BasicConfiguration" BrowseName="2:BasicConfiguration" ParentNodeId="ns=2;s=CloudDataSolution.EdgeGWSolution.EdgeGW.DieCastingLine">
+    <DisplayName>BasicConfiguration</DisplayName>
+    <Description>BasicConfiguration</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=CloudDataSolution.EdgeGWSolution.EdgeGW.DieCastingLine</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=CloudDataSolution.EdgeGWSolution.EdgeGW.DieCastingLine.BasicConfiguration.NetworkConnection</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=CloudDataSolution.EdgeGWSolution.EdgeGW.DieCastingLine.BasicConfiguration.SamplingInterval</Reference>
+    </References>
+  </UAObject>
+  <UAVariable NodeId="ns=2;s=CloudDataSolution.EdgeGWSolution.EdgeGW.DieCastingLine.BasicConfiguration.NetworkConnection" BrowseName="2:NetworkConnection" ParentNodeId="ns=2;s=CloudDataSolution.EdgeGWSolution.EdgeGW.DieCastingLine.BasicConfiguration" DataType="String">
+    <DisplayName>NetworkConnection</DisplayName>
+    <Description>NetworkConnection</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=CloudDataSolution.EdgeGWSolution.EdgeGW.DieCastingLine.BasicConfiguration</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>opc.tcp://192.168.0.117:48420</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=CloudDataSolution.EdgeGWSolution.EdgeGW.DieCastingLine.BasicConfiguration.SamplingInterval" BrowseName="2:SamplingInterval" ParentNodeId="ns=2;s=CloudDataSolution.EdgeGWSolution.EdgeGW.DieCastingLine.BasicConfiguration" DataType="Float">
+    <DisplayName>SamplingInterval</DisplayName>
+    <Description>SamplingInterval</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=CloudDataSolution.EdgeGWSolution.EdgeGW.DieCastingLine.BasicConfiguration</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>100.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAObject NodeId="ns=2;s=Die_Casting_Machine" BrowseName="2:Die_Casting_Machine" ParentNodeId="i=85">
+    <DisplayName>Die_Casting_Machine</DisplayName>
+    <Description>Die_Casting_Machine</Description>
+    <References>
+      <Reference ReferenceType="Organizes" IsForward="false">i=85</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Identification</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Operational_Data</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component</Reference>
+    </References>
+  </UAObject>
+  <UAObject NodeId="ns=2;s=Die_Casting_Machine.Identification" BrowseName="2:Identification" ParentNodeId="ns=2;s=Die_Casting_Machine">
+    <DisplayName>Identification</DisplayName>
+    <Description>Identification</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Identification.ManufacturerName</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Identification.ManufacturerId01</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Identification.ManufacturerIdProvider</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Identification.ManufacturerTypId</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Identification.ManufacturerTypName</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Identification.ManufacturerTypDescription</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Identification.SupplierName</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Identification.SupplierId</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Identification.SupplierIdProvider</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Identification.SupplierTypId</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Identification.SupplierTypName</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Identification.SupplierTypDescription</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Identification.TypClass</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Identification.ClassificationSystem</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Identification.SecondaryKeyTyp</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Identification.AssetId</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Identification.InstanceId</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Identification.ChargeId</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Identification.SecondaryKeyInstance</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Identification.ManufacturingDate</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Identification.DeviceRevision</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Identification.SoftwareRevision</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Identification.HardwareRevision</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Identification.ContactInfo01</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Identification.URL</Reference>
+    </References>
+  </UAObject>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Identification.ManufacturerName" BrowseName="2:ManufacturerName" ParentNodeId="ns=2;s=Die_Casting_Machine.Identification" DataType="String">
+    <DisplayName>ManufacturerName</DisplayName>
+    <Description>ManufacturerName</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Identification</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>name</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Identification.ManufacturerId01" BrowseName="2:ManufacturerId01" ParentNodeId="ns=2;s=Die_Casting_Machine.Identification" DataType="String">
+    <DisplayName>ManufacturerId01</DisplayName>
+    <Description>ManufacturerId01</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Identification</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>id</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Identification.ManufacturerIdProvider" BrowseName="2:ManufacturerIdProvider" ParentNodeId="ns=2;s=Die_Casting_Machine.Identification" DataType="String">
+    <DisplayName>ManufacturerIdProvider</DisplayName>
+    <Description>ManufacturerIdProvider</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Identification</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>provider</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Identification.ManufacturerTypId" BrowseName="2:ManufacturerTypId" ParentNodeId="ns=2;s=Die_Casting_Machine.Identification" DataType="String">
+    <DisplayName>ManufacturerTypId</DisplayName>
+    <Description>ManufacturerTypId</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Identification</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>id</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Identification.ManufacturerTypName" BrowseName="2:ManufacturerTypName" ParentNodeId="ns=2;s=Die_Casting_Machine.Identification" DataType="QualifiedName">
+    <DisplayName>ManufacturerTypName</DisplayName>
+    <Description>ManufacturerTypName</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Identification</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:QualifiedName>name</uax:QualifiedName>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Identification.ManufacturerTypDescription" BrowseName="2:ManufacturerTypDescription" ParentNodeId="ns=2;s=Die_Casting_Machine.Identification" DataType="String">
+    <DisplayName>ManufacturerTypDescription</DisplayName>
+    <Description>ManufacturerTypDescription</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Identification</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>des</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Identification.SupplierName" BrowseName="2:SupplierName" ParentNodeId="ns=2;s=Die_Casting_Machine.Identification" DataType="QualifiedName">
+    <DisplayName>SupplierName</DisplayName>
+    <Description>SupplierName</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Identification</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:QualifiedName>name</uax:QualifiedName>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Identification.SupplierId" BrowseName="2:SupplierId" ParentNodeId="ns=2;s=Die_Casting_Machine.Identification" DataType="String">
+    <DisplayName>SupplierId</DisplayName>
+    <Description>SupplierId</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Identification</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>id</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Identification.SupplierIdProvider" BrowseName="2:SupplierIdProvider" ParentNodeId="ns=2;s=Die_Casting_Machine.Identification" DataType="QualifiedName">
+    <DisplayName>SupplierIdProvider</DisplayName>
+    <Description>SupplierIdProvider</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Identification</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:QualifiedName>provider</uax:QualifiedName>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Identification.SupplierTypId" BrowseName="2:SupplierTypId" ParentNodeId="ns=2;s=Die_Casting_Machine.Identification" DataType="String">
+    <DisplayName>SupplierTypId</DisplayName>
+    <Description>SupplierTypId</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Identification</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>id</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Identification.SupplierTypName" BrowseName="2:SupplierTypName" ParentNodeId="ns=2;s=Die_Casting_Machine.Identification" DataType="String">
+    <DisplayName>SupplierTypName</DisplayName>
+    <Description>SupplierTypName</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Identification</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>name</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Identification.SupplierTypDescription" BrowseName="2:SupplierTypDescription" ParentNodeId="ns=2;s=Die_Casting_Machine.Identification" DataType="String">
+    <DisplayName>SupplierTypDescription</DisplayName>
+    <Description>SupplierTypDescription</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Identification</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>des</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Identification.TypClass" BrowseName="2:TypClass" ParentNodeId="ns=2;s=Die_Casting_Machine.Identification" DataType="String">
+    <DisplayName>TypClass</DisplayName>
+    <Description>TypClass</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Identification</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>class</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Identification.ClassificationSystem" BrowseName="2:ClassificationSystem" ParentNodeId="ns=2;s=Die_Casting_Machine.Identification" DataType="String">
+    <DisplayName>ClassificationSystem</DisplayName>
+    <Description>ClassificationSystem</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Identification</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>eclass</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Identification.SecondaryKeyTyp" BrowseName="2:SecondaryKeyTyp" ParentNodeId="ns=2;s=Die_Casting_Machine.Identification" DataType="String">
+    <DisplayName>SecondaryKeyTyp</DisplayName>
+    <Description>SecondaryKeyTyp</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Identification</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>type</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Identification.AssetId" BrowseName="2:AssetId" ParentNodeId="ns=2;s=Die_Casting_Machine.Identification" DataType="String">
+    <DisplayName>AssetId</DisplayName>
+    <Description>AssetId</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Identification</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>id</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Identification.InstanceId" BrowseName="2:InstanceId" ParentNodeId="ns=2;s=Die_Casting_Machine.Identification" DataType="String">
+    <DisplayName>InstanceId</DisplayName>
+    <Description>InstanceId</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Identification</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>id</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Identification.ChargeId" BrowseName="2:ChargeId" ParentNodeId="ns=2;s=Die_Casting_Machine.Identification" DataType="String">
+    <DisplayName>ChargeId</DisplayName>
+    <Description>ChargeId</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Identification</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>id</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Identification.SecondaryKeyInstance" BrowseName="2:SecondaryKeyInstance" ParentNodeId="ns=2;s=Die_Casting_Machine.Identification" DataType="String">
+    <DisplayName>SecondaryKeyInstance</DisplayName>
+    <Description>SecondaryKeyInstance</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Identification</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>instance</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Identification.ManufacturingDate" BrowseName="2:ManufacturingDate" ParentNodeId="ns=2;s=Die_Casting_Machine.Identification" DataType="String">
+    <DisplayName>ManufacturingDate</DisplayName>
+    <Description>ManufacturingDate</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Identification</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>date</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Identification.DeviceRevision" BrowseName="2:DeviceRevision" ParentNodeId="ns=2;s=Die_Casting_Machine.Identification" DataType="String">
+    <DisplayName>DeviceRevision</DisplayName>
+    <Description>DeviceRevision</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Identification</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>revision</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Identification.SoftwareRevision" BrowseName="2:SoftwareRevision" ParentNodeId="ns=2;s=Die_Casting_Machine.Identification" DataType="String">
+    <DisplayName>SoftwareRevision</DisplayName>
+    <Description>SoftwareRevision</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Identification</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>revision</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Identification.HardwareRevision" BrowseName="2:HardwareRevision" ParentNodeId="ns=2;s=Die_Casting_Machine.Identification" DataType="String">
+    <DisplayName>HardwareRevision</DisplayName>
+    <Description>HardwareRevision</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Identification</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>revision</uax:String>
+    </Value>
+  </UAVariable>
+  <UAObject NodeId="ns=2;s=Die_Casting_Machine.Identification.ContactInfo01" BrowseName="2:ContactInfo01" ParentNodeId="ns=2;s=Die_Casting_Machine.Identification">
+    <DisplayName>ContactInfo01</DisplayName>
+    <Description>ContactInfo01</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Identification</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Identification.ContactInfo01.Name</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Identification.ContactInfo01.Role</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Identification.ContactInfo01.PhysicalAddress</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Identification.ContactInfo01.Email</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Identification.ContactInfo01.URL</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Identification.ContactInfo01.Phone</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Identification.ContactInfo01.Fax</Reference>
+    </References>
+  </UAObject>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Identification.ContactInfo01.Name" BrowseName="2:Name" ParentNodeId="ns=2;s=Die_Casting_Machine.Identification.ContactInfo01" DataType="String">
+    <DisplayName>Name</DisplayName>
+    <Description>Name</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Identification.ContactInfo01</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>name</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Identification.ContactInfo01.Role" BrowseName="2:Role" ParentNodeId="ns=2;s=Die_Casting_Machine.Identification.ContactInfo01" DataType="String">
+    <DisplayName>Role</DisplayName>
+    <Description>Role</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Identification.ContactInfo01</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>Manufacturer</uax:String>
+    </Value>
+  </UAVariable>
+  <UAObject NodeId="ns=2;s=Die_Casting_Machine.Identification.ContactInfo01.PhysicalAddress" BrowseName="2:PhysicalAddress" ParentNodeId="ns=2;s=Die_Casting_Machine.Identification.ContactInfo01">
+    <DisplayName>PhysicalAddress</DisplayName>
+    <Description>PhysicalAddress</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Identification.ContactInfo01</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Identification.ContactInfo01.PhysicalAddress.CountryCode</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Identification.ContactInfo01.PhysicalAddress.Street</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Identification.ContactInfo01.PhysicalAddress.PostalCode</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Identification.ContactInfo01.PhysicalAddress.City</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Identification.ContactInfo01.PhysicalAddress.StateCounty</Reference>
+    </References>
+  </UAObject>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Identification.ContactInfo01.PhysicalAddress.CountryCode" BrowseName="2:CountryCode" ParentNodeId="ns=2;s=Die_Casting_Machine.Identification.ContactInfo01.PhysicalAddress" DataType="QualifiedName">
+    <DisplayName>CountryCode</DisplayName>
+    <Description>CountryCode</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Identification.ContactInfo01.PhysicalAddress</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:QualifiedName>KR</uax:QualifiedName>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Identification.ContactInfo01.PhysicalAddress.Street" BrowseName="2:Street" ParentNodeId="ns=2;s=Die_Casting_Machine.Identification.ContactInfo01.PhysicalAddress" DataType="String">
+    <DisplayName>Street</DisplayName>
+    <Description>Street</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Identification.ContactInfo01.PhysicalAddress</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>na</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Identification.ContactInfo01.PhysicalAddress.PostalCode" BrowseName="2:PostalCode" ParentNodeId="ns=2;s=Die_Casting_Machine.Identification.ContactInfo01.PhysicalAddress" DataType="String">
+    <DisplayName>PostalCode</DisplayName>
+    <Description>PostalCode</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Identification.ContactInfo01.PhysicalAddress</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>na</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Identification.ContactInfo01.PhysicalAddress.City" BrowseName="2:City" ParentNodeId="ns=2;s=Die_Casting_Machine.Identification.ContactInfo01.PhysicalAddress" DataType="String">
+    <DisplayName>City</DisplayName>
+    <Description>City</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Identification.ContactInfo01.PhysicalAddress</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>na</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Identification.ContactInfo01.PhysicalAddress.StateCounty" BrowseName="2:StateCounty" ParentNodeId="ns=2;s=Die_Casting_Machine.Identification.ContactInfo01.PhysicalAddress" DataType="QualifiedName">
+    <DisplayName>StateCounty</DisplayName>
+    <Description>StateCounty</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Identification.ContactInfo01.PhysicalAddress</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:QualifiedName>na</uax:QualifiedName>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Identification.ContactInfo01.Email" BrowseName="2:Email" ParentNodeId="ns=2;s=Die_Casting_Machine.Identification.ContactInfo01" DataType="String">
+    <DisplayName>Email</DisplayName>
+    <Description>Email</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Identification.ContactInfo01</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>email</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Identification.ContactInfo01.URL" BrowseName="2:URL" ParentNodeId="ns=2;s=Die_Casting_Machine.Identification.ContactInfo01" DataType="String">
+    <DisplayName>URL</DisplayName>
+    <Description>URL</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Identification.ContactInfo01</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>url</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Identification.ContactInfo01.Phone" BrowseName="2:Phone" ParentNodeId="ns=2;s=Die_Casting_Machine.Identification.ContactInfo01" DataType="String">
+    <DisplayName>Phone</DisplayName>
+    <Description>Phone</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Identification.ContactInfo01</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>phone</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Identification.ContactInfo01.Fax" BrowseName="2:Fax" ParentNodeId="ns=2;s=Die_Casting_Machine.Identification.ContactInfo01" DataType="String">
+    <DisplayName>Fax</DisplayName>
+    <Description>Fax</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Identification.ContactInfo01</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>fax</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Identification.URL" BrowseName="2:URL" ParentNodeId="ns=2;s=Die_Casting_Machine.Identification" DataType="String">
+    <DisplayName>URL</DisplayName>
+    <Description>URL</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Identification</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>na</uax:String>
+    </Value>
+  </UAVariable>
+  <UAObject NodeId="ns=2;s=Die_Casting_Machine.Operational_Data" BrowseName="2:Operational_Data" ParentNodeId="ns=2;s=Die_Casting_Machine">
+    <DisplayName>Operational_Data</DisplayName>
+    <Description>Operational_Data</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Operational_Data.Status</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Operational_Data.Production_Info</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Operational_Data.Defect_Info</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Operational_Data.Mold_Info</Reference>
+    </References>
+  </UAObject>
+  <UAObject NodeId="ns=2;s=Die_Casting_Machine.Operational_Data.Status" BrowseName="2:Status" ParentNodeId="ns=2;s=Die_Casting_Machine.Operational_Data">
+    <DisplayName>Status</DisplayName>
+    <Description>Status</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Operational_Data.Status.Machine_Status</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Operational_Data.Status.Start_Status</Reference>
+    </References>
+  </UAObject>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Operational_Data.Status.Machine_Status" BrowseName="2:Machine_Status" ParentNodeId="ns=2;s=Die_Casting_Machine.Operational_Data.Status" DataType="String">
+    <DisplayName>Machine_Status</DisplayName>
+    <Description>Machine_Status</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Operational_Data.Status</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>na</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Operational_Data.Status.Start_Status" BrowseName="2:Start_Status" ParentNodeId="ns=2;s=Die_Casting_Machine.Operational_Data.Status" DataType="String">
+    <DisplayName>Start_Status</DisplayName>
+    <Description>Start_Status</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Operational_Data.Status</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>na</uax:String>
+    </Value>
+  </UAVariable>
+  <UAObject NodeId="ns=2;s=Die_Casting_Machine.Operational_Data.Production_Info" BrowseName="2:Production_Info" ParentNodeId="ns=2;s=Die_Casting_Machine.Operational_Data">
+    <DisplayName>Production_Info</DisplayName>
+    <Description>Production_Info</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Operational_Data.Production_Info.Operation_Status</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Operational_Data.Production_Info.Product_Name</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Operational_Data.Production_Info.Production_Quantity</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Operational_Data.Production_Info.Planned_Production_Quantity</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Operational_Data.Production_Info.Performance_Achievement_Rate</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Operational_Data.Production_Info.Operating_Ratio</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Operational_Data.Production_Info.Cycle_Time</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Operational_Data.Production_Info.Machine_Cycle_Time</Reference>
+    </References>
+  </UAObject>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Operational_Data.Production_Info.Operation_Status" BrowseName="2:Operation_Status" ParentNodeId="ns=2;s=Die_Casting_Machine.Operational_Data.Production_Info" DataType="String">
+    <DisplayName>Operation_Status</DisplayName>
+    <Description>Operation_Status</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Operational_Data.Production_Info</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>na</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Operational_Data.Production_Info.Product_Name" BrowseName="2:Product_Name" ParentNodeId="ns=2;s=Die_Casting_Machine.Operational_Data.Production_Info" DataType="String">
+    <DisplayName>Product_Name</DisplayName>
+    <Description>Product_Name</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Operational_Data.Production_Info</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>name</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Operational_Data.Production_Info.Production_Quantity" BrowseName="2:Production_Quantity" ParentNodeId="ns=2;s=Die_Casting_Machine.Operational_Data.Production_Info" DataType="Int32">
+    <DisplayName>Production_Quantity</DisplayName>
+    <Description>Production_Quantity</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Operational_Data.Production_Info</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Int32>0</uax:Int32>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Operational_Data.Production_Info.Planned_Production_Quantity" BrowseName="2:Planned_Production_Quantity" ParentNodeId="ns=2;s=Die_Casting_Machine.Operational_Data.Production_Info" DataType="Int32">
+    <DisplayName>Planned_Production_Quantity</DisplayName>
+    <Description>Planned_Production_Quantity</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Operational_Data.Production_Info</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Int32>0</uax:Int32>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Operational_Data.Production_Info.Performance_Achievement_Rate" BrowseName="2:Performance_Achievement_Rate" ParentNodeId="ns=2;s=Die_Casting_Machine.Operational_Data.Production_Info" DataType="Float">
+    <DisplayName>Performance_Achievement_Rate</DisplayName>
+    <Description>Performance_Achievement_Rate</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Operational_Data.Production_Info</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Operational_Data.Production_Info.Operating_Ratio" BrowseName="2:Operating_Ratio" ParentNodeId="ns=2;s=Die_Casting_Machine.Operational_Data.Production_Info" DataType="Float">
+    <DisplayName>Operating_Ratio</DisplayName>
+    <Description>Operating_Ratio</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Operational_Data.Production_Info</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Operational_Data.Production_Info.Cycle_Time" BrowseName="2:Cycle_Time" ParentNodeId="ns=2;s=Die_Casting_Machine.Operational_Data.Production_Info" DataType="Float">
+    <DisplayName>Cycle_Time</DisplayName>
+    <Description>Cycle_Time</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Operational_Data.Production_Info</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Operational_Data.Production_Info.Machine_Cycle_Time" BrowseName="2:Machine_Cycle_Time" ParentNodeId="ns=2;s=Die_Casting_Machine.Operational_Data.Production_Info" DataType="Float">
+    <DisplayName>Machine_Cycle_Time</DisplayName>
+    <Description>Machine_Cycle_Time</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Operational_Data.Production_Info</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAObject NodeId="ns=2;s=Die_Casting_Machine.Operational_Data.Defect_Info" BrowseName="2:Defect_Info" ParentNodeId="ns=2;s=Die_Casting_Machine.Operational_Data">
+    <DisplayName>Defect_Info</DisplayName>
+    <Description>Defect_Info</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Operational_Data.Defect_Info.Defect_Quantity</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Operational_Data.Defect_Info.Defect_Rate</Reference>
+    </References>
+  </UAObject>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Operational_Data.Defect_Info.Defect_Quantity" BrowseName="2:Defect_Quantity" ParentNodeId="ns=2;s=Die_Casting_Machine.Operational_Data.Defect_Info" DataType="Int32">
+    <DisplayName>Defect_Quantity</DisplayName>
+    <Description>Defect_Quantity</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Operational_Data.Defect_Info</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Int32>0</uax:Int32>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Operational_Data.Defect_Info.Defect_Rate" BrowseName="2:Defect_Rate" ParentNodeId="ns=2;s=Die_Casting_Machine.Operational_Data.Defect_Info" DataType="Float">
+    <DisplayName>Defect_Rate</DisplayName>
+    <Description>Defect_Rate</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Operational_Data.Defect_Info</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAObject NodeId="ns=2;s=Die_Casting_Machine.Operational_Data.Mold_Info" BrowseName="2:Mold_Info" ParentNodeId="ns=2;s=Die_Casting_Machine.Operational_Data">
+    <DisplayName>Mold_Info</DisplayName>
+    <Description>Mold_Info</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Operational_Data.Mold_Info.Enabled_Mold_Number</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Operational_Data.Mold_Info.No_Cavity</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Operational_Data.Mold_Info.Shot</Reference>
+    </References>
+  </UAObject>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Operational_Data.Mold_Info.Enabled_Mold_Number" BrowseName="2:Enabled_Mold_Number" ParentNodeId="ns=2;s=Die_Casting_Machine.Operational_Data.Mold_Info" DataType="Int32">
+    <DisplayName>Enabled_Mold_Number</DisplayName>
+    <Description>Enabled_Mold_Number</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Operational_Data.Mold_Info</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Int32>0</uax:Int32>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Operational_Data.Mold_Info.No_Cavity" BrowseName="2:No_Cavity" ParentNodeId="ns=2;s=Die_Casting_Machine.Operational_Data.Mold_Info" DataType="Int32">
+    <DisplayName>No_Cavity</DisplayName>
+    <Description>No_Cavity</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Operational_Data.Mold_Info</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Int32>0</uax:Int32>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Operational_Data.Mold_Info.Shot" BrowseName="2:Shot" ParentNodeId="ns=2;s=Die_Casting_Machine.Operational_Data.Mold_Info" DataType="Int32">
+    <DisplayName>Shot</DisplayName>
+    <Description>Shot</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Operational_Data.Mold_Info</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Int32>0</uax:Int32>
+    </Value>
+  </UAVariable>
+  <UAObject NodeId="ns=2;s=Die_Casting_Machine.Component" BrowseName="2:Component" ParentNodeId="ns=2;s=Die_Casting_Machine">
+    <DisplayName>Component</DisplayName>
+    <Description>Component</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+    </References>
+  </UAObject>
+  <UAObject NodeId="ns=2;s=Die_Casting_Machine.Component.Injection_Unit" BrowseName="2:Die_Casting_Machine.Component.Injection_Unit" ParentNodeId="i=85">
+    <DisplayName>Die_Casting_Machine.Component.Injection_Unit</DisplayName>
+    <Description>Die_Casting_Machine.Component.Injection_Unit</Description>
+    <References>
+      <Reference ReferenceType="Organizes" IsForward="false">i=85</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component</Reference>
+    </References>
+  </UAObject>
+  <UAObject NodeId="ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component" BrowseName="2:Component" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Injection_Unit">
+    <DisplayName>Component</DisplayName>
+    <Description>Component</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Injection_Unit</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+    </References>
+  </UAObject>
+  <UAObject NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit" BrowseName="2:Die_Casting_Machine.Component.Clamping_Unit" ParentNodeId="i=85">
+    <DisplayName>Die_Casting_Machine.Component.Clamping_Unit</DisplayName>
+    <Description>Die_Casting_Machine.Component.Clamping_Unit</Description>
+    <References>
+      <Reference ReferenceType="Organizes" IsForward="false">i=85</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component</Reference>
+    </References>
+  </UAObject>
+  <UAObject NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component" BrowseName="2:Component" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit">
+    <DisplayName>Component</DisplayName>
+    <Description>Component</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+    </References>
+  </UAObject>
+  <UAObject NodeId="ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder" BrowseName="2:Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder" ParentNodeId="i=85">
+    <DisplayName>Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder</DisplayName>
+    <Description>Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder</Description>
+    <References>
+      <Reference ReferenceType="Organizes" IsForward="false">i=85</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder.Operational_Data</Reference>
+    </References>
+  </UAObject>
+  <UAObject NodeId="ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder.Operational_Data" BrowseName="2:Operational_Data" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder">
+    <DisplayName>Operational_Data</DisplayName>
+    <Description>Operational_Data</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder.Operational_Data.Injection_Level_1</Reference>
+    </References>
+  </UAObject>
+  <UAObject NodeId="ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder.Operational_Data.Injection_Level_1" BrowseName="2:Injection_Level_1" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder.Operational_Data">
+    <DisplayName>Injection_Level_1</DisplayName>
+    <Description>Injection_Level_1</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder.Operational_Data.Injection_Level_1.Velosity_1</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder.Operational_Data.Injection_Level_1.Velosity_2</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder.Operational_Data.Injection_Level_1.Velosity_3</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder.Operational_Data.Injection_Level_1.High_Velosity</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder.Operational_Data.Injection_Level_1.Cylinder_Pressure</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder.Operational_Data.Injection_Level_1.Casting_Pressure</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder.Operational_Data.Injection_Level_1.Rapid_Rise_Time</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder.Operational_Data.Injection_Level_1.Pressure_Rise_Time</Reference>
+    </References>
+  </UAObject>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder.Operational_Data.Injection_Level_1.Velosity_1" BrowseName="2:Velosity_1" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder.Operational_Data.Injection_Level_1" DataType="Float">
+    <DisplayName>Velosity_1</DisplayName>
+    <Description>Velosity_1</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder.Operational_Data.Injection_Level_1</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder.Operational_Data.Injection_Level_1.Velosity_2" BrowseName="2:Velosity_2" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder.Operational_Data.Injection_Level_1" DataType="Float">
+    <DisplayName>Velosity_2</DisplayName>
+    <Description>Velosity_2</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder.Operational_Data.Injection_Level_1</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder.Operational_Data.Injection_Level_1.Velosity_3" BrowseName="2:Velosity_3" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder.Operational_Data.Injection_Level_1" DataType="Float">
+    <DisplayName>Velosity_3</DisplayName>
+    <Description>Velosity_3</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder.Operational_Data.Injection_Level_1</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder.Operational_Data.Injection_Level_1.High_Velosity" BrowseName="2:High_Velosity" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder.Operational_Data.Injection_Level_1" DataType="Float">
+    <DisplayName>High_Velosity</DisplayName>
+    <Description>High_Velosity</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder.Operational_Data.Injection_Level_1</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder.Operational_Data.Injection_Level_1.Cylinder_Pressure" BrowseName="2:Cylinder_Pressure" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder.Operational_Data.Injection_Level_1" DataType="Float">
+    <DisplayName>Cylinder_Pressure</DisplayName>
+    <Description>Cylinder_Pressure</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder.Operational_Data.Injection_Level_1</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder.Operational_Data.Injection_Level_1.Casting_Pressure" BrowseName="2:Casting_Pressure " ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder.Operational_Data.Injection_Level_1" DataType="Float">
+    <DisplayName>Casting_Pressure </DisplayName>
+    <Description>Casting_Pressure </Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder.Operational_Data.Injection_Level_1</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder.Operational_Data.Injection_Level_1.Rapid_Rise_Time" BrowseName="2:Rapid_Rise_Time" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder.Operational_Data.Injection_Level_1" DataType="Float">
+    <DisplayName>Rapid_Rise_Time</DisplayName>
+    <Description>Rapid_Rise_Time</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder.Operational_Data.Injection_Level_1</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder.Operational_Data.Injection_Level_1.Pressure_Rise_Time" BrowseName="2:Pressure_Rise_Time" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder.Operational_Data.Injection_Level_1" DataType="Float">
+    <DisplayName>Pressure_Rise_Time</DisplayName>
+    <Description>Pressure_Rise_Time</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Cylinder.Operational_Data.Injection_Level_1</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAObject NodeId="ns=2;s=Die_Casting_Machine.Component.Injection_Unit.Component.Melting_Furnace" BrowseName="2:Die_Casting_Machine.Component.Injection_Unit.Component.Melting_Furnace" ParentNodeId="i=85">
+    <DisplayName>Die_Casting_Machine.Component.Injection_Unit.Component.Melting_Furnace</DisplayName>
+    <Description>Die_Casting_Machine.Component.Injection_Unit.Component.Melting_Furnace</Description>
+    <References>
+      <Reference ReferenceType="Organizes" IsForward="false">i=85</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+    </References>
+  </UAObject>
+  <UAObject NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Coolant" BrowseName="2:Die_Casting_Machine.Component.Clamping_Unit.Component.Coolant" ParentNodeId="i=85">
+    <DisplayName>Die_Casting_Machine.Component.Clamping_Unit.Component.Coolant</DisplayName>
+    <Description>Die_Casting_Machine.Component.Clamping_Unit.Component.Coolant</Description>
+    <References>
+      <Reference ReferenceType="Organizes" IsForward="false">i=85</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Coolant.Operational_Data</Reference>
+    </References>
+  </UAObject>
+  <UAObject NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Coolant.Operational_Data" BrowseName="2:Operational_Data" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Coolant">
+    <DisplayName>Operational_Data</DisplayName>
+    <Description>Operational_Data</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Coolant</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Coolant.Operational_Data.Spray_Time</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Coolant.Operational_Data.Spray_1_Time</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Coolant.Operational_Data.Spray_2_Time</Reference>
+    </References>
+  </UAObject>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Coolant.Operational_Data.Spray_Time" BrowseName="2:Spray_Time" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Coolant.Operational_Data" DataType="Float">
+    <DisplayName>Spray_Time</DisplayName>
+    <Description>Spray_Time</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Coolant.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Coolant.Operational_Data.Spray_1_Time" BrowseName="2:Spray_1_Time" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Coolant.Operational_Data" DataType="Float">
+    <DisplayName>Spray_1_Time</DisplayName>
+    <Description>Spray_1_Time</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Coolant.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Coolant.Operational_Data.Spray_2_Time" BrowseName="2:Spray_2_Time" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Coolant.Operational_Data" DataType="Float">
+    <DisplayName>Spray_2_Time</DisplayName>
+    <Description>Spray_2_Time</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Coolant.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAObject NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold" BrowseName="2:Die_Casting_Machine.Component.Clamping_Unit.Component.Mold" ParentNodeId="i=85">
+    <DisplayName>Die_Casting_Machine.Component.Clamping_Unit.Component.Mold</DisplayName>
+    <Description>Die_Casting_Machine.Component.Clamping_Unit.Component.Mold</Description>
+    <References>
+      <Reference ReferenceType="Organizes" IsForward="false">i=85</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data</Reference>
+    </References>
+  </UAObject>
+  <UAObject NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data" BrowseName="2:Operational_Data" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold">
+    <DisplayName>Operational_Data</DisplayName>
+    <Description>Operational_Data</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Mold_Open_Close</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Biscuit_Thickness</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Clamping_Force</Reference>
+    </References>
+  </UAObject>
+  <UAObject NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Mold_Open_Close" BrowseName="2:Mold_Open_Close" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data">
+    <DisplayName>Mold_Open_Close</DisplayName>
+    <Description>Mold_Open_Close</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Mold_Open_Close.Mold_Status</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Mold_Open_Close.Mold_Open_Time</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Mold_Open_Close.Mold_Close_Time</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Mold_Open_Close.Mold_Time</Reference>
+    </References>
+  </UAObject>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Mold_Open_Close.Mold_Status" BrowseName="2:Mold_Status" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Mold_Open_Close" DataType="String">
+    <DisplayName>Mold_Status</DisplayName>
+    <Description>Mold_Status</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Mold_Open_Close</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>na</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Mold_Open_Close.Mold_Open_Time" BrowseName="2:Mold_Open_Time" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Mold_Open_Close" DataType="String">
+    <DisplayName>Mold_Open_Time</DisplayName>
+    <Description>Mold_Open_Time</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Mold_Open_Close</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>na</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Mold_Open_Close.Mold_Close_Time" BrowseName="2:Mold_Close_Time" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Mold_Open_Close" DataType="String">
+    <DisplayName>Mold_Close_Time</DisplayName>
+    <Description>Mold_Close_Time</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Mold_Open_Close</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>na</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Mold_Open_Close.Mold_Time" BrowseName="2:Mold_Time" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Mold_Open_Close" DataType="Float">
+    <DisplayName>Mold_Time</DisplayName>
+    <Description>Mold_Time</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Mold_Open_Close</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAObject NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n" BrowseName="2:Cavity_n" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data">
+    <DisplayName>Cavity_n</DisplayName>
+    <Description>Cavity_n</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Cavity_Number</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Temperature</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Pressure</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Fluidity</Reference>
+    </References>
+  </UAObject>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Cavity_Number" BrowseName="2:Cavity_Number" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n" DataType="Int32">
+    <DisplayName>Cavity_Number</DisplayName>
+    <Description>Cavity_Number</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Int32>0</uax:Int32>
+    </Value>
+  </UAVariable>
+  <UAObject NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Temperature" BrowseName="2:Temperature" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n">
+    <DisplayName>Temperature</DisplayName>
+    <Description>Temperature</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Temperature.Mold_Pressure_Real_Time</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Temperature.Max_Mold_Temp</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Temperature.Start_Mold_Temp</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Temperature.VP_Mold_Temp</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Temperature.Integral_Mold_Temp</Reference>
+    </References>
+  </UAObject>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Temperature.Mold_Pressure_Real_Time" BrowseName="2:Mold_Pressure_Real_Time" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Temperature" DataType="String">
+    <DisplayName>Mold_Pressure_Real_Time</DisplayName>
+    <Description>Mold_Pressure_Real_Time</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Temperature</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>na</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Temperature.Max_Mold_Temp" BrowseName="2:Max_Mold_Temp" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Temperature" DataType="Float">
+    <DisplayName>Max_Mold_Temp</DisplayName>
+    <Description>Max_Mold_Temp</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Temperature</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Temperature.Start_Mold_Temp" BrowseName="2:Start_Mold_Temp" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Temperature" DataType="Float">
+    <DisplayName>Start_Mold_Temp</DisplayName>
+    <Description>Start_Mold_Temp</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Temperature</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Temperature.VP_Mold_Temp" BrowseName="2:VP_Mold_Temp" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Temperature" DataType="Float">
+    <DisplayName>VP_Mold_Temp</DisplayName>
+    <Description>VP_Mold_Temp</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Temperature</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Temperature.Integral_Mold_Temp" BrowseName="2:Integral_Mold_Temp" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Temperature" DataType="Float">
+    <DisplayName>Integral_Mold_Temp</DisplayName>
+    <Description>Integral_Mold_Temp</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Temperature</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAObject NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Pressure" BrowseName="2:Pressure" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n">
+    <DisplayName>Pressure</DisplayName>
+    <Description>Pressure</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Pressure.Mold_Pressure_Real_Time</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Pressure.Max_Mold_Pressure</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Pressure.Start_Mold_Pressure</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Pressure.VP_Mold_Pressure</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Pressure.Integral_Mold_Pressure</Reference>
+    </References>
+  </UAObject>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Pressure.Mold_Pressure_Real_Time" BrowseName="2:Mold_Pressure_Real_Time" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Pressure" DataType="String">
+    <DisplayName>Mold_Pressure_Real_Time</DisplayName>
+    <Description>Mold_Pressure_Real_Time</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Pressure</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>na</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Pressure.Max_Mold_Pressure" BrowseName="2:Max_Mold_Pressure" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Pressure" DataType="Float">
+    <DisplayName>Max_Mold_Pressure</DisplayName>
+    <Description>Max_Mold_Pressure</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Pressure</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Pressure.Start_Mold_Pressure" BrowseName="2:Start_Mold_Pressure" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Pressure" DataType="Float">
+    <DisplayName>Start_Mold_Pressure</DisplayName>
+    <Description>Start_Mold_Pressure</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Pressure</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Pressure.VP_Mold_Pressure" BrowseName="2:VP_Mold_Pressure" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Pressure" DataType="Float">
+    <DisplayName>VP_Mold_Pressure</DisplayName>
+    <Description>VP_Mold_Pressure</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Pressure</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Pressure.Integral_Mold_Pressure" BrowseName="2:Integral_Mold_Pressure" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Pressure" DataType="Float">
+    <DisplayName>Integral_Mold_Pressure</DisplayName>
+    <Description>Integral_Mold_Pressure</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Pressure</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAObject NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Fluidity" BrowseName="2:Fluidity" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n">
+    <DisplayName>Fluidity</DisplayName>
+    <Description>Fluidity</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Fluidity.Shear_Rate</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Fluidity.Shear_Stress</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Fluidity.Viscocity</Reference>
+    </References>
+  </UAObject>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Fluidity.Shear_Rate" BrowseName="2:Shear_Rate" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Fluidity" DataType="Float">
+    <DisplayName>Shear_Rate</DisplayName>
+    <Description>Shear_Rate</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Fluidity</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Fluidity.Shear_Stress" BrowseName="2:Shear_Stress" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Fluidity" DataType="Float">
+    <DisplayName>Shear_Stress</DisplayName>
+    <Description>Shear_Stress</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Fluidity</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Fluidity.Viscocity" BrowseName="2:Viscocity" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Fluidity" DataType="Float">
+    <DisplayName>Viscocity</DisplayName>
+    <Description>Viscocity</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Cavity_n.Fluidity</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Biscuit_Thickness" BrowseName="2:Biscuit_Thickness" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data" DataType="Float">
+    <DisplayName>Biscuit_Thickness</DisplayName>
+    <Description>Biscuit_Thickness</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data.Clamping_Force" BrowseName="2:Clamping_Force" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data" DataType="Float">
+    <DisplayName>Clamping_Force</DisplayName>
+    <Description>Clamping_Force</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Mold.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAObject NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n" BrowseName="2:Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n" ParentNodeId="i=85">
+    <DisplayName>Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n</DisplayName>
+    <Description>Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n</Description>
+    <References>
+      <Reference ReferenceType="Organizes" IsForward="false">i=85</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n.Identification</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n.Operational_Data</Reference>
+    </References>
+  </UAObject>
+  <UAObject NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n.Identification" BrowseName="2:Identification" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n">
+    <DisplayName>Identification</DisplayName>
+    <Description>Identification</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n.Identification.Position</Reference>
+    </References>
+  </UAObject>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n.Identification.Position" BrowseName="2:Position" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n.Identification" DataType="String">
+    <DisplayName>Position</DisplayName>
+    <Description>Position</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n.Identification</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>na</uax:String>
+    </Value>
+  </UAVariable>
+  <UAObject NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n.Operational_Data" BrowseName="2:Operational_Data" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n">
+    <DisplayName>Operational_Data</DisplayName>
+    <Description>Operational_Data</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n.Operational_Data.Start_Status</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n.Operational_Data.Speed</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n.Operational_Data.Torque</Reference>
+    </References>
+  </UAObject>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n.Operational_Data.Start_Status" BrowseName="2:Start_Status" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n.Operational_Data" DataType="String">
+    <DisplayName>Start_Status</DisplayName>
+    <Description>Start_Status</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>na</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n.Operational_Data.Speed" BrowseName="2:Speed" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n.Operational_Data" DataType="Float">
+    <DisplayName>Speed</DisplayName>
+    <Description>Speed</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAObject NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n.Operational_Data.Torque" BrowseName="2:Torque" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n.Operational_Data">
+    <DisplayName>Torque</DisplayName>
+    <Description>Torque</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n.Operational_Data.Torque.Average_Torque</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n.Operational_Data.Torque.Max_Torque</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n.Operational_Data.Torque.Min_Torque</Reference>
+    </References>
+  </UAObject>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n.Operational_Data.Torque.Average_Torque" BrowseName="2:Average_Torque" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n.Operational_Data.Torque" DataType="Float">
+    <DisplayName>Average_Torque</DisplayName>
+    <Description>Average_Torque</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n.Operational_Data.Torque</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n.Operational_Data.Torque.Max_Torque" BrowseName="2:Max_Torque" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n.Operational_Data.Torque" DataType="Float">
+    <DisplayName>Max_Torque</DisplayName>
+    <Description>Max_Torque</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n.Operational_Data.Torque</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n.Operational_Data.Torque.Min_Torque" BrowseName="2:Min_Torque" ParentNodeId="ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n.Operational_Data.Torque" DataType="Float">
+    <DisplayName>Min_Torque</DisplayName>
+    <Description>Min_Torque</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Die_Casting_Machine.Component.Clamping_Unit.Component.Motor_Drive_n.Operational_Data.Torque</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAObject NodeId="ns=2;s=Sensor" BrowseName="2:Sensor" ParentNodeId="i=85">
+    <DisplayName>Sensor</DisplayName>
+    <Description>Sensor</Description>
+    <References>
+      <Reference ReferenceType="Organizes" IsForward="false">i=85</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Sensor.Component</Reference>
+    </References>
+  </UAObject>
+  <UAObject NodeId="ns=2;s=Sensor.Component" BrowseName="2:Component" ParentNodeId="ns=2;s=Sensor">
+    <DisplayName>Component</DisplayName>
+    <Description>Component</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Sensor</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+    </References>
+  </UAObject>
+  <UAObject NodeId="ns=2;s=Sensor.Component.Melting_Furnace_Temp_Sensor" BrowseName="2:Sensor.Component.Melting_Furnace_Temp_Sensor" ParentNodeId="i=85">
+    <DisplayName>Sensor.Component.Melting_Furnace_Temp_Sensor</DisplayName>
+    <Description>Sensor.Component.Melting_Furnace_Temp_Sensor</Description>
+    <References>
+      <Reference ReferenceType="Organizes" IsForward="false">i=85</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Sensor.Component.Melting_Furnace_Temp_Sensor.Operational_Data</Reference>
+    </References>
+  </UAObject>
+  <UAObject NodeId="ns=2;s=Sensor.Component.Melting_Furnace_Temp_Sensor.Operational_Data" BrowseName="2:Operational_Data" ParentNodeId="ns=2;s=Sensor.Component.Melting_Furnace_Temp_Sensor">
+    <DisplayName>Operational_Data</DisplayName>
+    <Description>Operational_Data</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Sensor.Component.Melting_Furnace_Temp_Sensor</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Sensor.Component.Melting_Furnace_Temp_Sensor.Operational_Data.Melting_Furnace_Temp</Reference>
+    </References>
+  </UAObject>
+  <UAVariable NodeId="ns=2;s=Sensor.Component.Melting_Furnace_Temp_Sensor.Operational_Data.Melting_Furnace_Temp" BrowseName="2:Melting_Furnace_Temp" ParentNodeId="ns=2;s=Sensor.Component.Melting_Furnace_Temp_Sensor.Operational_Data" DataType="Boolean">
+    <DisplayName>Melting_Furnace_Temp</DisplayName>
+    <Description>Melting_Furnace_Temp</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Sensor.Component.Melting_Furnace_Temp_Sensor.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Boolean>true</uax:Boolean>
+    </Value>
+  </UAVariable>
+  <UAObject NodeId="ns=2;s=Sensor.Component.Air_Pressure_Sensor" BrowseName="2:Sensor.Component.Air_Pressure_Sensor" ParentNodeId="i=85">
+    <DisplayName>Sensor.Component.Air_Pressure_Sensor</DisplayName>
+    <Description>Sensor.Component.Air_Pressure_Sensor</Description>
+    <References>
+      <Reference ReferenceType="Organizes" IsForward="false">i=85</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Sensor.Component.Air_Pressure_Sensor.Operational_Data</Reference>
+    </References>
+  </UAObject>
+  <UAObject NodeId="ns=2;s=Sensor.Component.Air_Pressure_Sensor.Operational_Data" BrowseName="2:Operational_Data" ParentNodeId="ns=2;s=Sensor.Component.Air_Pressure_Sensor">
+    <DisplayName>Operational_Data</DisplayName>
+    <Description>Operational_Data</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Sensor.Component.Air_Pressure_Sensor</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Sensor.Component.Air_Pressure_Sensor.Operational_Data.Air_Pressure</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Sensor.Component.Air_Pressure_Sensor.Operational_Data.Air_Pressure_Min</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Sensor.Component.Air_Pressure_Sensor.Operational_Data.Air_Pressure_Max</Reference>
+    </References>
+  </UAObject>
+  <UAVariable NodeId="ns=2;s=Sensor.Component.Air_Pressure_Sensor.Operational_Data.Air_Pressure" BrowseName="2:Air_Pressure" ParentNodeId="ns=2;s=Sensor.Component.Air_Pressure_Sensor.Operational_Data" DataType="Float">
+    <DisplayName>Air_Pressure</DisplayName>
+    <Description>Air_Pressure</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Sensor.Component.Air_Pressure_Sensor.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Sensor.Component.Air_Pressure_Sensor.Operational_Data.Air_Pressure_Min" BrowseName="2:Air_Pressure_Min" ParentNodeId="ns=2;s=Sensor.Component.Air_Pressure_Sensor.Operational_Data" DataType="Float">
+    <DisplayName>Air_Pressure_Min</DisplayName>
+    <Description>Air_Pressure_Min</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Sensor.Component.Air_Pressure_Sensor.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Sensor.Component.Air_Pressure_Sensor.Operational_Data.Air_Pressure_Max" BrowseName="2:Air_Pressure_Max" ParentNodeId="ns=2;s=Sensor.Component.Air_Pressure_Sensor.Operational_Data" DataType="Float">
+    <DisplayName>Air_Pressure_Max</DisplayName>
+    <Description>Air_Pressure_Max</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Sensor.Component.Air_Pressure_Sensor.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAObject NodeId="ns=2;s=Sensor.Component.Coolant_Sensor" BrowseName="2:Sensor.Component.Coolant_Sensor" ParentNodeId="i=85">
+    <DisplayName>Sensor.Component.Coolant_Sensor</DisplayName>
+    <Description>Sensor.Component.Coolant_Sensor</Description>
+    <References>
+      <Reference ReferenceType="Organizes" IsForward="false">i=85</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Sensor.Component.Coolant_Sensor.Operational_Data</Reference>
+    </References>
+  </UAObject>
+  <UAObject NodeId="ns=2;s=Sensor.Component.Coolant_Sensor.Operational_Data" BrowseName="2:Operational_Data" ParentNodeId="ns=2;s=Sensor.Component.Coolant_Sensor">
+    <DisplayName>Operational_Data</DisplayName>
+    <Description>Operational_Data</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Sensor.Component.Coolant_Sensor</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Sensor.Component.Coolant_Sensor.Operational_Data.Coolant_Temp</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Sensor.Component.Coolant_Sensor.Operational_Data.Coolant_Temp_Min</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Sensor.Component.Coolant_Sensor.Operational_Data.Coolant_Temp_Max</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Sensor.Component.Coolant_Sensor.Operational_Data.Coolant_Pressure</Reference>
+    </References>
+  </UAObject>
+  <UAVariable NodeId="ns=2;s=Sensor.Component.Coolant_Sensor.Operational_Data.Coolant_Temp" BrowseName="2:Coolant_Temp" ParentNodeId="ns=2;s=Sensor.Component.Coolant_Sensor.Operational_Data" DataType="Float">
+    <DisplayName>Coolant_Temp</DisplayName>
+    <Description>Coolant_Temp</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Sensor.Component.Coolant_Sensor.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Sensor.Component.Coolant_Sensor.Operational_Data.Coolant_Temp_Min" BrowseName="2:Coolant_Temp_Min" ParentNodeId="ns=2;s=Sensor.Component.Coolant_Sensor.Operational_Data" DataType="Float">
+    <DisplayName>Coolant_Temp_Min</DisplayName>
+    <Description>Coolant_Temp_Min</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Sensor.Component.Coolant_Sensor.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Sensor.Component.Coolant_Sensor.Operational_Data.Coolant_Temp_Max" BrowseName="2:Coolant_Temp_Max" ParentNodeId="ns=2;s=Sensor.Component.Coolant_Sensor.Operational_Data" DataType="Float">
+    <DisplayName>Coolant_Temp_Max</DisplayName>
+    <Description>Coolant_Temp_Max</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Sensor.Component.Coolant_Sensor.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Sensor.Component.Coolant_Sensor.Operational_Data.Coolant_Pressure" BrowseName="2:Coolant_Pressure" ParentNodeId="ns=2;s=Sensor.Component.Coolant_Sensor.Operational_Data" DataType="Float">
+    <DisplayName>Coolant_Pressure</DisplayName>
+    <Description>Coolant_Pressure</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Sensor.Component.Coolant_Sensor.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAObject NodeId="ns=2;s=Sensor.Component.Factory_Sensor" BrowseName="2:Sensor.Component.Factory_Sensor" ParentNodeId="i=85">
+    <DisplayName>Sensor.Component.Factory_Sensor</DisplayName>
+    <Description>Sensor.Component.Factory_Sensor</Description>
+    <References>
+      <Reference ReferenceType="Organizes" IsForward="false">i=85</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Sensor.Component.Factory_Sensor.Operational_Data</Reference>
+    </References>
+  </UAObject>
+  <UAObject NodeId="ns=2;s=Sensor.Component.Factory_Sensor.Operational_Data" BrowseName="2:Operational_Data" ParentNodeId="ns=2;s=Sensor.Component.Factory_Sensor">
+    <DisplayName>Operational_Data</DisplayName>
+    <Description>Operational_Data</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Sensor.Component.Factory_Sensor</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Sensor.Component.Factory_Sensor.Operational_Data.Factory_Temp</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Sensor.Component.Factory_Sensor.Operational_Data.Factory_Temp_Min</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Sensor.Component.Factory_Sensor.Operational_Data.Factory_Temp_Max</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Sensor.Component.Factory_Sensor.Operational_Data.Factory_Humidity</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Sensor.Component.Factory_Sensor.Operational_Data.Factory_Humidity_Min</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Sensor.Component.Factory_Sensor.Operational_Data.Factory_Humidity_Max</Reference>
+    </References>
+  </UAObject>
+  <UAVariable NodeId="ns=2;s=Sensor.Component.Factory_Sensor.Operational_Data.Factory_Temp" BrowseName="2:Factory_Temp" ParentNodeId="ns=2;s=Sensor.Component.Factory_Sensor.Operational_Data" DataType="Float">
+    <DisplayName>Factory_Temp</DisplayName>
+    <Description>Factory_Temp</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Sensor.Component.Factory_Sensor.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Sensor.Component.Factory_Sensor.Operational_Data.Factory_Temp_Min" BrowseName="2:Factory_Temp_Min" ParentNodeId="ns=2;s=Sensor.Component.Factory_Sensor.Operational_Data" DataType="Float">
+    <DisplayName>Factory_Temp_Min</DisplayName>
+    <Description>Factory_Temp_Min</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Sensor.Component.Factory_Sensor.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Sensor.Component.Factory_Sensor.Operational_Data.Factory_Temp_Max" BrowseName="2:Factory_Temp_Max" ParentNodeId="ns=2;s=Sensor.Component.Factory_Sensor.Operational_Data" DataType="Float">
+    <DisplayName>Factory_Temp_Max</DisplayName>
+    <Description>Factory_Temp_Max</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Sensor.Component.Factory_Sensor.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Sensor.Component.Factory_Sensor.Operational_Data.Factory_Humidity" BrowseName="2:Factory_Humidity" ParentNodeId="ns=2;s=Sensor.Component.Factory_Sensor.Operational_Data" DataType="Float">
+    <DisplayName>Factory_Humidity</DisplayName>
+    <Description>Factory_Humidity</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Sensor.Component.Factory_Sensor.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Sensor.Component.Factory_Sensor.Operational_Data.Factory_Humidity_Min" BrowseName="2:Factory_Humidity_Min" ParentNodeId="ns=2;s=Sensor.Component.Factory_Sensor.Operational_Data" DataType="Float">
+    <DisplayName>Factory_Humidity_Min</DisplayName>
+    <Description>Factory_Humidity_Min</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Sensor.Component.Factory_Sensor.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Sensor.Component.Factory_Sensor.Operational_Data.Factory_Humidity_Max" BrowseName="2:Factory_Humidity_Max" ParentNodeId="ns=2;s=Sensor.Component.Factory_Sensor.Operational_Data" DataType="Float">
+    <DisplayName>Factory_Humidity_Max</DisplayName>
+    <Description>Factory_Humidity_Max</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Sensor.Component.Factory_Sensor.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAObject NodeId="ns=2;s=Defects" BrowseName="2:Defects" ParentNodeId="i=85">
+    <DisplayName>Defects</DisplayName>
+    <Description>Defects</Description>
+    <References>
+      <Reference ReferenceType="Organizes" IsForward="false">i=85</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Defects.Operational_Data</Reference>
+    </References>
+  </UAObject>
+  <UAObject NodeId="ns=2;s=Defects.Operational_Data" BrowseName="2:Operational_Data" ParentNodeId="ns=2;s=Defects">
+    <DisplayName>Operational_Data</DisplayName>
+    <Description>Operational_Data</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Defects</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Defects.Operational_Data.Product_Type</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Defects.Operational_Data.Short_Shot_1</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Defects.Operational_Data.Short_Shot_2</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Defects.Operational_Data.Bubble_1</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Defects.Operational_Data.Bubble_2</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Defects.Operational_Data.Exfoliation_1</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Defects.Operational_Data.Exfoliation_2</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Defects.Operational_Data.Blow_Hole_1</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Defects.Operational_Data.Blow_Hole_2</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Defects.Operational_Data.Stain_1</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Defects.Operational_Data.Stain_2</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Defects.Operational_Data.Dent_1</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Defects.Operational_Data.Dent_2</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Defects.Operational_Data.Deformation_1</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Defects.Operational_Data.Deformation_2</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Defects.Operational_Data.Contamination_1</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Defects.Operational_Data.Contamination_2</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Defects.Operational_Data.Impurity_1</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Defects.Operational_Data.Impurity_2</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Defects.Operational_Data.Crack_1</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Defects.Operational_Data.Crack_2</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Defects.Operational_Data.Scratch_1</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Defects.Operational_Data.Scratch_2</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Defects.Operational_Data.Buring_Mark_1</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Defects.Operational_Data.Buring_Mark_2</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Defects.Operational_Data.Inclusions_1</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=Defects.Operational_Data.Inclusions_2</Reference>
+    </References>
+  </UAObject>
+  <UAVariable NodeId="ns=2;s=Defects.Operational_Data.Product_Type" BrowseName="2:Product_Type" ParentNodeId="ns=2;s=Defects.Operational_Data" DataType="String">
+    <DisplayName>Product_Type</DisplayName>
+    <Description>Product_Type</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Defects.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:String>Type1</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Defects.Operational_Data.Short_Shot_1" BrowseName="2:Short_Shot_1" ParentNodeId="ns=2;s=Defects.Operational_Data" DataType="Boolean">
+    <DisplayName>Short_Shot_1</DisplayName>
+    <Description>Short_Shot_1</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Defects.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Boolean>true</uax:Boolean>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Defects.Operational_Data.Short_Shot_2" BrowseName="2:Short_Shot_2" ParentNodeId="ns=2;s=Defects.Operational_Data" DataType="Boolean">
+    <DisplayName>Short_Shot_2</DisplayName>
+    <Description>Short_Shot_2</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Defects.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Boolean>true</uax:Boolean>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Defects.Operational_Data.Bubble_1" BrowseName="2:Bubble_1" ParentNodeId="ns=2;s=Defects.Operational_Data" DataType="Boolean">
+    <DisplayName>Bubble_1</DisplayName>
+    <Description>Bubble_1</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Defects.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Boolean>true</uax:Boolean>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Defects.Operational_Data.Bubble_2" BrowseName="2:Bubble_2" ParentNodeId="ns=2;s=Defects.Operational_Data" DataType="Boolean">
+    <DisplayName>Bubble_2</DisplayName>
+    <Description>Bubble_2</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Defects.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Boolean>true</uax:Boolean>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Defects.Operational_Data.Exfoliation_1" BrowseName="2:Exfoliation_1" ParentNodeId="ns=2;s=Defects.Operational_Data" DataType="Boolean">
+    <DisplayName>Exfoliation_1</DisplayName>
+    <Description>Exfoliation_1</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Defects.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Boolean>true</uax:Boolean>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Defects.Operational_Data.Exfoliation_2" BrowseName="2:Exfoliation_2" ParentNodeId="ns=2;s=Defects.Operational_Data" DataType="Boolean">
+    <DisplayName>Exfoliation_2</DisplayName>
+    <Description>Exfoliation_2</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Defects.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Boolean>true</uax:Boolean>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Defects.Operational_Data.Blow_Hole_1" BrowseName="2:Blow_Hole_1" ParentNodeId="ns=2;s=Defects.Operational_Data" DataType="Boolean">
+    <DisplayName>Blow_Hole_1</DisplayName>
+    <Description>Blow_Hole_1</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Defects.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Boolean>true</uax:Boolean>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Defects.Operational_Data.Blow_Hole_2" BrowseName="2:Blow_Hole_2" ParentNodeId="ns=2;s=Defects.Operational_Data" DataType="Boolean">
+    <DisplayName>Blow_Hole_2</DisplayName>
+    <Description>Blow_Hole_2</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Defects.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Boolean>true</uax:Boolean>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Defects.Operational_Data.Stain_1" BrowseName="2:Stain_1" ParentNodeId="ns=2;s=Defects.Operational_Data" DataType="Boolean">
+    <DisplayName>Stain_1</DisplayName>
+    <Description>Stain_1</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Defects.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Boolean>true</uax:Boolean>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Defects.Operational_Data.Stain_2" BrowseName="2:Stain_2" ParentNodeId="ns=2;s=Defects.Operational_Data" DataType="Boolean">
+    <DisplayName>Stain_2</DisplayName>
+    <Description>Stain_2</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Defects.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Boolean>true</uax:Boolean>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Defects.Operational_Data.Dent_1" BrowseName="2:Dent_1" ParentNodeId="ns=2;s=Defects.Operational_Data" DataType="Boolean">
+    <DisplayName>Dent_1</DisplayName>
+    <Description>Dent_1</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Defects.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Boolean>true</uax:Boolean>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Defects.Operational_Data.Dent_2" BrowseName="2:Dent_2" ParentNodeId="ns=2;s=Defects.Operational_Data" DataType="Boolean">
+    <DisplayName>Dent_2</DisplayName>
+    <Description>Dent_2</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Defects.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Boolean>true</uax:Boolean>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Defects.Operational_Data.Deformation_1" BrowseName="2:Deformation_1" ParentNodeId="ns=2;s=Defects.Operational_Data" DataType="Boolean">
+    <DisplayName>Deformation_1</DisplayName>
+    <Description>Deformation_1</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Defects.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Boolean>true</uax:Boolean>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Defects.Operational_Data.Deformation_2" BrowseName="2:Deformation_2" ParentNodeId="ns=2;s=Defects.Operational_Data" DataType="Boolean">
+    <DisplayName>Deformation_2</DisplayName>
+    <Description>Deformation_2</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Defects.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Boolean>true</uax:Boolean>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Defects.Operational_Data.Contamination_1" BrowseName="2:Contamination_1" ParentNodeId="ns=2;s=Defects.Operational_Data" DataType="Boolean">
+    <DisplayName>Contamination_1</DisplayName>
+    <Description>Contamination_1</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Defects.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Boolean>true</uax:Boolean>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Defects.Operational_Data.Contamination_2" BrowseName="2:Contamination_2" ParentNodeId="ns=2;s=Defects.Operational_Data" DataType="Boolean">
+    <DisplayName>Contamination_2</DisplayName>
+    <Description>Contamination_2</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Defects.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Boolean>true</uax:Boolean>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Defects.Operational_Data.Impurity_1" BrowseName="2:Impurity_1" ParentNodeId="ns=2;s=Defects.Operational_Data" DataType="Boolean">
+    <DisplayName>Impurity_1</DisplayName>
+    <Description>Impurity_1</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Defects.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Boolean>true</uax:Boolean>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Defects.Operational_Data.Impurity_2" BrowseName="2:Impurity_2" ParentNodeId="ns=2;s=Defects.Operational_Data" DataType="Boolean">
+    <DisplayName>Impurity_2</DisplayName>
+    <Description>Impurity_2</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Defects.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Boolean>true</uax:Boolean>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Defects.Operational_Data.Crack_1" BrowseName="2:Crack_1" ParentNodeId="ns=2;s=Defects.Operational_Data" DataType="Boolean">
+    <DisplayName>Crack_1</DisplayName>
+    <Description>Crack_1</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Defects.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Boolean>true</uax:Boolean>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Defects.Operational_Data.Crack_2" BrowseName="2:Crack_2" ParentNodeId="ns=2;s=Defects.Operational_Data" DataType="Boolean">
+    <DisplayName>Crack_2</DisplayName>
+    <Description>Crack_2</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Defects.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Boolean>true</uax:Boolean>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Defects.Operational_Data.Scratch_1" BrowseName="2:Scratch_1" ParentNodeId="ns=2;s=Defects.Operational_Data" DataType="Boolean">
+    <DisplayName>Scratch_1</DisplayName>
+    <Description>Scratch_1</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Defects.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Boolean>true</uax:Boolean>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Defects.Operational_Data.Scratch_2" BrowseName="2:Scratch_2" ParentNodeId="ns=2;s=Defects.Operational_Data" DataType="Boolean">
+    <DisplayName>Scratch_2</DisplayName>
+    <Description>Scratch_2</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Defects.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Boolean>true</uax:Boolean>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Defects.Operational_Data.Buring_Mark_1" BrowseName="2:Buring_Mark_1" ParentNodeId="ns=2;s=Defects.Operational_Data" DataType="Boolean">
+    <DisplayName>Buring_Mark_1</DisplayName>
+    <Description>Buring_Mark_1</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Defects.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Boolean>true</uax:Boolean>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Defects.Operational_Data.Buring_Mark_2" BrowseName="2:Buring_Mark_2" ParentNodeId="ns=2;s=Defects.Operational_Data" DataType="Boolean">
+    <DisplayName>Buring_Mark_2</DisplayName>
+    <Description>Buring_Mark_2</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Defects.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Boolean>true</uax:Boolean>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Defects.Operational_Data.Inclusions_1" BrowseName="2:Inclusions_1" ParentNodeId="ns=2;s=Defects.Operational_Data" DataType="Boolean">
+    <DisplayName>Inclusions_1</DisplayName>
+    <Description>Inclusions_1</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Defects.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Boolean>true</uax:Boolean>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=2;s=Defects.Operational_Data.Inclusions_2" BrowseName="2:Inclusions_2" ParentNodeId="ns=2;s=Defects.Operational_Data" DataType="Boolean">
+    <DisplayName>Inclusions_2</DisplayName>
+    <Description>Inclusions_2</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=Defects.Operational_Data</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Boolean>true</uax:Boolean>
+    </Value>
+  </UAVariable>
+</UANodeSet>
