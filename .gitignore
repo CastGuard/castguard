@@ -1,0 +1,8 @@
+# 데이터와 문서는 보관하고 로컬 환경·캐시만 제외
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+.DS_Store
+Thumbs.db
+**/syscfg.json
