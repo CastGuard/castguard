@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "data_kind": "unconfigured",
+  "protocol_frozen_at": null,
+  "evaluation_start_at": null,
+  "evaluation_end_at": null,
+  "outcome_cutoff_at": null,
+  "required_features": [
+    "Velocity_1",
+    "Cycle_Time"
+  ],
+  "resources": [],
+  "max_wait_seconds": null,
+  "max_queue_size": null,
+  "service_seconds": null,
+  "overflow_rule": "drop_new",
+  "expiry_rule": "complete_by_event_expiry",
+  "window_end_rule": "complete_by_evaluation_end",
+  "missing_input_rule": "hold_fifo",
+  "sampling": {
+    "design": null,
+    "probability": null,
+    "seed": null,
+    "frozen_at": null,
+    "audit_resource_mode": "separate_from_policy_capacity",
+    "event_id_rule": null,
+    "definition_path": null,
+    "definition_sha256": null
+  },
+  "policies": [
+    {
+      "policy": "FIFO",
+      "priority_rule": "fifo",
+      "definition_path": null,
+      "definition_sha256": null,
+      "frozen_at": null,
+      "uses_labels": false
+    },
+    {
+      "policy": "Q",
+      "priority_rule": "score_desc",
+      "definition_path": null,
+      "definition_sha256": null,
+      "frozen_at": null,
+      "uses_labels": true
+    }
+  ],
+  "source_files": [],
+  "attestations": {
+    "independent_future_collection": false,
+    "sampling_independent_of_policy_and_outcome": false,
+    "event_ids_fixed_before_outcomes": false,
+    "complete_event_and_input_trace": false,
+    "capacity_and_expiry_agreed": false,
+    "training_label_trace_complete": false,
+    "source_and_clock_provenance_reviewed": false
+  },
+  "warning": "DRAFT: replace field choices using real operations and freeze before new labels; no performance certification"
+}

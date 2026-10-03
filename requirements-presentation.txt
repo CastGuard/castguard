@@ -1,0 +1,3 @@
+python-pptx==1.0.2
+pypdf==6.10.0
+# Native PDF/PNG export: Microsoft PowerPoint on Windows (installed application).

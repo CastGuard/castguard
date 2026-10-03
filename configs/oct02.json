@@ -1,0 +1,17 @@
+{
+  "seeds": [17, 29, 43, 71, 101],
+  "models": {
+    "logistic": {"C": 1.0, "max_iter": 3000},
+    "random_forest": {"n_estimators": 200, "min_samples_leaf": 5, "max_features": "sqrt"},
+    "lightgbm": {"n_estimators": 200, "learning_rate": 0.05, "num_leaves": 15, "min_child_samples": 20, "colsample_bytree": 0.85, "subsample": 0.85, "subsample_freq": 1},
+    "catboost": {"iterations": 200, "depth": 5, "learning_rate": 0.05, "l2_leaf_reg": 3.0}
+  },
+  "quality_experiments": {"A0": "q42_A0", "A": "q42_A", "B": "q42_B"},
+  "gate_max_validation_fpr": 0.02,
+  "b_min_ap_gain": 0.02,
+  "b_seed_sd_multiplier": 2.0,
+  "mold_six": ["top_temp1", "top_temp2", "top_temp3", "bottom_temp1", "bottom_temp2", "bottom_temp3"],
+  "bootstrap_repetitions": 1000,
+  "bootstrap_seed": 20261002,
+  "permutation_repetitions": 3
+}
