@@ -22,10 +22,18 @@ def _since_last(values: np.ndarray) -> np.ndarray:
 
 
 def add_feedback(df: pd.DataFrame, delay: int, windows=(20, 50, 100), halflife: float = 15,
-                 label: str = "y_defect", run_col: str = "run_id", order_col: str = "source_row") -> pd.DataFrame:
-    """delay Shot 이전까지의 검사결과로 최근 불량률·지수평균·마지막 불량 이후 경과를 만든다."""
+                 label: str = "y_defect", run_col: str = "run_id", order_col: str = "source_row",
+                 coverage: float = 1.0, seed: int = 0) -> pd.DataFrame:
+    """delay Shot 이전까지의 검사결과로 최근 불량률·지수평균·마지막 불량 이후 경과를 만든다.
+
+    coverage < 1이면 검사결과의 일부만 회신되는 상황(표본검사·회신 누락)을 모사한다.
+    """
     out = df.sort_values([run_col, order_col], kind="stable").copy()
-    known = out.groupby(run_col)[label].shift(delay)            # delay 이전 Shot의 결과만 '알려진' 값
+    observed = out[label].astype(float)
+    if coverage < 1.0:
+        returned = np.random.default_rng(seed).random(len(out)) < coverage
+        observed = observed.where(returned)
+    known = observed.groupby(out[run_col]).shift(delay)         # delay 이전 Shot의 결과만 '알려진' 값
     g = known.groupby(out[run_col])
     for w in windows:
         out[f"{FB_PREFIX}rate{w}"] = g.transform(lambda s, w=w: s.rolling(w, min_periods=1).mean())

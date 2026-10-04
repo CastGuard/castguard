@@ -99,6 +99,32 @@ def _run_tasks(tasks, frames, cfg, jobs):
     return rows, preds
 
 
+# ───────────────────────── 검증 방식 비교 ─────────────────────────
+def _random_split_eval(frame, feats, model, seed, cfg, protocol):
+    from sklearn.model_selection import train_test_split
+    tr, te = train_test_split(frame, test_size=0.3, random_state=seed, stratify=frame.y_defect)
+    m = make(model, seed, cfg)
+    m.fit(tr[feats], tr.y_defect)
+    p = m.predict_proba(te[feats])[:, 1]
+    return {"kind": "protocol", "scheme": protocol, "fold": "random70_30", "experiment": "A", "model": model,
+            "seed": seed, "target": "y_defect", "population": "all", "delay": None, "role": "test",
+            **score(te.y_defect, p, threshold_f1(te.y_defect, p))}
+
+
+def protocol_comparison(joined, folds, feats, model, seeds, cfg, jobs):
+    """가이드북식(중복 포함 무작위) → 중복 제거 무작위 → 구간 내 시간순 → 새 구간 순으로 같은 모델을 평가한다."""
+    from .prepare import build_quality, with_run
+    raw = pd.read_csv(paths.RAW_Q42, header=1)
+    raw.columns = raw.columns.str.strip()
+    raw = with_run(raw, "q42")
+    types = [c[:-2] for c in raw.columns if c.endswith("_1") and c not in feats]
+    raw["y_defect"] = raw[[f"{k}_{c}" for c in [1, 2] for k in types]].gt(0).any(axis=1).astype(int)
+    raw["shot_position"] = raw.groupby("run_id").cumcount()
+    jobs_list = [delayed(_random_split_eval)(raw, feats, model, s, cfg, "random_with_duplicates") for s in seeds]
+    jobs_list += [delayed(_random_split_eval)(joined, feats, model, s, cfg, "random_dedup") for s in seeds]
+    return Parallel(n_jobs=jobs, backend="loky")(jobs_list)
+
+
 # ───────────────────────── 선정 규칙 ─────────────────────────
 def select(metrics: pd.DataFrame, by=("experiment", "model")) -> pd.Series:
     """validation AP 평균 최대, 동률이면 ECE·seed 표준편차가 작은 쪽."""
@@ -169,6 +195,33 @@ def run(cfg: dict, jobs: int | None = None, log=print) -> dict:
     log(f"[3/6] 지연 민감도 {dl}: {len(tasks)}회")
     rows, preds = _run_tasks(tasks, frames, cfg, jobs)
     all_rows += rows; all_preds += preds
+
+    # 3b) 검사결과 회신율 민감도 (일부만 회신되는 경우)
+    covs = [c for c in cfg["feedback_coverage_sensitivity"] if c < 1.0]
+    frames = {("quality", "within_run", "primary", f"cov{c}", delay):
+              with_roles(add_feedback(joined, delay, windows, cfg["feedback_halflife"], coverage=c, seed=7),
+                         folds, "q42", "within_run", "primary") for c in covs}
+    tasks = [_task("quality", "within_run", "primary", fb_exp, final["model"], s, "y_defect", sets[fb_exp],
+                   population=f"cov{c}", delay=delay) for c in covs for s in seeds]
+    log(f"[3b] 회신율 민감도 {covs}: {len(tasks)}회")
+    rows, preds = _run_tasks(tasks, frames, cfg, jobs)
+    all_rows += rows; all_preds += preds
+
+    # 3b') 참고 상한: '정답' 설비상태 이력(oracle_*)을 넣으면 품질예측이 얼마나 좋아지는가
+    #      운영에서는 쓸 수 없는 정보다(입력 계약상 금지). #41 이력의 최대 가치를 가늠하는 분석 전용 실험.
+    oracle = ["oracle_shots_since_warm", "oracle_prior_episodes"]
+    base_exp = final["experiment"]
+    frames = {("quality_ref", "within_run", "primary", "all", delay): qframe("within_run", "primary", delay)}
+    tasks = [_task("quality_ref", "within_run", "primary", f"{base_exp}+oracle", final["model"], s, "y_defect",
+                   sets[base_exp] + oracle, delay=delay) for s in seeds]
+    rows, preds = _run_tasks(tasks, frames, cfg, jobs)
+    all_rows += rows
+    log(f"[3b'] 참고 상한(정답 설비상태 이력): {len(tasks)}회")
+
+    # 3c) 검증 방식 비교: 같은 입력(A)·같은 모델을 검증 방식만 바꿔 평가 (숫자가 왜 낮은지의 근거)
+    prot_rows = protocol_comparison(joined, folds, sets["A"], final["model"], seeds, cfg, jobs)
+    all_rows += prot_rows
+    log(f"[3c] 검증 방식 비교: {len(prot_rows)}행")
 
     # 4) 설비상태 Gate
     gfeat = contract["m41_gate"]

@@ -43,7 +43,7 @@ def seed_mean(preds: pd.DataFrame, **filt) -> pd.DataFrame:
 
 # ───────────────────────── 1~4. 모델 비교·Ablation·실패조건·지연 ─────────────────────────
 def model_tables(metrics, sel):
-    q = metrics[(metrics.kind == "quality") & (metrics.scheme == "within_run")]
+    q = metrics[(metrics.kind == "quality") & (metrics.scheme == "within_run") & (metrics.population == "all")]
     d = sel["label_delay_shots"]
     base = q[q.delay == d]
     rows = []
@@ -93,6 +93,63 @@ def model_tables(metrics, sel):
         test_auc=("roc_auc", "mean"), test_ap=("average_precision", "mean"), test_ap_lift=("ap_lift", "mean")).reset_index()
     _save(s.round(4), "delay_sensitivity.csv")
     return comp, dec
+
+
+def protocol_table(metrics, sel):
+    """같은 입력(A)·같은 모델을 검증 방식만 바꿔 평가: 숫자가 낮은 이유가 '정직한 검증'임을 보인다."""
+    fm, d = sel["final_quality"]["model"], sel["label_delay_shots"]
+    t = metrics[metrics.role == "test"]
+    rows = []
+    desc = {"random_with_duplicates": ("① 가이드북식: 중복 포함·무작위 70/30", "같은 Shot이 학습·평가에 동시에 들어감 → 부풀려짐"),
+            "random_dedup": ("② 중복 제거·무작위 70/30", "이웃 Shot이 섞여 여전히 낙관적"),
+            "within_run": ("③ 중복 제거·구간 내 시간순 (최종 기준)", "과거로 학습해 같은 구간의 미래를 예측"),
+            "run_holdout": ("④ 구간 하나 통째로 제외", "학습에 없던 구간 (다른 구간의 미래 포함)"),
+            "forward_run": ("⑤ 앞선 구간으로만 학습 → 다음 구간", "완전히 새로운 미래 구간 (실패 조건)")}
+    for scheme, (name, meaning) in desc.items():
+        if scheme.startswith("random"):
+            g = t[(t.kind == "protocol") & (t.scheme == scheme)]
+        else:
+            g = t[(t.kind == "quality") & (t.scheme == scheme) & (t.experiment == "A") & (t.model == fm) & (t.population == "all")]
+        rows.append({"protocol": name, "meaning": meaning, "test_auc": round(g.roc_auc.mean(), 3),
+                     "test_ap": round(g.average_precision.mean(), 3), "test_ap_lift": round(g.ap_lift.mean(), 2), "evaluations": len(g)})
+    f = sel["final_quality"]
+    g = t[(t.kind == "quality") & (t.scheme == "within_run") & (t.experiment == f["experiment"]) & (t.model == fm)
+          & (t.population == "all") & (t.delay == d)]
+    rows.append({"protocol": f"③' 최종 모델 ({f['experiment']}: 검사결과 피드백 포함)", "meaning": "③과 같은 검증, 피드백 추가",
+                 "test_auc": round(g.roc_auc.mean(), 3), "test_ap": round(g.average_precision.mean(), 3),
+                 "test_ap_lift": round(g.ap_lift.mean(), 2), "evaluations": len(g)})
+    return _save(pd.DataFrame(rows), "validation_protocols.csv")
+
+
+def oracle_table(metrics, sel):
+    f = sel["final_quality"]
+    t = metrics[(metrics.scheme == "within_run") & (metrics.model == f["model"]) & (metrics.population == "all")
+                & (metrics.delay == sel["label_delay_shots"])]
+    base = t[(t.kind == "quality") & (t.experiment == f["experiment"])]
+    ref = t[(t.kind == "quality_ref")]
+    rows = []
+    for name, g in [(f"{f['experiment']} (운영 입력)", base), (f"{f['experiment']} + 정답 설비상태 이력 (참고 상한)", ref)]:
+        v, te = g[g.role == "validation"], g[g.role == "test"]
+        rows.append({"inputs": name, "val_ap": round(v.average_precision.mean(), 4), "test_ap": round(te.average_precision.mean(), 4),
+                     "test_auc": round(te.roc_auc.mean(), 4)})
+    out = pd.DataFrame(rows)
+    out["val_ap_gain_vs_operational"] = (out.val_ap - out.val_ap.iloc[0]).round(4)
+    return _save(out, "ablation_oracle_upper_bound.csv")
+
+
+def coverage_table(metrics, sel):
+    fm, d, e = sel["final_quality"]["model"], sel["label_delay_shots"], sel["feedback_experiment_for_sensitivity"]
+    t = metrics[(metrics.kind == "quality") & (metrics.scheme == "within_run") & (metrics.role == "test")
+                & (metrics.experiment == e) & (metrics.model == fm) & (metrics.delay == d)]
+    t = t[t.population.isin(["all"]) | t.population.str.startswith("cov")]
+    out = t.assign(coverage=t.population.map(lambda x: 1.0 if x == "all" else float(x[3:]))).groupby("coverage").agg(
+        test_auc=("roc_auc", "mean"), test_ap=("average_precision", "mean"), test_ap_lift=("ap_lift", "mean")).reset_index()
+    a = metrics[(metrics.kind == "quality") & (metrics.scheme == "within_run") & (metrics.role == "test") & (metrics.experiment == "A")
+                & (metrics.model == fm) & (metrics.population == "all")]
+    out = pd.concat([out.sort_values("coverage", ascending=False),
+                     pd.DataFrame([{"coverage": 0.0, "test_auc": a.roc_auc.mean(), "test_ap": a.average_precision.mean(),
+                                    "test_ap_lift": a.ap_lift.mean()}])], ignore_index=True)
+    return _save(out.round(4), "feedback_coverage.csv")
 
 
 # ───────────────────────── 5~6. Gate · 적용범위(C) ─────────────────────────
@@ -180,7 +237,7 @@ def physics_table(joined, p40, folds, cfg):
 def final_predictions(preds, sel):
     f = sel["final_quality"]
     return seed_mean(preds, kind="quality", scheme="within_run", experiment=f["experiment"], model=f["model"],
-                     delay=sel["label_delay_shots"])
+                     delay=sel["label_delay_shots"], population="all")
 
 
 def kpi_tables(fp, cfg):
@@ -373,6 +430,7 @@ def run(cfg: dict, log=print) -> dict:
     p40 = pd.read_parquet(paths.P40)
     folds = pd.read_csv(paths.FOLDS, dtype={"fold": str, "episode_id": str, "order": str})
     comp, dec = model_tables(metrics, sel); log("  모델 비교·Ablation·실패조건·지연 민감도")
+    protocol_table(metrics, sel); coverage_table(metrics, sel); oracle_table(metrics, sel); log("  검증 방식 비교·회신율 민감도")
     gs = gate_tables(metrics, preds, m41, cfg, sel); log("  Gate·적용범위(C)")
     type_table(metrics); p40_table(metrics); physics_table(joined, p40, folds, cfg); log("  유형·#40(E)·물리방향(F)")
     fp = final_predictions(preds, sel)

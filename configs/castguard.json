@@ -2,6 +2,7 @@
   "seeds": [17, 29, 43, 71, 101],
   "label_delay_shots": 20,
   "label_delay_sensitivity": [5, 20, 50, 100],
+  "feedback_coverage_sensitivity": [1.0, 0.5, 0.2],
   "feedback_windows": [20, 50, 100],
   "feedback_halflife": 15,
   "min_run_size": 20,

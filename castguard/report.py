@@ -43,6 +43,14 @@ def run(cfg: dict) -> str:
     cond, shap = _csv("error_by_condition.csv"), _csv("shap_importance.csv")
     inter = _csv("shap_interactions.csv") if (T / "shap_interactions.csv").exists() else None
     ow = _csv("operating_window_candidates.csv")
+    prot, cov = _csv("validation_protocols.csv"), _csv("feedback_coverage.csv")
+    orc = _csv("ablation_oracle_upper_bound.csv")
+    orc_gain = orc.val_ap_gain_vs_operational.iloc[1]
+    p_dup, p_wr = prot.iloc[0], prot.iloc[2]
+    cov0 = cov[cov.coverage == 0.0].iloc[0]
+    cov20 = cov[cov.coverage == 0.2].iloc[0]
+    d100 = delay[delay.delay == delay.delay.max()].iloc[0]
+    i10, i30 = insp[insp.target_inspection_rate == 0.1].iloc[0], insp[insp.target_inspection_rate == 0.3].iloc[0]
 
     fq = sel["final_quality"]
     fin = comp[(comp.experiment == fq["experiment"]) & (comp.model == fq["model"])].iloc[0]
@@ -65,11 +73,12 @@ def run(cfg: dict) -> str:
 
 ## 요약
 
-- **계보 증명**: 품질보증(#42)과 설비 예지보전(#41)을 (가동구간, Shot) 키로 연결하면 {prep['join_matched']:,} Shot이 1:1로 맞고 공정값 {prep['join_equal_values']:,}개가 전부 일치한다. 두 데이터는 같은 설비의 서로 다른 기록이다.
-- **정직한 검증**: 반복 저장된 중복 {prep['q42_duplicates_removed']:,}행을 제거하고 가동구간 안 시간순으로만 검증했다. 최종 모델({fq['experiment']} · {fq['model']})의 test ROC-AUC는 **{fin.test_auc:.3f}**, PR-AUC는 **{fin.test_ap:.3f}**(불량률 대비 {fin.test_ap_lift:.2f}배)다. 공정변수만 쓴 베이스라인은 {a0.test_auc:.3f} / {a0.test_ap:.3f}다.
-- **현장 효과**: Shot의 {_pct(i20.test_inspection_rate)}만 추가검사해도 불량의 **{_pct(i20.capture_rate)}**를 잡는다. 같은 양을 무작위로 검사할 때보다 **{i20.lift_vs_random:.1f}배** 많다.
-- **보조 데이터의 역할**: #41 가동이력을 품질모델 입력으로 더하면 AP 변화는 validation {b['val_gain']:+.3f}로 채택 기준(+0.02)에 못 미쳤다. 대신 #41이 정의하는 설비상태를 **Gate**로 쓰면 test 구간 예열 에피소드 {gw.episodes:.0f}개 중 평균 {gw.detected_within_k:.1f}개를 첫 {cfg['gate_detect_within_shots']} Shot 안에 잡고, 정상 Shot 오정지는 {_pct(gw.false_stop_rate, 2)}다. #40(타 공장)에서는 금형온도 6개를 빼면 정상압력 구간 AUC가 {e_full:.3f} → {e_no:.3f}로 떨어진다. #42에 없는 **금형 열상태가 핵심 결손 변수**임을 보여준다.
-- **실패 조건**: 학습에 없던 새 가동구간(forward_run)에서는 AUC가 {fw.test_auc.min():.2f}~{fw.test_auc.max():.2f}로 떨어진다. 이를 숨기지 않고 원인(미관측 열상태·구간별 조건 변화)과 데이터 수집 제언으로 연결했다.
+- **현장 효과**: Shot의 {_pct(i20.test_inspection_rate)}만 추가검사해도 불량의 **{_pct(i20.capture_rate)}**를 잡는다(무작위 검사의 **{i20.lift_vs_random:.1f}배**). 10% 검사 시 {_pct(i10.capture_rate)}({i10.lift_vs_random:.1f}배), 30% 검사 시 {_pct(i30.capture_rate)}다.
+- **예열 Shot 차단**: 설비상태 Gate가 test 구간 예열 에피소드 {gw.episodes:.0f}개 중 평균 {gw.detected_within_k:.1f}개를 평균 {gw.mean_shots_to_detect:.1f} Shot 만에 잡는다. 정상 Shot 오정지는 {_pct(gw.false_stop_rate, 2)}다. Gate가 없으면 예열 Shot은 전부 정상처럼 품질판정된다.
+- **정직한 성능**: 같은 모델을 가이드북 방식(중복 포함·무작위 분할)으로 평가하면 AUC {p_dup.test_auc:.3f}지만, 중복을 지우고 구간 안 시간순으로 평가하면 {p_wr.test_auc:.3f}다. 우리는 낮은 쪽을 기준으로 보고한다. 최종 모델({fq['experiment']} · {fq['model']})은 이 기준에서 ROC-AUC **{fin.test_auc:.3f}**, PR-AUC **{fin.test_ap:.3f}**(불량률의 {fin.test_ap_lift:.2f}배)다.
+- **계보 증명**: 품질보증(#42)과 설비 예지보전(#41)을 (가동구간, Shot) 키로 연결하면 {prep['join_matched']:,} Shot이 1:1로 맞고 공정값 {prep['join_equal_values']:,}개가 전부 일치한다.
+- **보조 데이터의 역할**: #41은 품질모델 입력으로는 효과가 없었지만(validation AP {b['val_gain']:+.3f}, 채택 기준 +0.02 미달) Gate로 쓰면 예열 판정 문제를 해결한다. #40(타 공장)에서는 금형온도 6개를 빼면 정상압력 구간 AUC가 {e_full:.3f} → {e_no:.3f}로 떨어져, #42에 없는 **금형 열상태가 핵심 결손 변수**임을 보여준다.
+- **한계와 실패 조건**: 학습에 없던 새 가동구간에서는 AUC가 {fw.test_auc.min():.2f}~{fw.test_auc.max():.2f}로 떨어진다. 원인 가설(미관측 열상태)과 데이터 수집 제언까지 함께 제시한다.
 
 ## 1. 기업문제 정의 및 데이터 통합
 
@@ -99,6 +108,10 @@ def run(cfg: dict) -> str:
 
 **검사결과 피드백.** 현장은 모든 Shot을 사후 육안검사하므로 결과가 늦게 도착한다. Shot t를 예측할 때 같은 구간에서 {sel['label_delay_shots']} Shot 이전까지 도착한 검사결과로 최근 불량률(20·50·100 Shot), 지수평균, 마지막 불량 이후 경과를 만든다. 불량은 시간적으로 몰려 있어(구간 내 자기상관) 이 정보가 미관측 설비 상태의 대리 지표가 된다.
 
+**검증 방식에 따른 성능 차이.** 같은 입력(A)과 같은 모델을 검증 방식만 바꿔 평가했다. 무작위 분할은 같은 Shot의 중복 기록이나 이웃 Shot이 학습과 평가에 함께 들어가 성능을 부풀린다. 현장에서 쓰이는 상황은 "과거로 학습해 미래를 예측"이므로 ③을 최종 기준으로 삼는다.
+
+{_md(prot)}
+
 **검증.** 가동구간 안에서 앞 70%를 개발(그중 80% train · 20% validation), 뒤 30%를 test로 고정했다. 모든 선택(입력·모델·임계값)은 validation으로만 했다. seed {len(cfg['seeds'])}개 평균 ± 표준편차.
 
 **Ablation (최종 모델군 {fq['model']}, within-run test).**
@@ -109,6 +122,10 @@ def run(cfg: dict) -> str:
 |---|---:|---:|---|
 """ + "\n".join(f"| {k} ({v['from']}→{v['to']}) | {v['val_gain']:+.3f} | {v['test_gain']:+.3f} | {'예' if v['pass_rule(+0.02 & >2sd on validation)'] else '아니오'} |" for k, v in dec.items()) + f"""
 
+**#41 이력의 최대 가치 (참고 상한).** 운영에서는 쓸 수 없는 '정답' 설비상태 이력(예열 후 경과 Shot, 이전 예열 횟수)을 넣어도 validation AP 변화는 {orc_gain:+.3f}로 채택 기준(+0.02)에 못 미친다. 정상 생산 Shot의 품질은 예열 이력과 거의 무관하므로, #41의 가치는 품질 입력이 아니라 **예열 Shot을 걸러내는 Gate**에 있다.
+
+{_md(orc)}
+
 **후보 모델 비교와 최종모델 선정근거.** 로지스틱·랜덤포레스트·LightGBM·CatBoost·XGBoost·앙상블(로지스틱+LightGBM+CatBoost 평균)을 같은 분할에서 비교했다. validation PR-AUC가 가장 높은 조합을 선정하고, 동률이면 보정오차(ECE)와 seed 간 표준편차가 작은 쪽을 택했다. #41 이력을 포함한 입력(B 계열)은 validation에서 +0.02 이상, seed 표준편차의 2배를 넘을 때만 채택한다.
 
 {_md(comp.head(10)[['experiment', 'model', 'val_ap', 'val_auc', 'val_ece', 'test_ap', 'test_auc', 'selected']])}
@@ -118,6 +135,12 @@ def run(cfg: dict) -> str:
 **검사결과 지연 민감도.**
 
 {_md(delay)}
+
+**검사결과 회신율 민감도.** 검사결과가 일부만 회신되는 경우(표본검사·회신 누락)를 모사했다. 회신율 0%는 피드백이 없는 모델(A)이다.
+
+{_md(cov)}
+
+피드백의 이득은 회신이 빠르고 빠짐없을수록 크다. 회신이 늦거나 일부만 오더라도 성능은 피드백 없는 모델 수준(AUC {cov0.test_auc:.3f})에서 크게 벗어나지 않는다(지연 {int(d100.delay)} Shot: {d100.test_auc:.3f}, 회신율 20%: {cov20.test_auc:.3f}). 피드백 경로가 끊겨도 시스템은 공정·센서 모델로 계속 동작한다.
 
 **설비상태 Gate (Stage 1, {sel['gate_model']}).** 오정지율(정상 Shot 경보) {_pct(cfg['gate_max_validation_fpr'], 0)}가 되도록 validation에서 임계값을 정했다.
 
@@ -196,6 +219,23 @@ def run(cfg: dict) -> str:
 ## 6. 코드 · 재현성
 
 `python -m castguard all` 한 줄로 환경 점검 → 전처리 → 학습 → 분석 → 이 보고서까지 만든다. 원본 CSV 3종은 `data/raw/`, 결과 표는 `reports/tables/`, 그림은 `reports/figures/`, 제출용 예측은 `outputs/predictions/test_predictions.csv`에 있다. seed {cfg['seeds']}를 고정했고, 전처리 결과는 JH 브랜치 산출물과 값 단위로 동일함을 확인했다(#42·#41).
+
+## 예상 질문과 답변
+
+**Q1. 성능(AUC {fin.test_auc:.2f})이 낮은 것 아닌가?**
+같은 모델도 가이드북 방식으로 평가하면 {p_dup.test_auc:.2f}다. 차이는 모델이 아니라 검증 방식에서 나온다. 중복 Shot과 이웃 Shot이 학습·평가에 섞이지 않게 한 결과이고, 현장에서 실제로 기대할 수 있는 숫자다. 현장 가치는 AUC보다 KPI로 본다: 검사 {_pct(i20.test_inspection_rate, 0)}로 불량 {_pct(i20.capture_rate, 0)}를 잡는다(무작위의 {i20.lift_vs_random:.1f}배).
+
+**Q2. 검사결과가 20 Shot 안에 회신된다는 가정이 현실적인가?**
+Type 1 기준 약 7분, Type 2 기준 약 12분이다. 가정이 깨져도 지연 {int(d100.delay)} Shot에서 AUC {d100.test_auc:.3f}, 회신율 20%에서 {cov20.test_auc:.3f}로, 피드백이 없는 모델({cov0.test_auc:.3f})과 비슷한 수준을 유지한다. 도입 시 첫 단계로 검사 회신 주기를 측정한다.
+
+**Q3. #41과 #42는 같은 데이터 아닌가? 보조 데이터의 효과는?**
+공정변수는 같지만 모집단과 라벨이 다르다. #41은 예열·결측을 포함한 전체 가동 이력과 설비상태를, #42는 정상 생산분의 품질을 담는다. #41 이력을 품질모델 입력으로 넣는 효과는 사전에 정한 기준(+0.02)에 못 미쳐 채택하지 않았다. 운영에서 쓸 수 없는 '정답' 설비상태 이력을 넣어도 {orc_gain:+.3f}에 그쳐, 정상 Shot의 품질은 예열 이력과 거의 무관하다. 대신 #41의 설비상태로 만든 Gate는 #42만으로는 불가능한 예열 Shot 차단을 해낸다(에피소드 {gw.detected_within_k:.0f}/{gw.episodes:.0f}, 오정지 {_pct(gw.false_stop_rate, 1)}).
+
+**Q4. 새 가동구간에서 예측이 무너지는 이유는?**
+구간마다 불량률이 1.3%~41%로 다르고 공정 분포가 이동한다. #40에서 금형온도를 빼면 성능이 크게 떨어진 점을 보면, #42에 없는 금형 열상태가 유력한 원인 가설이다. 그래서 금형 온도의 Shot 단위 수집을 제언하고, 새 구간 초반에는 보수적 검사율로 운영한다.
+
+**Q5. 운전창 추천은 믿을 수 있는가?**
+모델 기반 후보이지 인과효과가 아니다. 관측된 정상 범위 안에서만 제안하고, 현장 시험 전에는 조건 변경을 자동 적용하지 않는다.
 
 ## 출처
 
