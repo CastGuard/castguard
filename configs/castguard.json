@@ -17,6 +17,15 @@
   "cost_ratios": [1, 2, 5, 10, 20],
   "b_min_ap_gain": 0.02,
   "use_gpu": false,
+  "adoption_min_gain": 0.02,
+  "inner_cv_folds": [[0.5, 0.6667], [0.6667, 0.8333], [0.8333, 1.0001]],
+  "gate_max_cross_run_fpr": 0.05,
+  "gate_adapt_delay": 20,
+  "gate_adapt_min_history": 30,
+  "quality_search": {
+    "random_forest": {"min_samples_leaf": [10, 20, 40], "max_features": ["sqrt", 0.5]},
+    "lightgbm": {"num_leaves": [4, 7, 15], "learning_rate": [0.02, 0.05], "min_child_samples": [40, 80]}
+  },
   "candidate_models": {
     "logistic": {"C": 0.3, "max_iter": 3000},
     "random_forest": {"n_estimators": 300, "min_samples_leaf": 20, "max_features": "sqrt"},

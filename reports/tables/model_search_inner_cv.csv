@@ -1,0 +1,24 @@
+﻿candidate,mean,std,gain_vs_current,adoptable
+random_forest min_samples_leaf=40 max_features=sqrt,0.4842,0.0046,0.0082,False
+random_forest min_samples_leaf=20 max_features=sqrt,0.4761,0.0048,0.0,False
+현재 최종: A_FB·random_forest,0.4761,0.0048,0.0,False
+Cavity1·2 분리 후 결합 (RF),0.4746,0.0023,-0.0014,False
+"B_FB (#41 이력 포함, RF)",0.4706,0.0056,-0.0055,False
+random_forest min_samples_leaf=40 max_features=0.5,0.4703,0.0049,-0.0058,False
+random_forest min_samples_leaf=10 max_features=sqrt,0.4673,0.0049,-0.0088,False
+lightgbm num_leaves=4 learning_rate=0.02 min_child_samples=40,0.4617,0.0065,-0.0144,False
+lightgbm num_leaves=7 learning_rate=0.02 min_child_samples=80,0.4615,0.0059,-0.0145,False
+lightgbm num_leaves=15 learning_rate=0.02 min_child_samples=80,0.4592,0.004,-0.0168,False
+lightgbm num_leaves=4 learning_rate=0.02 min_child_samples=80,0.4581,0.0066,-0.018,False
+앙상블 (LR+LGBM+CatBoost),0.4544,0.0054,-0.0217,False
+lightgbm num_leaves=7 learning_rate=0.02 min_child_samples=40,0.4541,0.0064,-0.022,False
+불량유형 5종 분리 후 결합 (RF),0.4497,0.0086,-0.0264,False
+lightgbm num_leaves=4 learning_rate=0.05 min_child_samples=40,0.4496,0.0079,-0.0265,False
+random_forest min_samples_leaf=20 max_features=0.5,0.4485,0.0073,-0.0275,False
+lightgbm num_leaves=4 learning_rate=0.05 min_child_samples=80,0.4477,0.0094,-0.0284,False
+lightgbm num_leaves=15 learning_rate=0.02 min_child_samples=40,0.4434,0.0072,-0.0327,False
+lightgbm num_leaves=15 learning_rate=0.05 min_child_samples=80,0.4321,0.0088,-0.044,False
+lightgbm num_leaves=7 learning_rate=0.05 min_child_samples=80,0.4301,0.007,-0.046,False
+random_forest min_samples_leaf=10 max_features=0.5,0.4241,0.0037,-0.052,False
+lightgbm num_leaves=7 learning_rate=0.05 min_child_samples=40,0.4241,0.0044,-0.052,False
+lightgbm num_leaves=15 learning_rate=0.05 min_child_samples=40,0.4217,0.0044,-0.0544,False

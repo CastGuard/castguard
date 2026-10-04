@@ -56,7 +56,17 @@ def run(cfg: dict) -> str:
     fin = comp[(comp.experiment == fq["experiment"]) & (comp.model == fq["model"])].iloc[0]
     a0 = comp[(comp.experiment == "A0")].sort_values("val_ap", ascending=False).iloc[0]
     i20 = insp[insp.target_inspection_rate == 0.2].iloc[0]
-    gw = gate[gate.scheme == "within_run"].iloc[0]
+    gw = gate[(gate.scheme == "within_run") & (gate.policy == "적응형")].iloc[0]
+    gsel = _csv("gate_selection_loro.csv")
+    gpick = gsel[gsel.selected].iloc[0]
+    gx = gate[gate.scheme != "within_run"].pivot_table(index=["scheme", "fold"], columns="policy",
+                                                       values=["false_stop_rate", "detected_within_k"]).round(3)
+    gx.columns = [f"{a}({b})" for a, b in gx.columns]
+    gx = gx.reset_index()
+    fixed_max = gate[(gate.scheme != "within_run") & (gate.policy == "고정")].false_stop_rate.max()
+    adapt_max = gate[(gate.scheme != "within_run") & (gate.policy == "적응형")].false_stop_rate.max()
+    srch = _csv("model_search_inner_cv.csv")
+    tsel = _csv("defect_type_model_selection.csv")
     fw = fail[(fail.scheme == "forward_run") & (fail.experiment == fq["experiment"])]
     rh = fail[(fail.scheme == "run_holdout") & (fail.experiment == fq["experiment"])]
     run_auc = cond[(cond.axis == "가동구간") & cond.auc.notna() & (cond.positives >= 10)]
@@ -132,6 +142,10 @@ def run(cfg: dict) -> str:
 
 **최종 선정: {fq['experiment']} · {fq['model']}** (validation AP {fq['val_ap']:.3f}).{(' B 계열 후보(' + fq['b_rule']['candidate'] + ')는 validation 이득 ' + format(fq['b_rule']['val_gain'], '+.3f') + '로 기준 미달이라 제외했다.') if fq.get('b_rule') and not fq['b_rule']['adopted'] else ''}
 
+**추가 탐색과 성능 한계.** 최종 선정 뒤, 사전에 정한 {len(srch)}개 후보(RF·LightGBM 하이퍼파라미터 격자, Cavity 분리 결합, 불량유형 분리 결합, 앙상블, #41 이력 포함)를 test를 보지 않고 **개발구간 확장창 3-fold**로 다시 비교했다. 채택 기준은 "현재 최종 대비 평균 AP +0.02 이상, seed 표준편차의 2배 초과"다. 최고 후보의 이득은 {srch.gain_vs_current.max():+.4f}로 기준을 넘은 후보가 없어 최종 모델을 유지했다. 모델 구조와 하이퍼파라미터를 바꿔도 성능이 오르지 않으므로, 현재 성능의 한계는 모델이 아니라 **데이터에 담긴 정보**(금형 열상태 미관측 등)에서 온다.
+
+{_md(srch.head(8)[['candidate', 'mean', 'std', 'gain_vs_current', 'adoptable']])}
+
 **검사결과 지연 민감도.**
 
 {_md(delay)}
@@ -142,17 +156,27 @@ def run(cfg: dict) -> str:
 
 피드백의 이득은 회신이 빠르고 빠짐없을수록 크다. 회신이 늦거나 일부만 오더라도 성능은 피드백 없는 모델 수준(AUC {cov0.test_auc:.3f})에서 크게 벗어나지 않는다(지연 {int(d100.delay)} Shot: {d100.test_auc:.3f}, 회신율 20%: {cov20.test_auc:.3f}). 피드백 경로가 끊겨도 시스템은 공정·센서 모델로 계속 동작한다.
 
-**설비상태 Gate (Stage 1, {sel['gate_model']}).** 오정지율(정상 Shot 경보) {_pct(cfg['gate_max_validation_fpr'], 0)}가 되도록 validation에서 임계값을 정했다.
+**설비상태 Gate (Stage 1).** 입력과 모델은 구간 이동에 대한 견고성으로 골랐다. 개발구간(test 제외)에서 구간 하나씩 빼고 학습한 뒤 다른 구간에서 오정지 2% 임계값을 정하고, 뺀 구간의 오정지율과 예열 에피소드 탐지를 쟀다. "구간별 최대 오정지 ≤ {_pct(cfg['gate_max_cross_run_fpr'], 0)}"를 만족하는 후보 중 탐지가 가장 많은 것을 택했다. 현재값을 같은 구간 직전 30 Shot 중앙값으로 나눈 **구간 상대값**을 넣자, 제품·구간마다 다른 압력·사이클 수준 때문에 생기던 오정지가 크게 줄었다.
+
+{_md(gsel[['features', 'model', 'max_fpr', 'mean_fpr', 'detected', 'episodes', 'selected']])}
+
+**선정: {gpick.features} · {gpick.model}.** 운영에서는 **적응형 임계값**을 쓴다. 작업자가 정상으로 확인한 같은 구간의 과거 Shot({cfg['gate_adapt_delay']} Shot 지연 반영) 점수의 98% 분위를 임계값의 하한으로 삼아, 처음 보는 운전점에서 정상 Shot이 계속 경보되는 것을 막는다. 이 규칙은 구간 이동 실험에서 관찰된 오정지를 보고 추가했으며, 파라미터는 조정하지 않은 기본값(지연 {cfg['gate_adapt_delay']} Shot, 오정지 목표 2%)이다.
 
 {_md(gcov)}
 
-{_md(gate[['scheme', 'fold', 'episodes', 'detected_within_k', 'mean_shots_to_detect', 'false_stop_rate', 'row_auc']])}
+| 구간 이동 검증 | 고정 임계값 | 적응형 임계값 |
+|---|---:|---:|
+| 최대 오정지율 | {_pct(fixed_max)} | {_pct(adapt_max)} |
 
-같은 구간 안(within_run)에서는 오정지 {_pct(gw.false_stop_rate, 2)}로 예열 에피소드 대부분을 첫 Shot에 잡는다. 다른 구간으로 옮기면 행 단위 AUC는 높게 유지되지만, 임계값이 맞지 않아 일부 구간에서 오정지가 커진다. 현장 적용 시 제품·구간 시작마다 임계값을 재보정해야 한다(4장).
+{_md(gx)}
+
+같은 구간 안에서는 오정지 {_pct(gw.false_stop_rate, 2)}로 예열 에피소드 대부분을 첫 Shot에 잡는다. 구간 2는 다른 Type 1 구간과 주조압력 수준이 달라(중앙값 1,155 vs 1,052) 처음 보는 운전점이다. 고정 임계값에서는 정상 Shot 대부분이 경보됐고, 적응형에서는 오정지가 크게 줄지만 탐지도 일부 줄어든다. 새 운전점에서는 초반 몇십 Shot의 작업자 확인이 필요하다는 뜻이다.
 
 **불량유형 (Stage 3, within-run test).**
 
 {_md(types)}
+
+유형별 모델은 개발구간 확장창 CV로 모델군(RF·로지스틱·LightGBM·CatBoost)을 비교해, 기본 모델보다 AP가 +0.02 이상 높을 때만 바꿨다. Bubble만 LightGBM으로 바뀌었다.
 
 **#40 외부 검증 (E) — 금형온도의 가치.**
 
@@ -188,7 +212,7 @@ def run(cfg: dict) -> str:
 
 | 설비 Gate | 불량 위험 | 조치 |
 |---|---|---|
-| 예열 의심 | — | 품질판정 보류 · 설비 점검 |
+| 예열 의심 (적응형 임계값) | — | 품질판정 보류 · 설비 점검 |
 | 정상 | 매우 높음 3연속 | 생산중지 · 조건조정 · 원인 점검 |
 | 정상 | 높음 + 내부결함(Short Shot·Blow Hole·Bubble) 예상 | 추가검사 → 폐기 판단 |
 | 정상 | 높음 + 표면불량 예상 | 재작업 라인 분기 |
@@ -234,7 +258,13 @@ Type 1 기준 약 7분, Type 2 기준 약 12분이다. 가정이 깨져도 지�
 **Q4. 새 가동구간에서 예측이 무너지는 이유는?**
 구간마다 불량률이 1.3%~41%로 다르고 공정 분포가 이동한다. #40에서 금형온도를 빼면 성능이 크게 떨어진 점을 보면, #42에 없는 금형 열상태가 유력한 원인 가설이다. 그래서 금형 온도의 Shot 단위 수집을 제언하고, 새 구간 초반에는 보수적 검사율로 운영한다.
 
-**Q5. 운전창 추천은 믿을 수 있는가?**
+**Q5. 모델을 더 튜닝하면 성능이 오르지 않나?**
+사전에 정한 {len(srch)}개 후보를 test를 보지 않고 개발구간에서 비교했지만, 기준(+0.02)을 넘은 후보가 없었다(최고 {srch.gain_vs_current.max():+.3f}). 성능 한계는 모델이 아니라 데이터에 없는 정보(금형 열상태)에서 온다. 그래서 개선 방향을 튜닝이 아니라 금형 온도 수집으로 제시한다.
+
+**Q6. Gate가 다른 구간에서도 통하나?**
+구간 상대값과 적응형 임계값으로 구간 이동 시 최대 오정지율을 {_pct(fixed_max)}에서 {_pct(adapt_max)}로 낮췄다. 처음 보는 운전점(구간 2)에서는 초반 작업자 확인이 필요하다.
+
+**Q7. 운전창 추천은 믿을 수 있는가?**
 모델 기반 후보이지 인과효과가 아니다. 관측된 정상 범위 안에서만 제안하고, 현장 시험 전에는 조건 변경을 자동 적용하지 않는다.
 
 ## 출처

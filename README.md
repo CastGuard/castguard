@@ -49,10 +49,10 @@ outputs/predictions/test_predictions.csv   제출용 test 예측결과
 
 1. `reports/REPORT_DRAFT.md` — 공고문 6개 평가항목 순서의 보고서 초안
 2. `reports/tables/validation_protocols.csv` — 같은 모델의 검증 방식별 성능 (가이드북식 0.80 → 정직한 기준 0.72)
-3. `reports/tables/ablation.csv`, `model_comparison.csv`, `ablation_decisions.json`, `ablation_oracle_upper_bound.csv` — 베이스라인·전후비교·선정근거
+3. `reports/tables/ablation.csv`, `model_comparison.csv`, `ablation_decisions.json`, `ablation_oracle_upper_bound.csv`, `model_search_inner_cv.csv` — 베이스라인·전후비교·선정근거·추가 탐색
 4. `reports/tables/delay_sensitivity.csv`, `feedback_coverage.csv` — 검사결과 피드백 가정의 민감도
 5. `reports/tables/failure_conditions.csv`, `error_by_condition.csv` — 실패 조건·조건별 성능
-6. `reports/tables/kpi_inspection.csv`, `kpi_cost_sensitivity.csv`, `gate_results.csv` — 현장 KPI
+6. `reports/tables/kpi_inspection.csv`, `kpi_cost_sensitivity.csv`, `gate_results.csv`, `gate_selection_loro.csv` — 현장 KPI·Gate 견고성
 7. `outputs/predictions/test_predictions.csv` — Shot별 위험·유형·Gate·조치
 
 ## 브랜치 관계

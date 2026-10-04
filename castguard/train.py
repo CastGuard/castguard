@@ -21,6 +21,7 @@ from joblib import Parallel, delayed
 from . import paths
 from .features import add_feedback, feedback_columns, is_forbidden, quality_feature_sets
 from .metrics import score, threshold_f1, threshold_max_fpr
+import itertools
 from .models import make
 
 QUALITY_MODELS = ["logistic", "random_forest", "lightgbm", "catboost", "xgboost", "ensemble"]
@@ -57,7 +58,7 @@ def fit_eval(frame: pd.DataFrame, task: dict, cfg: dict, save_model: bool = Fals
     val = frame[frame.role == "validation"]
     if train[target].nunique() < 2 or val.empty:
         return [], None
-    model = make(task["model"], task["seed"], cfg)
+    model = make(task["model"], task["seed"], cfg, task.get("params"))
     t0 = time.perf_counter()
     model.fit(train[feats], train[target].astype(int))
     fit_s = time.perf_counter() - t0
@@ -66,7 +67,7 @@ def fit_eval(frame: pd.DataFrame, task: dict, cfg: dict, save_model: bool = Fals
         thr = threshold_max_fpr(val[target].astype(int), pv, cfg["gate_max_validation_fpr"])
     else:
         thr = threshold_f1(val[target].astype(int), pv)
-    meta = {k: v for k, v in task.items() if k != "features"}
+    meta = {k: v for k, v in task.items() if k not in ("features", "params")}
     rows, preds = [], []
     for role in ["validation", "test"]:
         part = frame[frame.role == role]
@@ -84,9 +85,9 @@ def fit_eval(frame: pd.DataFrame, task: dict, cfg: dict, save_model: bool = Fals
     return rows, pd.concat(preds, ignore_index=True)
 
 
-def _task(kind, scheme, fold, experiment, model, seed, target, features, population="all", delay=None):
+def _task(kind, scheme, fold, experiment, model, seed, target, features, population="all", delay=None, params=None):
     return dict(kind=kind, scheme=scheme, fold=str(fold), experiment=experiment, model=model, seed=seed,
-                target=target, features=features, population=population, delay=delay)
+                target=target, features=features, population=population, delay=delay, params=params)
 
 
 def _run_tasks(tasks, frames, cfg, jobs):
@@ -97,6 +98,64 @@ def _run_tasks(tasks, frames, cfg, jobs):
     rows = [r for rs, _ in out for r in rs]
     preds = [p for _, p in out if p is not None]
     return rows, preds
+
+
+# ───────────────────────── 개발구간 안에서의 견고한 선택 ─────────────────────────
+def _dev_part(frame):
+    dev = frame[frame.role.isin(["train", "validation"])].sort_values(["run_id", "source_row"]).copy()
+    dev["frac"] = dev.groupby("run_id").cumcount() / dev.groupby("run_id").run_id.transform("size")
+    return dev
+
+
+def inner_cv_ap(dev, feats, model, params, seed, cfg, target="y_defect", combine=None):
+    """개발구간(test 제외)을 시간순으로 3번 나눠 확장창 학습→다음 구간 검증. 반환: 평균 AP."""
+    from sklearn.metrics import average_precision_score
+    aps = []
+    for a, b in cfg["inner_cv_folds"]:
+        tr, va = dev[dev.frac < a], dev[(dev.frac >= a) & (dev.frac < b)]
+        if va[target].sum() == 0 or tr[target].sum() < 5:
+            continue
+        if combine is None:
+            m = make(model, seed, cfg, params)
+            m.fit(tr[feats], tr[target].astype(int))
+            p = m.predict_proba(va[feats])[:, 1]
+        else:                       # 여러 하위 정답을 따로 예측해 '하나라도 불량' 확률로 결합
+            q = np.ones(len(va))
+            for t in combine:
+                m = make(model, seed, cfg, params)
+                m.fit(tr[feats], tr[t].astype(int))
+                q *= 1 - m.predict_proba(va[feats])[:, 1]
+            p = 1 - q
+        aps.append(average_precision_score(va[target], p))
+    return float(np.mean(aps)) if aps else np.nan
+
+
+def gate_loro(m41, folds, feats, model, seed, cfg):
+    """구간 이동 견고성: 개발구간(within_run의 train+validation)만으로 구간 하나씩 빼고 학습,
+    가장 늦은 다른 구간에서 오정지 2% 임계값을 정해, 뺀 구간의 오정지율·에피소드 탐지를 잰다."""
+    d = with_roles(m41, folds, "m41", "within_run", "primary")
+    dev = d[d.role.isin(["train", "validation"])].copy()
+    dev["y"] = dev.Machine_Status.astype(int)
+    runs = sorted(dev.run_id.unique())
+    runs = [r for r in runs if (dev.run_id == r).sum() >= cfg["min_run_size"]]
+    out = []
+    for r in runs:
+        others = [x for x in runs if x != r]
+        thr_run = max(others)
+        tr = dev[dev.run_id.isin([o for o in others if o != thr_run])]
+        th, te = dev[dev.run_id == thr_run], dev[dev.run_id == r].sort_values("source_row")
+        if tr.y.nunique() < 2:
+            continue
+        m = make(model, seed, cfg)
+        m.fit(tr[feats], tr.y)
+        thr = threshold_max_fpr(th.y, m.predict_proba(th[feats])[:, 1], cfg["gate_max_validation_fpr"])
+        alarm = m.predict_proba(te[feats])[:, 1] >= thr
+        det = n = 0
+        for _, g in te.assign(a=alarm)[te.episode_id.notna().to_numpy()].groupby("episode_id"):
+            n += 1
+            det += bool(g.a.to_numpy()[:cfg["gate_detect_within_shots"]].any())
+        out.append({"run": int(r), "fpr": float(alarm[te.y.to_numpy() == 0].mean()), "detected": det, "episodes": n})
+    return pd.DataFrame(out)
 
 
 # ───────────────────────── 검증 방식 비교 ─────────────────────────
@@ -177,11 +236,51 @@ def run(cfg: dict, jobs: int | None = None, log=print) -> dict:
     final = {"experiment": best.experiment, "model": best.model, "val_ap": float(best.val_ap), "b_rule": b_rule}
     log(f"      최종 품질모델(validation 선정): {final}")
 
+    # 1b) 사전 등록한 추가 탐색: 하이퍼파라미터 격자·Cavity 결합·유형 결합·앙상블·B_FB
+    #     개발구간 확장창 3-fold 평균 AP로만 비교하고, 현재 최종 대비 +adoption_min_gain 이상일 때만 교체한다.
+    dev_q = _dev_part(qframe("within_run", "primary", delay))
+    cm = cfg["candidate_models"]
+    specs = {f"현재 최종: {final['experiment']}·{final['model']}": (final["experiment"], final["model"], None, None)}
+    for name, grid in cfg["quality_search"].items():
+        keys = list(grid)
+        for vals in itertools.product(*[grid[k] for k in keys]):
+            prm = {**cm[name], **dict(zip(keys, vals))}
+            specs[f"{name} " + " ".join(f"{k}={v}" for k, v in zip(keys, vals))] = ("A_FB", name, prm, None)
+    specs["Cavity1·2 분리 후 결합 (RF)"] = ("A_FB", "random_forest", None, ["y_cavity_1", "y_cavity_2"])
+    specs["불량유형 5종 분리 후 결합 (RF)"] = ("A_FB", "random_forest", None, TYPE_TARGETS)
+    specs["앙상블 (LR+LGBM+CatBoost)"] = ("A_FB", "ensemble", None, None)
+    specs["B_FB (#41 이력 포함, RF)"] = ("B_FB", "random_forest", None, None)
+    jobs_l = [(k, sd) for k in specs for sd in seeds]
+    res = Parallel(n_jobs=jobs, backend="loky")(
+        delayed(inner_cv_ap)(dev_q, sets[specs[k][0]], specs[k][1], specs[k][2], sd, cfg, "y_defect", specs[k][3]) for k, sd in jobs_l)
+    srch = pd.DataFrame([{"candidate": k, "seed": sd, "inner_cv_ap": v} for (k, sd), v in zip(jobs_l, res)])
+    srch = srch.groupby("candidate", sort=False).inner_cv_ap.agg(["mean", "std"]).reset_index()
+    base_ap = srch.iloc[0]["mean"]
+    srch["gain_vs_current"] = srch["mean"] - base_ap
+    srch["adoptable"] = (srch.gain_vs_current >= cfg["adoption_min_gain"]) & (srch.gain_vs_current > 2 * srch["std"].fillna(0))
+    srch = srch.sort_values("mean", ascending=False)
+    srch.round(4).to_csv(paths.TABLES / "model_search_inner_cv.csv", index=False, encoding="utf-8-sig")
+    adopt = srch[srch.adoptable & srch.candidate.map(lambda k: specs[k][3] is None)]
+    final["search"] = {"candidates": len(specs), "current_inner_cv_ap": round(float(base_ap), 4),
+                       "best": srch.iloc[0].candidate, "best_gain": round(float(srch.iloc[0].gain_vs_current), 4),
+                       "adopted": None}
+    final_params = None
+    if len(adopt):
+        k = adopt.iloc[0].candidate
+        final.update(experiment=specs[k][0], model=specs[k][1])
+        final_params = specs[k][2]
+        final["search"]["adopted"] = k
+    log(f"[1b] 추가 탐색 {len(specs)}개 후보: 최고 이득 {final['search']['best_gain']:+.4f} → 채택 {final['search']['adopted']}")
+
     # 2) 실패 조건: 구간 이동·새 미래 구간
     abl = ["A0", "A", "B", "A_FB", "B_FB"]
     frames = {("quality", s, f, "all", delay): qframe(s, f, delay) for s, f in q_schemes if s != "within_run"}
-    tasks = [_task("quality", s, f, e, final["model"], sd, "y_defect", sets[e], delay=delay)
+    tasks = [_task("quality", s, f, e, final["model"], sd, "y_defect", sets[e], delay=delay, params=final_params)
              for s, f in q_schemes if s != "within_run" for e in abl for sd in seeds]
+    if final_params is not None:      # 채택된 탐색 설정을 within_run에서도 평가 (보고용)
+        tasks += [_task("quality", "within_run", "primary", e, final["model"], sd, "y_defect", sets[e], delay=delay,
+                        params=final_params) for e in abl for sd in seeds]
+        frames[("quality", "within_run", "primary", "all", delay)] = qframe("within_run", "primary", delay)
     log(f"[2/6] 품질 run_holdout·forward_run: {len(tasks)}회")
     rows, preds = _run_tasks(tasks, frames, cfg, jobs)
     all_rows += rows; all_preds += preds
@@ -190,8 +289,8 @@ def run(cfg: dict, jobs: int | None = None, log=print) -> dict:
     fb_exp = final["experiment"] if "FB" in final["experiment"] else "A_FB"
     dl = [d for d in cfg["label_delay_sensitivity"] if d != delay]
     frames = {("quality", "within_run", "primary", "all", d): qframe("within_run", "primary", d) for d in dl}
-    tasks = [_task("quality", "within_run", "primary", fb_exp, final["model"], s, "y_defect", sets[fb_exp], delay=d)
-             for d in dl for s in seeds]
+    tasks = [_task("quality", "within_run", "primary", fb_exp, final["model"], s, "y_defect", sets[fb_exp], delay=d,
+                   params=final_params) for d in dl for s in seeds]
     log(f"[3/6] 지연 민감도 {dl}: {len(tasks)}회")
     rows, preds = _run_tasks(tasks, frames, cfg, jobs)
     all_rows += rows; all_preds += preds
@@ -202,7 +301,7 @@ def run(cfg: dict, jobs: int | None = None, log=print) -> dict:
               with_roles(add_feedback(joined, delay, windows, cfg["feedback_halflife"], coverage=c, seed=7),
                          folds, "q42", "within_run", "primary") for c in covs}
     tasks = [_task("quality", "within_run", "primary", fb_exp, final["model"], s, "y_defect", sets[fb_exp],
-                   population=f"cov{c}", delay=delay) for c in covs for s in seeds]
+                   population=f"cov{c}", delay=delay, params=final_params) for c in covs for s in seeds]
     log(f"[3b] 회신율 민감도 {covs}: {len(tasks)}회")
     rows, preds = _run_tasks(tasks, frames, cfg, jobs)
     all_rows += rows; all_preds += preds
@@ -213,7 +312,7 @@ def run(cfg: dict, jobs: int | None = None, log=print) -> dict:
     base_exp = final["experiment"]
     frames = {("quality_ref", "within_run", "primary", "all", delay): qframe("within_run", "primary", delay)}
     tasks = [_task("quality_ref", "within_run", "primary", f"{base_exp}+oracle", final["model"], s, "y_defect",
-                   sets[base_exp] + oracle, delay=delay) for s in seeds]
+                   sets[base_exp] + oracle, delay=delay, params=final_params) for s in seeds]
     rows, preds = _run_tasks(tasks, frames, cfg, jobs)
     all_rows += rows
     log(f"[3b'] 참고 상한(정답 설비상태 이력): {len(tasks)}회")
@@ -223,31 +322,54 @@ def run(cfg: dict, jobs: int | None = None, log=print) -> dict:
     all_rows += prot_rows
     log(f"[3c] 검증 방식 비교: {len(prot_rows)}행")
 
-    # 4) 설비상태 Gate
-    gfeat = contract["m41_gate"]
-    check_features(gfeat, contract)
+    # 4) 설비상태 Gate: 구간 이동 견고성(LORO, 개발구간만)으로 입력·모델 선정
+    #    규칙: 구간별 최대 오정지율 ≤ gate_max_cross_run_fpr 인 후보 중 에피소드 탐지 최대, 동률이면 평균 오정지 최소
+    gsets = {"공정+이력": contract["m41_gate"], "공정+이력+구간상대값": contract["m41_gate_rel"]}
+    for fs in gsets.values():
+        check_features(fs, contract)
+    gcands = [(gname, mname) for gname in gsets for mname in ["logistic", "random_forest", "lightgbm", "catboost", "xgboost"]]
+    gj = [(gn, mn, sd) for gn, mn in gcands for sd in seeds[:3]]
+    gres = Parallel(n_jobs=jobs, backend="loky")(delayed(gate_loro)(m41, folds, gsets[gn], mn, sd, cfg) for gn, mn, sd in gj)
+    grow = []
+    for (gn, mn, sd), d in zip(gj, gres):
+        grow.append({"features": gn, "model": mn, "seed": sd, "max_fpr": d.fpr.max(), "mean_fpr": d.fpr.mean(),
+                     "detected": d.detected.sum(), "episodes": d.episodes.sum()})
+    gsel = pd.DataFrame(grow).groupby(["features", "model"]).agg(max_fpr=("max_fpr", "mean"), mean_fpr=("mean_fpr", "mean"),
+                                                                 detected=("detected", "mean"), episodes=("episodes", "first")).reset_index()
+    ok = gsel[gsel.max_fpr <= cfg["gate_max_cross_run_fpr"]]
+    pick = (ok.sort_values(["detected", "mean_fpr"], ascending=[False, True]) if len(ok)
+            else gsel.sort_values(["max_fpr", "detected"], ascending=[True, False])).iloc[0]
+    gsel["selected"] = (gsel.features == pick.features) & (gsel.model == pick.model)
+    gsel.round(4).to_csv(paths.TABLES / "gate_selection_loro.csv", index=False, encoding="utf-8-sig")
+    gfeat, gate_model = gsets[pick.features], pick.model
+    log(f"[4/6] Gate 선정(구간 이동 견고성): {pick.features} · {gate_model} (최대 오정지 {pick.max_fpr:.3f})")
     g_schemes = [(s, f) for s, f in folds.loc[folds.dataset == "m41", ["scheme", "fold"]].drop_duplicates().itertuples(index=False)]
     gframes = {("gate", s, f, "all", None): with_roles(m41, folds, "m41", s, f).query("role != 'excluded'")
                .assign(Machine_Status=lambda d: d.Machine_Status.astype(int)) for s, f in g_schemes}
-    tasks = [_task("gate", "within_run", "primary", "Gate", m, s, "Machine_Status", gfeat)
-             for m in QUALITY_MODELS for s in seeds]
-    log(f"[4/6] Gate 후보 비교: {len(tasks)}회")
+    tasks = [_task("gate", s, f, "Gate", gate_model, sd, "Machine_Status", gfeat) for s, f in g_schemes for sd in seeds]
     rows, preds = _run_tasks(tasks, gframes, cfg, jobs)
     all_rows += rows; all_preds += preds
-    gbest = select(pd.DataFrame(rows))
-    gate_model = gbest.model
-    tasks = [_task("gate", s, f, "Gate", gate_model, sd, "Machine_Status", gfeat)
-             for s, f in g_schemes if s != "within_run" for sd in seeds]
-    rows, preds = _run_tasks(tasks, gframes, cfg, jobs)
-    all_rows += rows; all_preds += preds
-    log(f"      Gate 모델: {gate_model}")
+    gbest = pick
 
-    # 5) 불량유형
+    # 5) 불량유형: 유형마다 모델군을 개발구간 확장창 CV로 비교, 기본(최종 품질모델) 대비 +adoption_min_gain 이상이면 교체
     frames_q = qframe("within_run", "primary", delay)
     tframe = {("type", "within_run", "primary", "all", delay): frames_q}
-    tasks = [_task("type", "within_run", "primary", final["experiment"], final["model"], s, t, sets[final["experiment"]], delay=delay)
+    fexp = final["experiment"]
+    tj = [(t, mn, sd) for t in TYPE_TARGETS for mn in ["random_forest", "logistic", "lightgbm", "catboost"] for sd in seeds[:3]]
+    tres = Parallel(n_jobs=jobs, backend="loky")(delayed(inner_cv_ap)(dev_q, sets[fexp], mn, None, sd, cfg, t) for t, mn, sd in tj)
+    tsel = pd.DataFrame([{"target": t, "model": mn, "seed": sd, "inner_cv_ap": v} for (t, mn, sd), v in zip(tj, tres)])
+    tsel = tsel.groupby(["target", "model"]).inner_cv_ap.mean().reset_index()
+    type_models = {}
+    for t, g in tsel.groupby("target"):
+        default = g[g.model == final["model"]].inner_cv_ap.iloc[0] if (g.model == final["model"]).any() else -1
+        best = g.sort_values("inner_cv_ap", ascending=False).iloc[0]
+        type_models[t] = best.model if best.inner_cv_ap - default >= cfg["adoption_min_gain"] else final["model"]
+    tsel["selected"] = [type_models[t] == mn for t, mn in zip(tsel.target, tsel.model)]
+    tsel.round(4).to_csv(paths.TABLES / "defect_type_model_selection.csv", index=False, encoding="utf-8-sig")
+    tasks = [_task("type", "within_run", "primary", fexp, type_models[t], s, t, sets[fexp], delay=delay,
+                   params=final_params if type_models[t] == final["model"] else None)
              for t in TYPE_TARGETS for s in seeds]
-    log(f"[5/6] 불량유형: {len(tasks)}회")
+    log(f"[5/6] 불량유형 모델: {type_models}")
     rows, preds = _run_tasks(tasks, tframe, cfg, jobs)
     all_rows += rows; all_preds += preds
 
@@ -267,18 +389,19 @@ def run(cfg: dict, jobs: int | None = None, log=print) -> dict:
 
     # 최종 모델 저장 (예측 단계용, 첫 seed)
     fit_eval(frames_q, _task("quality", "within_run", "primary", final["experiment"], final["model"], seeds[0],
-                             "y_defect", sets[final["experiment"]], delay=delay), cfg, save_model=True)
+                             "y_defect", sets[final["experiment"]], delay=delay, params=final_params), cfg, save_model=True)
     fit_eval(gframes[("gate", "within_run", "primary", "all", None)],
              _task("gate", "within_run", "primary", "Gate", gate_model, seeds[0], "Machine_Status", gfeat), cfg, save_model=True)
     for t in TYPE_TARGETS:
-        fit_eval(frames_q, _task("type", "within_run", "primary", final["experiment"], final["model"], seeds[0], t,
+        fit_eval(frames_q, _task("type", "within_run", "primary", final["experiment"], type_models[t], seeds[0], t,
                                  sets[final["experiment"]], delay=delay), cfg, save_model=True)
 
     metrics = pd.DataFrame(all_rows)
     preds = pd.concat(all_preds, ignore_index=True)
     metrics.to_csv(paths.RUNS / "metrics.csv", index=False)
     preds.to_parquet(paths.RUNS / "predictions.parquet", index=False)
-    selection = {"final_quality": final, "gate_model": gate_model, "gate_val_ap": float(gbest.val_ap),
+    selection = {"final_quality": final, "final_params": final_params, "gate_model": gate_model,
+                 "gate_features": str(gbest.features), "gate_loro_max_fpr": float(gbest.max_fpr), "type_models": type_models,
                  "feedback_experiment_for_sensitivity": fb_exp, "label_delay_shots": delay,
                  "feature_sets": sets}
     (paths.RUNS / "selection.json").write_text(json.dumps(selection, ensure_ascii=False, indent=2), encoding="utf-8")

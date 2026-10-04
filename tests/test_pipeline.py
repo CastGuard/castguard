@@ -42,12 +42,13 @@ def test_history_does_not_look_ahead():
     m["run_id"] = np.r_[np.zeros(20, int), np.ones(20, int)]
     m["Machine_Status"] = 0.0
     m.loc[[5, 6, 25], "Machine_Status"] = 1.0
-    cols = ["prev_cycle_time", "max_cycle_previous_5", "missing_process_previous_20", "missing_shots_before_current"]
+    from castguard.prepare import REL
+    cols = ["prev_cycle_time", "max_cycle_previous_5", "missing_process_previous_20", "missing_shots_before_current"] + REL
     a = add_history(m)[cols]
     m2 = m.copy()
     m2.loc[12:, "Cycle_Time"] = 999.0
     b = add_history(m2)[cols]
-    pd.testing.assert_frame_equal(a.loc[:12], b.loc[:12])
+    pd.testing.assert_frame_equal(a.loc[:11], b.loc[:11])        # 12행부터 바뀐 값은 12행 이전에 영향 없음
 
 
 needs_data = pytest.mark.skipif(not paths.FOLDS.exists(), reason="python -m castguard prepare 먼저 실행")

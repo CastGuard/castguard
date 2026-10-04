@@ -21,6 +21,9 @@ SENSOR = ["Melting_Furnace_Temp", "Air_Pressure", "Coolant_Temp", "Coolant_Press
 LIMITS = [f"{b}_{s}" for b in ["Air_Pressure", "Coolant_Temp", "Factory_Temp", "Factory_Humidity"] for s in ["Min", "Max"]]
 MAIN4 = ["Short_Shot", "Bubble", "Exfoliation", "Blow_Hole"]
 HISTORY = ["prev_cycle_time", "max_cycle_previous_5", "missing_process_previous_20", "missing_shots_before_current"]
+REL_VARS = ["Casting_Pressure", "Cylinder_Pressure", "High_Velocity", "Cycle_Time", "Biscuit_Thickness", "Velocity_3",
+            "Clamping_Force", "Spray_Time"]
+REL = [f"rel_{v}" for v in REL_VARS]           # 현재값 ÷ 같은 구간 직전 30행 중앙값 (구간·제품별 수준 차이 제거)
 P40_INPUTS = ["mold_temperature", "facility_CycleTime", "production_CycleTime", "mechanical_strength",
               "injection_pressure", "sleeve_temperature", "top_temp1", "top_temp2", "top_temp3",
               "bottom_temp1", "bottom_temp2", "bottom_temp3", "biscuit_thickness", "cooling_water_temp"]
@@ -81,6 +84,9 @@ def add_history(frame: pd.DataFrame) -> pd.DataFrame:
         # oracle_*: 설비상태 '정답'을 쓴 참고 열. 기본 입력 금지(분석·오류분석용).
         frame.loc[group.index, "oracle_shots_since_warm"] = group.Shot - group.Shot.where(warm).ffill().shift()
         frame.loc[group.index, "oracle_prior_episodes"] = episode.shift(fill_value=0).astype(float)
+        for v in REL_VARS:                                         # 과거 행만 사용 (shift 1)
+            med = group[v].shift().rolling(30, min_periods=5).median()
+            frame.loc[group.index, f"rel_{v}"] = (group[v] / med).replace([np.inf, -np.inf], np.nan)
     return frame
 
 
@@ -194,6 +200,7 @@ def feature_contract(target_columns: list[str]) -> dict:
         "prediction_time": "현재 Shot 생산 완료 후, 최종검사 전",
         "q42_A0": PROCESS, "q42_A": a, "q42_B": a + HISTORY,
         "m41_gate": PROCESS + ["prev_cycle_time", "max_cycle_previous_5"],
+        "m41_gate_rel": PROCESS + ["prev_cycle_time", "max_cycle_previous_5"] + REL,
         "p40_full": P40_INPUTS,
         "feedback_note": "fb_* 열은 학습 단계에서 label_delay_shots만큼 지연된 '과거 검사결과'로 계산한다.",
         "target_columns": target_columns + ["Machine_Status", "PassOrFail", "y_defect", "y_type_*", "y_cavity_*"],

@@ -48,7 +48,8 @@ class Ensemble:
         return np.column_stack([1 - p, p])
 
 
-def make(name: str, seed: int, cfg: dict):
+def make(name: str, seed: int, cfg: dict, params: dict | None = None):
+    """name은 후보 이름. params를 주면 설정의 하이퍼파라미터 대신 사용한다(탐색 결과 채택 시)."""
     if name == "ensemble":
         return Ensemble(cfg["ensemble_members"], seed, cfg["candidate_models"], cfg["use_gpu"])
-    return build_model(name, seed, cfg["candidate_models"][name], cfg["use_gpu"])
+    return build_model(name, seed, params if params is not None else cfg["candidate_models"][name], cfg["use_gpu"])

@@ -153,6 +153,19 @@ def coverage_table(metrics, sel):
 
 
 # ───────────────────────── 5~6. Gate · 적용범위(C) ─────────────────────────
+def adaptive_alarm(d: pd.DataFrame, cfg: dict) -> np.ndarray:
+    """적응형 Gate 임계값: 구간 안에서 작업자가 '정상'으로 확인한 과거 Shot(지연 반영)의 점수 98% 분위를
+    기존 임계값의 하한으로 삼는다. 새 운전점(예: 압력 수준이 다른 구간)에서 정상 Shot이 계속 경보되는 것을 막는다."""
+    p, y = d.p.to_numpy(), d.y.to_numpy()
+    base, delay, mh = d.threshold.iloc[0], cfg["gate_adapt_delay"], cfg["gate_adapt_min_history"]
+    thr = np.full(len(d), base)
+    for t in range(len(d)):
+        past = p[:max(0, t - delay)][y[:max(0, t - delay)] == 0]
+        if len(past) >= mh:
+            thr[t] = max(base, np.quantile(past, 1 - cfg["gate_max_validation_fpr"]))
+    return p >= thr
+
+
 def gate_tables(metrics, preds, m41, cfg, sel):
     g = metrics[metrics.kind == "gate"]
     comp = g[(g.scheme == "within_run")].groupby(["model", "role"]).agg(ap=("average_precision", "mean"), auc=("roc_auc", "mean"),
@@ -162,30 +175,34 @@ def gate_tables(metrics, preds, m41, cfg, sel):
     info = m41.set_index("row_id")[["run_id", "Shot", "episode_id", "source_row"]]
     rows = []
     gp = preds[(preds.kind == "gate") & (preds.model == sel["gate_model"]) & (preds.role == "test")]
-    for (scheme, fold, seed), d in gp.groupby(["scheme", "fold", "seed"]):
+    for (scheme, fold, seed, policy), d in [(key + (pol,), d) for key, d in gp.groupby(["scheme", "fold", "seed"])
+                                           for pol in ["고정", "적응형"]]:
         d = d.join(info, on="row_id").sort_values("source_row")
-        alarm = d.p >= d.threshold
+        if policy == "고정":
+            alarm = d.p >= d.threshold
+        else:
+            alarm = pd.Series(np.concatenate([adaptive_alarm(g, cfg) for _, g in d.groupby("run_id", sort=False)]), index=d.index)
         normal = d.y == 0
         eps = d[d.episode_id.notna()].groupby("episode_id")
         det, delay = 0, []
         for _, e in eps:
-            a = (e.p >= e.threshold).to_numpy()
+            a = alarm.loc[e.index].to_numpy()
             hit = np.flatnonzero(a[:k])
             if len(hit):
                 det += 1
                 delay.append(hit[0] + 1)
-        rows.append({"scheme": scheme, "fold": fold, "seed": seed, "episodes": eps.ngroups, "detected_within_k": det,
+        rows.append({"policy": policy, "scheme": scheme, "fold": fold, "seed": seed, "episodes": eps.ngroups, "detected_within_k": det,
                      "mean_shots_to_detect": np.mean(delay) if delay else np.nan,
                      "warmup_rows": int((d.y == 1).sum()), "warmup_row_recall": float(alarm[d.y == 1].mean()) if (d.y == 1).any() else np.nan,
                      "false_stop_rate": float(alarm[normal].mean()) if normal.any() else np.nan,
                      "row_auc": _safe_auc(d.y, d.p)})
     ge = pd.DataFrame(rows)
-    gs = ge.groupby(["scheme", "fold"]).agg(episodes=("episodes", "first"), detected_within_k=("detected_within_k", "mean"),
+    gs = ge.groupby(["policy", "scheme", "fold"]).agg(episodes=("episodes", "first"), detected_within_k=("detected_within_k", "mean"),
                                             mean_shots_to_detect=("mean_shots_to_detect", "mean"),
                                             warmup_row_recall=("warmup_row_recall", "mean"),
                                             false_stop_rate=("false_stop_rate", "mean"), row_auc=("row_auc", "mean")).reset_index()
     _save(gs.round(4), "gate_results.csv")
-    w = gs[gs.scheme == "within_run"].iloc[0]
+    w = gs[(gs.scheme == "within_run") & (gs.policy == "적응형")].iloc[0]
     # C: 적용 범위 확장 — #42 단독 모델은 예열 Shot도 정상처럼 품질판정한다.
     total_rows = int(m41.gate_eligible.sum())
     c = pd.DataFrame([
@@ -201,7 +218,7 @@ def gate_tables(metrics, preds, m41, cfg, sel):
 # ───────────────────────── 7~9. 유형 · #40(E) · 물리방향(F) ─────────────────────────
 def type_table(metrics):
     t = metrics[(metrics.kind == "type") & (metrics.role == "test")]
-    out = t.groupby("target").agg(test_positive=("positive", "first"), prevalence=("prevalence", "first"),
+    out = t.groupby("target").agg(model=("model", "first"), test_positive=("positive", "first"), prevalence=("prevalence", "first"),
                                   test_auc=("roc_auc", "mean"), test_auc_sd=("roc_auc", "std"),
                                   test_ap=("average_precision", "mean"), test_ap_lift=("ap_lift", "mean")).reset_index()
     out["target"] = out.target.str.replace("y_type_", "")
@@ -360,13 +377,15 @@ def explain(joined, folds, sel, cfg):
 
 
 # ───────────────────────── 15. 제출용 test 예측 ─────────────────────────
-def submission_predictions(fp, preds, joined, sel, cfg):
+def submission_predictions(fp, preds, joined, m41, sel, cfg):
     v, t = fp[fp.role == "validation"], fp[fp.role == "test"]
     q20, q05 = threshold_rate(v.p, 0.2), threshold_rate(v.p, 0.05)
     out = t.merge(joined[["row_id", "run_id", "Shot", "Product_Type"]], on="row_id")
     out["m41_row_id"] = "m41_r" + out.run_id.astype(str) + "_s" + out.Shot.astype(str)
     g = seed_mean(preds, kind="gate", scheme="within_run", model=sel["gate_model"])
-    g = g[g.role == "test"][["row_id", "p", "threshold"]].rename(columns={"row_id": "m41_row_id", "p": "gate_p", "threshold": "gate_thr"})
+    g = g[g.role == "test"].merge(m41[["row_id", "run_id", "source_row"]], on="row_id").sort_values("source_row")
+    g["gate_alarm"] = np.concatenate([adaptive_alarm(x, cfg) for _, x in g.groupby("run_id", sort=False)])
+    g = g[["row_id", "p", "gate_alarm"]].rename(columns={"row_id": "m41_row_id", "p": "gate_p"})
     out = out.merge(g, on="m41_row_id", how="left")
     types = []
     for tname in ["Short_Shot", "Bubble", "Exfoliation", "Blow_Hole", "Etc"]:
@@ -375,7 +394,7 @@ def submission_predictions(fp, preds, joined, sel, cfg):
         out = out.merge(tp, on="row_id", how="left")
         types.append(f"p_{tname}")
     out["predicted_type"] = out[types].idxmax(axis=1).str.replace("p_", "")
-    out["gate_alarm"] = out.gate_p >= out.gate_thr
+    out["gate_alarm"] = out.gate_alarm.fillna(False).astype(bool)
     out["risk_grade"] = np.select([out.p >= q05, out.p >= q20, out.p >= out.threshold], ["매우 높음", "높음", "중간"], "낮음")
     internal = out.predicted_type.isin(["Short_Shot", "Blow_Hole", "Bubble"])
     run_hi = (out.sort_values("Shot").groupby("run_id").p.transform(lambda s: (s >= q05).rolling(3, min_periods=3).sum()) >= 3)
@@ -436,7 +455,7 @@ def run(cfg: dict, log=print) -> dict:
     fp = final_predictions(preds, sel)
     kpi_tables(fp, cfg); condition_table(fp, joined, folds); log("  KPI·조건별 오류분석")
     imp, inter, ow = explain(joined, folds, sel, cfg); log("  SHAP·상호작용·운전창")
-    submission_predictions(fp, preds, joined, sel, cfg); log("  제출용 test 예측")
+    submission_predictions(fp, preds, joined, m41, sel, cfg); log("  제출용 test 예측")
     figures(fp, comp, pd.read_csv(paths.TABLES / "failure_conditions.csv", dtype={"fold": str}),
             pd.read_csv(paths.TABLES / "delay_sensitivity.csv"), imp)
     return {"selection": sel, "ablation": dec}

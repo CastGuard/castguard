@@ -1,0 +1,11 @@
+﻿features,model,max_fpr,mean_fpr,detected,episodes,selected
+공정+이력,catboost,0.777,0.1871,10.3333,11,False
+공정+이력,lightgbm,0.593,0.2502,11.0,11,False
+공정+이력,logistic,0.1357,0.0492,8.0,11,False
+공정+이력,random_forest,0.4897,0.1512,10.3333,11,False
+공정+이력,xgboost,0.58,0.1498,10.0,11,False
+공정+이력+구간상대값,catboost,0.041,0.0209,10.3333,11,True
+공정+이력+구간상대값,lightgbm,0.157,0.0674,11.0,11,False
+공정+이력+구간상대값,logistic,0.0676,0.0219,8.0,11,False
+공정+이력+구간상대값,random_forest,0.2563,0.0663,11.0,11,False
+공정+이력+구간상대값,xgboost,0.4705,0.1193,11.0,11,False
