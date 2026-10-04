@@ -1,0 +1,4 @@
+﻿target_inspection_rate,test_inspection_rate,capture_rate,random_capture_rate,lift_vs_random,precision,defects_caught,defects_total,inspections,shots
+0.1,0.093,0.2316,0.093,2.49,0.4884,63,272,129,1387
+0.2,0.1702,0.3603,0.1702,2.12,0.4153,98,272,236,1387
+0.3,0.2906,0.5515,0.2906,1.9,0.3722,150,272,403,1387

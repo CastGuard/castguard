@@ -1,0 +1,6 @@
+﻿target,test_positive,prevalence,test_auc,test_auc_sd,test_ap,test_ap_lift
+Blow_Hole,47,0.0339,0.8216,0.0022,0.0886,2.6155
+Bubble,28,0.0202,0.7345,0.0089,0.0466,2.3068
+Etc,91,0.0656,0.867,0.0011,0.221,3.3678
+Exfoliation,33,0.0238,0.8183,0.0033,0.0907,3.8103
+Short_Shot,88,0.0634,0.6322,0.0047,0.108,1.7018

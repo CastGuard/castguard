@@ -1,0 +1,16 @@
+﻿feature_a,feature_b,mean_abs_interaction
+fb_rate100,fb_ewm,0.04295
+shot_position,fb_rate100,0.03609
+Air_Pressure,shot_position,0.03457
+Melting_Furnace_Temp,fb_ewm,0.03409
+shot_position,fb_known_count,0.03163
+Coolant_Pressure,fb_rate100,0.02981
+fb_rate100,fb_since_defect,0.02578
+fb_rate100,fb_known_count,0.02049
+Coolant_Temp,fb_ewm,0.01968
+Coolant_Temp,shot_position,0.01797
+Melting_Furnace_Temp,Factory_Humidity,0.01774
+Velocity_3,fb_ewm,0.01768
+Melting_Furnace_Temp,fb_rate20,0.01762
+High_Velocity,shot_position,0.01741
+Clamping_Force,Melting_Furnace_Temp,0.01631

@@ -1,0 +1,12 @@
+﻿scheme,fold,episodes,detected_within_k,mean_shots_to_detect,warmup_row_recall,false_stop_rate,row_auc
+forward_run,2,6,6.0,1.3,0.86,0.3829,0.8997
+forward_run,3,3,0.0,,0.0,0.0,0.7607
+forward_run,4,2,2.0,1.0,0.875,0.1694,0.9389
+forward_run,6,4,3.6,1.05,0.6095,0.0013,0.8125
+run_holdout,0,2,2.0,1.0,1.0,0.8359,0.9999
+run_holdout,1,3,2.0,1.0,0.4692,0.0256,0.8407
+run_holdout,2,6,6.0,1.0,1.0,0.8967,0.8513
+run_holdout,3,3,3.0,1.0,0.9652,0.0283,0.9984
+run_holdout,4,2,2.0,1.0,1.0,0.0276,0.9995
+run_holdout,6,4,3.6,1.05,0.6095,0.0013,0.8125
+within_run,primary,9,8.0,1.125,0.4966,0.019,0.7784

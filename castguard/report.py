@@ -16,9 +16,14 @@ def _csv(name, **kw):
 def _md(df: pd.DataFrame) -> str:
     cols = list(df.columns)
     lines = ["| " + " | ".join(map(str, cols)) + " |", "|" + "---|" * len(cols)]
-    for _, r in df.iterrows():
-        lines.append("| " + " | ".join("" if (isinstance(v, float) and np.isnan(v)) else
-                                       (f"{v:.3f}" if isinstance(v, float) else str(v)) for v in r) + " |")
+    def fmt(v):
+        if isinstance(v, (float, np.floating)):
+            if np.isnan(v):
+                return ""
+            return str(int(v)) if float(v).is_integer() and abs(v) >= 1 else f"{v:.3f}"
+        return str(v)
+    for r in df.itertuples(index=False):
+        lines.append("| " + " | ".join(fmt(v) for v in r) + " |")
     return "\n".join(lines)
 
 
@@ -46,7 +51,7 @@ def run(cfg: dict) -> str:
     gw = gate[gate.scheme == "within_run"].iloc[0]
     fw = fail[(fail.scheme == "forward_run") & (fail.experiment == fq["experiment"])]
     rh = fail[(fail.scheme == "run_holdout") & (fail.experiment == fq["experiment"])]
-    run_auc = cond[(cond.axis == "가동구간") & cond.auc.notna()]
+    run_auc = cond[(cond.axis == "가동구간") & cond.auc.notna() & (cond.positives >= 10)]
     en = lambda pop, exp: e40[(e40.population == pop) & (e40.experiment == exp) & (e40.model == "lightgbm") & (e40.role == "test")].auc.iloc[0]
     e_full, e_no = en("normal_pressure", "E_full"), en("normal_pressure", "E_no_mold6")
     b = dec["보조1(#41 이력) 효과"]
@@ -142,13 +147,13 @@ def run(cfg: dict) -> str:
 
 {_md(cond[cond.axis.isin(['가동구간', '제품', '예열 후 경과 Shot(분석용)', '불확실성'])][['axis', 'level', 'n', 'positives', 'prevalence', 'auc', 'ap', 'recall', 'fnr']])}
 
-구간별 AUC는 {run_auc.auc.min():.2f}~{run_auc.auc.max():.2f}로, 구간을 합친 AUC({fin.test_auc:.3f})보다 낮다. 모델의 힘 상당 부분은 "지금 위험이 높은 시기인가"를 구분하는 데서 나오고, 같은 시기 안에서 개별 Shot을 가려내는 능력은 제한적이다. 검사 자원을 시기별로 배분하는 데는 유효하지만, Shot 단위 판정을 대체하지는 못한다.
+불량이 10개 이상인 구간만 보면 구간별 AUC는 {run_auc.auc.min():.2f}~{run_auc.auc.max():.2f}로, 구간을 합친 AUC({fin.test_auc:.3f})보다 낮다. 모델의 힘 상당 부분은 "지금 위험이 높은 시기인가"를 구분하는 데서 나오고, 같은 시기 안에서 개별 Shot을 가려내는 능력은 제한적이다. 검사 자원을 시기별로 배분하는 데는 유효하지만, Shot 단위 판정을 대체하지는 못한다.
 
 **실패 조건 — 새 가동구간.**
 
 {_md(fw[['fold', 'n', 'prevalence', 'test_auc', 'test_ap']])}
 
-구간 하나를 통째로 빼고 학습한 run_holdout에서도 AUC {rh.test_auc.min():.2f}~{rh.test_auc.max():.2f}다. 구간마다 불량률이 1.3%~41%로 다르고 공정변수 분포도 이동한다. #40에서 금형온도가 핵심이었던 점을 종합하면, #42에 없는 금형 열상태가 구간 간 차이를 만드는 유력한 원인이다.
+구간 하나를 통째로 빼고 학습한 run_holdout에서도 AUC {rh.test_auc.min():.2f}~{rh.test_auc.max():.2f}다. 구간마다 불량률이 1.3%~41%로 다르고 공정변수 분포도 이동한다. #40에서 금형온도가 핵심이었던 점을 종합하면, #42에 없는 금형 열상태가 구간 간 차이를 만드는 유력한 원인 가설이다. 검증하려면 금형 온도를 Shot 단위로 수집해야 한다.
 
 **#40·#42 물리인자 방향 비교 (F).**
 

@@ -1,0 +1,7 @@
+﻿concept,q42_var,rho_q42,p40_var,rho_p40_all,rho_p40_normal_pressure,same_direction(all)
+주조·주입 압력,Casting_Pressure,-0.029,injection_pressure,-0.219,-0.008,True
+사이클,Cycle_Time,0.028,facility_CycleTime,0.002,0.0,True
+형체력,Clamping_Force,0.065,mechanical_strength,-0.031,-0.04,False
+비스킷 두께,Biscuit_Thickness,-0.005,biscuit_thickness,-0.039,-0.075,True
+냉각수 온도,Coolant_Temp,-0.015,cooling_water_temp,-0.167,-0.048,True
+용탕·용해 온도,Melting_Furnace_Temp,-0.08,mold_temperature,0.037,0.012,False

@@ -1,0 +1,6 @@
+﻿cost_ratio_miss_to_inspect,chosen_inspection_rate,model_cost,inspect_all_cost,inspect_none_cost,random_same_rate_cost,saving_vs_best_baseline_pct,saving_vs_random_pct
+1,0.0382,304,1387,272,314.6,-11.8,3.4
+2,0.0555,547,1387,544,590.8,-0.6,7.4
+5,0.4679,999,1387,1360,1372.6,26.5,27.2
+10,0.6229,1224,1387,2720,1889.6,11.8,35.2
+20,0.9474,1374,1387,5440,1600.3,0.9,14.1
