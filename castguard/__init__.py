@@ -1,1 +1,2 @@
-"""CastGuard experiment and evidence pipeline."""
+"""CastGuard: 설비 가동이력 인지형 다이캐스팅 품질불량 조기예측 및 공정개선 AI."""
+__version__ = "1.0.0"

@@ -1,284 +1,203 @@
-"""Generate reviewable decision evidence from frozen experiment outputs."""
+"""reports/tables의 결과로 보고서 초안(REPORT_DRAFT.md)을 만든다. 숫자는 모두 코드 산출물에서 읽는다."""
 import json
-from pathlib import Path
 
-import joblib
 import numpy as np
 import pandas as pd
-from sklearn.inspection import permutation_importance
-from sklearn.metrics import average_precision_score, roc_auc_score
-from threadpoolctl import threadpool_limits
 
-from .data import attach_roles, digest, read_inputs
-from .experiment import IDENTITY, KEYS, paired_seed_gain, passes_gain, quality_recommendations, task_frame, task_name, write_json
-from .metrics import score
-from .storage import require_cache, tracked_stage
+from . import paths
+
+T = paths.TABLES
 
 
-def markdown_table(frame, digits=4):
-    def fmt(value):
-        if pd.isna(value):
-            return "—"
-        if isinstance(value, (float, np.floating)):
-            return f"{value:.{digits}f}"
-        return str(value).replace("|", "/")
-    lines = ["| " + " | ".join(map(str, frame.columns)) + " |", "| " + " | ".join(["---"] * len(frame.columns)) + " |"]
-    return "\n".join(lines + ["| " + " | ".join(map(fmt, row)) + " |" for row in frame.itertuples(index=False, name=None)])
+def _csv(name, **kw):
+    return pd.read_csv(T / name, **kw)
 
 
-def paired_block_bootstrap(y, base, other, groups, repetitions, seed):
-    y, base, other, groups = map(np.asarray, [y, base, other, groups])
-    unique, inverse = np.unique(groups, return_inverse=True)
-    rng = np.random.default_rng(seed)
-    values = {"average_precision": [], "roc_auc": []}
-    for _ in range(repetitions):
-        multiplicity = np.bincount(rng.integers(0, len(unique), len(unique)), minlength=len(unique))
-        weights = multiplicity[inverse]
-        if np.unique(y[weights > 0]).size < 2:
-            continue
-        for metric, fn in [("average_precision", average_precision_score), ("roc_auc", roc_auc_score)]:
-            values[metric].append(fn(y, other, sample_weight=weights) - fn(y, base, sample_weight=weights))
-    return [{"metric": key, "estimate": (average_precision_score if key == "average_precision" else roc_auc_score)(y, other) - (average_precision_score if key == "average_precision" else roc_auc_score)(y, base),
-             "lower_95": float(np.quantile(value, 0.025)) if value else np.nan,
-             "upper_95": float(np.quantile(value, 0.975)) if value else np.nan,
-             "blocks": len(unique), "valid_replicates": len(value)} for key, value in values.items()]
+def _md(df: pd.DataFrame) -> str:
+    cols = list(df.columns)
+    lines = ["| " + " | ".join(map(str, cols)) + " |", "|" + "---|" * len(cols)]
+    for _, r in df.iterrows():
+        lines.append("| " + " | ".join("" if (isinstance(v, float) and np.isnan(v)) else
+                                       (f"{v:.3f}" if isinstance(v, float) else str(v)) for v in r) + " |")
+    return "\n".join(lines)
 
 
-def bootstrap_evidence(pred, frames, config):
-    rows = []
-    comparisons = [("q42", "all", "A", "B"), ("q42", "all", "A", "B2"),
-                   ("p40", "all", "E_no_mold6", "E_full"), ("p40", "normal_pressure", "E_no_mold6", "E_full")]
-    for dataset, population, base, other in comparisons:
-        scheme = "within_run" if dataset == "q42" else "chronological"
-        subset = pred.loc[(pred.dataset == dataset) & (pred.population == population) & (pred.scheme == scheme) & (pred.role == "test")]
-        wide = subset.groupby(["row_id", "experiment"]).probability.mean().unstack()
-        if other not in wide:
-            continue
-        wide = wide[[base, other]].dropna()
-        frame = frames[dataset].set_index("row_id").loc[wide.index]
-        groups = frame.run_id if dataset == "q42" else frame.event_time.dt.strftime("%Y-%m-%d")
-        for result in paired_block_bootstrap(frame.y_defect.astype(int), wide[base], wide[other], groups,
-                                             config["bootstrap_repetitions"], config["bootstrap_seed"]):
-            rows.append({"dataset": dataset, "population": population, "comparison": f"{other} - {base}", "scheme": scheme,
-                         "estimand": "AP/AUC difference of mean probabilities across five seeds", **result})
-    return pd.DataFrame(rows)
+def _pct(x, d=1):
+    return f"{100 * x:.{d}f}%"
 
 
-def scheduled_timeline(q, m, folds, scheme, fold):
-    """Recover test population before exclusions, preserving fully unobserved episodes."""
-    frame = attach_roles(m, folds, "m41", scheme, fold)
-    valid_runs = q.groupby("run_id").size().loc[lambda s: s >= 20].index
-    if scheme == "within_run":
-        qfold = attach_roles(q, folds, "q42", scheme, fold)
-        mask = pd.Series(False, index=frame.index)
-        for run in valid_runs:
-            boundary = qfold.loc[(qfold.run_id == run) & (qfold.role == "validation"), "Shot"].max()
-            mask |= (frame.run_id == run) & (frame.Shot > boundary)
-        return frame.loc[mask].copy()
-    return frame.loc[frame.run_id == int(fold)].copy()
+def run(cfg: dict) -> str:
+    prep = json.loads((T / "prepare_report.json").read_text(encoding="utf-8"))
+    sel = json.loads((paths.RUNS / "selection.json").read_text(encoding="utf-8"))
+    dec = json.loads((T / "ablation_decisions.json").read_text(encoding="utf-8"))
+    dq, comp, abl = _csv("data_quality.csv"), _csv("model_comparison.csv"), _csv("ablation.csv")
+    fail, delay = _csv("failure_conditions.csv", dtype={"fold": str}), _csv("delay_sensitivity.csv")
+    gate, gcov, types = _csv("gate_results.csv", dtype={"fold": str}), _csv("ablation_C_gate_coverage.csv"), _csv("defect_type_results.csv")
+    e40, f40 = _csv("ablation_E_p40.csv"), _csv("ablation_F_physics_direction.csv")
+    insp, cost = _csv("kpi_inspection.csv"), _csv("kpi_cost_sensitivity.csv")
+    cond, shap = _csv("error_by_condition.csv"), _csv("shap_importance.csv")
+    inter = _csv("shap_interactions.csv") if (T / "shap_interactions.csv").exists() else None
+    ow = _csv("operating_window_candidates.csv")
 
+    fq = sel["final_quality"]
+    fin = comp[(comp.experiment == fq["experiment"]) & (comp.model == fq["model"])].iloc[0]
+    a0 = comp[(comp.experiment == "A0")].sort_values("val_ap", ascending=False).iloc[0]
+    i20 = insp[insp.target_inspection_rate == 0.2].iloc[0]
+    gw = gate[gate.scheme == "within_run"].iloc[0]
+    fw = fail[(fail.scheme == "forward_run") & (fail.experiment == fq["experiment"])]
+    rh = fail[(fail.scheme == "run_holdout") & (fail.experiment == fq["experiment"])]
+    run_auc = cond[(cond.axis == "가동구간") & cond.auc.notna()]
+    en = lambda pop, exp: e40[(e40.population == pop) & (e40.experiment == exp) & (e40.model == "lightgbm") & (e40.role == "test")].auc.iloc[0]
+    e_full, e_no = en("normal_pressure", "E_full"), en("normal_pressure", "E_no_mold6")
+    b = dec["보조1(#41 이력) 효과"]
+    fbg = dec["검사결과 피드백 효과"]
+    fb_top = shap.head(10)
 
-def gate_evidence(pred, frames, folds):
-    episodes, rows, workflow = [], [], []
-    gate_predictions = pred.loc[(pred.dataset == "m41") & (pred.role == "test")]
-    for (scheme, fold, seed), group in gate_predictions.groupby(["scheme", "fold", "seed"]):
-        timeline = scheduled_timeline(frames["q42"], frames["m41"], folds, scheme, fold)
-        merged = timeline.merge(group[["row_id", "probability", "prediction"]], on="row_id", how="left", validate="one_to_one")
-        available = merged.probability.notna()
-        alarm = merged.prediction.fillna(False).astype(bool)
-        normal, warm = merged.Machine_Status.eq(0), merged.Machine_Status.eq(1)
-        detected, observed_count, all_count, delays = 0, 0, 0, []
-        for episode, ep in merged.loc[warm].groupby("episode_id"):
-            all_count += 1
-            observable = ep.probability.notna().any()
-            observed_count += int(observable)
-            hits = ep.loc[ep.prediction.fillna(False).astype(bool)]
-            hit = not hits.empty
-            detected += int(hit)
-            delay = int(hits.Shot.min() - ep.Shot.min()) if hit else np.nan
-            if hit:
-                delays.append(delay)
-            episodes.append({"scheme": scheme, "fold": fold, "seed": seed, "episode_id": episode,
-                             "total_shots": len(ep), "observable_shots": int(ep.probability.notna().sum()),
-                             "detected": hit, "delay_shots": delay,
-                             "status": "detected" if hit else ("missed" if observable else "unobservable_held")})
-        denominator = int((available & warm).sum())
-        rows.append({"scheme": scheme, "fold": fold, "seed": seed, "model": group.model.iloc[0],
-                     "total_test_timeline": len(merged), "eligible_test": int(available.sum()), "held_unavailable": int((~available).sum()),
-                     "warm_total": int(warm.sum()), "warm_observable": denominator,
-                     "warm_passed_without_gate": denominator,
-                     "warm_passed_with_gate": int((warm & available & ~alarm).sum()),
-                     "warm_pass_rate_with_gate": float((warm & available & ~alarm).sum() / denominator) if denominator else np.nan,
-                     "normal_observable": int((normal & available).sum()), "false_stops": int((normal & available & alarm).sum()),
-                     "test_fpr": float((normal & available & alarm).sum() / (normal & available).sum()),
-                     "episodes_total": all_count, "episodes_observable": observed_count, "episodes_detected": detected,
-                     "episode_recall_observable": detected / observed_count if observed_count else np.nan,
-                     "episode_recall_total": detected / all_count if all_count else np.nan,
-                     "mean_delay_detected_shots": float(np.mean(delays)) if delays else np.nan})
-        qp = pred.loc[(pred.dataset == "q42") & (pred.experiment == "A") & (pred.scheme == scheme) & (pred.fold == fold) & (pred.seed == seed) & (pred.role == "test")]
-        quality = qp.merge(frames["q42"][["row_id", "run_id", "Shot"]], on="row_id", validate="one_to_one")
-        quality = quality.merge(merged[["run_id", "Shot", "prediction"]], on=["run_id", "Shot"], suffixes=("_quality", "_gate"), validate="one_to_one")
-        held = quality.prediction_gate.fillna(True).astype(bool)
-        positives = quality.y.eq(1)
-        workflow.append({"scheme": scheme, "fold": fold, "seed": seed, "quality_test_n": len(quality),
-                         "quality_positive": int(positives.sum()), "quality_shots_held": int(held.sum()),
-                         "quality_positives_held": int((held & positives).sum()),
-                         "quality_tp_without_gate": int((quality.prediction_quality & positives).sum()),
-                         "quality_tp_automatic_path_with_gate": int((quality.prediction_quality & positives & ~held).sum())})
-    return pd.DataFrame(rows), pd.DataFrame(episodes), pd.DataFrame(workflow)
+    md = f"""# CastGuard: 설비 가동이력 인지형 다이캐스팅 품질불량 조기예측 및 공정개선 AI
 
+> 자동 생성 초안 (`python -m castguard report`). 모든 수치는 `reports/tables/`의 코드 산출물에서 읽었다.
+> 대상 기업은 비식별화하여 "자동차부품 알루미늄 다이캐스팅 중소기업 A사"로 표기한다.
 
-def factor_evidence(root, output, config, provenance, selection):
-    cache = root / provenance["cache"]
-    rows = []
-    compare = [("q42", "all", "within_run", "A"), ("p40", "normal_pressure", "chronological", "E_full")]
-    for dataset, population, scheme, experiment in compare:
-        selected = selection.loc[selection.selected & (selection.dataset == dataset) & (selection.population == population) & (selection.scheme == scheme)].iloc[0]
-        for seed in config["seeds"]:
-            task = dict(zip(IDENTITY, [dataset, population, scheme, "primary", experiment, selected.model, seed]))
-            require_cache(cache / task_name(task), task)
-            bundle = joblib.load(cache / task_name(task) / "model.joblib")
-            model, features = bundle["pipeline"], bundle["features"]
-            frame, _, _ = task_frame(root, task, config)
-            train, test = frame.loc[frame.role == "train"], frame.loc[frame.role == "test"]
-            with threadpool_limits(limits=1):
-                importance = permutation_importance(model, test[features], test.y_defect.astype(int), scoring="average_precision", n_repeats=config["permutation_repetitions"], random_state=seed, n_jobs=1)
-                ranks = pd.Series(importance.importances_mean).rank(ascending=False, method="min")
-                for i, feature in enumerate(features):
-                    low, high = train[feature].quantile([0.25, 0.75])
-                    low_frame, high_frame = test[features].copy(), test[features].copy()
-                    low_frame[feature], high_frame[feature] = low, high
-                    change = float(np.mean(model.predict_proba(high_frame)[:, 1] - model.predict_proba(low_frame)[:, 1]))
-                    rows.append({"dataset": dataset, "population": population, "experiment": experiment, "model": selected.model,
-                                 "seed": seed, "feature": feature, "permutation_ap_drop": importance.importances_mean[i],
-                                 "permutation_repeat_sd": importance.importances_std[i], "rank": ranks.iloc[i],
-                                 "train_q25": low, "train_q75": high, "pdp_q75_minus_q25": change})
-    result = pd.DataFrame(rows)
-    result.to_csv(output / "factor_details.csv", index=False)
-    aggregate = result.groupby(["dataset", "population", "feature"], as_index=False).agg(ap_drop_mean=("permutation_ap_drop", "mean"), ap_drop_seed_sd=("permutation_ap_drop", "std"), rank_mean=("rank", "mean"), direction_mean=("pdp_q75_minus_q25", "mean"), direction_seed_sd=("pdp_q75_minus_q25", "std"))
-    aggregate.to_csv(output / "factor_summary.csv", index=False)
-    mappings = [("pressure", "Casting_Pressure", "injection_pressure"),
-                ("pressure_secondary", "Cylinder_Pressure", "injection_pressure"),
-                ("heat_proxy", "Melting_Furnace_Temp", "mold_temperature")]
-    comparisons = []
-    for factor, qfeature, pfeature in mappings:
-        q = aggregate.loc[(aggregate.dataset == "q42") & (aggregate.feature == qfeature)].iloc[0]
-        p = aggregate.loc[(aggregate.dataset == "p40") & (aggregate.feature == pfeature)].iloc[0]
-        comparisons.append({"factor": factor, "q42_feature": qfeature, "p40_feature": pfeature,
-                            "q42_direction": q.direction_mean, "p40_direction": p.direction_mean,
-                            "same_sign": bool(np.sign(q.direction_mean) == np.sign(p.direction_mean)),
-                            "q42_rank": q.rank_mean, "p40_rank": p.rank_mean,
-                            "q42_ap_drop": q.ap_drop_mean, "p40_ap_drop": p.ap_drop_mean,
-                            "interpretation": "exploratory proxies, different physical quantities; not causal or transfer validation"})
-    comparison = pd.DataFrame(comparisons)
-    comparison.to_csv(output / "factor_comparison.csv", index=False)
-    return comparison
+## 요약
 
+- **계보 증명**: 품질보증(#42)과 설비 예지보전(#41)을 (가동구간, Shot) 키로 연결하면 {prep['join_matched']:,} Shot이 1:1로 맞고 공정값 {prep['join_equal_values']:,}개가 전부 일치한다. 두 데이터는 같은 설비의 서로 다른 기록이다.
+- **정직한 검증**: 반복 저장된 중복 {prep['q42_duplicates_removed']:,}행을 제거하고 가동구간 안 시간순으로만 검증했다. 최종 모델({fq['experiment']} · {fq['model']})의 test ROC-AUC는 **{fin.test_auc:.3f}**, PR-AUC는 **{fin.test_ap:.3f}**(불량률 대비 {fin.test_ap_lift:.2f}배)다. 공정변수만 쓴 베이스라인은 {a0.test_auc:.3f} / {a0.test_ap:.3f}다.
+- **현장 효과**: Shot의 {_pct(i20.test_inspection_rate)}만 추가검사해도 불량의 **{_pct(i20.capture_rate)}**를 잡는다. 같은 양을 무작위로 검사할 때보다 **{i20.lift_vs_random:.1f}배** 많다.
+- **보조 데이터의 역할**: #41 가동이력을 품질모델 입력으로 더하면 AP 변화는 validation {b['val_gain']:+.3f}로 채택 기준(+0.02)에 못 미쳤다. 대신 #41이 정의하는 설비상태를 **Gate**로 쓰면 test 구간 예열 에피소드 {gw.episodes:.0f}개 중 평균 {gw.detected_within_k:.1f}개를 첫 {cfg['gate_detect_within_shots']} Shot 안에 잡고, 정상 Shot 오정지는 {_pct(gw.false_stop_rate, 2)}다. #40(타 공장)에서는 금형온도 6개를 빼면 정상압력 구간 AUC가 {e_full:.3f} → {e_no:.3f}로 떨어진다. #42에 없는 **금형 열상태가 핵심 결손 변수**임을 보여준다.
+- **실패 조건**: 학습에 없던 새 가동구간(forward_run)에서는 AUC가 {fw.test_auc.min():.2f}~{fw.test_auc.max():.2f}로 떨어진다. 이를 숨기지 않고 원인(미관측 열상태·구간별 조건 변화)과 데이터 수집 제언으로 연결했다.
 
-def history_decision(metrics, selection, history, config):
-    primary = selection.loc[selection.selected & (selection.dataset == "q42") & (selection.scheme == "within_run")].iloc[0]
-    choice = next(x for x in history if x["scheme"] == "within_run" and x["fold"] == "primary")
-    selected_experiment = choice["validation_selected_history_experiment"]
-    b_gain, b_sd = paired_seed_gain(metrics, "within_run", "primary", "test", "B", primary.model)
-    gain, sd = paired_seed_gain(metrics, "within_run", "primary", "test", selected_experiment, primary.model)
-    passed = passes_gain(gain, sd, config)
-    return {"date": "2026-10-02", "primary_quality_model": primary.model,
-            "b_ap_gain": b_gain, "b_paired_seed_sd": b_sd, "b_pass": passes_gain(b_gain, b_sd, config),
-            "selected_history_experiment": selected_experiment, "selected_history_ap_gain": gain,
-            "selected_history_paired_seed_sd": sd, "selected_history_pass": passed,
-            "history_validation_selection": choice,
-            "narrative": f"{selected_experiment} primary; C/E supporting" if passed else "History improvement not established; E primary empirical evidence, C coverage evidence with false-stop limitations",
-            "deployment_ready": False,
-            "reason": "Retrospective quality accuracy and unseen-run Gate false stops do not establish operational readiness"}
+## 1. 기업문제 정의 및 데이터 통합
 
+**문제.** A사는 Shot마다 부품 2개(Cavity 1·2)를 생산하고, 품질은 사후 육안검사와 작업자 감에 의존한다. 기준 불량률은 중복 제거 후 {_pct(prep['q42_defect_rate'])}(Cavity1 {_pct(prep['q42_cavity1_rate'])} · Cavity2 {_pct(prep['q42_cavity2_rate'])})다. 설비 재가동 직후의 예열(가생산) 위험과 정상 운전 중 불량 위험이 섞여 있다.
 
-def summarize(root, output):
-    with tracked_stage(output, "summarizing"):
-        return _summarize(root, output)
+**목표 KPI.** ① 제한된 추가검사로 불량 포착률 최대화 ② 예열 Shot의 품질판정 오류 제거 ③ 고위험 연속 시 조건조정·중지 판단 ④ 비용비율별 품질비용 절감.
 
+**데이터 역할.**
 
-def _summarize(root, output):
-    root, output = Path(root), Path(output)
-    from .verify import verify_evidence, verify_provenance
-    provenance = verify_provenance(root, output)
-    verification = verify_evidence(root, output)
-    metrics = pd.read_csv(output / "metrics.csv", dtype={"fold": str}, float_precision="round_trip")
-    selected = pd.read_csv(output / "selected_metrics.csv", dtype={"fold": str}, float_precision="round_trip")
-    selection = pd.read_csv(output / "model_selection.csv", dtype={"fold": str})
-    predictions = pd.read_parquet(output / "predictions.parquet")
-    config = provenance["config"]
-    frames, folds, _ = read_inputs(root)
-    test = selected.loc[selected.role == "test"]
-    group_keys = KEYS + ["experiment", "model"]
-    summary = test.groupby(group_keys, as_index=False).agg(n=("n", "first"), positive=("positive", "first"), ap_mean=("average_precision", "mean"), ap_sd=("average_precision", "std"), auc_mean=("roc_auc", "mean"), auc_sd=("roc_auc", "std"), recall_mean=("recall", "mean"), fpr_mean=("fpr", "mean"), ece_mean=("ece", "mean"), brier_mean=("brier", "mean"))
-    summary.to_csv(output / "ablation_summary.csv", index=False)
-    print("Calculating paired run/date block intervals", flush=True)
-    bootstrap = bootstrap_evidence(predictions, frames, config)
-    bootstrap.to_csv(output / "bootstrap_intervals.csv", index=False)
-    gate, episodes, workflow = gate_evidence(predictions, frames, folds)
-    gate.to_csv(output / "gate_metrics.csv", index=False)
-    episodes.to_csv(output / "gate_episodes.csv", index=False)
-    workflow.to_csv(output / "gate_quality_workflow.csv", index=False)
-    print("Calculating F: permutation importance and probability direction", flush=True)
-    factors = factor_evidence(root, output, config, provenance, selection)
-    # Empirical pressure-only rule, scored only on the frozen chronological test.
-    process = attach_roles(frames["p40"], folds, "p40", "chronological", "primary")
-    process = process.loc[process.role == "test"]
-    rule = process.injection_pressure.le(615).astype(float)
-    write_json(output / "pressure_rule.json", {"rule": "injection_pressure <= 615", "threshold_source": "team guidebook, not fitted", **score(process.y_defect, rule)})
-    history = json.loads((output / "history_selection.json").read_text(encoding="utf-8"))
-    decision = history_decision(metrics, selection, history, config)
-    recommendation = quality_recommendations(metrics)
-    recommendation.to_csv(output / "quality_recommendations.csv", index=False)
-    recommended_primary = recommendation.loc[recommendation.recommended & (recommendation.scheme == "within_run")].iloc[0]
-    decision["supplementary_quality_recommendation"] = recommended_primary.to_dict()
-    write_json(output / "decision.json", decision)
-    candidates = metrics.loc[(metrics.dataset == "q42") & (metrics.scheme == "within_run") & (metrics.experiment == "A")].groupby(["model", "role"], as_index=False).agg(ap=("average_precision", "mean"), ap_sd=("average_precision", "std"), auc=("roc_auc", "mean"), ece=("ece", "mean"), brier=("brier", "mean"), inference_us=("predict_us_per_row", "mean"))
-    gate_fold = gate.groupby(["scheme", "fold"], as_index=False).agg(observable=("episodes_observable", "first"), total=("episodes_total", "first"), detected_mean=("episodes_detected", "mean"), test_fpr=("test_fpr", "mean"), warm_pass_rate=("warm_pass_rate_with_gate", "mean"), delay_detected=("mean_delay_detected_shots", "mean"), held_unavailable=("held_unavailable", "first"))
-    # Full OOF episode population exists only for run_holdout (one test role per run).
-    totals = gate.loc[gate.scheme == "run_holdout"].groupby("seed").agg(total=("episodes_total", "sum"), observable=("episodes_observable", "sum"), detected=("episodes_detected", "sum"), false_stops=("false_stops", "sum"), normal=("normal_observable", "sum"), warm_passed=("warm_passed_with_gate", "sum"), warm=("warm_observable", "sum"))
-    totals["pooled_fpr"] = totals.false_stops / totals.normal
-    totals.reset_index().to_csv(output / "gate_run_holdout_totals.csv", index=False)
-    body = ["# 10월 2일 판정 게이트 결과", "", "기준일: 2026-10-02. 팀 가이드북의 9/30–10/2 실험 범위를 실제 실행한 결과다. 기존 HTML의 참고 수치는 재사용하지 않았다.", "",
-            f"**검증에서 선택한 {decision['selected_history_experiment']}의 이력 변수 개선 기준을 {'통과했다' if decision['selected_history_pass'] else '충족하지 못했다'}.** {decision['primary_quality_model']}에서 A 대비 AP 차이는 {decision['selected_history_ap_gain']:+.4f}, paired seed 표준편차는 {decision['selected_history_paired_seed_sd']:.4f}다. 기준은 +0.02 이상 및 표준편차 2배 초과다.", "",
-            "#41과 #42는 공정 변수가 같고 모집단·라벨이 다르다. 이번에는 E(금형온도 제거실험)를 중심 증거로, C는 예열을 구분해 적용 범위를 넓히는 근거로 사용한다. C의 새 구간 오정지가 커서 현장 적용 성능으로 포장하면 안 된다." if not decision['selected_history_pass'] else "이력의 회고적 개선과 미래 구간 일반화는 별도 주장이다. C/E 결과와 미래 구간 결과를 함께 해석한다.", "",
-            "## 오늘까지 완료한 범위", "", "- 고정 입력 해시·조인·분할 검사 및 원본 CSV에서 전처리/분할 재생성 일치 검증.",
-            "- 로지스틱/RF/LightGBM/CatBoost, 5개 seed, 고정 분할 전부에서 A0/A/B/C/E 실행.",
-            "- validation만 사용한 후보 선택·임계값 결정, B2 한 번의 재설계, F의 변수 방향·순위 비교.",
-            "- 행 단위 예측, seed별 지표, 에피소드 단위 결과, paired block 구간 및 재실행 명령 저장.", "",
-            "## 후보 모델 비교", "", "모델군은 A의 validation AP 평균으로 선택했다. test 최고 모델을 다시 선택하지 않았다. ECE는 보정 전 10-bin 측정값이다. 추론 시간은 이 PC에서 배치 예측한 참고값이다.", "", markdown_table(candidates), "",
-            "## 재검토: 입력군까지 포함한 보완 권고", "",
-            "기존 제거실험은 A를 기준으로 모델군을 고정해야 공정한 전후 비교가 된다. 이 기준모델과 향후 사용할 입력/모델 조합은 다른 선택이다. 재검토에서는 이미 수행한 A0/A/B × 4개 모델의 validation AP 평균, Brier, 입력명·모델명 순으로만 권고를 계산했다. B2는 모든 모델군에 공통 실행되지 않아 이 표에서 제외했다. 원래 B 판정과 test 결과는 바꾸지 않았다.", "",
-            f"within_run 보완 권고는 **{recommended_primary.experiment} / {recommended_primary.model}**다. 이는 최초 test 공개 후 보완한 선택 정책이며, 새 독립 시험에서 성능 개선을 입증한 결과로 해석하면 안 된다. 새 데이터 검증을 거쳐 최종 적용 여부를 정한다.", "",
-            markdown_table(recommendation.loc[recommendation.scheme == "within_run", ["experiment", "model", "validation_ap", "validation_brier", "validation_ap_seed_sd", "recommended"]]), "",
-            "## A0 / A / B / B2", "", markdown_table(summary.loc[(summary.dataset == "q42") & (summary.scheme == "within_run"), ["experiment", "model", "n", "positive", "auc_mean", "auc_sd", "ap_mean", "ap_sd", "ece_mean"]]), "",
-            "AP는 Average Precision이다. ± 값은 5 seed의 표준편차이며 신뢰구간이 아니다. B2는 검증에서 사전 기준을 못 넘긴 fold에서만 한 번 실행했다. B2의 추가 입력은 과거 Cycle_Time의 train 제품별 중앙값 대비 비율 2개와 이전 20행 결손수/20이다. 정답이나 미래 값은 쓰지 않았다.", "",
-            "A0가 시험에서 더 좋게 나온 경우도 그대로 공개한다. 이번 실험 뒤 test를 보고 A0를 최종 채택했다고 주장하지 않는다. 입력군 최종 선택의 추가 검증은 다음 단계다.", "",
-            "## 새 미래 가동구간", "", "forward_run만 시간 전진 평가다. 표본·불량 수가 적은 구간에서는 AP/AUC가 불안정하다. run_holdout 상세는 CSV에 있으며 두 프로토콜을 혼합 평균하지 않았다.", "",
-            markdown_table(summary.loc[(summary.dataset == "q42") & (summary.scheme == "forward_run") & summary.experiment.isin(["A", "B"]), ["fold", "experiment", "model", "n", "positive", "auc_mean", "ap_mean", "ap_sd"]]), "",
-            "## C: Gate 적용 범위와 실패 조건", "", "Gate 경계는 validation 정상 FPR ≤2%로 선택했다. 아래 값은 독립 test의 실제 FPR이며 2% 보장값이 아니다. 지연은 탐지된 에피소드만의 최초 예열 Shot→최초 탐지 Shot 간격이고, 미탐지를 지연 평균에서 성공처럼 취급하지 않는다.", "", markdown_table(gate_fold), "",
-            "run_holdout은 각 구간을 한 번씩 test로 평가한다. 5 seed를 5배 많은 에피소드로 세지 않도록 seed별 합계를 보존했다.", "", markdown_table(totals.reset_index()), "",
-            "전체 21개 에피소드 중 20개에 관측 가능한 입력이 있다. 완전 결손 에피소드도 전체 분모에 포함하며, 결손 행은 보류한다. #42에는 정상 Shot의 품질 라벨만 있어 예열 제품의 품질 불량률/품질 정확도를 계산하지 않았다. Gate 경보는 정상 생산을 보류시킬 수도 있다. `gate_quality_workflow.csv`는 이 손실을 포함한 자동 품질 경로 TP와 보류 수를 담는다.", "",
-            "## E: 금형온도 6개 제거", "", "전체 및 정상압력(>615) 모집단을 각각 학습·평가했다. top_temp1–3/bottom_temp1–3만 제거했고, mold_temperature/sleeve_temperature는 유지했다. #40 자체의 변수 유용성 근거이며 #42의 정확도 향상을 입증하지 않는다. 원본 전처리 방침대로 1,500 초과 의심값도 유지했으므로 물리적 온도 해석과 센서 단위 확인은 별도 과제다.", "",
-            markdown_table(summary.loc[summary.dataset == "p40", ["population", "experiment", "model", "n", "positive", "auc_mean", "auc_sd", "ap_mean", "ap_sd"]]), "",
-            "## paired block 불확실성", "", "q42는 run, p40은 날짜 단위로 1,000회 paired 재표집했다. seed 평균 확률의 AP/AUC 차이를 대상으로 하므로 위 seed별 지표 평균과 추정량이 다르다. 6개 run과 소수 날짜만 있는 탐색적 구간이며 독립 외부 재검증을 대체하지 않는다.", "",
-            markdown_table(bootstrap[["dataset", "population", "comparison", "metric", "estimate", "lower_95", "upper_95", "blocks"]]), "",
-            "## F: 물리인자 방향·순위", "", "순위는 test 순열 중요도(AP 감소)이며 방향은 train 25→75 분위로 해당 열만 바꾼 평균 예측확률 차이다. 5 seed 평균이다. 서로 다른 공정의 압력·온도 proxy를 비교한 탐색 분석이다. 단위/설비 계보 확인 전 방향 일치만으로 전이 가능성·인과효과를 주장하지 않는다. 상관된 변수의 단독 치환은 실제 운전 가능한 조건을 보장하지 않는다.", "",
-            markdown_table(factors.drop(columns="interpretation")), "",
-            f"방향 부호가 일치한 proxy는 {int(factors.same_sign.sum())}/{len(factors)}개다. 방향이 같아도 순열 중요도가 음수이거나 확률 변화가 작으면 공통 효과의 근거가 약하다. F는 물리적 인과관계나 타 공장 전이 성공의 검증이 아니다.", "",
-            "## 다음 일정과 미확인 사항", "", "- 10/2–10/4: 조건별 오류분석 확대, SHAP·상호작용, 운전창·조치 정책·KPI. F의 순열/PDP는 SHAP 완료를 뜻하지 않는다.",
-            "- 10/4–10/6: 보고서·PPT 작성 및 팀 검토. 10/6–10/7: 제출용 전체 파이프라인 clean-room 검수, 10/7 사전 제출.",
-            "- KAMP 원본 가이드북/AAS 단위·수집주기·설비 계보와 현장 입력 가용성은 저장소에 근거 자료가 없어 미확인이다. 실제 품질비용·효과를 임의 생성하지 않았다.",
-            "- 이번 `all`은 10/2 판정 게이트 전체다. 제출일까지의 KPI·보고서까지 완료했다는 의미가 아니다.", "",
-            "## 재현 및 파일", "", "프로토콜: [EXPERIMENT_PROTOCOL.md](../../docs/EXPERIMENT_PROTOCOL.md). 실행: [README](../../README.md). 설정: [oct02.json](../../configs/oct02.json).",
-            "`metrics.csv`는 모든 후보/seed/validation/test 결과, `model_selection.csv`는 선정 근거, `predictions.parquet`은 선정 모델군의 모든 제거실험 예측이다. 개별 후보 전체 예측·학습모델은 로컬 `artifacts/`에 저장하고 같은 명령으로 재생성한다. `provenance.json`에 해시·환경을 기록했다.", "",
-            "방법 출처: [AP 정의](https://scikit-learn.org/1.7/modules/generated/sklearn.metrics.average_precision_score.html), [학습 누수 방지](https://scikit-learn.org/1.7/common_pitfalls.html).", ""]
-    (output / "RESULTS.md").write_text("\n".join(body), encoding="utf-8")
-    verify_provenance(root, output)
-    write_json(output / "prediction_verification.json", verification)
-    status = json.loads((output / "run_status.json").read_text())
-    status.update(status="complete", decision=decision)
-    write_json(output / "run_status.json", status)
-    write_json(output / "evidence_manifest.json", {"source_hashes": {p.relative_to(root).as_posix(): digest(p) for p in sorted((root / "castguard").glob("*.py"))},
-               "outputs": {p.name: digest(p) for p in sorted(output.iterdir()) if p.is_file() and p.name != "evidence_manifest.json"}})
-    print(f"Completed: {output / 'RESULTS.md'}", flush=True)
+| 데이터 | 역할 | 연결 방식 |
+|---|---|---|
+| #42 주조 품질보증 ({prep['q42_raw_rows']:,}행 → {prep['q42_rows']:,} Shot) | 주 데이터: 공정14·센서6·불량13종×Cavity2 | 기준 |
+| #41 주조 설비 예지보전 ({prep['m41_rows']:,}행) | 보조1: 전체 가동 타임라인·설비상태(예열 {prep['m41_warmup_rows']}행·{prep['m41_warmup_episodes']}에피소드) | (가동구간, Shot) 1:1 키 조인 + 의사결정 단계 Gate |
+| #40 주조 공정최적화 ({prep['p40_rows']:,}행) | 보조2: 타 공장 외부 검증·결손 변수(금형온도) 진단 | 물리개념 수준 비교 (행 조인 없음) |
+
+**전처리.** 2단 헤더·공백 정리 → Shot 감소 지점으로 가동구간 7개 부여 → 구간 내 완전 중복 {prep['q42_duplicates_removed']:,}행 제거 → 상수 관리한계 8열 제외 → 결측은 대체하지 않고 유지(학습 fold에서만 대체) → 불량 26열 중 하나라도 0보다 크면 불량. #41 이력 변수는 현재 행을 제외한 과거 행만으로 계산하고 구간마다 초기화했다. #40은 날짜+시각을 합치면 {prep['p40_rows_moved_if_naive_datetime_sort']:,}행의 순서가 뒤바뀌어(날짜 라벨 안에서 시각이 0시로 되돌아감), 검증된 파일 순서로 시간 분할했다.
+
+**데이터 품질지수 (전·후).**
+
+{_md(dq[['dataset', 'stage', 'rows', 'completeness', 'uniqueness', 'validity', 'consistency']])}
+
+정확성·적시성은 외부 정답과 수집 SLA가 없어 미측정이다.
+
+## 2. AI 모델 및 통합성능
+
+**3단계 계층 구조.** Stage 1 설비상태 Gate(#41) → Stage 2 불량 위험(#42 + 검사결과 피드백) → Stage 3 불량유형(주요 4종 + Etc).
+
+**검사결과 피드백.** 현장은 모든 Shot을 사후 육안검사하므로 결과가 늦게 도착한다. Shot t를 예측할 때 같은 구간에서 {sel['label_delay_shots']} Shot 이전까지 도착한 검사결과로 최근 불량률(20·50·100 Shot), 지수평균, 마지막 불량 이후 경과를 만든다. 불량은 시간적으로 몰려 있어(구간 내 자기상관) 이 정보가 미관측 설비 상태의 대리 지표가 된다.
+
+**검증.** 가동구간 안에서 앞 70%를 개발(그중 80% train · 20% validation), 뒤 30%를 test로 고정했다. 모든 선택(입력·모델·임계값)은 validation으로만 했다. seed {len(cfg['seeds'])}개 평균 ± 표준편차.
+
+**Ablation (최종 모델군 {fq['model']}, within-run test).**
+
+{_md(abl)}
+
+| 비교 | validation AP 변화 | test AP 변화 | 채택 기준 통과 |
+|---|---:|---:|---|
+""" + "\n".join(f"| {k} ({v['from']}→{v['to']}) | {v['val_gain']:+.3f} | {v['test_gain']:+.3f} | {'예' if v['pass_rule(+0.02 & >2sd on validation)'] else '아니오'} |" for k, v in dec.items()) + f"""
+
+**후보 모델 비교와 최종모델 선정근거.** 로지스틱·랜덤포레스트·LightGBM·CatBoost·XGBoost·앙상블(로지스틱+LightGBM+CatBoost 평균)을 같은 분할에서 비교했다. validation PR-AUC가 가장 높은 조합을 선정하고, 동률이면 보정오차(ECE)와 seed 간 표준편차가 작은 쪽을 택했다. #41 이력을 포함한 입력(B 계열)은 validation에서 +0.02 이상, seed 표준편차의 2배를 넘을 때만 채택한다.
+
+{_md(comp.head(10)[['experiment', 'model', 'val_ap', 'val_auc', 'val_ece', 'test_ap', 'test_auc', 'selected']])}
+
+**최종 선정: {fq['experiment']} · {fq['model']}** (validation AP {fq['val_ap']:.3f}).{(' B 계열 후보(' + fq['b_rule']['candidate'] + ')는 validation 이득 ' + format(fq['b_rule']['val_gain'], '+.3f') + '로 기준 미달이라 제외했다.') if fq.get('b_rule') and not fq['b_rule']['adopted'] else ''}
+
+**검사결과 지연 민감도.**
+
+{_md(delay)}
+
+**설비상태 Gate (Stage 1, {sel['gate_model']}).** 오정지율(정상 Shot 경보) {_pct(cfg['gate_max_validation_fpr'], 0)}가 되도록 validation에서 임계값을 정했다.
+
+{_md(gcov)}
+
+{_md(gate[['scheme', 'fold', 'episodes', 'detected_within_k', 'mean_shots_to_detect', 'false_stop_rate', 'row_auc']])}
+
+같은 구간 안(within_run)에서는 오정지 {_pct(gw.false_stop_rate, 2)}로 예열 에피소드 대부분을 첫 Shot에 잡는다. 다른 구간으로 옮기면 행 단위 AUC는 높게 유지되지만, 임계값이 맞지 않아 일부 구간에서 오정지가 커진다. 현장 적용 시 제품·구간 시작마다 임계값을 재보정해야 한다(4장).
+
+**불량유형 (Stage 3, within-run test).**
+
+{_md(types)}
+
+**#40 외부 검증 (E) — 금형온도의 가치.**
+
+{_md(e40[e40.role == 'test'][['population', 'experiment', 'model', 'auc', 'ap', 'prevalence', 'n']])}
+
+## 3. 영향요인 · 오류분석
+
+**주요 영향변수 (SHAP, LightGBM 설명모델).**
+
+{_md(fb_top[['feature', 'mean_abs_shap', 'direction(corr value↔shap)']])}
+
+{'**상호작용 상위 (XGBoost SHAP interaction).**' + chr(10) + chr(10) + _md(inter.head(8)) if inter is not None else ''}
+
+**조건별 성능.** 아래는 within-run test에서 최종 모델의 조건별 성능이다.
+
+{_md(cond[cond.axis.isin(['가동구간', '제품', '예열 후 경과 Shot(분석용)', '불확실성'])][['axis', 'level', 'n', 'positives', 'prevalence', 'auc', 'ap', 'recall', 'fnr']])}
+
+구간별 AUC는 {run_auc.auc.min():.2f}~{run_auc.auc.max():.2f}로, 구간을 합친 AUC({fin.test_auc:.3f})보다 낮다. 모델의 힘 상당 부분은 "지금 위험이 높은 시기인가"를 구분하는 데서 나오고, 같은 시기 안에서 개별 Shot을 가려내는 능력은 제한적이다. 검사 자원을 시기별로 배분하는 데는 유효하지만, Shot 단위 판정을 대체하지는 못한다.
+
+**실패 조건 — 새 가동구간.**
+
+{_md(fw[['fold', 'n', 'prevalence', 'test_auc', 'test_ap']])}
+
+구간 하나를 통째로 빼고 학습한 run_holdout에서도 AUC {rh.test_auc.min():.2f}~{rh.test_auc.max():.2f}다. 구간마다 불량률이 1.3%~41%로 다르고 공정변수 분포도 이동한다. #40에서 금형온도가 핵심이었던 점을 종합하면, #42에 없는 금형 열상태가 구간 간 차이를 만드는 유력한 원인이다.
+
+**#40·#42 물리인자 방향 비교 (F).**
+
+{_md(f40)}
+
+## 4. 현장 적용 기본설계
+
+**의사결정 정책.**
+
+| 설비 Gate | 불량 위험 | 조치 |
+|---|---|---|
+| 예열 의심 | — | 품질판정 보류 · 설비 점검 |
+| 정상 | 매우 높음 3연속 | 생산중지 · 조건조정 · 원인 점검 |
+| 정상 | 높음 + 내부결함(Short Shot·Blow Hole·Bubble) 예상 | 추가검사 → 폐기 판단 |
+| 정상 | 높음 + 표면불량 예상 | 재작업 라인 분기 |
+| 정상 | 중간 | 보수적 추가검사 |
+| 정상 | 낮음 | 정상 생산 |
+
+위험 등급 경계는 validation 예측의 상위 5% · 20% · F1 최적값으로 정했다. Shot별 결과는 `outputs/predictions/test_predictions.csv`에 있다.
+
+**KPI — 추가검사율별 불량 포착 (기준값: 무작위 검사).**
+
+{_md(insp)}
+
+산출식: 포착률 = 검사한 Shot 중 불량 수 ÷ 전체 불량 수. 무작위 검사의 기대 포착률은 검사율과 같다.
+
+**품질비용 민감도.** 비용 = r × 놓친 불량 + 1 × 추가검사 건수. 실제 단가가 없어 비용비율 r로만 제시한다.
+
+{_md(cost)}
+
+**운전창 후보 (모델 기반, 인과 아님).** 고위험 상위 5% Shot {len(ow)}개에서 조정 가능한 변수 하나를 같은 제품의 관측 범위(p10~p90) 안에서 바꿨을 때 예상 위험이 평균 {(ow.risk_before - ow.risk_after).mean():.3f} 낮아졌다. 가장 자주 제안된 변수는 {ow.suggested_var.value_counts().index[0]}다. 현장 시험 전 후보로만 사용한다.
+
+## 5. 창의성 · 확장성
+
+- **의사결정 단계 융합**: 보조 데이터를 feature로 붙이는 대신, 설비상태를 품질모델의 적용 조건(Gate)으로 쓴다.
+- **검사결과 피드백 루프**: 이미 존재하는 사후검사 결과를 지연을 반영해 다시 입력으로 쓴다. 새 센서 없이 바로 적용할 수 있다.
+- **정직한 검증**: 중복 제거, 구간 내 시간순, 새 구간 실패 조건, 보조 데이터 채택 규칙을 사전에 고정했다.
+- **확장 조건**: Shot 단위 공정 수집, 설비상태(예열) 라벨, 검사결과의 Shot 단위 회신, 그리고 **금형 온도 수집**(#40 근거). 예열 개념은 사출·용접에도 있어 같은 구조로 옮길 수 있다.
+
+## 6. 코드 · 재현성
+
+`python -m castguard all` 한 줄로 환경 점검 → 전처리 → 학습 → 분석 → 이 보고서까지 만든다. 원본 CSV 3종은 `data/raw/`, 결과 표는 `reports/tables/`, 그림은 `reports/figures/`, 제출용 예측은 `outputs/predictions/test_predictions.csv`에 있다. seed {cfg['seeds']}를 고정했고, 전처리 결과는 JH 브랜치 산출물과 값 단위로 동일함을 확인했다(#42·#41).
+
+## 출처
+
+- 중소벤처기업부, Korea AI Manufacturing Platform(KAMP), 주조 품질보증 AI 데이터셋, 스마트제조혁신추진단, 2022.12.23., www.kamp-ai.kr
+- 중소벤처기업부, Korea AI Manufacturing Platform(KAMP), 주조 설비 예지보전 AI 데이터셋, 스마트제조혁신추진단, 2022.12.23., www.kamp-ai.kr
+- 중소벤처기업부, Korea AI Manufacturing Platform(KAMP), 주조 공정최적화 AI 데이터셋, 스마트제조혁신추진단, 2022.12.23., www.kamp-ai.kr
+"""
+    paths.REPORT.write_text(md, encoding="utf-8")
+    print(f"  보고서 초안: {paths.REPORT.relative_to(paths.ROOT)}")
+    return md

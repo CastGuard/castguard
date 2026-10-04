@@ -1,39 +1,42 @@
+"""실행: python -m castguard all   (단계별: env | prepare | train | analyze | report)"""
 import argparse
-from pathlib import Path
+import json
+import time
 
-from .data import validate
+from . import paths
+from .config import load_config
 
 
 def main():
-    parser = argparse.ArgumentParser(description="CastGuard reproducible experiment gate")
-    parser.add_argument("command", choices=["validate", "verify", "run", "summarize", "rebuild-check", "all"])
-    parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
-    parser.add_argument("--config", type=Path, default=Path("configs/oct02.json"))
-    parser.add_argument("--output", type=Path, default=Path("reports/oct02"))
-    parser.add_argument("--jobs", type=int, default=4)
-    args = parser.parse_args()
-    root = args.root.resolve()
-    config_path = args.config if args.config.is_absolute() else root / args.config
-    output = args.output if args.output.is_absolute() else root / args.output
-    if args.command == "validate":
-        print(f"Data checks passed: {len(validate(root))}")
-    if args.command == "verify":
-        from .verify import verify_delivery
-        print(verify_delivery(root, output))
-    if args.command in ["rebuild-check", "all"]:
-        from .rebuild import rebuild_check
-        if args.command == "all":
-            from .storage import tracked_stage
-            with tracked_stage(output, "rebuilding"):
-                rebuild_check(root, output)
-        else:
-            rebuild_check(root, output)
-    if args.command in ["run", "all"]:
-        from .experiment import run
-        run(root, config_path, output, args.jobs)
-    if args.command in ["summarize", "all"]:
-        from .report import summarize
-        summarize(root, output)
+    ap = argparse.ArgumentParser(description="CastGuard 재현 파이프라인")
+    ap.add_argument("command", choices=["env", "prepare", "train", "analyze", "report", "all"])
+    ap.add_argument("--jobs", type=int, default=None, help="병렬 작업 수 (기본: CPU 코어 수)")
+    ap.add_argument("--quick", action="store_true", help="seed 1개로 빠른 점검 (보고용 아님)")
+    ap.add_argument("--config", default=str(paths.CONFIG))
+    a = ap.parse_args()
+    cfg = load_config(a.config)
+    if a.quick:
+        cfg["seeds"] = cfg["seeds"][:1]
+    t0 = time.time()
+    if a.command in ("env", "all"):
+        from .env import check
+        print(json.dumps(check(), ensure_ascii=False, indent=2))
+    if a.command in ("prepare", "all"):
+        from .prepare import run
+        r = run(cfg)
+        print(f"[전처리] #42 {r['q42_raw_rows']}→{r['q42_rows']} Shot (중복 {r['q42_duplicates_removed']} 제거), "
+              f"조인 {r['join_matched']}개·공정값 {r['join_equal_values']}/{r['join_total_values']} 일치, "
+              f"#41 예열 {r['m41_warmup_rows']}행·{r['m41_warmup_episodes']}에피소드")
+    if a.command in ("train", "all"):
+        from .train import run
+        run(cfg, a.jobs)
+    if a.command in ("analyze", "all"):
+        from .analysis import run
+        run(cfg)
+    if a.command in ("report", "all"):
+        from .report import run
+        run(cfg)
+    print(f"완료 ({time.time() - t0:.0f}초)")
 
 
 if __name__ == "__main__":

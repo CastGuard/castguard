@@ -1,37 +1,65 @@
-# CastGuard · 소스와 검증 코드
+# CastGuard
 
-설비 가동이력과 다이캐스팅 품질을 연결하는 분석·검사 대기열의 연구 코드입니다. `JH`는 소스·테스트·설정·기술 문서를 공개하는 브랜치입니다. 기존 저장소에 추적된 데이터 9개는 그대로 유지합니다. 새로운 데이터, 저장 모델, 행별 예측, ZIP, 생성 보고서·발표, 외부 원문 사본, 내부 작업 기록은 이번 변경에 포함하지 않습니다.
+**설비 가동이력 인지형 다이캐스팅 품질불량 조기예측 및 공정개선 AI**
+2026 제6회 K-인공지능 제조데이터 분석 경진대회 · 주제 ②
 
-품질 모델과 Gate는 기존 연구 목표를 함께 달성하지 못했습니다. 최근 수정은 평가 분모·후보 비교·검사 시점의 신뢰성 개선이며, 저장된 성능 수치의 상승이나 새로운 독립 평가가 아닙니다. [실험 검토](reports/today_closeout/EXPERIMENT_REVIEW.md)와 [실행 범위](CURRENT_REVIEW.md)를 함께 읽으세요.
+설비가 품질예측 가능한 정상 상태인지 먼저 판단하고(Gate), 정상 상태에서 불량 위험과 유형을 예측해,
+추가검사·재작업·조건조정·생산중지 같은 현장 조치로 연결한다. 성능은 중복 제거와 구간 내 시간순 검증으로
+누수 없이 측정하고, 모델이 실패하는 조건(새 가동구간)까지 정량으로 보고한다.
 
-## 설치와 소스 테스트
+## 실행
 
-확인 환경은 Windows x64 / CPython 3.12.14입니다. 새 폴더에 체크아웃하고 Python 3.12로 실행합니다. 잠금 파일은 36개 의존성의 버전·wheel 해시를 고정하며, 설치에는 공식 PyPI 연결이 필요합니다.
-
-```powershell
-python --version
-python -I -X utf8 -m venv .venv
-& ./.venv/Scripts/python.exe -I -X utf8 -m pip --isolated install --index-url https://pypi.org/simple --only-binary=:all: --require-hashes -r requirements-review-win-py312.lock
-& ./.venv/Scripts/python.exe -I -X utf8 -m pip check
-& ./.venv/Scripts/python.exe -I -B -X utf8 run_review_tests.py --source-only
+```bash
+pip install -r requirements.txt     # KAMP Note에는 이미 설치되어 있음
+python -m castguard all             # 환경 점검 → 전처리 → 학습 → 분석 → 보고서 초안
+python -m pytest -q tests           # 누수·계보·분할 검사
 ```
 
-소스 전용 복사본에서 **223개 통과, 7개 명시적 제외**를 확인했습니다. 합성 사례와 기존 추적 데이터로 누수 방어·분할 재구성·대기열·평가 계약을 검사합니다. 제외 목록과 이유는 [실행기](run_review_tests.py)에 고정돼 있고 매 실행 영수증에도 기록됩니다. 실패를 자동으로 건너뛰지 않습니다. `make test`도 같은 범위입니다.
+단계별: `python -m castguard env | prepare | train | analyze | report` · 빠른 점검: `--quick` (seed 1개, 보고용 아님) · 병렬 수: `--jobs 16`
 
-## 전체 검토와 다른 점
+KAMP Note(JupyterLab)에서 실행하는 방법은 [docs/KAMP_GUIDE.md](docs/KAMP_GUIDE.md)를 본다.
 
-- 6개 시험은 제외한 외부 HWPX 또는 저장된 행별 행동·결과 근거가 필요합니다.
-- 1개 시험은 원본 CSV의 바이트 해시를 검사합니다. 기존 Git CSV는 LF, 원본 manifest가 기록한 로컬 원본은 CRLF여서 Git blob 그대로의 복사본은 이 검사에 통과하지 않습니다. 값 재구성 검사와 바이트 동일성은 별개이며, 데이터나 manifest를 바꾸거나 해시 검사를 완화하지 않았습니다.
-- 전체 230개 시험·170개 저장 모델 재생·484그룹 독립 대기열 감사의 기존 통과 기록은 **로컬 전체 검토 묶음**의 결과입니다. 이 공개 소스 체크아웃의 성공으로 표시하지 않습니다.
-- `review.py check --full-replay --require-package`, 지표 재계산·과거 재생·문서 생성 명령은 해당 원본 산출물과 manifest가 모두 있는 검토 묶음에서 실행해야 합니다. `make test-full`은 전체 시험을 실행하며 필요한 파일이 없으면 실패합니다.
+## 데이터
 
-기술 문서의 과거 `reports/`, `review/`, `docs/sources/` 링크는 로컬 근거 경로를 가리킬 수 있습니다. 해당 파일은 이 브랜치에 새로 공개하지 않았습니다. 보고서·발표·ZIP은 원래 로컬 위치에 보존됩니다.
+`data/raw/`에 KAMP 원본 3종을 둔다 (파일명 그대로).
 
-| 찾을 내용 | 위치 |
-|---|---|
-| 모델·전처리·고정 분할 코드 | [castguard](castguard), [설정](configs), [전처리 명세](docs/PREPROCESSING.md) |
-| 평가 계약·대기열·독립 참조 | [평가 계약](experiment_integrity.py), [대기열](oct03_queue.py), [독립 구현](audit_queue_opportunity.py) |
-| 미래 자료 입력 계약 | [계약](docs/FUTURE_EVALUATION_CONTRACT.md), [빈 양식](templates/future_evaluation) |
-| 기술 문서와 폴더 구분 | [문서 안내](docs/README.md), [폴더 안내](FOLDER_GUIDE.md) |
+| 파일 | 데이터 | 역할 |
+|---|---|---|
+| `DieCasting_Quality_Raw_Data.csv` | #42 주조 품질보증 | 주 데이터 (정답) |
+| `DieCasting_Raw_Data.csv` | #41 주조 설비 예지보전 | 보조1: 가동 타임라인·설비상태 → Gate |
+| `Investment_Casting.csv` | #40 주조 공정최적화 | 보조2: 타 공장 외부검증·금형온도 가치 |
 
-기존에 노출된 test를 다시 사용한 결과를 미래 일반화로 해석하지 않습니다. 원천 상태 코드·품질 대상 정의·실제 검사 시각·독립 미래 자료의 부족은 여전히 연구 한계입니다.
+## 구조
+
+```
+castguard/
+  prepare.py    원본 → joined/m41_timeline/d40_clean.parquet, folds.csv, 입력계약, 품질지수 (JH 전처리 기반)
+  features.py   입력 세트(A0·A·B·FB·A_FB·B_FB)와 검사결과 피드백(지연 반영)
+  models.py     후보: 로지스틱·RF·LightGBM·CatBoost·XGBoost·앙상블
+  train.py      품질·Gate·유형·#40 실험 (선택은 validation으로만)
+  analysis.py   Ablation·실패조건·조건별 오류·SHAP·상호작용·KPI·비용·운전창·제출 예측
+  report.py     reports/REPORT_DRAFT.md 자동 작성
+configs/castguard.json   seed·지연·임계값·모델 설정
+tests/                   누수(피드백·이력 미래 참조), 1:1 조인, 분할 순서, 에피소드 비분할
+reports/tables, figures  결과 표·그림 (코드가 생성)
+outputs/predictions/test_predictions.csv   제출용 test 예측결과
+```
+
+## 산출물 읽는 순서
+
+1. `reports/REPORT_DRAFT.md` — 공고문 6개 평가항목 순서의 보고서 초안
+2. `reports/tables/ablation.csv`, `model_comparison.csv`, `ablation_decisions.json` — 베이스라인·전후비교·선정근거
+3. `reports/tables/failure_conditions.csv`, `error_by_condition.csv` — 실패 조건·조건별 성능
+4. `reports/tables/kpi_inspection.csv`, `kpi_cost_sensitivity.csv`, `gate_results.csv` — 현장 KPI
+5. `outputs/predictions/test_predictions.csv` — Shot별 위험·유형·Gate·조치
+
+## 브랜치 관계
+
+- `JH`: 팀원의 검증 연구 코드(평가 무결성 감사·대기열 실험 포함). 전처리와 고정 분할은 이 브랜치를 그대로 계승했고,
+  `prepare.py` 결과가 JH 산출물과 값 단위로 같음을 확인했다(#42·#41). #40만 시간 정렬 방식을 바로잡았다.
+- `add`: 제출용 파이프라인 (이 브랜치).
+
+## 출처
+
+중소벤처기업부, Korea AI Manufacturing Platform(KAMP), 주조 품질보증 / 주조 설비 예지보전 / 주조 공정최적화 AI 데이터셋,
+스마트제조혁신추진단, 2022.12.23., www.kamp-ai.kr

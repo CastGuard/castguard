@@ -1,24 +1,12 @@
-ifeq ($(OS),Windows_NT)
-PYTHON ?= .venv/Scripts/python.exe
-else
-PYTHON ?= .venv/bin/python
-endif
-JOBS ?= 4
+PYTHON ?= python
+JOBS ?=
 
-.PHONY: all validate verify rebuild test test-full train summarize
+.PHONY: all env prepare train analyze report test quick
 all:
-	$(PYTHON) -m castguard all --jobs $(JOBS)
-validate:
-	$(PYTHON) -m castguard validate
-verify:
-	$(PYTHON) -m castguard verify
-rebuild:
-	$(PYTHON) -m castguard rebuild-check
+	$(PYTHON) -m castguard all $(if $(JOBS),--jobs $(JOBS),)
+env prepare train analyze report:
+	$(PYTHON) -m castguard $@ $(if $(JOBS),--jobs $(JOBS),)
+quick:
+	$(PYTHON) -m castguard all --quick
 test:
-	$(PYTHON) -I -B run_review_tests.py --source-only
-test-full:
-	$(PYTHON) -I -B run_review_tests.py
-train:
-	$(PYTHON) -m castguard run --jobs $(JOBS)
-summarize:
-	$(PYTHON) -m castguard summarize
+	$(PYTHON) -m pytest -q tests

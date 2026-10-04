@@ -1,15 +1,8 @@
-[build-system]
-requires = ["setuptools>=75"]
-build-backend = "setuptools.build_meta"
-
 [project]
 name = "castguard"
-version = "0.1.0"
-requires-python = ">=3.12,<3.13"
-description = "Reproducible October 2 CastGuard experiment gate"
-
-[tool.setuptools.packages.find]
-include = ["castguard*"]
+version = "1.0.0"
+description = "설비 가동이력 인지형 다이캐스팅 품질불량 조기예측 및 공정개선 AI"
+requires-python = ">=3.10"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

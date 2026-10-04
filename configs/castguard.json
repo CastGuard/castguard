@@ -1,0 +1,41 @@
+{
+  "seeds": [17, 29, 43, 71, 101],
+  "label_delay_shots": 20,
+  "label_delay_sensitivity": [5, 20, 50, 100],
+  "feedback_windows": [20, 50, 100],
+  "feedback_halflife": 15,
+  "min_run_size": 20,
+  "within_run_dev_ratio": 0.7,
+  "within_run_train_ratio_of_dev": 0.8,
+  "p40_dev_ratio": 0.7,
+  "p40_train_ratio_of_dev": 0.8,
+  "p40_normal_pressure_threshold": 615,
+  "gate_max_validation_fpr": 0.02,
+  "gate_detect_within_shots": 3,
+  "inspection_rates": [0.1, 0.2, 0.3],
+  "cost_ratios": [1, 2, 5, 10, 20],
+  "b_min_ap_gain": 0.02,
+  "use_gpu": false,
+  "candidate_models": {
+    "logistic": {"C": 0.3, "max_iter": 3000},
+    "random_forest": {"n_estimators": 300, "min_samples_leaf": 20, "max_features": "sqrt"},
+    "lightgbm": {"n_estimators": 300, "learning_rate": 0.02, "num_leaves": 7, "min_child_samples": 40,
+                 "colsample_bytree": 0.7, "subsample": 0.8, "subsample_freq": 1, "reg_lambda": 5.0},
+    "catboost": {"iterations": 300, "depth": 4, "learning_rate": 0.03, "l2_leaf_reg": 5.0},
+    "xgboost": {"n_estimators": 300, "learning_rate": 0.03, "max_depth": 3, "min_child_weight": 5,
+                "subsample": 0.8, "colsample_bytree": 0.7, "reg_lambda": 5.0}
+  },
+  "ensemble_members": ["logistic", "lightgbm", "catboost"],
+  "p40_models": ["logistic", "lightgbm"],
+  "mold_six": ["top_temp1", "top_temp2", "top_temp3", "bottom_temp1", "bottom_temp2", "bottom_temp3"],
+  "controllable_vars": ["Casting_Pressure", "Cylinder_Pressure", "High_Velocity", "Velocity_3",
+                        "Spray_Time", "Clamping_Force", "Biscuit_Thickness"],
+  "physical_map": [
+    {"concept": "주조·주입 압력", "q42": "Casting_Pressure", "p40": "injection_pressure"},
+    {"concept": "사이클", "q42": "Cycle_Time", "p40": "facility_CycleTime"},
+    {"concept": "형체력", "q42": "Clamping_Force", "p40": "mechanical_strength"},
+    {"concept": "비스킷 두께", "q42": "Biscuit_Thickness", "p40": "biscuit_thickness"},
+    {"concept": "냉각수 온도", "q42": "Coolant_Temp", "p40": "cooling_water_temp"},
+    {"concept": "용탕·용해 온도", "q42": "Melting_Furnace_Temp", "p40": "mold_temperature"}
+  ]
+}
