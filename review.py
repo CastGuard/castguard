@@ -45,8 +45,15 @@ def check_document_bindings(root=ROOT):
     render=json.loads((root/'review/render_receipt.json').read_text(encoding='utf-8'))
     for name,key in [('CastGuard_report.md','markdown_sha256'),('CastGuard_report.html','html_sha256'),('CastGuard_report.pdf','pdf_sha256')]:
         if hashed('review/'+name)!=render[key]:raise ValueError('current report export mismatch: '+name)
+    # Old metadata-only fixtures/archives predate these semantic checks. Current
+    # Oct4 reports cannot silently bypass them by deleting a saved check result.
+    claims={'status':'not_checked_legacy_metadata_only'}
+    if (report.get('claims_reviewed_on') or '') >= '2026-10-04' or 'claim_checks' in report:
+        from review_claims import validate
+        claims=validate(root)
     return {'report_metrics':len(report['metrics']),'slide_metrics':len(slides['numeric_metrics']),
-        'source_and_export_hashes_match':True,'rendered_layout_checked_by_this_function':False}
+        'source_and_export_hashes_match':True,'rendered_layout_checked_by_this_function':False,
+        'focused_claim_checks':claims}
 
 
 def child_run(arguments,cwd=ROOT):

@@ -1,11 +1,12 @@
 """Verify current editable/report exports and consequential wording; no PDF regeneration."""
 from pathlib import Path
 from hashlib import sha256
-import argparse,csv,json,math,re,zipfile
+import argparse,csv,json,math,re,zipfile,sys
 from pptx import Presentation
 from pypdf import PdfReader
 
 ROOT=Path(__file__).resolve().parent
+if str(ROOT) not in sys.path:sys.path.insert(0,str(ROOT))
 def digest(p):return sha256(p.read_bytes()).hexdigest()
 def compact(s):return re.sub(r'\s+','',s)
 
@@ -16,6 +17,8 @@ def verify(root=ROOT,review_folder='review'):
     report=json.loads((out/'report_evidence.json').read_text(encoding='utf-8'))
     render=json.loads((out/'render_receipt.json').read_text(encoding='utf-8'))
     text=(out/'CastGuard_report.md').read_text(encoding='utf-8')
+    from review_claims import validate
+    claim_checks=validate(root,text)
     pdf=PdfReader(out/'CastGuard_report.pdf');pdftext='\n'.join(p.extract_text() for p in pdf.pages)
     assert digest(out/'CastGuard_report.md')==report['report_sha256']==render['markdown_sha256']
     assert digest(out/'CastGuard_report.pdf')==render['pdf_sha256']
@@ -63,6 +66,7 @@ def verify(root=ROOT,review_folder='review'):
     native=json.loads((out/'checks/native_export.json').read_text(encoding='utf-8-sig'))
     assert native['renderer']=='Microsoft PowerPoint' and native['slides']==17 and native['overflow_count']==0
     return {'report_pages':len(pdf.pages),'report_metric_bindings':len(report['metrics']),
+        'focused_claim_checks':claim_checks,
         'presentation_slides':17,'slide_metric_bindings':len(meta['numeric_metrics']),'native_powerpoint_overflow':0,
         'one_effective_baseline_zero_inclusive_sensitivity_and_delay_caveats_verified':True,
         'revision3_scope_and_readiness_entrypoint_verified':True,

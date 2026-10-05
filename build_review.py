@@ -10,9 +10,23 @@ if str(ROOT) not in sys.path:sys.path.insert(0,str(ROOT))
 def digest(path):return sha256(path.read_bytes()).hexdigest()
 
 
-def build(output):
+def checked_manuscript(root=ROOT):
+    """Fail before rendering a current manuscript whose scoped claims regressed."""
+    from review_claims import validate
+    prior=Path(root)/'review/CastGuard_report.md'
+    current=prior.is_file()
+    if not current:prior=Path(root)/'reports/submission_round8/CastGuard_current_review.md'
+    text=prior.read_text(encoding='utf-8')
+    checks=validate(root,text) if current else {
+        'status':'not_checked_historical_bootstrap',
+        'warning':'Historical round 8 is not the current Oct4 reviewed report; focused claim review required.'}
+    return prior,current,text,checks
+
+
+def build(output, report_only=False):
     output=Path(output).resolve()
     if not output.is_relative_to(ROOT) or output==ROOT:raise ValueError('Use a new folder inside this project')
+    prior,current,text,claim_checks=checked_manuscript(ROOT)
     missing_fonts=[name for name in ['batang.ttc','malgunbd.ttf'] if not (Path('C:/Windows/Fonts')/name).is_file()]
     if missing_fonts:raise RuntimeError('Report re-render needs installed Windows fonts: '+', '.join(missing_fonts)+'. The included PDF can be viewed without re-rendering.')
     output.mkdir(parents=True,exist_ok=False);prefix=output.relative_to(ROOT).as_posix()
@@ -23,10 +37,10 @@ def build(output):
     local_lineage.write_text(json.dumps(lineage,ensure_ascii=False,indent=2),encoding='utf-8')
     def bind_export_lineage(items):
         for item in items.values():
-            if item['source']==lineage_name:
+            if item['source']==lineage_name or item['source']=='review/evidence/lineage_audit.json':
                 item.update(source=prefix+'/evidence/lineage_audit.json',sha256=digest(local_lineage))
-    prior=ROOT/'reports/submission_round8/CastGuard_current_review.md'
-    text=prior.read_text(encoding='utf-8')
+    # Rebuild the reviewed canonical manuscript, retaining its later evidence
+    # and corrections. Historical round 8 is only a bootstrap fallback.
     text=text.replace('회차8 최신 검토용 편집초안:','최신 통합 검토용 편집초안:')
     text=text.replace('품질 가능성이 높은 Shot','불량 위험도가 높은 Shot')
     text=text.replace('양식 대응 검토초안: 실제 서명·설문·최종 HWPX 변환·제출 미완료.',
@@ -50,6 +64,9 @@ def build(output):
         '실제 팀 정보·서명·설문 완료 화면, 최종 양식 적용, 블라인드 검사 및 포털 접수 증빙은 별도로 완료해야 한다. 검토용 발표 PDF/PPTX는 함께 제공하며 PPTX 허용 여부는 포털에서 확인해야 한다. review.py ready가 제출 준비와 미래 성능평가의 부족한 증거를 따로 출력한다. 기능 검사 통과가 접수 완료를 뜻하지 않는다.')
     text=text.replace('이 자료에서 Q20.871%와 GQ20.238%보다 높았다는 사실은 FIFO의 현장 우위나 미래 일반화를 입증하지 않는다.',
         '관측 점추정은 Q20.871%와 GQ20.238%보다 높지만, 아래 구간 재표본 범위는0을 포함하고 대기 부담도 다르다. 통계적으로 확립된 FIFO 우위·모델 열등성 또는 어느 정책의 현장 우위도 입증하지 않는다.')
+    if current:
+        from review_claims import validate_text
+        claim_checks=validate_text(text,claim_checks['facts'])
     (output/'CastGuard_current_review.md').write_text(text,encoding='utf-8')
     # Reuse the proven renderer layout, changing only the current label and cover
     # prerequisite wording. HWPX is an optional editing format, not a required PDF.
@@ -60,7 +77,8 @@ def build(output):
     exec(compile(source,'render_submission_round8.py','exec'),namespace)
     namespace['OUT']=output;namespace['render']()
     for ext in ['md','html','pdf']:(output/('CastGuard_current_review.'+ext)).rename(output/('CastGuard_report.'+ext))
-    index=json.loads((ROOT/'reports/submission_round8/report_evidence.json').read_text(encoding='utf-8'))
+    index_path=ROOT/('review/report_evidence.json' if current else 'reports/submission_round8/report_evidence.json')
+    index=json.loads(index_path.read_text(encoding='utf-8'))
     selection_name='reports/oct02/history_selection.json'
     selected=next(x for x in json.loads((ROOT/selection_name).read_text(encoding='utf-8')) if x['scheme']=='within_run' and x['fold']=='primary' and x['model']=='lightgbm')
     validation_metric={'value':selected['b_validation_ap_gain'],'display':f"{selected['b_validation_ap_gain']:.5f}",
@@ -71,9 +89,14 @@ def build(output):
     report_index={'created_at':datetime.now(timezone.utc).isoformat(),'historical_report_source':prior.relative_to(ROOT).as_posix(),
         'historical_report_sha256':digest(prior),'report_sha256':digest(output/'CastGuard_report.md'),
         'metrics':index['metrics'],'numeric_results_unchanged':True,'new_performance_evidence':False,
-        'changes':['clear defect-risk wording','one effective FIFO/history baseline','zero-inclusive sensitivity and delay caveats',
-                   'revision 3 default and honest source-file scope','one executable review/readiness entrypoint']}
+        'changes':index.get('changes',[])+['rebuild reviewed canonical manuscript; preserve numeric evidence'],
+        'evidence_cutoff':index.get('evidence_cutoff','2026-10-03'),
+        'claims_reviewed_on':index.get('claims_reviewed_on'),'claim_checks':claim_checks}
     (output/'report_evidence.json').write_text(json.dumps(report_index,ensure_ascii=False,indent=2),encoding='utf-8')
+
+    if report_only:
+        print(json.dumps({'output':prefix,'report_metric_bindings':len(index['metrics']),'report_only':True}))
+        return
 
     original=ROOT/'reports/presentation_round9';presentation=Presentation(original/'CastGuard_presentation_draft.pptx')
     meta=json.loads((original/'slide_evidence.json').read_text(encoding='utf-8'))
@@ -162,4 +185,6 @@ def build(output):
 
 
 if __name__=='__main__':
-    parser=argparse.ArgumentParser();parser.add_argument('--output',type=Path,default=ROOT/'review');args=parser.parse_args();build(args.output)
+    parser=argparse.ArgumentParser();parser.add_argument('--output',type=Path,default=ROOT/'review')
+    parser.add_argument('--report-only',action='store_true',help='Rebuild the canonical report into a new folder; leave the deck unchanged')
+    args=parser.parse_args();build(args.output,args.report_only)

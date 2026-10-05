@@ -1,0 +1,238 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CastGuard label-free shot input v1",
+  "type": "object",
+  "additionalProperties": false,
+  "description": "Stateless packets. Runtime rejects duplicate (run_key,sequence), inconsistent Cycle_Time assertions and nonmonotonic historical quality positions across valid rows. No timestamp/arrival-order sorting, automatic history assembly or persistent deduplication. Packet order does not define model features.",
+  "required": [
+    "schema_version",
+    "records"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "castguard-shot-v1"
+    },
+    "records": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "record_id",
+          "observation",
+          "measurements"
+        ],
+        "properties": {
+          "record_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "observation": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "run_key",
+              "sequence"
+            ],
+            "properties": {
+              "run_key": {
+                "type": "string",
+                "minLength": 1
+              },
+              "sequence": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              "quality_record_position": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              "position_basis": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Quality inference requires retrospective-only legacy_quality_input_order; other bases abstain. Never renumber based on batch order, labels or product changes."
+              }
+            }
+          },
+          "measurements": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "Velocity_1": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "Velocity_2": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "Velocity_3": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "High_Velocity": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "Cylinder_Pressure": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "Rapid_Rise_Time": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "Biscuit_Thickness": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "Clamping_Force": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "Cycle_Time": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "Pressure_Rise_Time": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "Casting_Pressure": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "Spray_Time": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "Spray_1_Time": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "Spray_2_Time": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "Melting_Furnace_Temp": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "Air_Pressure": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "Coolant_Temp": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "Coolant_Pressure": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "Factory_Temp": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "Factory_Humidity": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "Product_Type": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 1,
+                "maximum": 9007199254740991
+              }
+            },
+            "description": "Missing/null current inputs abstain the affected model; labels/derived history are forbidden."
+          },
+          "history": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "maxItems": 5,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "run_key",
+                "sequence",
+                "Cycle_Time"
+              ],
+              "properties": {
+                "run_key": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "sequence": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                },
+                "Cycle_Time": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                }
+              }
+            },
+            "description": "Exact preceding min(sequence,5) observations, same equipment/session run, ascending original process order; never filtered by product, labels or current batch. Null/missing history means unknown; [] is known run start only. Explicit null Cycle_Time asserts an existing observation with missing measurement, not an absent event."
+          }
+        }
+      }
+    }
+  }
+}

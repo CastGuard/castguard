@@ -34,3 +34,18 @@ def test_document_metric_path_cannot_escape_bundle(tmp_path):
     folder=fixture(tmp_path);path=folder/'report_evidence.json';value=json.loads(path.read_text())
     value['metrics']['VALUE']['source']='../outside.json';path.write_text(json.dumps(value))
     with pytest.raises(ValueError,match='escapes'):check_document_bindings(tmp_path)
+
+
+@pytest.mark.parametrize('saved_check', [False, True])
+def test_current_report_recomputes_claims_even_without_or_with_stale_pass_receipt(tmp_path, monkeypatch, saved_check):
+    import review_claims
+    folder=fixture(tmp_path);path=folder/'report_evidence.json'
+    value=json.loads(path.read_text());value['claims_reviewed_on']='2026-10-04'
+    if saved_check:value['claim_checks']={'status':'passed'}
+    path.write_text(json.dumps(value))
+    def invalid_claim(root):
+        assert root==tmp_path
+        raise ValueError('Report claim: GQ observed numerator mismatch')
+    monkeypatch.setattr(review_claims,'validate',invalid_claim)
+    with pytest.raises(ValueError,match='observed numerator mismatch'):
+        check_document_bindings(tmp_path)

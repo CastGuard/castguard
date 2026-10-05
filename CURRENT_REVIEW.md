@@ -1,35 +1,39 @@
-# CastGuard · 공개 소스의 검증 범위
+# 공개 소스의 검증 범위
 
-이 브랜치는 [README](README.md)의 소스 공개 범위입니다. 로컬 전체 검토 ZIP과 구성물이 다르며, PDF/PPTX·저장 모델·행별 결과·외부 원문 사본은 포함하지 않습니다. 기존 저장소의 데이터 9개는 변경하지 않았습니다.
+이 파일은 공개 소스 후보의 실행 경계를 설명합니다. 로컬 전체 연구 묶음에는 추가 데이터 계보·저장 모델·학습 프로필·행별 예측·문서가 있으나 이번 공개 업데이트에는 포함하지 않습니다. 기존 추적 데이터 9개는 그대로입니다.
 
-## 이 체크아웃에서 실행
+## 이번 source-only 확인
 
-README의 Python 3.12 잠금 의존성 환경을 준비한 뒤 실행합니다.
-
-```powershell
-& ./.venv/Scripts/python.exe -I -B -X utf8 run_review_tests.py --source-only
-```
-
-검증된 범위는 223개 시험입니다. 최근 세 차례에 추가한 평가 계약·누락 정답·대기열 회귀 62개도 포함합니다. 실행기는 독립적인 임시 폴더와 영수증을 `reports/reproduction/` 아래 만들며 기존 파일을 덮어쓰지 않습니다. 생성 결과는 Git에서 제외됩니다.
-
-7개 제외 시험과 이유는 실행기 `ARTIFACT_TESTS`에 명시합니다. 그중 6개는 공개하지 않은 근거 파일이 필요하고, 1개는 원본 CSV 바이트 검증입니다. 기존 Git LF와 원본 CRLF 차이 때문에 원본 바이트 영수증은 Git blob 복사본에 그대로 적용할 수 없습니다. 원본 데이터·manifest·검사 기준은 유지합니다. 합성 fixture는 성능 근거가 아닙니다.
-
-## 전체 산출물이 있어야 실행
-
-다음 명령은 해당 로컬 검토 묶음에서만 사용합니다. 전체 230개 시험과 저장 모델 170개 재생의 기존 성공 기록을 소스 체크아웃의 성공으로 대신하지 않습니다.
+정확한 공개 후보 트리를 별도 폴더로 내보내고 잠금 의존성 환경에서 실행합니다.
 
 ```powershell
-python -I -B -X utf8 run_review_tests.py
-python -I -B -X utf8 review.py check --full-replay --require-package
-python -I -B -X utf8 audit_queue_opportunity.py --output verification_runs/queue_opportunities
-python -I -B -X utf8 audit_missing_quality.py --output verification_runs/missing_quality_lineage
-python -I -B -X utf8 audit_today_experiments.py --output verification_runs/today_experiment_audit.json
+python -I -B -X utf8 run_review_tests.py --source-only
 ```
 
-`audit_queue_opportunity.py`의 전체 484그룹 감사는 별도 명령입니다. 기본 `review.py check`가 전체 감사까지 자동 실행하는 것은 아닙니다. 대기열 독립 참조는 운영 heap·예산 helper를 사용하지 않습니다. 반면 `audit_today_experiments.py`는 원본·분할 감사와 함께 수정된 운영 지표·선정 함수를 재사용해 과거 결과를 대조합니다.
+**391개 통과, 7개 명시적 제외**입니다. 전체 로컬 연구 환경의 398개 통과와 범위가 다릅니다. 이 공개 후보 검사는 다음을 포함합니다.
 
-## 해석과 보존
+- 합성 원천/행동으로 보고서 에피소드 분모·비용·cavity 가정 검증, 잘못된 주장과 누락 원천의 실패 처리.
+- 합성 저장 모델로 역사적 판독의 전처리·설명 재구성·누수 필드 거절·순서/이력 충돌·배치/개별 호출 일치 확인.
+- 합성 A0 모델로 공정14 입력의 카운터/정답 독립성·결측 보류·명시적 schema 분리·제품 경고·설명·CLI 확인.
+- 기존 추적 데이터와 합성 fixture를 사용하는 나머지 소스 회귀검사.
 
-[실험 검토](reports/today_closeout/EXPERIMENT_REVIEW.md)의 저장 점수·선정·행동은 수정 전후 같았습니다. 3,395 Shot 중 관측 품질 정답은 2,879개, 양성은 505개입니다. 나머지 516개와 특히 GQ만 추가 검사한 상태1의 26개를 임의로 양성 또는 비대상으로 판정하지 않습니다. 같은 677개 검사 기회의 실제 사용량은 Q/FIFO 675개, GQ 677개입니다.
+합성 fixture의 작은 학습은 테스트용이며 경진대회 모델을 재학습하거나 성능을 측정하는 절차가 아닙니다. 실제 동결 모델 재생·전체 대기열 감사·PDF/PPT 검수·현장 실증은 이 source-only 명령에 포함되지 않습니다.
 
-원본에 없는 실제 시각·단위·대상 정의·독립 미래 성능은 미측정입니다. 노출 test에서 재선정하거나, 코드 검증 횟수를 모델 성과로 계산하지 않습니다. 전체 검토 파일은 로컬에 보존했고 소스 게시를 위해 삭제·재학습하지 않았습니다.
+## 제외된 7개 검사
+
+정확한 test ID와 사유는 [run_review_tests.py의 ARTIFACT_TESTS](run_review_tests.py)에 고정합니다.
+
+- 1개: 원본 CSV 바이트 해시. 기존 Git blob은 LF, 원래 manifest가 기록한 로컬 원본은 CRLF여서 바이트 동일성이 성립하지 않습니다. 원본/manifest/검사 기준을 바꾸지 않습니다.
+- 1개: 공개하지 않은 외부 HWPX 원문.
+- 2개: 저장 queue 지표/보고서 근거 표.
+- 3개: 실제 원천과 저장 행별 queue/baseline 행동 대조.
+
+제외한 검사는 원래 명령이나 개별 test ID로 전체 묶음에서 실행할 수 있습니다. 실행기는 매번 별도 임시 경로와 영수증을 만들며 기존 파일을 지우거나 실패를 자동 제외하지 않습니다.
+
+## 실제 추론과 문서 재생
+
+[관측 입력 경로](docs/OBSERVABLE_QUALITY.md)와 [역사적 재생 경로](docs/DECISION_REVIEW.md)는 서로 다른 입력 계약을 사용합니다. 소스 저장소에는 해당 실행 프로필/모델이 없으므로 실제 추론 명령은 부족한 파일을 알리고 실패합니다. 임의 카운터·확률·대체 모델을 만들어 실행하지 않습니다.
+
+prepare_*.py와 verify_*.py의 실제 모델/원천 경로는 권한이 있는 로컬 전체 묶음을 위한 인터페이스입니다. 문서/모델 검증 성공을 원한다면 그에 필요한 원본을 갖춰야 하며, 공개 소스 시험으로 대신할 수 없습니다.
+
+품질 파일 행 순서에 의존하는 A/B/queue 경로는 역사적 재생 전용입니다. A0 공정14 경로는 카운터 없는 신규 입력 형식을 처리하지만 실제 입력 수신 시각·미래 예측력·확률보정·운영효과는 미검증입니다. 코드 검증 수를 모델 성능이나 수상 가능성으로 해석하지 않습니다.

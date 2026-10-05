@@ -55,3 +55,14 @@ docs/SUBMISSION_EVIDENCE_STATUS.md
 docs/TEAM_HANDOFF_2026-10-03.md
 docs/TODAY_CLOSEOUT_2026-10-03.md
 docs/USER_SCOPE_2026-10-03.md
+
+# New local research profiles, observed examples and private audit records
+configs/decision_review.json
+configs/observable_quality.json
+examples/decision_review/
+examples/observable_quality/
+docs/audit_evidence/
+docs/strategy_evidence/
+docs/COMPETITION_STRATEGY_2026-10-05.md
+docs/SCOPE_AUDIT_2026-10-05.md
+*.hwpx
