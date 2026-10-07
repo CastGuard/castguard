@@ -1,0 +1,9 @@
+policy,reference,method,block_records,point_pp,lower_pp,upper_pp,replicates,valid_replicates,inference
+Q,FIFO,whole_run_cluster_exact_enumeration,,-1.504950495049505,-8.588957055214724,1.9801980198019802,256,256,conditional frozen decisions; seen data; no confirmatory coverage claim
+Q,FIFO,within_run_moving_block,25.0,-1.504950495049505,-11.67561429578112,10.283696433314068,4000,4000,conditional frozen decisions; seen data; no confirmatory coverage claim
+Q,FIFO,within_run_moving_block,50.0,-1.504950495049505,-14.992319959711265,14.366960917813152,4000,4000,conditional frozen decisions; seen data; no confirmatory coverage claim
+Q,FIFO,within_run_moving_block,100.0,-1.504950495049505,-14.007153589426515,20.04477945986893,4000,4000,conditional frozen decisions; seen data; no confirmatory coverage claim
+GQ,FIFO,whole_run_cluster_exact_enumeration,,-2.1386138613861387,-8.069498069498069,3.265306122448979,256,256,conditional frozen decisions; seen data; no confirmatory coverage claim
+GQ,FIFO,within_run_moving_block,25.0,-2.1386138613861387,-12.412638778747027,9.263941813645324,4000,4000,conditional frozen decisions; seen data; no confirmatory coverage claim
+GQ,FIFO,within_run_moving_block,50.0,-2.1386138613861387,-15.70996736118067,13.333928571428576,4000,4000,conditional frozen decisions; seen data; no confirmatory coverage claim
+GQ,FIFO,within_run_moving_block,100.0,-2.1386138613861387,-14.627022122093932,18.774836892593864,4000,4000,conditional frozen decisions; seen data; no confirmatory coverage claim

@@ -1,0 +1,9 @@
+dataset,population,comparison,scheme,estimand,metric,estimate,lower_95,upper_95,blocks,valid_replicates
+q42,all,B - A,within_run,AP/AUC difference of mean probabilities across five seeds,average_precision,0.004069585209801552,-0.0017635237028482964,0.01423171836306339,6,1000
+q42,all,B - A,within_run,AP/AUC difference of mean probabilities across five seeds,roc_auc,0.00905928514903731,-0.0009479201516672253,0.024827858922776502,6,1000
+q42,all,B2 - A,within_run,AP/AUC difference of mean probabilities across five seeds,average_precision,-0.003129421906994001,-0.011766736745657091,0.02019335998746563,6,1000
+q42,all,B2 - A,within_run,AP/AUC difference of mean probabilities across five seeds,roc_auc,-0.0012447243471378489,-0.038317089868837646,0.023490368709584764,6,1000
+p40,all,E_full - E_no_mold6,chronological,AP/AUC difference of mean probabilities across five seeds,average_precision,0.09012600868382248,0.05585056135618681,0.12113188606221634,23,1000
+p40,all,E_full - E_no_mold6,chronological,AP/AUC difference of mean probabilities across five seeds,roc_auc,0.044479329756297536,0.027536101933768074,0.06292547262934658,23,1000
+p40,normal_pressure,E_full - E_no_mold6,chronological,AP/AUC difference of mean probabilities across five seeds,average_precision,0.18679470576778975,0.10118379343952412,0.2950762936582031,23,1000
+p40,normal_pressure,E_full - E_no_mold6,chronological,AP/AUC difference of mean probabilities across five seeds,roc_auc,0.12092344871638183,0.07772333676156155,0.17391374024663386,23,1000

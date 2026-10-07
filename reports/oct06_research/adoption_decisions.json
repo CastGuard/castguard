@@ -1,0 +1,42 @@
+[
+  {
+    "added": "H",
+    "base": "P",
+    "pass_registered_validation_gate": false,
+    "within_ap_gain": 0.013252080081161374,
+    "within_capture_gain": 0.02908277404921707,
+    "forward_nonnegative_ap_folds": 3,
+    "forward_nonnegative_capture_folds": 4,
+    "forward_folds": 4
+  },
+  {
+    "added": "SH",
+    "base": "S",
+    "pass_registered_validation_gate": false,
+    "within_ap_gain": -0.015000097913989652,
+    "within_capture_gain": -0.02684563758389265,
+    "forward_nonnegative_ap_folds": 4,
+    "forward_nonnegative_capture_folds": 3,
+    "forward_folds": 4
+  },
+  {
+    "added": "S_FB",
+    "base": "S",
+    "pass_registered_validation_gate": false,
+    "within_ap_gain": 0.09177970625041237,
+    "within_capture_gain": 0.08053691275167779,
+    "forward_nonnegative_ap_folds": 2,
+    "forward_nonnegative_capture_folds": 2,
+    "forward_folds": 4
+  },
+  {
+    "added": "SH_FB",
+    "base": "S_FB",
+    "pass_registered_validation_gate": false,
+    "within_ap_gain": -0.012690879804601318,
+    "within_capture_gain": -0.011185682326621926,
+    "forward_nonnegative_ap_folds": 3,
+    "forward_nonnegative_capture_folds": 3,
+    "forward_folds": 4
+  }
+]

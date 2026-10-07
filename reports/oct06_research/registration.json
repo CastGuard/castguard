@@ -1,0 +1,20 @@
+{
+  "created_at": "2026-10-06T14:18:39.606991+00:00",
+  "git_head": "9ee5a981e9dc9ba16dcc4837e07687c4904c83f4",
+  "add_head": "90402e0a5dd62edbd5fd1980a0b965d19b0fe032",
+  "hashes": {
+    "data/raw/DieCasting_Quality_Raw_Data.csv": "165bba739f68cae771fecb2ad53b722e4223a8f2c6674cff1cb0c7f3c8e12319",
+    "data/raw/DieCasting_Raw_Data.csv": "d64579a2fcf07b9e77f0a92ce7e198e84c5e4645138ecca5d02ce430c74c572e",
+    "data/raw/Investment_Casting.csv": "1d9c109982acc6d7278e7fbd5ac7bfddc6c6158974753ae05a7094e7b23adf34",
+    "data/processed/d40_clean.parquet": "42b6b047d44b6067ce8d80463be9d15f38392a54cdb3a6459aaa5d8d2e02e3ba",
+    "data/processed/feature_contract.json": "8386169553c059d467f232d8789f4e9ec17b4d6b63fb0e115bbf567815f6920f",
+    "data/processed/folds.csv": "2f3db42fea449604ddbebb5180bad11b0ddedc8693c75504153933cefed13df7",
+    "data/processed/joined.parquet": "bd81e6ff8d9fce555ee04506b63fbdb28e17a585bad85f5c1c1bf7b9ee474754",
+    "data/processed/m41_timeline.parquet": "0529dbe13e383a96bb7ce363129df7d2146d7fa434ee94ecbf9bb4dde0275f18",
+    "data/processed/manifest.json": "c929223c6f853fa68a30bb677c437b3d5772356b020cf70329dd140dfef006b6",
+    "configs/oct06_research.json": "e969d07289132922b4856bfb09e7bc3f99db3e849b9dd7e65c3ccc0222b652f7",
+    "docs/OCT06_RESEARCH_PROTOCOL.md": "e66bd1680d130f6c49c7c99428eca09ce27b8011f1d2b925fd458005bf0ac20b",
+    "docs/설문조사완료.png": "b309f8fda718d7f0e5b971e225a459b4a1acd9110acdc5b259a8a08c2c387ad1"
+  },
+  "status": "registered_before_training"
+}

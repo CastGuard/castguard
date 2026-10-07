@@ -1,0 +1,237 @@
+[
+  {
+    "scheme": "within_run",
+    "fold": "primary",
+    "role": "test",
+    "n": 1387,
+    "positive": 272,
+    "runs": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      6
+    ],
+    "products": [
+      1,
+      2
+    ],
+    "feedback_available": 1387
+  },
+  {
+    "scheme": "within_run",
+    "fold": "primary",
+    "role": "train",
+    "n": 2579,
+    "positive": 650,
+    "runs": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      6
+    ],
+    "products": [
+      1,
+      2
+    ],
+    "feedback_available": 2463
+  },
+  {
+    "scheme": "within_run",
+    "fold": "primary",
+    "role": "validation",
+    "n": 647,
+    "positive": 149,
+    "runs": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      6
+    ],
+    "products": [
+      1,
+      2
+    ],
+    "feedback_available": 647
+  },
+  {
+    "scheme": "forward_run",
+    "fold": "2",
+    "role": "test",
+    "n": 397,
+    "positive": 5,
+    "runs": [
+      2
+    ],
+    "products": [
+      1
+    ],
+    "feedback_available": 377
+  },
+  {
+    "scheme": "forward_run",
+    "fold": "2",
+    "role": "train",
+    "n": 1099,
+    "positive": 413,
+    "runs": [
+      0
+    ],
+    "products": [
+      1
+    ],
+    "feedback_available": 1080
+  },
+  {
+    "scheme": "forward_run",
+    "fold": "2",
+    "role": "validation",
+    "n": 1157,
+    "positive": 158,
+    "runs": [
+      1
+    ],
+    "products": [
+      1
+    ],
+    "feedback_available": 1137
+  },
+  {
+    "scheme": "forward_run",
+    "fold": "3",
+    "role": "test",
+    "n": 600,
+    "positive": 44,
+    "runs": [
+      3
+    ],
+    "products": [
+      2
+    ],
+    "feedback_available": 580
+  },
+  {
+    "scheme": "forward_run",
+    "fold": "3",
+    "role": "train",
+    "n": 2256,
+    "positive": 571,
+    "runs": [
+      0,
+      1
+    ],
+    "products": [
+      1
+    ],
+    "feedback_available": 2217
+  },
+  {
+    "scheme": "forward_run",
+    "fold": "3",
+    "role": "validation",
+    "n": 397,
+    "positive": 5,
+    "runs": [
+      2
+    ],
+    "products": [
+      1
+    ],
+    "feedback_available": 377
+  },
+  {
+    "scheme": "forward_run",
+    "fold": "4",
+    "role": "test",
+    "n": 725,
+    "positive": 298,
+    "runs": [
+      4
+    ],
+    "products": [
+      2
+    ],
+    "feedback_available": 708
+  },
+  {
+    "scheme": "forward_run",
+    "fold": "4",
+    "role": "train",
+    "n": 2653,
+    "positive": 576,
+    "runs": [
+      0,
+      1,
+      2
+    ],
+    "products": [
+      1
+    ],
+    "feedback_available": 2594
+  },
+  {
+    "scheme": "forward_run",
+    "fold": "4",
+    "role": "validation",
+    "n": 600,
+    "positive": 44,
+    "runs": [
+      3
+    ],
+    "products": [
+      2
+    ],
+    "feedback_available": 580
+  },
+  {
+    "scheme": "forward_run",
+    "fold": "6",
+    "role": "test",
+    "n": 635,
+    "positive": 153,
+    "runs": [
+      6
+    ],
+    "products": [
+      2
+    ],
+    "feedback_available": 615
+  },
+  {
+    "scheme": "forward_run",
+    "fold": "6",
+    "role": "train",
+    "n": 3253,
+    "positive": 620,
+    "runs": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "products": [
+      1,
+      2
+    ],
+    "feedback_available": 3174
+  },
+  {
+    "scheme": "forward_run",
+    "fold": "6",
+    "role": "validation",
+    "n": 725,
+    "positive": 298,
+    "runs": [
+      4
+    ],
+    "products": [
+      2
+    ],
+    "feedback_available": 708
+  }
+]

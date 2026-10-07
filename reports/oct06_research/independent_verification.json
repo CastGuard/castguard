@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "preserved_registered_hashes": 12,
+  "selection_groups": 35,
+  "metric_groups": 210,
+  "max_independent_ap_error": 1.1102230246251565e-16,
+  "independent_feedback_records": 518,
+  "checks": [
+    "raw quality label equality",
+    "validation-only model choice",
+    "exact top20 rank denominator",
+    "normal FPR counts",
+    "independent process-event delayed label window",
+    "original data and protocol hashes"
+  ],
+  "boundary": "reused data computational validation; not independent field performance"
+}

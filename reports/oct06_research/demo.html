@@ -1,0 +1,2838 @@
+<!doctype html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CastGuard 판독</title>
+<style>body{font:16px/1.65 "Malgun Gothic",sans-serif;margin:40px auto;max-width:1100px;padding:0 24px;color:#172b43;background:#f6f8fc}article{background:white;padding:24px;margin:24px 0}table{border-collapse:collapse;width:100%}td,th{padding:10px;border-bottom:1px solid #ccd5df;text-align:left}strong{color:#185fa0}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style>
+<h1>CastGuard · 검사 판단 근거</h1><p>현재 공정 입력과 도착한 과거 검사결과로 위험을 표시하고 검토 대상을 자동 분류합니다. 연구용 미보정 점수이며 현장 확률·자동 제어·검사 대체를 보증하지 않습니다.</p>
+<article><h2>q42_r0_s1000</h2><p><strong>입력·적용범위 사람 검토</strong> · scored_with_warning</p>
+<p>품질 위험 점수 <strong>0.2793</strong> / validation 고정 기준 0.3134 · 학습 공동지지 272행</p>
+<p>적용 경고: outside_training_range:Factory_Temp, outside_training_range:Factory_Humidity, outside_training_range:fb_known_count</p>
+<p>설비 상태: {&quot;score&quot;: 2.1560792860020422e-06, &quot;threshold&quot;: 0.001012407074245573, &quot;diagnostic_flag&quot;: false, &quot;outside_training_range&quot;: [], &quot;checkpoint&quot;: &quot;queue-fold3-seed17&quot;, &quot;meaning&quot;: &quot;numeric state1; physical status coding and field FPR unverified&quot;}</p>
+<details><summary>입력 판단·모델 설명 전체 보기</summary><pre>{
+  &quot;record_id&quot;: &quot;q42_r0_s1000&quot;,
+  &quot;status&quot;: &quot;scored_with_warning&quot;,
+  &quot;action&quot;: &quot;manual_review&quot;,
+  &quot;warnings&quot;: [
+    &quot;outside_training_range:Factory_Temp&quot;,
+    &quot;outside_training_range:Factory_Humidity&quot;,
+    &quot;outside_training_range:fb_known_count&quot;
+  ],
+  &quot;quality&quot;: {
+    &quot;score&quot;: 0.2792954394037016,
+    &quot;threshold&quot;: 0.31341528399357055,
+    &quot;risk_flag&quot;: false,
+    &quot;interpretation&quot;: &quot;uncalibrated research score&quot;,
+    &quot;explanation&quot;: {
+      &quot;method&quot;: &quot;linear_margin_decomposition&quot;,
+      &quot;scale&quot;: &quot;log_odds_of_encoded_class_1&quot;,
+      &quot;causal&quot;: false,
+      &quot;baseline_description&quot;: &quot;intercept at zero standardized coordinates; not SHAP expected value&quot;,
+      &quot;baseline_margin&quot;: -1.2660876622329267,
+      &quot;raw_margin&quot;: -0.9479591457674377,
+      &quot;reconstructed_margin&quot;: -0.9479591457674374,
+      &quot;reconstructed_score&quot;: 0.27929543940370166,
+      &quot;margin_error&quot;: 2.220446049250313e-16,
+      &quot;score_error&quot;: 5.551115123125783e-17,
+      &quot;tolerance&quot;: 1e-06,
+      &quot;contributions&quot;: [
+        {
+          &quot;feature&quot;: &quot;Velocity_1&quot;,
+          &quot;input_value&quot;: 0.144,
+          &quot;model_input_value&quot;: -0.5512714512772188,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.040747760926151726
+        },
+        {
+          &quot;feature&quot;: &quot;Velocity_2&quot;,
+          &quot;input_value&quot;: 0.168,
+          &quot;model_input_value&quot;: -0.0826003046420866,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.0008786802043924502
+        },
+        {
+          &quot;feature&quot;: &quot;Velocity_3&quot;,
+          &quot;input_value&quot;: 0.178,
+          &quot;model_input_value&quot;: -1.1052237591759713,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.2559197752572657
+        },
+        {
+          &quot;feature&quot;: &quot;High_Velocity&quot;,
+          &quot;input_value&quot;: 2.152,
+          &quot;model_input_value&quot;: -0.7241594763744511,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.35015376071888554
+        },
+        {
+          &quot;feature&quot;: &quot;Cylinder_Pressure&quot;,
+          &quot;input_value&quot;: 218.0,
+          &quot;model_input_value&quot;: -0.8558035480214511,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.35141889201193244
+        },
+        {
+          &quot;feature&quot;: &quot;Rapid_Rise_Time&quot;,
+          &quot;input_value&quot;: 0.008,
+          &quot;model_input_value&quot;: -0.7100556167338667,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.0440190308239038
+        },
+        {
+          &quot;feature&quot;: &quot;Biscuit_Thickness&quot;,
+          &quot;input_value&quot;: 13.0,
+          &quot;model_input_value&quot;: -0.2510048657409444,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.044121587403750946
+        },
+        {
+          &quot;feature&quot;: &quot;Clamping_Force&quot;,
+          &quot;input_value&quot;: 257.0,
+          &quot;model_input_value&quot;: -0.8340138617757665,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.7322929680856716
+        },
+        {
+          &quot;feature&quot;: &quot;Cycle_Time&quot;,
+          &quot;input_value&quot;: 20.8,
+          &quot;model_input_value&quot;: -0.7359794449344851,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.10194724714983046
+        },
+        {
+          &quot;feature&quot;: &quot;Pressure_Rise_Time&quot;,
+          &quot;input_value&quot;: 0.044,
+          &quot;model_input_value&quot;: 1.1222004447207514,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.10043482074915627
+        },
+        {
+          &quot;feature&quot;: &quot;Casting_Pressure&quot;,
+          &quot;input_value&quot;: 1054.0,
+          &quot;model_input_value&quot;: 0.8354126511597283,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.21029798214065648
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_Time&quot;,
+          &quot;input_value&quot;: 8.1,
+          &quot;model_input_value&quot;: -0.825967906091956,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.429587459600946
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_1_Time&quot;,
+          &quot;input_value&quot;: 1.0,
+          &quot;model_input_value&quot;: -0.6828904097346609,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.7284424091364572
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_2_Time&quot;,
+          &quot;input_value&quot;: 0.8,
+          &quot;model_input_value&quot;: -0.8048051081304737,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.6835048875940544
+        },
+        {
+          &quot;feature&quot;: &quot;Melting_Furnace_Temp&quot;,
+          &quot;input_value&quot;: 704.0,
+          &quot;model_input_value&quot;: 0.8588812772763552,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.4787465272235283
+        },
+        {
+          &quot;feature&quot;: &quot;Air_Pressure&quot;,
+          &quot;input_value&quot;: 6.2,
+          &quot;model_input_value&quot;: 0.1840947486021477,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.014066273680351564
+        },
+        {
+          &quot;feature&quot;: &quot;Coolant_Temp&quot;,
+          &quot;input_value&quot;: 27.3,
+          &quot;model_input_value&quot;: 2.407963917265606,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.2509846853999623
+        },
+        {
+          &quot;feature&quot;: &quot;Coolant_Pressure&quot;,
+          &quot;input_value&quot;: 2.67,
+          &quot;model_input_value&quot;: -0.6678158983853697,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.055009172692573834
+        },
+        {
+          &quot;feature&quot;: &quot;Factory_Temp&quot;,
+          &quot;input_value&quot;: 36.5,
+          &quot;model_input_value&quot;: 2.1466234457396336,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.7459032171827032
+        },
+        {
+          &quot;feature&quot;: &quot;Factory_Humidity&quot;,
+          &quot;input_value&quot;: 46.4,
+          &quot;model_input_value&quot;: -2.0405445520483494,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.8412544980061779
+        },
+        {
+          &quot;feature&quot;: &quot;Product_Type&quot;,
+          &quot;input_value&quot;: 1.0,
+          &quot;model_input_value&quot;: -0.8596758002040693,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.013430244019530326
+        },
+        {
+          &quot;feature&quot;: &quot;fb_rate20&quot;,
+          &quot;input_value&quot;: 0.35,
+          &quot;model_input_value&quot;: 0.4891884354397897,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.07458340267169856
+        },
+        {
+          &quot;feature&quot;: &quot;fb_rate100&quot;,
+          &quot;input_value&quot;: 0.45,
+          &quot;model_input_value&quot;: 1.171940230256862,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.1616262221202127
+        },
+        {
+          &quot;feature&quot;: &quot;fb_ewm&quot;,
+          &quot;input_value&quot;: 0.4141072994746388,
+          &quot;model_input_value&quot;: 0.8854071136243438,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.2086501208443639
+        },
+        {
+          &quot;feature&quot;: &quot;fb_known_count&quot;,
+          &quot;input_value&quot;: 973.0,
+          &quot;model_input_value&quot;: 4.571369064553753,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.13702394734059928
+        }
+      ]
+    }
+  },
+  &quot;gate&quot;: {
+    &quot;score&quot;: 2.1560792860020422e-06,
+    &quot;threshold&quot;: 0.001012407074245573,
+    &quot;diagnostic_flag&quot;: false,
+    &quot;outside_training_range&quot;: [],
+    &quot;checkpoint&quot;: &quot;queue-fold3-seed17&quot;,
+    &quot;meaning&quot;: &quot;numeric state1; physical status coding and field FPR unverified&quot;,
+    &quot;explanation&quot;: {
+      &quot;method&quot;: &quot;lightgbm_native_tree_shap&quot;,
+      &quot;scale&quot;: &quot;log_odds_of_encoded_class_1&quot;,
+      &quot;causal&quot;: false,
+      &quot;baseline_description&quot;: &quot;native TreeSHAP expected raw margin&quot;,
+      &quot;baseline_margin&quot;: -14.20620145549403,
+      &quot;raw_margin&quot;: -13.047216974928574,
+      &quot;reconstructed_margin&quot;: -13.047216974928578,
+      &quot;reconstructed_score&quot;: 2.156079286002034e-06,
+      &quot;margin_error&quot;: 3.552713678800501e-15,
+      &quot;score_error&quot;: 8.046812998915853e-21,
+      &quot;tolerance&quot;: 1e-06,
+      &quot;contributions&quot;: [
+        {
+          &quot;feature&quot;: &quot;Velocity_1&quot;,
+          &quot;input_value&quot;: 0.144,
+          &quot;model_input_value&quot;: 0.144,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.16907281799013807
+        },
+        {
+          &quot;feature&quot;: &quot;Velocity_2&quot;,
+          &quot;input_value&quot;: 0.168,
+          &quot;model_input_value&quot;: 0.168,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.014930883295578757
+        },
+        {
+          &quot;feature&quot;: &quot;Velocity_3&quot;,
+          &quot;input_value&quot;: 0.178,
+          &quot;model_input_value&quot;: 0.178,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.09098214918319351
+        },
+        {
+          &quot;feature&quot;: &quot;High_Velocity&quot;,
+          &quot;input_value&quot;: 2.152,
+          &quot;model_input_value&quot;: 2.152,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.40804766596871583
+        },
+        {
+          &quot;feature&quot;: &quot;Cylinder_Pressure&quot;,
+          &quot;input_value&quot;: 218.0,
+          &quot;model_input_value&quot;: 218.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.006095320307630998
+        },
+        {
+          &quot;feature&quot;: &quot;Rapid_Rise_Time&quot;,
+          &quot;input_value&quot;: 0.008,
+          &quot;model_input_value&quot;: 0.008,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.004405090537131735
+        },
+        {
+          &quot;feature&quot;: &quot;Biscuit_Thickness&quot;,
+          &quot;input_value&quot;: 13.0,
+          &quot;model_input_value&quot;: 13.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.9295340861707668
+        },
+        {
+          &quot;feature&quot;: &quot;Clamping_Force&quot;,
+          &quot;input_value&quot;: 257.0,
+          &quot;model_input_value&quot;: 257.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.2650136986704209
+        },
+        {
+          &quot;feature&quot;: &quot;Cycle_Time&quot;,
+          &quot;input_value&quot;: 20.8,
+          &quot;model_input_value&quot;: 20.8,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.00866362225593845
+        },
+        {
+          &quot;feature&quot;: &quot;Pressure_Rise_Time&quot;,
+          &quot;input_value&quot;: 0.044,
+          &quot;model_input_value&quot;: 0.044,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.04206415607730754
+        },
+        {
+          &quot;feature&quot;: &quot;Casting_Pressure&quot;,
+          &quot;input_value&quot;: 1054.0,
+          &quot;model_input_value&quot;: 1054.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.032731607387148406
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_Time&quot;,
+          &quot;input_value&quot;: 8.1,
+          &quot;model_input_value&quot;: 8.1,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.04582609136518867
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_1_Time&quot;,
+          &quot;input_value&quot;: 1.0,
+          &quot;model_input_value&quot;: 1.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.0939810087846217
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_2_Time&quot;,
+          &quot;input_value&quot;: 0.8,
+          &quot;model_input_value&quot;: 0.8,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.0
+        },
+        {
+          &quot;feature&quot;: &quot;prev_cycle_time&quot;,
+          &quot;input_value&quot;: 21.0,
+          &quot;model_input_value&quot;: 21.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.04201778072697167
+        },
+        {
+          &quot;feature&quot;: &quot;max_cycle_previous_5&quot;,
+          &quot;input_value&quot;: 21.0,
+          &quot;model_input_value&quot;: 21.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.03242175556766245
+        }
+      ]
+    }
+  },
+  &quot;control_action&quot;: null,
+  &quot;field_effect_validated&quot;: false,
+  &quot;joint_training_n&quot;: 272
+}</pre></details></article>
+<article><h2>q42_r0_s1001</h2><p><strong>입력·적용범위 사람 검토</strong> · scored_with_warning</p>
+<p>품질 위험 점수 <strong>0.2665</strong> / validation 고정 기준 0.3134 · 학습 공동지지 272행</p>
+<p>적용 경고: outside_training_range:Factory_Temp, outside_training_range:Factory_Humidity, outside_training_range:fb_known_count</p>
+<p>설비 상태: {&quot;score&quot;: 3.0815483222173324e-07, &quot;threshold&quot;: 0.001012407074245573, &quot;diagnostic_flag&quot;: false, &quot;outside_training_range&quot;: [], &quot;checkpoint&quot;: &quot;queue-fold3-seed17&quot;, &quot;meaning&quot;: &quot;numeric state1; physical status coding and field FPR unverified&quot;}</p>
+<details><summary>입력 판단·모델 설명 전체 보기</summary><pre>{
+  &quot;record_id&quot;: &quot;q42_r0_s1001&quot;,
+  &quot;status&quot;: &quot;scored_with_warning&quot;,
+  &quot;action&quot;: &quot;manual_review&quot;,
+  &quot;warnings&quot;: [
+    &quot;outside_training_range:Factory_Temp&quot;,
+    &quot;outside_training_range:Factory_Humidity&quot;,
+    &quot;outside_training_range:fb_known_count&quot;
+  ],
+  &quot;quality&quot;: {
+    &quot;score&quot;: 0.2665303275238074,
+    &quot;threshold&quot;: 0.31341528399357055,
+    &quot;risk_flag&quot;: false,
+    &quot;interpretation&quot;: &quot;uncalibrated research score&quot;,
+    &quot;explanation&quot;: {
+      &quot;method&quot;: &quot;linear_margin_decomposition&quot;,
+      &quot;scale&quot;: &quot;log_odds_of_encoded_class_1&quot;,
+      &quot;causal&quot;: false,
+      &quot;baseline_description&quot;: &quot;intercept at zero standardized coordinates; not SHAP expected value&quot;,
+      &quot;baseline_margin&quot;: -1.2660876622329267,
+      &quot;raw_margin&quot;: -1.0122982139407513,
+      &quot;reconstructed_margin&quot;: -1.012298213940751,
+      &quot;reconstructed_score&quot;: 0.2665303275238074,
+      &quot;margin_error&quot;: 2.220446049250313e-16,
+      &quot;score_error&quot;: 0.0,
+      &quot;tolerance&quot;: 1e-06,
+      &quot;contributions&quot;: [
+        {
+          &quot;feature&quot;: &quot;Velocity_1&quot;,
+          &quot;input_value&quot;: 0.144,
+          &quot;model_input_value&quot;: -0.5512714512772188,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.040747760926151726
+        },
+        {
+          &quot;feature&quot;: &quot;Velocity_2&quot;,
+          &quot;input_value&quot;: 0.17,
+          &quot;model_input_value&quot;: 0.6090431553317814,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.006478840078491431
+        },
+        {
+          &quot;feature&quot;: &quot;Velocity_3&quot;,
+          &quot;input_value&quot;: 0.186,
+          &quot;model_input_value&quot;: -0.39857103986893744,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.09229100451420227
+        },
+        {
+          &quot;feature&quot;: &quot;High_Velocity&quot;,
+          &quot;input_value&quot;: 2.146,
+          &quot;model_input_value&quot;: -0.7498055550440412,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.3625544420422988
+        },
+        {
+          &quot;feature&quot;: &quot;Cylinder_Pressure&quot;,
+          &quot;input_value&quot;: 218.0,
+          &quot;model_input_value&quot;: -0.8558035480214511,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.35141889201193244
+        },
+        {
+          &quot;feature&quot;: &quot;Rapid_Rise_Time&quot;,
+          &quot;input_value&quot;: 0.008,
+          &quot;model_input_value&quot;: -0.7100556167338667,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.0440190308239038
+        },
+        {
+          &quot;feature&quot;: &quot;Biscuit_Thickness&quot;,
+          &quot;input_value&quot;: 11.0,
+          &quot;model_input_value&quot;: -0.8605543466692827,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.15126807884845303
+        },
+        {
+          &quot;feature&quot;: &quot;Clamping_Force&quot;,
+          &quot;input_value&quot;: 258.0,
+          &quot;model_input_value&quot;: -0.8165268352514317,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.7169387549923393
+        },
+        {
+          &quot;feature&quot;: &quot;Cycle_Time&quot;,
+          &quot;input_value&quot;: 20.9,
+          &quot;model_input_value&quot;: -0.7247540489093978,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.10039231483371643
+        },
+        {
+          &quot;feature&quot;: &quot;Pressure_Rise_Time&quot;,
+          &quot;input_value&quot;: 0.044,
+          &quot;model_input_value&quot;: 1.1222004447207514,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.10043482074915627
+        },
+        {
+          &quot;feature&quot;: &quot;Casting_Pressure&quot;,
+          &quot;input_value&quot;: 1056.0,
+          &quot;model_input_value&quot;: 0.8440867332467172,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.21248150420880316
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_Time&quot;,
+          &quot;input_value&quot;: 8.1,
+          &quot;model_input_value&quot;: -0.825967906091956,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.429587459600946
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_1_Time&quot;,
+          &quot;input_value&quot;: 1.0,
+          &quot;model_input_value&quot;: -0.6828904097346609,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.7284424091364572
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_2_Time&quot;,
+          &quot;input_value&quot;: 0.8,
+          &quot;model_input_value&quot;: -0.8048051081304737,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.6835048875940544
+        },
+        {
+          &quot;feature&quot;: &quot;Melting_Furnace_Temp&quot;,
+          &quot;input_value&quot;: 704.0,
+          &quot;model_input_value&quot;: 0.8588812772763552,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.4787465272235283
+        },
+        {
+          &quot;feature&quot;: &quot;Air_Pressure&quot;,
+          &quot;input_value&quot;: 6.2,
+          &quot;model_input_value&quot;: 0.1840947486021477,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.014066273680351564
+        },
+        {
+          &quot;feature&quot;: &quot;Coolant_Temp&quot;,
+          &quot;input_value&quot;: 27.3,
+          &quot;model_input_value&quot;: 2.407963917265606,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.2509846853999623
+        },
+        {
+          &quot;feature&quot;: &quot;Coolant_Pressure&quot;,
+          &quot;input_value&quot;: 2.67,
+          &quot;model_input_value&quot;: -0.6678158983853697,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.055009172692573834
+        },
+        {
+          &quot;feature&quot;: &quot;Factory_Temp&quot;,
+          &quot;input_value&quot;: 36.5,
+          &quot;model_input_value&quot;: 2.1466234457396336,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.7459032171827032
+        },
+        {
+          &quot;feature&quot;: &quot;Factory_Humidity&quot;,
+          &quot;input_value&quot;: 46.4,
+          &quot;model_input_value&quot;: -2.0405445520483494,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.8412544980061779
+        },
+        {
+          &quot;feature&quot;: &quot;Product_Type&quot;,
+          &quot;input_value&quot;: 1.0,
+          &quot;model_input_value&quot;: -0.8596758002040693,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.013430244019530326
+        },
+        {
+          &quot;feature&quot;: &quot;fb_rate20&quot;,
+          &quot;input_value&quot;: 0.35,
+          &quot;model_input_value&quot;: 0.4891884354397897,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.07458340267169856
+        },
+        {
+          &quot;feature&quot;: &quot;fb_rate100&quot;,
+          &quot;input_value&quot;: 0.45,
+          &quot;model_input_value&quot;: 1.171940230256862,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.1616262221202127
+        },
+        {
+          &quot;feature&quot;: &quot;fb_ewm&quot;,
+          &quot;input_value&quot;: 0.39540685937219544,
+          &quot;model_input_value&quot;: 0.7821501384086872,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.18431715578766902
+        },
+        {
+          &quot;feature&quot;: &quot;fb_known_count&quot;,
+          &quot;input_value&quot;: 974.0,
+          &quot;model_input_value&quot;: 4.57746572363464,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.13720669090845747
+        }
+      ]
+    }
+  },
+  &quot;gate&quot;: {
+    &quot;score&quot;: 3.0815483222173324e-07,
+    &quot;threshold&quot;: 0.001012407074245573,
+    &quot;diagnostic_flag&quot;: false,
+    &quot;outside_training_range&quot;: [],
+    &quot;checkpoint&quot;: &quot;queue-fold3-seed17&quot;,
+    &quot;meaning&quot;: &quot;numeric state1; physical status coding and field FPR unverified&quot;,
+    &quot;explanation&quot;: {
+      &quot;method&quot;: &quot;lightgbm_native_tree_shap&quot;,
+      &quot;scale&quot;: &quot;log_odds_of_encoded_class_1&quot;,
+      &quot;causal&quot;: false,
+      &quot;baseline_description&quot;: &quot;native TreeSHAP expected raw margin&quot;,
+      &quot;baseline_margin&quot;: -14.20620145549403,
+      &quot;raw_margin&quot;: -14.992663170111673,
+      &quot;reconstructed_margin&quot;: -14.992663170111678,
+      &quot;reconstructed_score&quot;: 3.0815483222173154e-07,
+      &quot;margin_error&quot;: 5.329070518200751e-15,
+      &quot;score_error&quot;: 1.6940658945086007e-21,
+      &quot;tolerance&quot;: 1e-06,
+      &quot;contributions&quot;: [
+        {
+          &quot;feature&quot;: &quot;Velocity_1&quot;,
+          &quot;input_value&quot;: 0.144,
+          &quot;model_input_value&quot;: 0.144,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.05276806306325292
+        },
+        {
+          &quot;feature&quot;: &quot;Velocity_2&quot;,
+          &quot;input_value&quot;: 0.17,
+          &quot;model_input_value&quot;: 0.17,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.026212469388417096
+        },
+        {
+          &quot;feature&quot;: &quot;Velocity_3&quot;,
+          &quot;input_value&quot;: 0.186,
+          &quot;model_input_value&quot;: 0.186,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.1877869948171552
+        },
+        {
+          &quot;feature&quot;: &quot;High_Velocity&quot;,
+          &quot;input_value&quot;: 2.146,
+          &quot;model_input_value&quot;: 2.146,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.18667312579616696
+        },
+        {
+          &quot;feature&quot;: &quot;Cylinder_Pressure&quot;,
+          &quot;input_value&quot;: 218.0,
+          &quot;model_input_value&quot;: 218.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.0037299746091933803
+        },
+        {
+          &quot;feature&quot;: &quot;Rapid_Rise_Time&quot;,
+          &quot;input_value&quot;: 0.008,
+          &quot;model_input_value&quot;: 0.008,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.008372922522079914
+        },
+        {
+          &quot;feature&quot;: &quot;Biscuit_Thickness&quot;,
+          &quot;input_value&quot;: 11.0,
+          &quot;model_input_value&quot;: 11.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.08196805676877603
+        },
+        {
+          &quot;feature&quot;: &quot;Clamping_Force&quot;,
+          &quot;input_value&quot;: 258.0,
+          &quot;model_input_value&quot;: 258.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.20124146073838708
+        },
+        {
+          &quot;feature&quot;: &quot;Cycle_Time&quot;,
+          &quot;input_value&quot;: 20.9,
+          &quot;model_input_value&quot;: 20.9,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.0014663242368860708
+        },
+        {
+          &quot;feature&quot;: &quot;Pressure_Rise_Time&quot;,
+          &quot;input_value&quot;: 0.044,
+          &quot;model_input_value&quot;: 0.044,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.05152472782493271
+        },
+        {
+          &quot;feature&quot;: &quot;Casting_Pressure&quot;,
+          &quot;input_value&quot;: 1056.0,
+          &quot;model_input_value&quot;: 1056.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.026375818706744818
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_Time&quot;,
+          &quot;input_value&quot;: 8.1,
+          &quot;model_input_value&quot;: 8.1,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.016723149881837623
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_1_Time&quot;,
+          &quot;input_value&quot;: 1.0,
+          &quot;model_input_value&quot;: 1.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.026359103790692964
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_2_Time&quot;,
+          &quot;input_value&quot;: 0.8,
+          &quot;model_input_value&quot;: 0.8,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.0
+        },
+        {
+          &quot;feature&quot;: &quot;prev_cycle_time&quot;,
+          &quot;input_value&quot;: 20.8,
+          &quot;model_input_value&quot;: 20.8,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.0069565327624146025
+        },
+        {
+          &quot;feature&quot;: &quot;max_cycle_previous_5&quot;,
+          &quot;input_value&quot;: 21.0,
+          &quot;model_input_value&quot;: 21.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.02775218136204509
+        }
+      ]
+    }
+  },
+  &quot;control_action&quot;: null,
+  &quot;field_effect_validated&quot;: false,
+  &quot;joint_training_n&quot;: 272
+}</pre></details></article>
+<article><h2>q42_r0_s1017</h2><p><strong>입력·적용범위 사람 검토</strong> · scored_with_warning</p>
+<p>품질 위험 점수 <strong>0.3467</strong> / validation 고정 기준 0.3134 · 학습 공동지지 397행</p>
+<p>적용 경고: outside_training_range:Factory_Temp, outside_training_range:Factory_Humidity, outside_training_range:fb_known_count</p>
+<p>설비 상태: {&quot;score&quot;: 6.511904032528976e-07, &quot;threshold&quot;: 0.001012407074245573, &quot;diagnostic_flag&quot;: false, &quot;outside_training_range&quot;: [], &quot;checkpoint&quot;: &quot;queue-fold3-seed17&quot;, &quot;meaning&quot;: &quot;numeric state1; physical status coding and field FPR unverified&quot;}</p>
+<details><summary>입력 판단·모델 설명 전체 보기</summary><pre>{
+  &quot;record_id&quot;: &quot;q42_r0_s1017&quot;,
+  &quot;status&quot;: &quot;scored_with_warning&quot;,
+  &quot;action&quot;: &quot;manual_review&quot;,
+  &quot;warnings&quot;: [
+    &quot;outside_training_range:Factory_Temp&quot;,
+    &quot;outside_training_range:Factory_Humidity&quot;,
+    &quot;outside_training_range:fb_known_count&quot;
+  ],
+  &quot;quality&quot;: {
+    &quot;score&quot;: 0.34666098508055404,
+    &quot;threshold&quot;: 0.31341528399357055,
+    &quot;risk_flag&quot;: true,
+    &quot;interpretation&quot;: &quot;uncalibrated research score&quot;,
+    &quot;explanation&quot;: {
+      &quot;method&quot;: &quot;linear_margin_decomposition&quot;,
+      &quot;scale&quot;: &quot;log_odds_of_encoded_class_1&quot;,
+      &quot;causal&quot;: false,
+      &quot;baseline_description&quot;: &quot;intercept at zero standardized coordinates; not SHAP expected value&quot;,
+      &quot;baseline_margin&quot;: -1.2660876622329267,
+      &quot;raw_margin&quot;: -0.6337488456816202,
+      &quot;reconstructed_margin&quot;: -0.6337488456816203,
+      &quot;reconstructed_score&quot;: 0.34666098508055404,
+      &quot;margin_error&quot;: 1.1102230246251565e-16,
+      &quot;score_error&quot;: 0.0,
+      &quot;tolerance&quot;: 1e-06,
+      &quot;contributions&quot;: [
+        {
+          &quot;feature&quot;: &quot;Velocity_1&quot;,
+          &quot;input_value&quot;: 0.142,
+          &quot;model_input_value&quot;: -0.8474650081197084,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.0626411933070987
+        },
+        {
+          &quot;feature&quot;: &quot;Velocity_2&quot;,
+          &quot;input_value&quot;: 0.166,
+          &quot;model_input_value&quot;: -0.7742437646159546,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.008236200487276331
+        },
+        {
+          &quot;feature&quot;: &quot;Velocity_3&quot;,
+          &quot;input_value&quot;: 0.176,
+          &quot;model_input_value&quot;: -1.2818869390027297,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.2968269679430316
+        },
+        {
+          &quot;feature&quot;: &quot;High_Velocity&quot;,
+          &quot;input_value&quot;: 2.137,
+          &quot;model_input_value&quot;: -0.7882746730484245,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.38115546402741773
+        },
+        {
+          &quot;feature&quot;: &quot;Cylinder_Pressure&quot;,
+          &quot;input_value&quot;: 215.0,
+          &quot;model_input_value&quot;: -0.9832401708907296,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.40374823431718515
+        },
+        {
+          &quot;feature&quot;: &quot;Rapid_Rise_Time&quot;,
+          &quot;input_value&quot;: 0.008,
+          &quot;model_input_value&quot;: -0.7100556167338667,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.0440190308239038
+        },
+        {
+          &quot;feature&quot;: &quot;Biscuit_Thickness&quot;,
+          &quot;input_value&quot;: 12.0,
+          &quot;model_input_value&quot;: -0.5557796062051135,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.09769483312610198
+        },
+        {
+          &quot;feature&quot;: &quot;Clamping_Force&quot;,
+          &quot;input_value&quot;: 258.0,
+          &quot;model_input_value&quot;: -0.8165268352514317,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.7169387549923393
+        },
+        {
+          &quot;feature&quot;: &quot;Cycle_Time&quot;,
+          &quot;input_value&quot;: 20.9,
+          &quot;model_input_value&quot;: -0.7247540489093978,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.10039231483371643
+        },
+        {
+          &quot;feature&quot;: &quot;Pressure_Rise_Time&quot;,
+          &quot;input_value&quot;: 0.044,
+          &quot;model_input_value&quot;: 1.1222004447207514,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.10043482074915627
+        },
+        {
+          &quot;feature&quot;: &quot;Casting_Pressure&quot;,
+          &quot;input_value&quot;: 1039.0,
+          &quot;model_input_value&quot;: 0.7703570355073106,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.19392156662955623
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_Time&quot;,
+          &quot;input_value&quot;: 8.0,
+          &quot;model_input_value&quot;: -0.8800180755829903,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.457699054290521
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_1_Time&quot;,
+          &quot;input_value&quot;: 1.0,
+          &quot;model_input_value&quot;: -0.6828904097346609,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.7284424091364572
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_2_Time&quot;,
+          &quot;input_value&quot;: 0.8,
+          &quot;model_input_value&quot;: -0.8048051081304737,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.6835048875940544
+        },
+        {
+          &quot;feature&quot;: &quot;Melting_Furnace_Temp&quot;,
+          &quot;input_value&quot;: 702.0,
+          &quot;model_input_value&quot;: 0.7799721269235628,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.4347620060830083
+        },
+        {
+          &quot;feature&quot;: &quot;Air_Pressure&quot;,
+          &quot;input_value&quot;: 6.1,
+          &quot;model_input_value&quot;: 0.007070007123794686,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.0005402036499164488
+        },
+        {
+          &quot;feature&quot;: &quot;Coolant_Temp&quot;,
+          &quot;input_value&quot;: 27.3,
+          &quot;model_input_value&quot;: 2.407963917265606,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.2509846853999623
+        },
+        {
+          &quot;feature&quot;: &quot;Coolant_Pressure&quot;,
+          &quot;input_value&quot;: 2.71,
+          &quot;model_input_value&quot;: 0.14525961297347334,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.011965290366152938
+        },
+        {
+          &quot;feature&quot;: &quot;Factory_Temp&quot;,
+          &quot;input_value&quot;: 36.7,
+          &quot;model_input_value&quot;: 2.268722226471691,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.7883297888028353
+        },
+        {
+          &quot;feature&quot;: &quot;Factory_Humidity&quot;,
+          &quot;input_value&quot;: 46.3,
+          &quot;model_input_value&quot;: -2.0557091763297,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.8475064116801301
+        },
+        {
+          &quot;feature&quot;: &quot;Product_Type&quot;,
+          &quot;input_value&quot;: 1.0,
+          &quot;model_input_value&quot;: -0.8596758002040693,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.013430244019530326
+        },
+        {
+          &quot;feature&quot;: &quot;fb_rate20&quot;,
+          &quot;input_value&quot;: 0.45,
+          &quot;model_input_value&quot;: 0.9920239727058235,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.15124749085652334
+        },
+        {
+          &quot;feature&quot;: &quot;fb_rate100&quot;,
+          &quot;input_value&quot;: 0.47,
+          &quot;model_input_value&quot;: 1.2907100729433205,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.1780061709261487
+        },
+        {
+          &quot;feature&quot;: &quot;fb_ewm&quot;,
+          &quot;input_value&quot;: 0.4720544699745008,
+          &quot;model_input_value&quot;: 1.205370147400211,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.2840508315860993
+        },
+        {
+          &quot;feature&quot;: &quot;fb_known_count&quot;,
+          &quot;input_value&quot;: 990.0,
+          &quot;model_input_value&quot;: 4.675012268928841,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.14013058799418854
+        }
+      ]
+    }
+  },
+  &quot;gate&quot;: {
+    &quot;score&quot;: 6.511904032528976e-07,
+    &quot;threshold&quot;: 0.001012407074245573,
+    &quot;diagnostic_flag&quot;: false,
+    &quot;outside_training_range&quot;: [],
+    &quot;checkpoint&quot;: &quot;queue-fold3-seed17&quot;,
+    &quot;meaning&quot;: &quot;numeric state1; physical status coding and field FPR unverified&quot;,
+    &quot;explanation&quot;: {
+      &quot;method&quot;: &quot;lightgbm_native_tree_shap&quot;,
+      &quot;scale&quot;: &quot;log_odds_of_encoded_class_1&quot;,
+      &quot;causal&quot;: false,
+      &quot;baseline_description&quot;: &quot;native TreeSHAP expected raw margin&quot;,
+      &quot;baseline_margin&quot;: -14.20620145549403,
+      &quot;raw_margin&quot;: -14.244463108195562,
+      &quot;reconstructed_margin&quot;: -14.244463108195564,
+      &quot;reconstructed_score&quot;: 6.511904032528965e-07,
+      &quot;margin_error&quot;: 1.7763568394002505e-15,
+      &quot;score_error&quot;: 1.0587911840678754e-21,
+      &quot;tolerance&quot;: 1e-06,
+      &quot;contributions&quot;: [
+        {
+          &quot;feature&quot;: &quot;Velocity_1&quot;,
+          &quot;input_value&quot;: 0.142,
+          &quot;model_input_value&quot;: 0.142,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.4150403539829045
+        },
+        {
+          &quot;feature&quot;: &quot;Velocity_2&quot;,
+          &quot;input_value&quot;: 0.166,
+          &quot;model_input_value&quot;: 0.166,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.0779814782339229
+        },
+        {
+          &quot;feature&quot;: &quot;Velocity_3&quot;,
+          &quot;input_value&quot;: 0.176,
+          &quot;model_input_value&quot;: 0.176,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.5697161395383054
+        },
+        {
+          &quot;feature&quot;: &quot;High_Velocity&quot;,
+          &quot;input_value&quot;: 2.137,
+          &quot;model_input_value&quot;: 2.137,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.21326745195931482
+        },
+        {
+          &quot;feature&quot;: &quot;Cylinder_Pressure&quot;,
+          &quot;input_value&quot;: 215.0,
+          &quot;model_input_value&quot;: 215.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.02174035171957257
+        },
+        {
+          &quot;feature&quot;: &quot;Rapid_Rise_Time&quot;,
+          &quot;input_value&quot;: 0.008,
+          &quot;model_input_value&quot;: 0.008,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.008039997580687111
+        },
+        {
+          &quot;feature&quot;: &quot;Biscuit_Thickness&quot;,
+          &quot;input_value&quot;: 12.0,
+          &quot;model_input_value&quot;: 12.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.38001277693768554
+        },
+        {
+          &quot;feature&quot;: &quot;Clamping_Force&quot;,
+          &quot;input_value&quot;: 258.0,
+          &quot;model_input_value&quot;: 258.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.2353522794248609
+        },
+        {
+          &quot;feature&quot;: &quot;Cycle_Time&quot;,
+          &quot;input_value&quot;: 20.9,
+          &quot;model_input_value&quot;: 20.9,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.014626088974059771
+        },
+        {
+          &quot;feature&quot;: &quot;Pressure_Rise_Time&quot;,
+          &quot;input_value&quot;: 0.044,
+          &quot;model_input_value&quot;: 0.044,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.02496303003516263
+        },
+        {
+          &quot;feature&quot;: &quot;Casting_Pressure&quot;,
+          &quot;input_value&quot;: 1039.0,
+          &quot;model_input_value&quot;: 1039.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.057604348797832085
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_Time&quot;,
+          &quot;input_value&quot;: 8.0,
+          &quot;model_input_value&quot;: 8.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.004203964180497248
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_1_Time&quot;,
+          &quot;input_value&quot;: 1.0,
+          &quot;model_input_value&quot;: 1.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.09020953036028798
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_2_Time&quot;,
+          &quot;input_value&quot;: 0.8,
+          &quot;model_input_value&quot;: 0.8,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.0
+        },
+        {
+          &quot;feature&quot;: &quot;prev_cycle_time&quot;,
+          &quot;input_value&quot;: 20.8,
+          &quot;model_input_value&quot;: 20.8,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.01644858120840789
+        },
+        {
+          &quot;feature&quot;: &quot;max_cycle_previous_5&quot;,
+          &quot;input_value&quot;: 20.9,
+          &quot;model_input_value&quot;: 20.9,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.03503333791378997
+        }
+      ]
+    }
+  },
+  &quot;control_action&quot;: null,
+  &quot;field_effect_validated&quot;: false,
+  &quot;joint_training_n&quot;: 397
+}</pre></details></article>
+<article><h2>q42_r0_s1018</h2><p><strong>입력·적용범위 사람 검토</strong> · scored_with_warning</p>
+<p>품질 위험 점수 <strong>0.3270</strong> / validation 고정 기준 0.3134 · 학습 공동지지 486행</p>
+<p>적용 경고: outside_training_range:Factory_Temp, outside_training_range:Factory_Humidity, outside_training_range:fb_known_count</p>
+<p>설비 상태: {&quot;score&quot;: 3.357644878731248e-07, &quot;threshold&quot;: 0.001012407074245573, &quot;diagnostic_flag&quot;: false, &quot;outside_training_range&quot;: [], &quot;checkpoint&quot;: &quot;queue-fold3-seed17&quot;, &quot;meaning&quot;: &quot;numeric state1; physical status coding and field FPR unverified&quot;}</p>
+<details><summary>입력 판단·모델 설명 전체 보기</summary><pre>{
+  &quot;record_id&quot;: &quot;q42_r0_s1018&quot;,
+  &quot;status&quot;: &quot;scored_with_warning&quot;,
+  &quot;action&quot;: &quot;manual_review&quot;,
+  &quot;warnings&quot;: [
+    &quot;outside_training_range:Factory_Temp&quot;,
+    &quot;outside_training_range:Factory_Humidity&quot;,
+    &quot;outside_training_range:fb_known_count&quot;
+  ],
+  &quot;quality&quot;: {
+    &quot;score&quot;: 0.3270215523695974,
+    &quot;threshold&quot;: 0.31341528399357055,
+    &quot;risk_flag&quot;: true,
+    &quot;interpretation&quot;: &quot;uncalibrated research score&quot;,
+    &quot;explanation&quot;: {
+      &quot;method&quot;: &quot;linear_margin_decomposition&quot;,
+      &quot;scale&quot;: &quot;log_odds_of_encoded_class_1&quot;,
+      &quot;causal&quot;: false,
+      &quot;baseline_description&quot;: &quot;intercept at zero standardized coordinates; not SHAP expected value&quot;,
+      &quot;baseline_margin&quot;: -1.2660876622329267,
+      &quot;raw_margin&quot;: -0.7216872266961405,
+      &quot;reconstructed_margin&quot;: -0.7216872266961403,
+      &quot;reconstructed_score&quot;: 0.32702155236959746,
+      &quot;margin_error&quot;: 2.220446049250313e-16,
+      &quot;score_error&quot;: 5.551115123125783e-17,
+      &quot;tolerance&quot;: 1e-06,
+      &quot;contributions&quot;: [
+        {
+          &quot;feature&quot;: &quot;Velocity_1&quot;,
+          &quot;input_value&quot;: 0.144,
+          &quot;model_input_value&quot;: -0.5512714512772188,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.040747760926151726
+        },
+        {
+          &quot;feature&quot;: &quot;Velocity_2&quot;,
+          &quot;input_value&quot;: 0.166,
+          &quot;model_input_value&quot;: -0.7742437646159546,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.008236200487276331
+        },
+        {
+          &quot;feature&quot;: &quot;Velocity_3&quot;,
+          &quot;input_value&quot;: 0.184,
+          &quot;model_input_value&quot;: -0.5752342196956959,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.13319819719996814
+        },
+        {
+          &quot;feature&quot;: &quot;High_Velocity&quot;,
+          &quot;input_value&quot;: 2.135,
+          &quot;model_input_value&quot;: -0.7968233659382885,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.38528902446855584
+        },
+        {
+          &quot;feature&quot;: &quot;Cylinder_Pressure&quot;,
+          &quot;input_value&quot;: 218.0,
+          &quot;model_input_value&quot;: -0.8558035480214511,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.35141889201193244
+        },
+        {
+          &quot;feature&quot;: &quot;Rapid_Rise_Time&quot;,
+          &quot;input_value&quot;: 0.01,
+          &quot;model_input_value&quot;: 0.1814893859714117,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.011251212844473939
+        },
+        {
+          &quot;feature&quot;: &quot;Biscuit_Thickness&quot;,
+          &quot;input_value&quot;: 12.0,
+          &quot;model_input_value&quot;: -0.5557796062051135,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.09769483312610198
+        },
+        {
+          &quot;feature&quot;: &quot;Clamping_Force&quot;,
+          &quot;input_value&quot;: 257.0,
+          &quot;model_input_value&quot;: -0.8340138617757665,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.7322929680856716
+        },
+        {
+          &quot;feature&quot;: &quot;Cycle_Time&quot;,
+          &quot;input_value&quot;: 20.9,
+          &quot;model_input_value&quot;: -0.7247540489093978,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.10039231483371643
+        },
+        {
+          &quot;feature&quot;: &quot;Pressure_Rise_Time&quot;,
+          &quot;input_value&quot;: 0.044,
+          &quot;model_input_value&quot;: 1.1222004447207514,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.10043482074915627
+        },
+        {
+          &quot;feature&quot;: &quot;Casting_Pressure&quot;,
+          &quot;input_value&quot;: 1053.0,
+          &quot;model_input_value&quot;: 0.8310756101162338,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.20920622110658313
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_Time&quot;,
+          &quot;input_value&quot;: 8.0,
+          &quot;model_input_value&quot;: -0.8800180755829903,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.457699054290521
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_1_Time&quot;,
+          &quot;input_value&quot;: 1.0,
+          &quot;model_input_value&quot;: -0.6828904097346609,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.7284424091364572
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_2_Time&quot;,
+          &quot;input_value&quot;: 0.8,
+          &quot;model_input_value&quot;: -0.8048051081304737,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.6835048875940544
+        },
+        {
+          &quot;feature&quot;: &quot;Melting_Furnace_Temp&quot;,
+          &quot;input_value&quot;: 702.0,
+          &quot;model_input_value&quot;: 0.7799721269235628,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.4347620060830083
+        },
+        {
+          &quot;feature&quot;: &quot;Air_Pressure&quot;,
+          &quot;input_value&quot;: 6.1,
+          &quot;model_input_value&quot;: 0.007070007123794686,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.0005402036499164488
+        },
+        {
+          &quot;feature&quot;: &quot;Coolant_Temp&quot;,
+          &quot;input_value&quot;: 27.3,
+          &quot;model_input_value&quot;: 2.407963917265606,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.2509846853999623
+        },
+        {
+          &quot;feature&quot;: &quot;Coolant_Pressure&quot;,
+          &quot;input_value&quot;: 2.71,
+          &quot;model_input_value&quot;: 0.14525961297347334,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.011965290366152938
+        },
+        {
+          &quot;feature&quot;: &quot;Factory_Temp&quot;,
+          &quot;input_value&quot;: 36.7,
+          &quot;model_input_value&quot;: 2.268722226471691,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.7883297888028353
+        },
+        {
+          &quot;feature&quot;: &quot;Factory_Humidity&quot;,
+          &quot;input_value&quot;: 46.3,
+          &quot;model_input_value&quot;: -2.0557091763297,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.8475064116801301
+        },
+        {
+          &quot;feature&quot;: &quot;Product_Type&quot;,
+          &quot;input_value&quot;: 1.0,
+          &quot;model_input_value&quot;: -0.8596758002040693,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.013430244019530326
+        },
+        {
+          &quot;feature&quot;: &quot;fb_rate20&quot;,
+          &quot;input_value&quot;: 0.5,
+          &quot;model_input_value&quot;: 1.2434417413388403,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.1895795349489357
+        },
+        {
+          &quot;feature&quot;: &quot;fb_rate100&quot;,
+          &quot;input_value&quot;: 0.48,
+          &quot;model_input_value&quot;: 1.3500949942865499,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.18619614532911674
+        },
+        {
+          &quot;feature&quot;: &quot;fb_ewm&quot;,
+          &quot;input_value&quot;: 0.4958956541715979,
+          &quot;model_input_value&quot;: 1.3370124270613144,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.3150729197722695
+        },
+        {
+          &quot;feature&quot;: &quot;fb_known_count&quot;,
+          &quot;input_value&quot;: 991.0,
+          &quot;model_input_value&quot;: 4.681108928009728,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.14031333156204673
+        }
+      ]
+    }
+  },
+  &quot;gate&quot;: {
+    &quot;score&quot;: 3.357644878731248e-07,
+    &quot;threshold&quot;: 0.001012407074245573,
+    &quot;diagnostic_flag&quot;: false,
+    &quot;outside_training_range&quot;: [],
+    &quot;checkpoint&quot;: &quot;queue-fold3-seed17&quot;,
+    &quot;meaning&quot;: &quot;numeric state1; physical status coding and field FPR unverified&quot;,
+    &quot;explanation&quot;: {
+      &quot;method&quot;: &quot;lightgbm_native_tree_shap&quot;,
+      &quot;scale&quot;: &quot;log_odds_of_encoded_class_1&quot;,
+      &quot;causal&quot;: false,
+      &quot;baseline_description&quot;: &quot;native TreeSHAP expected raw margin&quot;,
+      &quot;baseline_margin&quot;: -14.20620145549403,
+      &quot;raw_margin&quot;: -14.906855515933241,
+      &quot;reconstructed_margin&quot;: -14.906855515933252,
+      &quot;reconstructed_score&quot;: 3.3576448787312125e-07,
+      &quot;margin_error&quot;: 1.0658141036401503e-14,
+      &quot;score_error&quot;: 3.546950466627383e-21,
+      &quot;tolerance&quot;: 1e-06,
+      &quot;contributions&quot;: [
+        {
+          &quot;feature&quot;: &quot;Velocity_1&quot;,
+          &quot;input_value&quot;: 0.144,
+          &quot;model_input_value&quot;: 0.144,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.02520021575365208
+        },
+        {
+          &quot;feature&quot;: &quot;Velocity_2&quot;,
+          &quot;input_value&quot;: 0.166,
+          &quot;model_input_value&quot;: 0.166,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.0991904075574084
+        },
+        {
+          &quot;feature&quot;: &quot;Velocity_3&quot;,
+          &quot;input_value&quot;: 0.184,
+          &quot;model_input_value&quot;: 0.184,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.2985960909428243
+        },
+        {
+          &quot;feature&quot;: &quot;High_Velocity&quot;,
+          &quot;input_value&quot;: 2.135,
+          &quot;model_input_value&quot;: 2.135,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.2784650440070225
+        },
+        {
+          &quot;feature&quot;: &quot;Cylinder_Pressure&quot;,
+          &quot;input_value&quot;: 218.0,
+          &quot;model_input_value&quot;: 218.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.028167007523540438
+        },
+        {
+          &quot;feature&quot;: &quot;Rapid_Rise_Time&quot;,
+          &quot;input_value&quot;: 0.01,
+          &quot;model_input_value&quot;: 0.01,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.008307856365344464
+        },
+        {
+          &quot;feature&quot;: &quot;Biscuit_Thickness&quot;,
+          &quot;input_value&quot;: 12.0,
+          &quot;model_input_value&quot;: 12.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.156607022940249
+        },
+        {
+          &quot;feature&quot;: &quot;Clamping_Force&quot;,
+          &quot;input_value&quot;: 257.0,
+          &quot;model_input_value&quot;: 257.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.21201772033107377
+        },
+        {
+          &quot;feature&quot;: &quot;Cycle_Time&quot;,
+          &quot;input_value&quot;: 20.9,
+          &quot;model_input_value&quot;: 20.9,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.014595503796198023
+        },
+        {
+          &quot;feature&quot;: &quot;Pressure_Rise_Time&quot;,
+          &quot;input_value&quot;: 0.044,
+          &quot;model_input_value&quot;: 0.044,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.04631098272899241
+        },
+        {
+          &quot;feature&quot;: &quot;Casting_Pressure&quot;,
+          &quot;input_value&quot;: 1053.0,
+          &quot;model_input_value&quot;: 1053.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.026617785589856335
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_Time&quot;,
+          &quot;input_value&quot;: 8.0,
+          &quot;model_input_value&quot;: 8.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.00020707435330346788
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_1_Time&quot;,
+          &quot;input_value&quot;: 1.0,
+          &quot;model_input_value&quot;: 1.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.09397902686182305
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_2_Time&quot;,
+          &quot;input_value&quot;: 0.8,
+          &quot;model_input_value&quot;: 0.8,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.0
+        },
+        {
+          &quot;feature&quot;: &quot;prev_cycle_time&quot;,
+          &quot;input_value&quot;: 20.9,
+          &quot;model_input_value&quot;: 20.9,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.035553377051047164
+        },
+        {
+          &quot;feature&quot;: &quot;max_cycle_previous_5&quot;,
+          &quot;input_value&quot;: 20.9,
+          &quot;model_input_value&quot;: 20.9,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.03913199883399534
+        }
+      ]
+    }
+  },
+  &quot;control_action&quot;: null,
+  &quot;field_effect_validated&quot;: false,
+  &quot;joint_training_n&quot;: 486
+}</pre></details></article>
+<article><h2>q42_r0_s777</h2><p><strong>입력·적용범위 사람 검토</strong> · scored_with_warning</p>
+<p>품질 위험 점수 <strong>0.1850</strong> / validation 고정 기준 0.3134 · 학습 공동지지 486행</p>
+<p>적용 경고: outside_training_range:Factory_Temp, outside_training_range:Factory_Humidity, outside_training_range:fb_known_count</p>
+<p>설비 상태: {&quot;score&quot;: 1.5318376600995178e-06, &quot;threshold&quot;: 0.001012407074245573, &quot;diagnostic_flag&quot;: false, &quot;outside_training_range&quot;: [], &quot;checkpoint&quot;: &quot;queue-fold3-seed17&quot;, &quot;meaning&quot;: &quot;numeric state1; physical status coding and field FPR unverified&quot;}</p>
+<details><summary>입력 판단·모델 설명 전체 보기</summary><pre>{
+  &quot;record_id&quot;: &quot;q42_r0_s777&quot;,
+  &quot;status&quot;: &quot;scored_with_warning&quot;,
+  &quot;action&quot;: &quot;manual_review&quot;,
+  &quot;warnings&quot;: [
+    &quot;outside_training_range:Factory_Temp&quot;,
+    &quot;outside_training_range:Factory_Humidity&quot;,
+    &quot;outside_training_range:fb_known_count&quot;
+  ],
+  &quot;quality&quot;: {
+    &quot;score&quot;: 0.18496136551672673,
+    &quot;threshold&quot;: 0.31341528399357055,
+    &quot;risk_flag&quot;: false,
+    &quot;interpretation&quot;: &quot;uncalibrated research score&quot;,
+    &quot;explanation&quot;: {
+      &quot;method&quot;: &quot;linear_margin_decomposition&quot;,
+      &quot;scale&quot;: &quot;log_odds_of_encoded_class_1&quot;,
+      &quot;causal&quot;: false,
+      &quot;baseline_description&quot;: &quot;intercept at zero standardized coordinates; not SHAP expected value&quot;,
+      &quot;baseline_margin&quot;: -1.2660876622329267,
+      &quot;raw_margin&quot;: -1.4830885481667404,
+      &quot;reconstructed_margin&quot;: -1.4830885481667408,
+      &quot;reconstructed_score&quot;: 0.18496136551672668,
+      &quot;margin_error&quot;: 4.440892098500626e-16,
+      &quot;score_error&quot;: 5.551115123125783e-17,
+      &quot;tolerance&quot;: 1e-06,
+      &quot;contributions&quot;: [
+        {
+          &quot;feature&quot;: &quot;Velocity_1&quot;,
+          &quot;input_value&quot;: 0.146,
+          &quot;model_input_value&quot;: -0.25507789443472934,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.018854328545204756
+        },
+        {
+          &quot;feature&quot;: &quot;Velocity_2&quot;,
+          &quot;input_value&quot;: 0.17,
+          &quot;model_input_value&quot;: 0.6090431553317814,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.006478840078491431
+        },
+        {
+          &quot;feature&quot;: &quot;Velocity_3&quot;,
+          &quot;input_value&quot;: 0.18,
+          &quot;model_input_value&quot;: -0.9285605793492128,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.21501258257149986
+        },
+        {
+          &quot;feature&quot;: &quot;High_Velocity&quot;,
+          &quot;input_value&quot;: 2.125,
+          &quot;model_input_value&quot;: -0.8395668303876028,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.4059568266742433
+        },
+        {
+          &quot;feature&quot;: &quot;Cylinder_Pressure&quot;,
+          &quot;input_value&quot;: 218.0,
+          &quot;model_input_value&quot;: -0.8558035480214511,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.35141889201193244
+        },
+        {
+          &quot;feature&quot;: &quot;Rapid_Rise_Time&quot;,
+          &quot;input_value&quot;: 0.009,
+          &quot;model_input_value&quot;: -0.2642831153812279,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.016383908989714955
+        },
+        {
+          &quot;feature&quot;: &quot;Biscuit_Thickness&quot;,
+          &quot;input_value&quot;: 12.0,
+          &quot;model_input_value&quot;: -0.5557796062051135,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.09769483312610198
+        },
+        {
+          &quot;feature&quot;: &quot;Clamping_Force&quot;,
+          &quot;input_value&quot;: 257.0,
+          &quot;model_input_value&quot;: -0.8340138617757665,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.7322929680856716
+        },
+        {
+          &quot;feature&quot;: &quot;Cycle_Time&quot;,
+          &quot;input_value&quot;: 20.8,
+          &quot;model_input_value&quot;: -0.7359794449344851,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.10194724714983046
+        },
+        {
+          &quot;feature&quot;: &quot;Pressure_Rise_Time&quot;,
+          &quot;input_value&quot;: 0.035,
+          &quot;model_input_value&quot;: -1.2909359757362906,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.11553633215140532
+        },
+        {
+          &quot;feature&quot;: &quot;Casting_Pressure&quot;,
+          &quot;input_value&quot;: 1054.0,
+          &quot;model_input_value&quot;: 0.8354126511597283,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.21029798214065648
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_Time&quot;,
+          &quot;input_value&quot;: 8.0,
+          &quot;model_input_value&quot;: -0.8800180755829903,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.457699054290521
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_1_Time&quot;,
+          &quot;input_value&quot;: 1.0,
+          &quot;model_input_value&quot;: -0.6828904097346609,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.7284424091364572
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_2_Time&quot;,
+          &quot;input_value&quot;: 0.8,
+          &quot;model_input_value&quot;: -0.8048051081304737,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.6835048875940544
+        },
+        {
+          &quot;feature&quot;: &quot;Melting_Furnace_Temp&quot;,
+          &quot;input_value&quot;: 703.7,
+          &quot;model_input_value&quot;: 0.8470449047234382,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.4721488490524513
+        },
+        {
+          &quot;feature&quot;: &quot;Air_Pressure&quot;,
+          &quot;input_value&quot;: 6.2,
+          &quot;model_input_value&quot;: 0.1840947486021477,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.014066273680351564
+        },
+        {
+          &quot;feature&quot;: &quot;Coolant_Temp&quot;,
+          &quot;input_value&quot;: 27.1,
+          &quot;model_input_value&quot;: 1.8025987135196424,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.18788681498552554
+        },
+        {
+          &quot;feature&quot;: &quot;Coolant_Pressure&quot;,
+          &quot;input_value&quot;: 2.7,
+          &quot;model_input_value&quot;: -0.0580092648662329,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.004778325398528383
+        },
+        {
+          &quot;feature&quot;: &quot;Factory_Temp&quot;,
+          &quot;input_value&quot;: 36.8,
+          &quot;model_input_value&quot;: 2.3297716168377156,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.8095430746128999
+        },
+        {
+          &quot;feature&quot;: &quot;Factory_Humidity&quot;,
+          &quot;input_value&quot;: 46.4,
+          &quot;model_input_value&quot;: -2.0405445520483494,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.8412544980061779
+        },
+        {
+          &quot;feature&quot;: &quot;Product_Type&quot;,
+          &quot;input_value&quot;: 1.0,
+          &quot;model_input_value&quot;: -0.8596758002040693,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.013430244019530326
+        },
+        {
+          &quot;feature&quot;: &quot;fb_rate20&quot;,
+          &quot;input_value&quot;: 0.2631578947368421,
+          &quot;model_input_value&quot;: 0.05251546886665522,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.00800669451119288
+        },
+        {
+          &quot;feature&quot;: &quot;fb_rate100&quot;,
+          &quot;input_value&quot;: 0.24242424242424243,
+          &quot;model_input_value&quot;: -0.06074677338289976,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.008377792002002392
+        },
+        {
+          &quot;feature&quot;: &quot;fb_ewm&quot;,
+          &quot;input_value&quot;: 0.24664160578346805,
+          &quot;model_input_value&quot;: -0.039277058952033296,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.009255813479074844
+        },
+        {
+          &quot;feature&quot;: &quot;fb_known_count&quot;,
+          &quot;input_value&quot;: 750.0,
+          &quot;model_input_value&quot;: 3.2118140895158422,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.09627213170822267
+        }
+      ]
+    }
+  },
+  &quot;gate&quot;: {
+    &quot;score&quot;: 1.5318376600995178e-06,
+    &quot;threshold&quot;: 0.001012407074245573,
+    &quot;diagnostic_flag&quot;: false,
+    &quot;outside_training_range&quot;: [],
+    &quot;checkpoint&quot;: &quot;queue-fold3-seed17&quot;,
+    &quot;meaning&quot;: &quot;numeric state1; physical status coding and field FPR unverified&quot;,
+    &quot;explanation&quot;: {
+      &quot;method&quot;: &quot;lightgbm_native_tree_shap&quot;,
+      &quot;scale&quot;: &quot;log_odds_of_encoded_class_1&quot;,
+      &quot;causal&quot;: false,
+      &quot;baseline_description&quot;: &quot;native TreeSHAP expected raw margin&quot;,
+      &quot;baseline_margin&quot;: -14.20620145549403,
+      &quot;raw_margin&quot;: -13.389040926414316,
+      &quot;reconstructed_margin&quot;: -13.38904092641432,
+      &quot;reconstructed_score&quot;: 1.5318376600995096e-06,
+      &quot;margin_error&quot;: 5.329070518200751e-15,
+      &quot;score_error&quot;: 8.258571235729428e-21,
+      &quot;tolerance&quot;: 1e-06,
+      &quot;contributions&quot;: [
+        {
+          &quot;feature&quot;: &quot;Velocity_1&quot;,
+          &quot;input_value&quot;: 0.146,
+          &quot;model_input_value&quot;: 0.146,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 1.4283493683758326
+        },
+        {
+          &quot;feature&quot;: &quot;Velocity_2&quot;,
+          &quot;input_value&quot;: 0.17,
+          &quot;model_input_value&quot;: 0.17,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.01961041961425563
+        },
+        {
+          &quot;feature&quot;: &quot;Velocity_3&quot;,
+          &quot;input_value&quot;: 0.18,
+          &quot;model_input_value&quot;: 0.18,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.35832965408445494
+        },
+        {
+          &quot;feature&quot;: &quot;High_Velocity&quot;,
+          &quot;input_value&quot;: 2.125,
+          &quot;model_input_value&quot;: 2.125,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.2571727057186055
+        },
+        {
+          &quot;feature&quot;: &quot;Cylinder_Pressure&quot;,
+          &quot;input_value&quot;: 218.0,
+          &quot;model_input_value&quot;: 218.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.028181590546188216
+        },
+        {
+          &quot;feature&quot;: &quot;Rapid_Rise_Time&quot;,
+          &quot;input_value&quot;: 0.009,
+          &quot;model_input_value&quot;: 0.009,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.008432637151134759
+        },
+        {
+          &quot;feature&quot;: &quot;Biscuit_Thickness&quot;,
+          &quot;input_value&quot;: 12.0,
+          &quot;model_input_value&quot;: 12.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.3042016207474062
+        },
+        {
+          &quot;feature&quot;: &quot;Clamping_Force&quot;,
+          &quot;input_value&quot;: 257.0,
+          &quot;model_input_value&quot;: 257.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.22961938690073494
+        },
+        {
+          &quot;feature&quot;: &quot;Cycle_Time&quot;,
+          &quot;input_value&quot;: 20.8,
+          &quot;model_input_value&quot;: 20.8,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.010259145051272584
+        },
+        {
+          &quot;feature&quot;: &quot;Pressure_Rise_Time&quot;,
+          &quot;input_value&quot;: 0.035,
+          &quot;model_input_value&quot;: 0.035,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.1216814325065082
+        },
+        {
+          &quot;feature&quot;: &quot;Casting_Pressure&quot;,
+          &quot;input_value&quot;: 1054.0,
+          &quot;model_input_value&quot;: 1054.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.013479943632731372
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_Time&quot;,
+          &quot;input_value&quot;: 8.0,
+          &quot;model_input_value&quot;: 8.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.00043899487616541263
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_1_Time&quot;,
+          &quot;input_value&quot;: 1.0,
+          &quot;model_input_value&quot;: 1.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.09603128763707022
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_2_Time&quot;,
+          &quot;input_value&quot;: 0.8,
+          &quot;model_input_value&quot;: 0.8,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.0
+        },
+        {
+          &quot;feature&quot;: &quot;prev_cycle_time&quot;,
+          &quot;input_value&quot;: 20.8,
+          &quot;model_input_value&quot;: 20.8,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.016459908788364588
+        },
+        {
+          &quot;feature&quot;: &quot;max_cycle_previous_5&quot;,
+          &quot;input_value&quot;: 21.0,
+          &quot;model_input_value&quot;: 21.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.032854025878119045
+        }
+      ]
+    }
+  },
+  &quot;control_action&quot;: null,
+  &quot;field_effect_validated&quot;: false,
+  &quot;joint_training_n&quot;: 486
+}</pre></details></article>
+<article><h2>q42_r3_s434</h2><p><strong>입력·적용범위 사람 검토</strong> · scored_with_warning</p>
+<p>품질 위험 점수 <strong>0.1118</strong> / validation 고정 기준 0.3134 · 학습 공동지지 809행</p>
+<p>적용 경고: outside_training_range:Factory_Humidity</p>
+<p>설비 상태: {&quot;score&quot;: 7.658449980766548e-05, &quot;threshold&quot;: 0.001012407074245573, &quot;diagnostic_flag&quot;: false, &quot;outside_training_range&quot;: [&quot;Velocity_1&quot;, &quot;Velocity_3&quot;, &quot;High_Velocity&quot;, &quot;Cylinder_Pressure&quot;, &quot;Biscuit_Thickness&quot;, &quot;Clamping_Force&quot;, &quot;Spray_Time&quot;, &quot;Spray_1_Time&quot;, &quot;Spray_2_Time&quot;], &quot;checkpoint&quot;: &quot;queue-fold3-seed17&quot;, &quot;meaning&quot;: &quot;numeric state1; physical status coding and field FPR unverified&quot;}</p>
+<details><summary>입력 판단·모델 설명 전체 보기</summary><pre>{
+  &quot;record_id&quot;: &quot;q42_r3_s434&quot;,
+  &quot;status&quot;: &quot;scored_with_warning&quot;,
+  &quot;action&quot;: &quot;manual_review&quot;,
+  &quot;warnings&quot;: [
+    &quot;outside_training_range:Factory_Humidity&quot;
+  ],
+  &quot;quality&quot;: {
+    &quot;score&quot;: 0.11177234043687204,
+    &quot;threshold&quot;: 0.31341528399357055,
+    &quot;risk_flag&quot;: false,
+    &quot;interpretation&quot;: &quot;uncalibrated research score&quot;,
+    &quot;explanation&quot;: {
+      &quot;method&quot;: &quot;linear_margin_decomposition&quot;,
+      &quot;scale&quot;: &quot;log_odds_of_encoded_class_1&quot;,
+      &quot;causal&quot;: false,
+      &quot;baseline_description&quot;: &quot;intercept at zero standardized coordinates; not SHAP expected value&quot;,
+      &quot;baseline_margin&quot;: -1.2660876622329267,
+      &quot;raw_margin&quot;: -2.072763955578668,
+      &quot;reconstructed_margin&quot;: -2.072763955578668,
+      &quot;reconstructed_score&quot;: 0.11177234043687204,
+      &quot;margin_error&quot;: 0.0,
+      &quot;score_error&quot;: 0.0,
+      &quot;tolerance&quot;: 1e-06,
+      &quot;contributions&quot;: [
+        {
+          &quot;feature&quot;: &quot;Velocity_1&quot;,
+          &quot;input_value&quot;: 0.154,
+          &quot;model_input_value&quot;: 0.9296963329352288,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.06871940097858316
+        },
+        {
+          &quot;feature&quot;: &quot;Velocity_2&quot;,
+          &quot;input_value&quot;: 0.17,
+          &quot;model_input_value&quot;: 0.6090431553317814,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.006478840078491431
+        },
+        {
+          &quot;feature&quot;: &quot;Velocity_3&quot;,
+          &quot;input_value&quot;: 0.2,
+          &quot;model_input_value&quot;: 0.8380712189183718,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.19405934428615879
+        },
+        {
+          &quot;feature&quot;: &quot;High_Velocity&quot;,
+          &quot;input_value&quot;: 2.725,
+          &quot;model_input_value&quot;: 1.7250410365713116,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.8341113056670344
+        },
+        {
+          &quot;feature&quot;: &quot;Cylinder_Pressure&quot;,
+          &quot;input_value&quot;: 265.0,
+          &quot;model_input_value&quot;: 1.140703543597245,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.46840747077036077
+        },
+        {
+          &quot;feature&quot;: &quot;Rapid_Rise_Time&quot;,
+          &quot;input_value&quot;: 0.011,
+          &quot;model_input_value&quot;: 0.6272618873240505,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.03888633467866279
+        },
+        {
+          &quot;feature&quot;: &quot;Biscuit_Thickness&quot;,
+          &quot;input_value&quot;: 19.0,
+          &quot;model_input_value&quot;: 1.5776435770440702,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.2773178869303553
+        },
+        {
+          &quot;feature&quot;: &quot;Clamping_Force&quot;,
+          &quot;input_value&quot;: 359.0,
+          &quot;model_input_value&quot;: 0.9496628437063817,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.8338367674342079
+        },
+        {
+          &quot;feature&quot;: &quot;Cycle_Time&quot;,
+          &quot;input_value&quot;: 33.9,
+          &quot;model_input_value&quot;: 0.7345474343519913,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.10174888626111343
+        },
+        {
+          &quot;feature&quot;: &quot;Pressure_Rise_Time&quot;,
+          &quot;input_value&quot;: 0.042,
+          &quot;model_input_value&quot;: 0.5859479068414097,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.05244123121569823
+        },
+        {
+          &quot;feature&quot;: &quot;Casting_Pressure&quot;,
+          &quot;input_value&quot;: 595.0,
+          &quot;model_input_value&quot;: -1.15528918780425,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.29082033249901007
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_Time&quot;,
+          &quot;input_value&quot;: 10.0,
+          &quot;model_input_value&quot;: 0.20098531423769686,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.1045328395009789
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_1_Time&quot;,
+          &quot;input_value&quot;: 2.0,
+          &quot;model_input_value&quot;: 1.0555108998159175,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 1.125918436942828
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_2_Time&quot;,
+          &quot;input_value&quot;: 2.7,
+          &quot;model_input_value&quot;: 1.6734362733501613,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -1.4212159693779975
+        },
+        {
+          &quot;feature&quot;: &quot;Melting_Furnace_Temp&quot;,
+          &quot;input_value&quot;: 652.1,
+          &quot;model_input_value&quot;: -1.1888111743786076,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.6626517963729641
+        },
+        {
+          &quot;feature&quot;: &quot;Air_Pressure&quot;,
+          &quot;input_value&quot;: 5.7,
+          &quot;model_input_value&quot;: -0.7010289587896126,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.053564076471823645
+        },
+        {
+          &quot;feature&quot;: &quot;Coolant_Temp&quot;,
+          &quot;input_value&quot;: 27.0,
+          &quot;model_input_value&quot;: 1.4999161116466553,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.1563378797783066
+        },
+        {
+          &quot;feature&quot;: &quot;Coolant_Pressure&quot;,
+          &quot;input_value&quot;: 2.71,
+          &quot;model_input_value&quot;: 0.14525961297347334,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.011965290366152938
+        },
+        {
+          &quot;feature&quot;: &quot;Factory_Temp&quot;,
+          &quot;input_value&quot;: 36.0,
+          &quot;model_input_value&quot;: 1.8413764939094939,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.6398367881323747
+        },
+        {
+          &quot;feature&quot;: &quot;Factory_Humidity&quot;,
+          &quot;input_value&quot;: 46.3,
+          &quot;model_input_value&quot;: -2.0557091763297,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.8475064116801301
+        },
+        {
+          &quot;feature&quot;: &quot;Product_Type&quot;,
+          &quot;input_value&quot;: 2.0,
+          &quot;model_input_value&quot;: 1.1632292077578787,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.018172492592119963
+        },
+        {
+          &quot;feature&quot;: &quot;fb_rate20&quot;,
+          &quot;input_value&quot;: 0.1,
+          &quot;model_input_value&quot;: -0.7679004077252943,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.11707681779036326
+        },
+        {
+          &quot;feature&quot;: &quot;fb_rate100&quot;,
+          &quot;input_value&quot;: 0.15,
+          &quot;model_input_value&quot;: -0.60960741004002,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.08407300996882809
+        },
+        {
+          &quot;feature&quot;: &quot;fb_ewm&quot;,
+          &quot;input_value&quot;: 0.09539041288322675,
+          &quot;model_input_value&quot;: -0.8744307019188698,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.20606348064965194
+        },
+        {
+          &quot;feature&quot;: &quot;fb_known_count&quot;,
+          &quot;input_value&quot;: 401.0,
+          &quot;model_input_value&quot;: 1.0840800702861075,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.032494626525714
+        }
+      ]
+    }
+  },
+  &quot;gate&quot;: {
+    &quot;score&quot;: 7.658449980766548e-05,
+    &quot;threshold&quot;: 0.001012407074245573,
+    &quot;diagnostic_flag&quot;: false,
+    &quot;outside_training_range&quot;: [
+      &quot;Velocity_1&quot;,
+      &quot;Velocity_3&quot;,
+      &quot;High_Velocity&quot;,
+      &quot;Cylinder_Pressure&quot;,
+      &quot;Biscuit_Thickness&quot;,
+      &quot;Clamping_Force&quot;,
+      &quot;Spray_Time&quot;,
+      &quot;Spray_1_Time&quot;,
+      &quot;Spray_2_Time&quot;
+    ],
+    &quot;checkpoint&quot;: &quot;queue-fold3-seed17&quot;,
+    &quot;meaning&quot;: &quot;numeric state1; physical status coding and field FPR unverified&quot;,
+    &quot;explanation&quot;: {
+      &quot;method&quot;: &quot;lightgbm_native_tree_shap&quot;,
+      &quot;scale&quot;: &quot;log_odds_of_encoded_class_1&quot;,
+      &quot;causal&quot;: false,
+      &quot;baseline_description&quot;: &quot;native TreeSHAP expected raw margin&quot;,
+      &quot;baseline_margin&quot;: -14.20620145549403,
+      &quot;raw_margin&quot;: -9.47703926664153,
+      &quot;reconstructed_margin&quot;: -9.477039266641544,
+      &quot;reconstructed_score&quot;: 7.658449980766438e-05,
+      &quot;margin_error&quot;: 1.4210854715202004e-14,
+      &quot;score_error&quot;: 1.0977546996415732e-18,
+      &quot;tolerance&quot;: 1e-06,
+      &quot;contributions&quot;: [
+        {
+          &quot;feature&quot;: &quot;Velocity_1&quot;,
+          &quot;input_value&quot;: 0.154,
+          &quot;model_input_value&quot;: 0.154,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 1.412164566584904
+        },
+        {
+          &quot;feature&quot;: &quot;Velocity_2&quot;,
+          &quot;input_value&quot;: 0.17,
+          &quot;model_input_value&quot;: 0.17,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.02836097580910427
+        },
+        {
+          &quot;feature&quot;: &quot;Velocity_3&quot;,
+          &quot;input_value&quot;: 0.2,
+          &quot;model_input_value&quot;: 0.2,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.2861911946125942
+        },
+        {
+          &quot;feature&quot;: &quot;High_Velocity&quot;,
+          &quot;input_value&quot;: 2.725,
+          &quot;model_input_value&quot;: 2.725,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.6938776305531904
+        },
+        {
+          &quot;feature&quot;: &quot;Cylinder_Pressure&quot;,
+          &quot;input_value&quot;: 265.0,
+          &quot;model_input_value&quot;: 265.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.00610606838015967
+        },
+        {
+          &quot;feature&quot;: &quot;Rapid_Rise_Time&quot;,
+          &quot;input_value&quot;: 0.011,
+          &quot;model_input_value&quot;: 0.011,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.00446723579109944
+        },
+        {
+          &quot;feature&quot;: &quot;Biscuit_Thickness&quot;,
+          &quot;input_value&quot;: 19.0,
+          &quot;model_input_value&quot;: 19.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 1.0020050467001669
+        },
+        {
+          &quot;feature&quot;: &quot;Clamping_Force&quot;,
+          &quot;input_value&quot;: 359.0,
+          &quot;model_input_value&quot;: 359.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.27142760938489535
+        },
+        {
+          &quot;feature&quot;: &quot;Cycle_Time&quot;,
+          &quot;input_value&quot;: 33.9,
+          &quot;model_input_value&quot;: 33.9,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 2.2139089680013155
+        },
+        {
+          &quot;feature&quot;: &quot;Pressure_Rise_Time&quot;,
+          &quot;input_value&quot;: 0.042,
+          &quot;model_input_value&quot;: 0.042,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.03768065064625796
+        },
+        {
+          &quot;feature&quot;: &quot;Casting_Pressure&quot;,
+          &quot;input_value&quot;: 595.0,
+          &quot;model_input_value&quot;: 595.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.03670759359690931
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_Time&quot;,
+          &quot;input_value&quot;: 10.0,
+          &quot;model_input_value&quot;: 10.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.07724533790828604
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_1_Time&quot;,
+          &quot;input_value&quot;: 2.0,
+          &quot;model_input_value&quot;: 2.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.11124559429301192
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_2_Time&quot;,
+          &quot;input_value&quot;: 2.7,
+          &quot;model_input_value&quot;: 2.7,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.0
+        },
+        {
+          &quot;feature&quot;: &quot;prev_cycle_time&quot;,
+          &quot;input_value&quot;: 33.8,
+          &quot;model_input_value&quot;: 33.8,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.1438281171076306
+        },
+        {
+          &quot;feature&quot;: &quot;max_cycle_previous_5&quot;,
+          &quot;input_value&quot;: 33.9,
+          &quot;model_input_value&quot;: 33.9,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.025966368158738144
+        }
+      ]
+    }
+  },
+  &quot;control_action&quot;: null,
+  &quot;field_effect_validated&quot;: false,
+  &quot;joint_training_n&quot;: 809
+}</pre></details></article>
+<article><h2>missing_measurement</h2><p><strong>입력·적용범위 사람 검토</strong> · invalid_or_incomplete_input</p>
+<p>missing measurements/history: Casting_Pressure</p>
+<details><summary>입력 판단·모델 설명 전체 보기</summary><pre>{
+  &quot;record_id&quot;: &quot;missing_measurement&quot;,
+  &quot;status&quot;: &quot;invalid_or_incomplete_input&quot;,
+  &quot;action&quot;: &quot;manual_review&quot;,
+  &quot;warnings&quot;: [],
+  &quot;quality&quot;: null,
+  &quot;gate&quot;: null,
+  &quot;control_action&quot;: null,
+  &quot;field_effect_validated&quot;: false,
+  &quot;reason&quot;: &quot;missing measurements/history: Casting_Pressure&quot;
+}</pre></details></article>
+<article><h2>unseen_product</h2><p><strong>입력·적용범위 사람 검토</strong> · scored_with_warning</p>
+<p>품질 위험 점수 <strong>0.0000</strong> / validation 고정 기준 0.3134 · 학습 공동지지 0행</p>
+<p>적용 경고: unseen_product, outside_training_range:Factory_Temp, outside_training_range:Factory_Humidity, outside_training_range:Product_Type, outside_training_range:fb_known_count, insufficient_joint_support</p>
+<p>설비 상태: {&quot;score&quot;: 2.1560792860020422e-06, &quot;threshold&quot;: 0.001012407074245573, &quot;diagnostic_flag&quot;: false, &quot;outside_training_range&quot;: [], &quot;checkpoint&quot;: &quot;queue-fold3-seed17&quot;, &quot;meaning&quot;: &quot;numeric state1; physical status coding and field FPR unverified&quot;}</p>
+<details><summary>입력 판단·모델 설명 전체 보기</summary><pre>{
+  &quot;record_id&quot;: &quot;unseen_product&quot;,
+  &quot;status&quot;: &quot;scored_with_warning&quot;,
+  &quot;action&quot;: &quot;manual_review&quot;,
+  &quot;warnings&quot;: [
+    &quot;unseen_product&quot;,
+    &quot;outside_training_range:Factory_Temp&quot;,
+    &quot;outside_training_range:Factory_Humidity&quot;,
+    &quot;outside_training_range:Product_Type&quot;,
+    &quot;outside_training_range:fb_known_count&quot;,
+    &quot;insufficient_joint_support&quot;
+  ],
+  &quot;quality&quot;: {
+    &quot;score&quot;: 7.77789791428538e-15,
+    &quot;threshold&quot;: 0.31341528399357055,
+    &quot;risk_flag&quot;: false,
+    &quot;interpretation&quot;: &quot;uncalibrated research score&quot;,
+    &quot;explanation&quot;: {
+      &quot;method&quot;: &quot;linear_margin_decomposition&quot;,
+      &quot;scale&quot;: &quot;log_odds_of_encoded_class_1&quot;,
+      &quot;causal&quot;: false,
+      &quot;baseline_description&quot;: &quot;intercept at zero standardized coordinates; not SHAP expected value&quot;,
+      &quot;baseline_margin&quot;: -1.2660876622329267,
+      &quot;raw_margin&quot;: -32.48749028419442,
+      &quot;reconstructed_margin&quot;: -32.48749028419442,
+      &quot;reconstructed_score&quot;: 7.77789791428538e-15,
+      &quot;margin_error&quot;: 0.0,
+      &quot;score_error&quot;: 0.0,
+      &quot;tolerance&quot;: 1e-06,
+      &quot;contributions&quot;: [
+        {
+          &quot;feature&quot;: &quot;Velocity_1&quot;,
+          &quot;input_value&quot;: 0.144,
+          &quot;model_input_value&quot;: -0.5512714512772188,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.040747760926151726
+        },
+        {
+          &quot;feature&quot;: &quot;Velocity_2&quot;,
+          &quot;input_value&quot;: 0.168,
+          &quot;model_input_value&quot;: -0.0826003046420866,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.0008786802043924502
+        },
+        {
+          &quot;feature&quot;: &quot;Velocity_3&quot;,
+          &quot;input_value&quot;: 0.178,
+          &quot;model_input_value&quot;: -1.1052237591759713,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.2559197752572657
+        },
+        {
+          &quot;feature&quot;: &quot;High_Velocity&quot;,
+          &quot;input_value&quot;: 2.152,
+          &quot;model_input_value&quot;: -0.7241594763744511,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.35015376071888554
+        },
+        {
+          &quot;feature&quot;: &quot;Cylinder_Pressure&quot;,
+          &quot;input_value&quot;: 218.0,
+          &quot;model_input_value&quot;: -0.8558035480214511,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.35141889201193244
+        },
+        {
+          &quot;feature&quot;: &quot;Rapid_Rise_Time&quot;,
+          &quot;input_value&quot;: 0.008,
+          &quot;model_input_value&quot;: -0.7100556167338667,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.0440190308239038
+        },
+        {
+          &quot;feature&quot;: &quot;Biscuit_Thickness&quot;,
+          &quot;input_value&quot;: 13.0,
+          &quot;model_input_value&quot;: -0.2510048657409444,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.044121587403750946
+        },
+        {
+          &quot;feature&quot;: &quot;Clamping_Force&quot;,
+          &quot;input_value&quot;: 257.0,
+          &quot;model_input_value&quot;: -0.8340138617757665,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.7322929680856716
+        },
+        {
+          &quot;feature&quot;: &quot;Cycle_Time&quot;,
+          &quot;input_value&quot;: 20.8,
+          &quot;model_input_value&quot;: -0.7359794449344851,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.10194724714983046
+        },
+        {
+          &quot;feature&quot;: &quot;Pressure_Rise_Time&quot;,
+          &quot;input_value&quot;: 0.044,
+          &quot;model_input_value&quot;: 1.1222004447207514,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.10043482074915627
+        },
+        {
+          &quot;feature&quot;: &quot;Casting_Pressure&quot;,
+          &quot;input_value&quot;: 1054.0,
+          &quot;model_input_value&quot;: 0.8354126511597283,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.21029798214065648
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_Time&quot;,
+          &quot;input_value&quot;: 8.1,
+          &quot;model_input_value&quot;: -0.825967906091956,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.429587459600946
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_1_Time&quot;,
+          &quot;input_value&quot;: 1.0,
+          &quot;model_input_value&quot;: -0.6828904097346609,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.7284424091364572
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_2_Time&quot;,
+          &quot;input_value&quot;: 0.8,
+          &quot;model_input_value&quot;: -0.8048051081304737,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.6835048875940544
+        },
+        {
+          &quot;feature&quot;: &quot;Melting_Furnace_Temp&quot;,
+          &quot;input_value&quot;: 704.0,
+          &quot;model_input_value&quot;: 0.8588812772763552,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.4787465272235283
+        },
+        {
+          &quot;feature&quot;: &quot;Air_Pressure&quot;,
+          &quot;input_value&quot;: 6.2,
+          &quot;model_input_value&quot;: 0.1840947486021477,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.014066273680351564
+        },
+        {
+          &quot;feature&quot;: &quot;Coolant_Temp&quot;,
+          &quot;input_value&quot;: 27.3,
+          &quot;model_input_value&quot;: 2.407963917265606,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.2509846853999623
+        },
+        {
+          &quot;feature&quot;: &quot;Coolant_Pressure&quot;,
+          &quot;input_value&quot;: 2.67,
+          &quot;model_input_value&quot;: -0.6678158983853697,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.055009172692573834
+        },
+        {
+          &quot;feature&quot;: &quot;Factory_Temp&quot;,
+          &quot;input_value&quot;: 36.5,
+          &quot;model_input_value&quot;: 2.1466234457396336,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.7459032171827032
+        },
+        {
+          &quot;feature&quot;: &quot;Factory_Humidity&quot;,
+          &quot;input_value&quot;: 46.4,
+          &quot;model_input_value&quot;: -2.0405445520483494,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.8412544980061779
+        },
+        {
+          &quot;feature&quot;: &quot;Product_Type&quot;,
+          &quot;input_value&quot;: 999.0,
+          &quot;model_input_value&quot;: 2017.99952214582,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -31.526100894407456
+        },
+        {
+          &quot;feature&quot;: &quot;fb_rate20&quot;,
+          &quot;input_value&quot;: 0.35,
+          &quot;model_input_value&quot;: 0.4891884354397897,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.07458340267169856
+        },
+        {
+          &quot;feature&quot;: &quot;fb_rate100&quot;,
+          &quot;input_value&quot;: 0.45,
+          &quot;model_input_value&quot;: 1.171940230256862,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.1616262221202127
+        },
+        {
+          &quot;feature&quot;: &quot;fb_ewm&quot;,
+          &quot;input_value&quot;: 0.4141072994746388,
+          &quot;model_input_value&quot;: 0.8854071136243438,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.2086501208443639
+        },
+        {
+          &quot;feature&quot;: &quot;fb_known_count&quot;,
+          &quot;input_value&quot;: 973.0,
+          &quot;model_input_value&quot;: 4.571369064553753,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.13702394734059928
+        }
+      ]
+    }
+  },
+  &quot;gate&quot;: {
+    &quot;score&quot;: 2.1560792860020422e-06,
+    &quot;threshold&quot;: 0.001012407074245573,
+    &quot;diagnostic_flag&quot;: false,
+    &quot;outside_training_range&quot;: [],
+    &quot;checkpoint&quot;: &quot;queue-fold3-seed17&quot;,
+    &quot;meaning&quot;: &quot;numeric state1; physical status coding and field FPR unverified&quot;,
+    &quot;explanation&quot;: {
+      &quot;method&quot;: &quot;lightgbm_native_tree_shap&quot;,
+      &quot;scale&quot;: &quot;log_odds_of_encoded_class_1&quot;,
+      &quot;causal&quot;: false,
+      &quot;baseline_description&quot;: &quot;native TreeSHAP expected raw margin&quot;,
+      &quot;baseline_margin&quot;: -14.20620145549403,
+      &quot;raw_margin&quot;: -13.047216974928574,
+      &quot;reconstructed_margin&quot;: -13.047216974928578,
+      &quot;reconstructed_score&quot;: 2.156079286002034e-06,
+      &quot;margin_error&quot;: 3.552713678800501e-15,
+      &quot;score_error&quot;: 8.046812998915853e-21,
+      &quot;tolerance&quot;: 1e-06,
+      &quot;contributions&quot;: [
+        {
+          &quot;feature&quot;: &quot;Velocity_1&quot;,
+          &quot;input_value&quot;: 0.144,
+          &quot;model_input_value&quot;: 0.144,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.16907281799013807
+        },
+        {
+          &quot;feature&quot;: &quot;Velocity_2&quot;,
+          &quot;input_value&quot;: 0.168,
+          &quot;model_input_value&quot;: 0.168,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.014930883295578757
+        },
+        {
+          &quot;feature&quot;: &quot;Velocity_3&quot;,
+          &quot;input_value&quot;: 0.178,
+          &quot;model_input_value&quot;: 0.178,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.09098214918319351
+        },
+        {
+          &quot;feature&quot;: &quot;High_Velocity&quot;,
+          &quot;input_value&quot;: 2.152,
+          &quot;model_input_value&quot;: 2.152,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.40804766596871583
+        },
+        {
+          &quot;feature&quot;: &quot;Cylinder_Pressure&quot;,
+          &quot;input_value&quot;: 218.0,
+          &quot;model_input_value&quot;: 218.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.006095320307630998
+        },
+        {
+          &quot;feature&quot;: &quot;Rapid_Rise_Time&quot;,
+          &quot;input_value&quot;: 0.008,
+          &quot;model_input_value&quot;: 0.008,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.004405090537131735
+        },
+        {
+          &quot;feature&quot;: &quot;Biscuit_Thickness&quot;,
+          &quot;input_value&quot;: 13.0,
+          &quot;model_input_value&quot;: 13.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.9295340861707668
+        },
+        {
+          &quot;feature&quot;: &quot;Clamping_Force&quot;,
+          &quot;input_value&quot;: 257.0,
+          &quot;model_input_value&quot;: 257.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.2650136986704209
+        },
+        {
+          &quot;feature&quot;: &quot;Cycle_Time&quot;,
+          &quot;input_value&quot;: 20.8,
+          &quot;model_input_value&quot;: 20.8,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.00866362225593845
+        },
+        {
+          &quot;feature&quot;: &quot;Pressure_Rise_Time&quot;,
+          &quot;input_value&quot;: 0.044,
+          &quot;model_input_value&quot;: 0.044,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.04206415607730754
+        },
+        {
+          &quot;feature&quot;: &quot;Casting_Pressure&quot;,
+          &quot;input_value&quot;: 1054.0,
+          &quot;model_input_value&quot;: 1054.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.032731607387148406
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_Time&quot;,
+          &quot;input_value&quot;: 8.1,
+          &quot;model_input_value&quot;: 8.1,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.04582609136518867
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_1_Time&quot;,
+          &quot;input_value&quot;: 1.0,
+          &quot;model_input_value&quot;: 1.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.0939810087846217
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_2_Time&quot;,
+          &quot;input_value&quot;: 0.8,
+          &quot;model_input_value&quot;: 0.8,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.0
+        },
+        {
+          &quot;feature&quot;: &quot;prev_cycle_time&quot;,
+          &quot;input_value&quot;: 21.0,
+          &quot;model_input_value&quot;: 21.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.04201778072697167
+        },
+        {
+          &quot;feature&quot;: &quot;max_cycle_previous_5&quot;,
+          &quot;input_value&quot;: 21.0,
+          &quot;model_input_value&quot;: 21.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.03242175556766245
+        }
+      ]
+    }
+  },
+  &quot;control_action&quot;: null,
+  &quot;field_effect_validated&quot;: false,
+  &quot;joint_training_n&quot;: 0
+}</pre></details></article>
+<article><h2>future_feedback</h2><p><strong>입력·적용범위 사람 검토</strong> · invalid_or_incomplete_input</p>
+<p>duplicate/current/future/early/cross-run quality feedback</p>
+<details><summary>입력 판단·모델 설명 전체 보기</summary><pre>{
+  &quot;record_id&quot;: &quot;future_feedback&quot;,
+  &quot;status&quot;: &quot;invalid_or_incomplete_input&quot;,
+  &quot;action&quot;: &quot;manual_review&quot;,
+  &quot;warnings&quot;: [],
+  &quot;quality&quot;: null,
+  &quot;gate&quot;: null,
+  &quot;control_action&quot;: null,
+  &quot;field_effect_validated&quot;: false,
+  &quot;reason&quot;: &quot;duplicate/current/future/early/cross-run quality feedback&quot;
+}</pre></details></article>
+<article><h2>current_label</h2><p><strong>입력·적용범위 사람 검토</strong> · invalid_or_incomplete_input</p>
+<p>unsupported fields or missing required fields</p>
+<details><summary>입력 판단·모델 설명 전체 보기</summary><pre>{
+  &quot;record_id&quot;: &quot;current_label&quot;,
+  &quot;status&quot;: &quot;invalid_or_incomplete_input&quot;,
+  &quot;action&quot;: &quot;manual_review&quot;,
+  &quot;warnings&quot;: [],
+  &quot;quality&quot;: null,
+  &quot;gate&quot;: null,
+  &quot;control_action&quot;: null,
+  &quot;field_effect_validated&quot;: false,
+  &quot;reason&quot;: &quot;unsupported fields or missing required fields&quot;
+}</pre></details></article>
+<article><h2>no_feedback</h2><p><strong>입력·적용범위 사람 검토</strong> · scored_with_warning</p>
+<p>품질 위험 점수 <strong>0.2103</strong> / validation 고정 기준 0.3134 · 학습 공동지지 272행</p>
+<p>적용 경고: no_available_quality_feedback, outside_training_range:Factory_Temp, outside_training_range:Factory_Humidity</p>
+<p>설비 상태: {&quot;score&quot;: 2.1560792860020422e-06, &quot;threshold&quot;: 0.001012407074245573, &quot;diagnostic_flag&quot;: false, &quot;outside_training_range&quot;: [], &quot;checkpoint&quot;: &quot;queue-fold3-seed17&quot;, &quot;meaning&quot;: &quot;numeric state1; physical status coding and field FPR unverified&quot;}</p>
+<details><summary>입력 판단·모델 설명 전체 보기</summary><pre>{
+  &quot;record_id&quot;: &quot;no_feedback&quot;,
+  &quot;status&quot;: &quot;scored_with_warning&quot;,
+  &quot;action&quot;: &quot;manual_review&quot;,
+  &quot;warnings&quot;: [
+    &quot;no_available_quality_feedback&quot;,
+    &quot;outside_training_range:Factory_Temp&quot;,
+    &quot;outside_training_range:Factory_Humidity&quot;
+  ],
+  &quot;quality&quot;: {
+    &quot;score&quot;: 0.21026448381549925,
+    &quot;threshold&quot;: 0.31341528399357055,
+    &quot;risk_flag&quot;: false,
+    &quot;interpretation&quot;: &quot;uncalibrated research score&quot;,
+    &quot;explanation&quot;: {
+      &quot;method&quot;: &quot;linear_margin_decomposition&quot;,
+      &quot;scale&quot;: &quot;log_odds_of_encoded_class_1&quot;,
+      &quot;causal&quot;: false,
+      &quot;baseline_description&quot;: &quot;intercept at zero standardized coordinates; not SHAP expected value&quot;,
+      &quot;baseline_margin&quot;: -1.2660876622329267,
+      &quot;raw_margin&quot;: -1.3233319147464508,
+      &quot;reconstructed_margin&quot;: -1.3233319147464506,
+      &quot;reconstructed_score&quot;: 0.21026448381549934,
+      &quot;margin_error&quot;: 2.220446049250313e-16,
+      &quot;score_error&quot;: 8.326672684688674e-17,
+      &quot;tolerance&quot;: 1e-06,
+      &quot;contributions&quot;: [
+        {
+          &quot;feature&quot;: &quot;Velocity_1&quot;,
+          &quot;input_value&quot;: 0.144,
+          &quot;model_input_value&quot;: -0.5512714512772188,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.040747760926151726
+        },
+        {
+          &quot;feature&quot;: &quot;Velocity_2&quot;,
+          &quot;input_value&quot;: 0.168,
+          &quot;model_input_value&quot;: -0.0826003046420866,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.0008786802043924502
+        },
+        {
+          &quot;feature&quot;: &quot;Velocity_3&quot;,
+          &quot;input_value&quot;: 0.178,
+          &quot;model_input_value&quot;: -1.1052237591759713,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.2559197752572657
+        },
+        {
+          &quot;feature&quot;: &quot;High_Velocity&quot;,
+          &quot;input_value&quot;: 2.152,
+          &quot;model_input_value&quot;: -0.7241594763744511,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.35015376071888554
+        },
+        {
+          &quot;feature&quot;: &quot;Cylinder_Pressure&quot;,
+          &quot;input_value&quot;: 218.0,
+          &quot;model_input_value&quot;: -0.8558035480214511,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.35141889201193244
+        },
+        {
+          &quot;feature&quot;: &quot;Rapid_Rise_Time&quot;,
+          &quot;input_value&quot;: 0.008,
+          &quot;model_input_value&quot;: -0.7100556167338667,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.0440190308239038
+        },
+        {
+          &quot;feature&quot;: &quot;Biscuit_Thickness&quot;,
+          &quot;input_value&quot;: 13.0,
+          &quot;model_input_value&quot;: -0.2510048657409444,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.044121587403750946
+        },
+        {
+          &quot;feature&quot;: &quot;Clamping_Force&quot;,
+          &quot;input_value&quot;: 257.0,
+          &quot;model_input_value&quot;: -0.8340138617757665,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.7322929680856716
+        },
+        {
+          &quot;feature&quot;: &quot;Cycle_Time&quot;,
+          &quot;input_value&quot;: 20.8,
+          &quot;model_input_value&quot;: -0.7359794449344851,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.10194724714983046
+        },
+        {
+          &quot;feature&quot;: &quot;Pressure_Rise_Time&quot;,
+          &quot;input_value&quot;: 0.044,
+          &quot;model_input_value&quot;: 1.1222004447207514,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.10043482074915627
+        },
+        {
+          &quot;feature&quot;: &quot;Casting_Pressure&quot;,
+          &quot;input_value&quot;: 1054.0,
+          &quot;model_input_value&quot;: 0.8354126511597283,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.21029798214065648
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_Time&quot;,
+          &quot;input_value&quot;: 8.1,
+          &quot;model_input_value&quot;: -0.825967906091956,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.429587459600946
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_1_Time&quot;,
+          &quot;input_value&quot;: 1.0,
+          &quot;model_input_value&quot;: -0.6828904097346609,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.7284424091364572
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_2_Time&quot;,
+          &quot;input_value&quot;: 0.8,
+          &quot;model_input_value&quot;: -0.8048051081304737,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.6835048875940544
+        },
+        {
+          &quot;feature&quot;: &quot;Melting_Furnace_Temp&quot;,
+          &quot;input_value&quot;: 704.0,
+          &quot;model_input_value&quot;: 0.8588812772763552,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.4787465272235283
+        },
+        {
+          &quot;feature&quot;: &quot;Air_Pressure&quot;,
+          &quot;input_value&quot;: 6.2,
+          &quot;model_input_value&quot;: 0.1840947486021477,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.014066273680351564
+        },
+        {
+          &quot;feature&quot;: &quot;Coolant_Temp&quot;,
+          &quot;input_value&quot;: 27.3,
+          &quot;model_input_value&quot;: 2.407963917265606,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.2509846853999623
+        },
+        {
+          &quot;feature&quot;: &quot;Coolant_Pressure&quot;,
+          &quot;input_value&quot;: 2.67,
+          &quot;model_input_value&quot;: -0.6678158983853697,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.055009172692573834
+        },
+        {
+          &quot;feature&quot;: &quot;Factory_Temp&quot;,
+          &quot;input_value&quot;: 36.5,
+          &quot;model_input_value&quot;: 2.1466234457396336,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.7459032171827032
+        },
+        {
+          &quot;feature&quot;: &quot;Factory_Humidity&quot;,
+          &quot;input_value&quot;: 46.4,
+          &quot;model_input_value&quot;: -2.0405445520483494,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.8412544980061779
+        },
+        {
+          &quot;feature&quot;: &quot;Product_Type&quot;,
+          &quot;input_value&quot;: 1.0,
+          &quot;model_input_value&quot;: -0.8596758002040693,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.013430244019530326
+        },
+        {
+          &quot;feature&quot;: &quot;fb_rate20&quot;,
+          &quot;input_value&quot;: null,
+          &quot;model_input_value&quot;: -0.26506487045926064,
+          &quot;was_imputed&quot;: true,
+          &quot;contribution&quot;: -0.04041272960553852
+        },
+        {
+          &quot;feature&quot;: &quot;fb_rate100&quot;,
+          &quot;input_value&quot;: null,
+          &quot;model_input_value&quot;: -0.1939129606374142,
+          &quot;was_imputed&quot;: true,
+          &quot;contribution&quot;: -0.026743189148051908
+        },
+        {
+          &quot;feature&quot;: &quot;fb_ewm&quot;,
+          &quot;input_value&quot;: null,
+          &quot;model_input_value&quot;: -0.1746905148991394,
+          &quot;was_imputed&quot;: true,
+          &quot;contribution&quot;: -0.04116659611516751
+        },
+        {
+          &quot;feature&quot;: &quot;fb_known_count&quot;,
+          &quot;input_value&quot;: 0.0,
+          &quot;model_input_value&quot;: -1.3606802211497766,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.04078554418542061
+        }
+      ]
+    }
+  },
+  &quot;gate&quot;: {
+    &quot;score&quot;: 2.1560792860020422e-06,
+    &quot;threshold&quot;: 0.001012407074245573,
+    &quot;diagnostic_flag&quot;: false,
+    &quot;outside_training_range&quot;: [],
+    &quot;checkpoint&quot;: &quot;queue-fold3-seed17&quot;,
+    &quot;meaning&quot;: &quot;numeric state1; physical status coding and field FPR unverified&quot;,
+    &quot;explanation&quot;: {
+      &quot;method&quot;: &quot;lightgbm_native_tree_shap&quot;,
+      &quot;scale&quot;: &quot;log_odds_of_encoded_class_1&quot;,
+      &quot;causal&quot;: false,
+      &quot;baseline_description&quot;: &quot;native TreeSHAP expected raw margin&quot;,
+      &quot;baseline_margin&quot;: -14.20620145549403,
+      &quot;raw_margin&quot;: -13.047216974928574,
+      &quot;reconstructed_margin&quot;: -13.047216974928578,
+      &quot;reconstructed_score&quot;: 2.156079286002034e-06,
+      &quot;margin_error&quot;: 3.552713678800501e-15,
+      &quot;score_error&quot;: 8.046812998915853e-21,
+      &quot;tolerance&quot;: 1e-06,
+      &quot;contributions&quot;: [
+        {
+          &quot;feature&quot;: &quot;Velocity_1&quot;,
+          &quot;input_value&quot;: 0.144,
+          &quot;model_input_value&quot;: 0.144,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.16907281799013807
+        },
+        {
+          &quot;feature&quot;: &quot;Velocity_2&quot;,
+          &quot;input_value&quot;: 0.168,
+          &quot;model_input_value&quot;: 0.168,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.014930883295578757
+        },
+        {
+          &quot;feature&quot;: &quot;Velocity_3&quot;,
+          &quot;input_value&quot;: 0.178,
+          &quot;model_input_value&quot;: 0.178,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.09098214918319351
+        },
+        {
+          &quot;feature&quot;: &quot;High_Velocity&quot;,
+          &quot;input_value&quot;: 2.152,
+          &quot;model_input_value&quot;: 2.152,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.40804766596871583
+        },
+        {
+          &quot;feature&quot;: &quot;Cylinder_Pressure&quot;,
+          &quot;input_value&quot;: 218.0,
+          &quot;model_input_value&quot;: 218.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.006095320307630998
+        },
+        {
+          &quot;feature&quot;: &quot;Rapid_Rise_Time&quot;,
+          &quot;input_value&quot;: 0.008,
+          &quot;model_input_value&quot;: 0.008,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.004405090537131735
+        },
+        {
+          &quot;feature&quot;: &quot;Biscuit_Thickness&quot;,
+          &quot;input_value&quot;: 13.0,
+          &quot;model_input_value&quot;: 13.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.9295340861707668
+        },
+        {
+          &quot;feature&quot;: &quot;Clamping_Force&quot;,
+          &quot;input_value&quot;: 257.0,
+          &quot;model_input_value&quot;: 257.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.2650136986704209
+        },
+        {
+          &quot;feature&quot;: &quot;Cycle_Time&quot;,
+          &quot;input_value&quot;: 20.8,
+          &quot;model_input_value&quot;: 20.8,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.00866362225593845
+        },
+        {
+          &quot;feature&quot;: &quot;Pressure_Rise_Time&quot;,
+          &quot;input_value&quot;: 0.044,
+          &quot;model_input_value&quot;: 0.044,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.04206415607730754
+        },
+        {
+          &quot;feature&quot;: &quot;Casting_Pressure&quot;,
+          &quot;input_value&quot;: 1054.0,
+          &quot;model_input_value&quot;: 1054.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.032731607387148406
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_Time&quot;,
+          &quot;input_value&quot;: 8.1,
+          &quot;model_input_value&quot;: 8.1,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.04582609136518867
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_1_Time&quot;,
+          &quot;input_value&quot;: 1.0,
+          &quot;model_input_value&quot;: 1.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.0939810087846217
+        },
+        {
+          &quot;feature&quot;: &quot;Spray_2_Time&quot;,
+          &quot;input_value&quot;: 0.8,
+          &quot;model_input_value&quot;: 0.8,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.0
+        },
+        {
+          &quot;feature&quot;: &quot;prev_cycle_time&quot;,
+          &quot;input_value&quot;: 21.0,
+          &quot;model_input_value&quot;: 21.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: 0.04201778072697167
+        },
+        {
+          &quot;feature&quot;: &quot;max_cycle_previous_5&quot;,
+          &quot;input_value&quot;: 21.0,
+          &quot;model_input_value&quot;: 21.0,
+          &quot;was_imputed&quot;: false,
+          &quot;contribution&quot;: -0.03242175556766245
+        }
+      ]
+    }
+  },
+  &quot;control_action&quot;: null,
+  &quot;field_effect_validated&quot;: false,
+  &quot;joint_training_n&quot;: 272
+}</pre></details></article>
+<h2>같은 검사 기회의 이득과 손실</h2><p>기존 동결 정책의 별도 역사적 비교입니다. 이번 새 판독기의 정책 성능으로 읽지 않습니다.</p><table><tr><th>정책</th><th>관측 불량 포착 / 505</th><th>상태 에피소드 검사 도달 / 15</th></tr><tr><td>FIFO</td><td>113</td><td>별도 지표 참조</td></tr><tr><td>품질 Q</td><td>105.4</td><td>1</td></tr><tr><td>품질+설비 GQ</td><td>102.2</td><td>8</td></tr></table><p>3,395행 · 공통 제공 기회677 · 품질 미관측516 · 보류409 · 종료잔량241. 품질 포착 개선은 입증되지 않았습니다.</p></html>

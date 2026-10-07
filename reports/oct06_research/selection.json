@@ -1,0 +1,260 @@
+{
+  "sealed_at": "2026-10-06T14:20:15.291015+00:00",
+  "rule": {
+    "metric": "validation_mean_ap",
+    "tie_break": "model_name",
+    "minimum_ap_gain": 0.02,
+    "minimum_capture_gain": 0.05,
+    "minimum_forward_validation_folds": 2
+  },
+  "validation_sha256": "2aeebd4f9b87f0d0e58faeb2aa4bf69d1630d6d8453c5bf21d083b90e3766bc3",
+  "selections": [
+    {
+      "scheme": "forward_run",
+      "fold": "2",
+      "representation": "FB",
+      "model": "logistic",
+      "validation_ap": 0.16185207980021038
+    },
+    {
+      "scheme": "forward_run",
+      "fold": "2",
+      "representation": "H",
+      "model": "catboost",
+      "validation_ap": 0.20155813565184388
+    },
+    {
+      "scheme": "forward_run",
+      "fold": "2",
+      "representation": "P",
+      "model": "catboost",
+      "validation_ap": 0.1981140319890613
+    },
+    {
+      "scheme": "forward_run",
+      "fold": "2",
+      "representation": "S",
+      "model": "logistic",
+      "validation_ap": 0.19353368860166062
+    },
+    {
+      "scheme": "forward_run",
+      "fold": "2",
+      "representation": "SH",
+      "model": "logistic",
+      "validation_ap": 0.19432019189200733
+    },
+    {
+      "scheme": "forward_run",
+      "fold": "2",
+      "representation": "SH_FB",
+      "model": "logistic",
+      "validation_ap": 0.1941923692621159
+    },
+    {
+      "scheme": "forward_run",
+      "fold": "2",
+      "representation": "S_FB",
+      "model": "logistic",
+      "validation_ap": 0.1956149632291678
+    },
+    {
+      "scheme": "forward_run",
+      "fold": "3",
+      "representation": "FB",
+      "model": "hist_gradient",
+      "validation_ap": 0.020584371179134996
+    },
+    {
+      "scheme": "forward_run",
+      "fold": "3",
+      "representation": "H",
+      "model": "hist_gradient",
+      "validation_ap": 0.021075178403622552
+    },
+    {
+      "scheme": "forward_run",
+      "fold": "3",
+      "representation": "P",
+      "model": "lightgbm",
+      "validation_ap": 0.021297546748176212
+    },
+    {
+      "scheme": "forward_run",
+      "fold": "3",
+      "representation": "S",
+      "model": "logistic",
+      "validation_ap": 0.016157436880922218
+    },
+    {
+      "scheme": "forward_run",
+      "fold": "3",
+      "representation": "SH",
+      "model": "logistic",
+      "validation_ap": 0.016523123958938065
+    },
+    {
+      "scheme": "forward_run",
+      "fold": "3",
+      "representation": "SH_FB",
+      "model": "hist_gradient",
+      "validation_ap": 0.03442102847792464
+    },
+    {
+      "scheme": "forward_run",
+      "fold": "3",
+      "representation": "S_FB",
+      "model": "hist_gradient",
+      "validation_ap": 0.028926647681158175
+    },
+    {
+      "scheme": "forward_run",
+      "fold": "4",
+      "representation": "FB",
+      "model": "random_forest",
+      "validation_ap": 0.0958392741002413
+    },
+    {
+      "scheme": "forward_run",
+      "fold": "4",
+      "representation": "H",
+      "model": "random_forest",
+      "validation_ap": 0.07898188429881248
+    },
+    {
+      "scheme": "forward_run",
+      "fold": "4",
+      "representation": "P",
+      "model": "random_forest",
+      "validation_ap": 0.07685121653942463
+    },
+    {
+      "scheme": "forward_run",
+      "fold": "4",
+      "representation": "S",
+      "model": "catboost",
+      "validation_ap": 0.08584084160635354
+    },
+    {
+      "scheme": "forward_run",
+      "fold": "4",
+      "representation": "SH",
+      "model": "catboost",
+      "validation_ap": 0.08623957216058749
+    },
+    {
+      "scheme": "forward_run",
+      "fold": "4",
+      "representation": "SH_FB",
+      "model": "catboost",
+      "validation_ap": 0.09018753738577977
+    },
+    {
+      "scheme": "forward_run",
+      "fold": "4",
+      "representation": "S_FB",
+      "model": "catboost",
+      "validation_ap": 0.08255232330722578
+    },
+    {
+      "scheme": "forward_run",
+      "fold": "6",
+      "representation": "FB",
+      "model": "catboost",
+      "validation_ap": 0.4868107470520255
+    },
+    {
+      "scheme": "forward_run",
+      "fold": "6",
+      "representation": "H",
+      "model": "random_forest",
+      "validation_ap": 0.48849229753111506
+    },
+    {
+      "scheme": "forward_run",
+      "fold": "6",
+      "representation": "P",
+      "model": "random_forest",
+      "validation_ap": 0.47520180967413905
+    },
+    {
+      "scheme": "forward_run",
+      "fold": "6",
+      "representation": "S",
+      "model": "logistic",
+      "validation_ap": 0.48142886087067066
+    },
+    {
+      "scheme": "forward_run",
+      "fold": "6",
+      "representation": "SH",
+      "model": "logistic",
+      "validation_ap": 0.48222619888120616
+    },
+    {
+      "scheme": "forward_run",
+      "fold": "6",
+      "representation": "SH_FB",
+      "model": "logistic",
+      "validation_ap": 0.48117631613882383
+    },
+    {
+      "scheme": "forward_run",
+      "fold": "6",
+      "representation": "S_FB",
+      "model": "logistic",
+      "validation_ap": 0.4771000599541859
+    },
+    {
+      "scheme": "within_run",
+      "fold": "primary",
+      "representation": "FB",
+      "model": "lightgbm",
+      "validation_ap": 0.44597950152263466
+    },
+    {
+      "scheme": "within_run",
+      "fold": "primary",
+      "representation": "H",
+      "model": "catboost",
+      "validation_ap": 0.35884309289174166
+    },
+    {
+      "scheme": "within_run",
+      "fold": "primary",
+      "representation": "P",
+      "model": "catboost",
+      "validation_ap": 0.3455910128105803
+    },
+    {
+      "scheme": "within_run",
+      "fold": "primary",
+      "representation": "S",
+      "model": "logistic",
+      "validation_ap": 0.34259512265049047
+    },
+    {
+      "scheme": "within_run",
+      "fold": "primary",
+      "representation": "SH",
+      "model": "random_forest",
+      "validation_ap": 0.32759502473650076
+    },
+    {
+      "scheme": "within_run",
+      "fold": "primary",
+      "representation": "SH_FB",
+      "model": "lightgbm",
+      "validation_ap": 0.4216839490963015
+    },
+    {
+      "scheme": "within_run",
+      "fold": "primary",
+      "representation": "S_FB",
+      "model": "logistic",
+      "validation_ap": 0.43437482890090284
+    }
+  ],
+  "test_used_for_selection": false,
+  "independent_new_data": false
+}

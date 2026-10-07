@@ -1,0 +1,10 @@
+{
+  "run_at": "2026-10-06T14:38:39.915930+00:00",
+  "returncode": 0,
+  "fresh_local_temp": true,
+  "junit_path": "reports/reproduction/tests_20261006T143800Z_b6a10e51/tests.xml",
+  "scope": "full_review",
+  "excluded_tests": {},
+  "full_historical_replay_performed": false,
+  "command": "python -I -B run_review_tests.py"
+}

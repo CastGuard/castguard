@@ -1,0 +1,68 @@
+[
+  {
+    "record_id": "q42_r0_s1000",
+    "source_row_id": "q42_r0_s1000",
+    "case": "TN",
+    "selection": "lexicographically first post-hoc error class; diagnostic only"
+  },
+  {
+    "record_id": "q42_r0_s1001",
+    "source_row_id": "q42_r0_s1001",
+    "case": "FN",
+    "selection": "lexicographically first post-hoc error class; diagnostic only"
+  },
+  {
+    "record_id": "q42_r0_s1017",
+    "source_row_id": "q42_r0_s1017",
+    "case": "FP",
+    "selection": "lexicographically first post-hoc error class; diagnostic only"
+  },
+  {
+    "record_id": "q42_r0_s1018",
+    "source_row_id": "q42_r0_s1018",
+    "case": "TP",
+    "selection": "lexicographically first post-hoc error class; diagnostic only"
+  },
+  {
+    "record_id": "q42_r0_s777",
+    "source_row_id": "q42_r0_s777",
+    "case": "first_complete_by_product",
+    "selection": "fixed order, not prediction success"
+  },
+  {
+    "record_id": "q42_r3_s434",
+    "source_row_id": "q42_r3_s434",
+    "case": "first_complete_by_product",
+    "selection": "fixed order, not prediction success"
+  },
+  {
+    "record_id": "missing_measurement",
+    "source_row_id": "q42_r0_s1000",
+    "case": "explicit synthetic variant",
+    "selection": "functional failure scenario; not new production observation"
+  },
+  {
+    "record_id": "unseen_product",
+    "source_row_id": "q42_r0_s1000",
+    "case": "explicit synthetic variant",
+    "selection": "functional failure scenario; not new production observation"
+  },
+  {
+    "record_id": "future_feedback",
+    "source_row_id": "q42_r0_s1000",
+    "case": "explicit synthetic variant",
+    "selection": "functional failure scenario; not new production observation"
+  },
+  {
+    "record_id": "current_label",
+    "source_row_id": "q42_r0_s1000",
+    "case": "explicit synthetic variant",
+    "selection": "functional failure scenario; not new production observation"
+  },
+  {
+    "record_id": "no_feedback",
+    "source_row_id": "q42_r0_s1000",
+    "case": "explicit synthetic variant",
+    "selection": "functional failure scenario; not new production observation"
+  }
+]

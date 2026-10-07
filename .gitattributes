@@ -1,0 +1,7 @@
+# Preserve registered evidence and submission checksums across platforms.
+/data/raw/** -text whitespace=cr-at-eol
+/data/processed/** -text whitespace=cr-at-eol
+/configs/oct06_research.json -text whitespace=cr-at-eol
+/docs/OCT06_RESEARCH_PROTOCOL.md -text whitespace=cr-at-eol
+/reports/oct06_research/** -text whitespace=cr-at-eol
+/submission/** -text whitespace=cr-at-eol

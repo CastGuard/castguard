@@ -1,0 +1,112 @@
+{
+  "checked_at": "2026-10-06T23:52:44.322832+09:00",
+  "status": "artifact checks passed; browser interaction unverified; signature and portal pending",
+  "report_pages": 14,
+  "presentation_slides": 16,
+  "visual_inspection": "all 14 final report pages and 16 final native slide renders reviewed",
+  "native_powerpoint_text_overflow": 0,
+  "survey_png_byte_exact": true,
+  "survey_pdf_pixels_exact": true,
+  "source_zip_files": 184,
+  "source_manifest_hashes_verified": 183,
+  "source_zip_crc_and_containment": true,
+  "sensitive_local_path_scan": "no local user path in packaged text/code or PDF text; no organization identification added",
+  "full_repository_regressions": {
+    "passed": 413,
+    "failed": 0,
+    "excluded": 0,
+    "receipt": "reports/reproduction/tests_20261006T143800Z_b6a10e51/receipt.json"
+  },
+  "computational_reproduction": {
+    "passed": true,
+    "rows": 210,
+    "columns": [
+      "ap",
+      "auc",
+      "brier",
+      "threshold",
+      "tp",
+      "fp",
+      "fn",
+      "tn",
+      "capture20"
+    ],
+    "max_absolute_difference": 0.0,
+    "status": "same-data computational reproduction, not independent performance validation",
+    "completed_at": "2026-10-06T14:48:11.436747+00:00"
+  },
+  "reproduction_scope": "525 candidate fits in unpacked prior ZIP; all scientific source/data/config/checkpoints identical in final ZIP; final ZIP adds support docs/demo HTML and README formatting",
+  "metric_crosscheck": {
+    "passed": true,
+    "preserved_registered_hashes": 12,
+    "selection_groups": 35,
+    "metric_groups": 210,
+    "max_independent_ap_error": 1.1102230246251565e-16,
+    "independent_feedback_records": 518,
+    "checks": [
+      "raw quality label equality",
+      "validation-only model choice",
+      "exact top20 rank denominator",
+      "normal FPR counts",
+      "independent process-event delayed label window",
+      "original data and protocol hashes"
+    ],
+    "boundary": "reused data computational validation; not independent field performance"
+  },
+  "demo": {
+    "records": 11,
+    "explanation_panels": 11,
+    "external_resources": false,
+    "javascript": false,
+    "browser_interaction_verified": false,
+    "browser_limitation": "Browser tool security policy blocked local file URL; no workaround attempted"
+  },
+  "not_verified": [
+    "new independent data performance",
+    "field input arrival times and actual cost",
+    "physical line improvement",
+    "actual signature",
+    "portal submission"
+  ],
+  "artifacts": [
+    {
+      "file": "CastGuard_demo.html",
+      "bytes": 123533,
+      "sha256": "89390547449c28cc2d875e66f75c3accbea4776af4e41cc98ae682482e8fdb86"
+    },
+    {
+      "file": "CastGuard_presentation.pdf",
+      "bytes": 224227,
+      "sha256": "558c01dc93e055dedfceb791686a0ede0d02314719d86510de2c4510fd58807e"
+    },
+    {
+      "file": "CastGuard_presentation.pptx",
+      "bytes": 67393,
+      "sha256": "2008fe2528b9ae3b96350529c142f81303253f5e4b53d21a48b840c322053497"
+    },
+    {
+      "file": "CastGuard_report.pdf",
+      "bytes": 361473,
+      "sha256": "6cf9edb9ffdd5ad1c63ad87cbfc075cf7902d65be4f889b0524a505b6f3e0ed3"
+    },
+    {
+      "file": "CastGuard_source.zip",
+      "bytes": 27325106,
+      "sha256": "4f0f0a745880f9a4e53158c980dbd042e69b72e3194bded21935ebb7a99d9e76"
+    },
+    {
+      "file": "설문조사완료.png",
+      "bytes": 94165,
+      "sha256": "b309f8fda718d7f0e5b971e225a459b4a1acd9110acdc5b259a8a08c2c387ad1"
+    }
+  ],
+  "final_zip_smoke": {
+    "tests_passed": 15,
+    "tests_failed": 0,
+    "cli_records": 11,
+    "exit_codes": [
+      0,
+      0
+    ]
+  }
+}

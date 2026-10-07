@@ -1,0 +1,25 @@
+{
+  "protocol": "oct06_bounded_research_v1",
+  "seeds": [17, 29, 43],
+  "schemes": ["within_run", "forward_run"],
+  "representations": ["P", "H", "S", "SH", "FB", "S_FB", "SH_FB"],
+  "models": {
+    "logistic": {"C": 0.3, "max_iter": 3000},
+    "random_forest": {"n_estimators": 300, "min_samples_leaf": 20, "max_features": 0.5},
+    "lightgbm": {"n_estimators": 300, "learning_rate": 0.02, "num_leaves": 7, "min_child_samples": 40, "reg_lambda": 5.0, "colsample_bytree": 0.7, "subsample": 0.8, "subsample_freq": 1},
+    "catboost": {"iterations": 300, "depth": 4, "learning_rate": 0.03, "l2_leaf_reg": 5.0, "boosting_type": "Ordered", "has_time": true},
+    "hist_gradient": {"max_iter": 200, "learning_rate": 0.05, "max_leaf_nodes": 7, "min_samples_leaf": 40, "l2_regularization": 5.0, "early_stopping": false}
+  },
+  "feedback": {"delay_events": 20, "windows": [20, 100], "coverage": 1.0, "halflife": 15},
+  "sensitivity": {"delays": [5, 50, 100], "coverages": [0.5, 0.2]},
+  "inspection_rates": [0.1, 0.2, 0.3],
+  "selection": {"metric": "validation_mean_ap", "tie_break": "model_name", "minimum_ap_gain": 0.02, "minimum_capture_gain": 0.05, "minimum_forward_validation_folds": 2},
+  "condition_pair": ["High_Velocity", "Casting_Pressure"],
+  "condition_quantiles": [0, 0.3333333333, 0.6666666667, 1],
+  "minimum_train_cell": 30,
+  "minimum_evaluation_cell": 20,
+  "bootstrap_repetitions": 1000,
+  "bootstrap_seed": 20261006,
+  "max_fits": 525,
+  "wall_hours_limit": 6
+}

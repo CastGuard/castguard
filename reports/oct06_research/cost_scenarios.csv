@@ -1,0 +1,11 @@
+policy,miss_cost_per_inspection_cost,n,inspections,misses,normalized_loss,assumption
+reader,1,1387,186,192,378.0,"perfect additional inspection; misses cost ratio; diagnostic scenario, no actual currency"
+S,1,1387,78,235,313.0,"perfect additional inspection; misses cost ratio; diagnostic scenario, no actual currency"
+reader,2,1387,186,192,570.0,"perfect additional inspection; misses cost ratio; diagnostic scenario, no actual currency"
+S,2,1387,78,235,548.0,"perfect additional inspection; misses cost ratio; diagnostic scenario, no actual currency"
+reader,5,1387,186,192,1146.0,"perfect additional inspection; misses cost ratio; diagnostic scenario, no actual currency"
+S,5,1387,78,235,1253.0,"perfect additional inspection; misses cost ratio; diagnostic scenario, no actual currency"
+reader,10,1387,186,192,2106.0,"perfect additional inspection; misses cost ratio; diagnostic scenario, no actual currency"
+S,10,1387,78,235,2428.0,"perfect additional inspection; misses cost ratio; diagnostic scenario, no actual currency"
+reader,20,1387,186,192,4026.0,"perfect additional inspection; misses cost ratio; diagnostic scenario, no actual currency"
+S,20,1387,78,235,4778.0,"perfect additional inspection; misses cost ratio; diagnostic scenario, no actual currency"

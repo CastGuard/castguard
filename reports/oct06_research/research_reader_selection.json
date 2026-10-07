@@ -1,0 +1,13 @@
+{
+  "choice": {
+    "scheme": "within_run",
+    "fold": "primary",
+    "representation": "S_FB",
+    "model": "logistic",
+    "validation_ap": 0.43437482890090284
+  },
+  "seed": 17,
+  "reason": "highest sealed within_run validation AP among current-process readers; seed17 fixed in original seed list",
+  "deployment": "research_only",
+  "future_or_field_adoption": false
+}

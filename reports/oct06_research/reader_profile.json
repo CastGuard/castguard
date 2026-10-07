@@ -1,0 +1,247 @@
+{
+  "selection": {
+    "scheme": "within_run",
+    "fold": "primary",
+    "representation": "S_FB",
+    "model": "logistic",
+    "validation_ap": 0.43437482890090284
+  },
+  "model_path": "reports/oct06_research/models/within_run__primary__S_FB__logistic__17/model.joblib",
+  "model_sha256": "4860025ea4474ce4480d3905d0dfaaba56e24b98c2a93fad5c80c8a4e625b51d",
+  "features": [
+    "Velocity_1",
+    "Velocity_2",
+    "Velocity_3",
+    "High_Velocity",
+    "Cylinder_Pressure",
+    "Rapid_Rise_Time",
+    "Biscuit_Thickness",
+    "Clamping_Force",
+    "Cycle_Time",
+    "Pressure_Rise_Time",
+    "Casting_Pressure",
+    "Spray_Time",
+    "Spray_1_Time",
+    "Spray_2_Time",
+    "Melting_Furnace_Temp",
+    "Air_Pressure",
+    "Coolant_Temp",
+    "Coolant_Pressure",
+    "Factory_Temp",
+    "Factory_Humidity",
+    "Product_Type",
+    "fb_rate20",
+    "fb_rate100",
+    "fb_ewm",
+    "fb_known_count"
+  ],
+  "seed": 17,
+  "products": [
+    1,
+    2
+  ],
+  "ranges": {
+    "Velocity_1": [
+      0.136,
+      0.162
+    ],
+    "Velocity_2": [
+      0.158,
+      0.178
+    ],
+    "Velocity_3": [
+      0.172,
+      0.216
+    ],
+    "High_Velocity": [
+      0.0,
+      2.744
+    ],
+    "Cylinder_Pressure": [
+      107.0,
+      265.0
+    ],
+    "Rapid_Rise_Time": [
+      0.0,
+      0.021
+    ],
+    "Biscuit_Thickness": [
+      1.0,
+      22.0
+    ],
+    "Clamping_Force": [
+      238.0,
+      384.0
+    ],
+    "Cycle_Time": [
+      20.4,
+      218.6
+    ],
+    "Pressure_Rise_Time": [
+      0.0,
+      0.046
+    ],
+    "Casting_Pressure": [
+      516.0,
+      1164.0
+    ],
+    "Spray_Time": [
+      7.8,
+      13.1
+    ],
+    "Spray_1_Time": [
+      0.7,
+      2.5
+    ],
+    "Spray_2_Time": [
+      0.7,
+      3.0
+    ],
+    "Melting_Furnace_Temp": [
+      640.4,
+      730.0
+    ],
+    "Air_Pressure": [
+      4.6,
+      7.1
+    ],
+    "Coolant_Temp": [
+      25.9,
+      27.5
+    ],
+    "Coolant_Pressure": [
+      2.58,
+      2.79
+    ],
+    "Factory_Temp": [
+      30.6,
+      36.0
+    ],
+    "Factory_Humidity": [
+      47.7,
+      70.6
+    ],
+    "Product_Type": [
+      1.0,
+      2.0
+    ],
+    "fb_rate20": [
+      0.0,
+      1.0
+    ],
+    "fb_rate100": [
+      0.0,
+      1.0
+    ],
+    "fb_ewm": [
+      0.0,
+      1.0
+    ],
+    "fb_known_count": [
+      0.0,
+      627.0
+    ]
+  },
+  "medians": {
+    "Velocity_1": 0.144,
+    "Velocity_2": 0.168,
+    "Velocity_3": 0.186,
+    "High_Velocity": 2.157,
+    "Cylinder_Pressure": 218.0,
+    "Rapid_Rise_Time": 0.008,
+    "Biscuit_Thickness": 12.0,
+    "Clamping_Force": 258.0,
+    "Cycle_Time": 21.4,
+    "Pressure_Rise_Time": 0.041,
+    "Casting_Pressure": 1037.0,
+    "Spray_Time": 8.5,
+    "Spray_1_Time": 1.0,
+    "Spray_2_Time": 0.8,
+    "Melting_Furnace_Temp": 684.1,
+    "Air_Pressure": 6.2,
+    "Coolant_Temp": 26.5,
+    "Coolant_Pressure": 2.71,
+    "Factory_Temp": 32.2,
+    "Factory_Humidity": 61.9,
+    "Product_Type": 1.0,
+    "fb_rate20": 0.2,
+    "fb_rate100": 0.22,
+    "fb_ewm": 0.22211743957857086,
+    "fb_known_count": 195.0
+  },
+  "pair": [
+    "High_Velocity",
+    "Casting_Pressure"
+  ],
+  "edges": {
+    "High_Velocity": [
+      0.0,
+      2.14,
+      2.517,
+      2.744
+    ],
+    "Casting_Pressure": [
+      516.0,
+      596.0,
+      1051.0,
+      1164.0
+    ]
+  },
+  "cells": [
+    {
+      "product": 1,
+      "x": 0,
+      "y": 2,
+      "n": 486
+    },
+    {
+      "product": 1,
+      "x": 0,
+      "y": 1,
+      "n": 397
+    },
+    {
+      "product": 1,
+      "x": 1,
+      "y": 1,
+      "n": 327
+    },
+    {
+      "product": 1,
+      "x": 1,
+      "y": 2,
+      "n": 272
+    },
+    {
+      "product": 1,
+      "x": 0,
+      "y": 0,
+      "n": 1
+    },
+    {
+      "product": 2,
+      "x": 2,
+      "y": 0,
+      "n": 809
+    },
+    {
+      "product": 2,
+      "x": 1,
+      "y": 0,
+      "n": 240
+    },
+    {
+      "product": 2,
+      "x": 2,
+      "y": 1,
+      "n": 32
+    },
+    {
+      "product": 2,
+      "x": 1,
+      "y": 1,
+      "n": 15
+    }
+  ],
+  "scope": "research_only; observed historical quality population; field latency unverified"
+}

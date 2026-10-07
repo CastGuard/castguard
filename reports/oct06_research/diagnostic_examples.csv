@@ -1,0 +1,5 @@
+row_id,run_id,Product_Type,event_order,y_defect,probability,threshold,scheme,fold,representation,model,validation_ap,seed,role,error_type
+q42_r0_s1000,0,1,999,0,0.2792954394037016,0.31341528399357055,within_run,primary,S_FB,logistic,0.43437482890090284,17,test,TN
+q42_r0_s1001,0,1,1000,1,0.2665303275238074,0.31341528399357055,within_run,primary,S_FB,logistic,0.43437482890090284,17,test,FN
+q42_r0_s1017,0,1,1016,0,0.34666098508055404,0.31341528399357055,within_run,primary,S_FB,logistic,0.43437482890090284,17,test,FP
+q42_r0_s1018,0,1,1017,1,0.32702155236959746,0.31341528399357055,within_run,primary,S_FB,logistic,0.43437482890090284,17,test,TP

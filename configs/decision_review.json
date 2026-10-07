@@ -1,0 +1,4923 @@
+{
+  "schema_version": "castguard-review-profile-v1",
+  "input_schema": "castguard-shot-v1",
+  "selection_sha256": "8948656bc389159bb5c06aa2d69a0ffa831eef1b7b2eab523ad09cfe8a33eede",
+  "source_hashes": {
+    "data/processed/joined.parquet": "bd81e6ff8d9fce555ee04506b63fbdb28e17a585bad85f5c1c1bf7b9ee474754",
+    "data/processed/m41_timeline.parquet": "0529dbe13e383a96bb7ce363129df7d2146d7fa434ee94ecbf9bb4dde0275f18",
+    "data/processed/feature_contract.json": "8386169553c059d467f232d8789f4e9ec17b4d6b63fb0e115bbf567815f6920f"
+  },
+  "selection_scope": "frozen nested development; historically exposed data; no new model selection",
+  "checkpoints": {
+    "queue-fold2-seed17": {
+      "quality": {
+        "fold": "2",
+        "seed": 17,
+        "task": "quality",
+        "model": "logistic",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "Melting_Furnace_Temp",
+          "Air_Pressure",
+          "Coolant_Temp",
+          "Coolant_Pressure",
+          "Factory_Temp",
+          "Factory_Humidity",
+          "Product_Type",
+          "shot_position"
+        ],
+        "path": "reports/oct03_queue/models/2__quality__logistic__17.joblib",
+        "sha256": "27b2b9f57702cd6ea2c2aa9458fc12c47d78efc8e5f7fd8bd1d81a0056b28a01",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.148
+          ],
+          "Velocity_2": [
+            0.164,
+            0.174
+          ],
+          "Velocity_3": [
+            0.172,
+            0.19
+          ],
+          "High_Velocity": [
+            2.084,
+            2.23
+          ],
+          "Cylinder_Pressure": [
+            214.0,
+            219.0
+          ],
+          "Rapid_Rise_Time": [
+            0.005,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            10.0,
+            17.0
+          ],
+          "Clamping_Force": [
+            250.0,
+            262.0
+          ],
+          "Cycle_Time": [
+            20.4,
+            89.1
+          ],
+          "Pressure_Rise_Time": [
+            0.033,
+            0.045
+          ],
+          "Casting_Pressure": [
+            1035.0,
+            1058.0
+          ],
+          "Spray_Time": [
+            7.8,
+            8.1
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.0
+          ],
+          "Spray_2_Time": [
+            0.8,
+            0.8
+          ],
+          "Melting_Furnace_Temp": [
+            671.4,
+            720.0
+          ],
+          "Air_Pressure": [
+            5.3,
+            7.0
+          ],
+          "Coolant_Temp": [
+            26.0,
+            27.1
+          ],
+          "Coolant_Pressure": [
+            2.66,
+            2.74
+          ],
+          "Factory_Temp": [
+            32.8,
+            37.0
+          ],
+          "Factory_Humidity": [
+            45.5,
+            58.5
+          ],
+          "Product_Type": [
+            1.0,
+            1.0
+          ],
+          "shot_position": [
+            0.0,
+            768.0
+          ]
+        },
+        "encoded_target": "any_recorded_quality_defect_equals_1",
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 769,
+          "run_ids": [
+            0
+          ],
+          "fit_row_ids_sha256": "7c41dbdf9e03513679aa5044ef2616ea8a37f57183d3eb496beaf0aedae23099",
+          "products": [
+            1
+          ]
+        }
+      },
+      "gate": {
+        "fold": "2",
+        "seed": 17,
+        "task": "gate",
+        "model": "lightgbm",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "prev_cycle_time",
+          "max_cycle_previous_5"
+        ],
+        "path": "reports/oct03_queue/models/2__gate__lightgbm__17.joblib",
+        "sha256": "89cce8cf5d16ff381909af4cf6fd11513dd9018079d3fb23eb316d72a90d8799",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.148
+          ],
+          "Velocity_2": [
+            0.164,
+            0.174
+          ],
+          "Velocity_3": [
+            0.172,
+            0.19
+          ],
+          "High_Velocity": [
+            0.0,
+            2.23
+          ],
+          "Cylinder_Pressure": [
+            108.0,
+            219.0
+          ],
+          "Rapid_Rise_Time": [
+            0.0,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            10.0,
+            17.0
+          ],
+          "Clamping_Force": [
+            222.0,
+            262.0
+          ],
+          "Cycle_Time": [
+            20.4,
+            652.3
+          ],
+          "Pressure_Rise_Time": [
+            0.0,
+            1.49
+          ],
+          "Casting_Pressure": [
+            522.0,
+            1058.0
+          ],
+          "Spray_Time": [
+            7.8,
+            8.1
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.0
+          ],
+          "Spray_2_Time": [
+            0.8,
+            0.8
+          ],
+          "prev_cycle_time": [
+            20.4,
+            652.3
+          ],
+          "max_cycle_previous_5": [
+            20.6,
+            652.3
+          ]
+        },
+        "encoded_target": "Machine_Status_numeric_code_1_semantics_unverified",
+        "threshold": {
+          "threshold": null,
+          "disabled": true,
+          "reason": "insufficient_validation_episodes"
+        },
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 775,
+          "run_ids": [
+            0
+          ],
+          "fit_row_ids_sha256": "8c5189e981ff3efad28f40a373b4abc234aa5d7bf420e28466f52a0d653952dc",
+          "products": null,
+          "product_mapping": "not_recorded_for_all_state_training_rows"
+        }
+      }
+    },
+    "queue-fold2-seed29": {
+      "quality": {
+        "fold": "2",
+        "seed": 29,
+        "task": "quality",
+        "model": "logistic",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "Melting_Furnace_Temp",
+          "Air_Pressure",
+          "Coolant_Temp",
+          "Coolant_Pressure",
+          "Factory_Temp",
+          "Factory_Humidity",
+          "Product_Type",
+          "shot_position"
+        ],
+        "path": "reports/oct03_queue/models/2__quality__logistic__29.joblib",
+        "sha256": "5375502c98969842f58aa55c49caa9ca5fff0be405175d7d31c3d902c49a8c01",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.148
+          ],
+          "Velocity_2": [
+            0.164,
+            0.174
+          ],
+          "Velocity_3": [
+            0.172,
+            0.19
+          ],
+          "High_Velocity": [
+            2.084,
+            2.23
+          ],
+          "Cylinder_Pressure": [
+            214.0,
+            219.0
+          ],
+          "Rapid_Rise_Time": [
+            0.005,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            10.0,
+            17.0
+          ],
+          "Clamping_Force": [
+            250.0,
+            262.0
+          ],
+          "Cycle_Time": [
+            20.4,
+            89.1
+          ],
+          "Pressure_Rise_Time": [
+            0.033,
+            0.045
+          ],
+          "Casting_Pressure": [
+            1035.0,
+            1058.0
+          ],
+          "Spray_Time": [
+            7.8,
+            8.1
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.0
+          ],
+          "Spray_2_Time": [
+            0.8,
+            0.8
+          ],
+          "Melting_Furnace_Temp": [
+            671.4,
+            720.0
+          ],
+          "Air_Pressure": [
+            5.3,
+            7.0
+          ],
+          "Coolant_Temp": [
+            26.0,
+            27.1
+          ],
+          "Coolant_Pressure": [
+            2.66,
+            2.74
+          ],
+          "Factory_Temp": [
+            32.8,
+            37.0
+          ],
+          "Factory_Humidity": [
+            45.5,
+            58.5
+          ],
+          "Product_Type": [
+            1.0,
+            1.0
+          ],
+          "shot_position": [
+            0.0,
+            768.0
+          ]
+        },
+        "encoded_target": "any_recorded_quality_defect_equals_1",
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 769,
+          "run_ids": [
+            0
+          ],
+          "fit_row_ids_sha256": "7c41dbdf9e03513679aa5044ef2616ea8a37f57183d3eb496beaf0aedae23099",
+          "products": [
+            1
+          ]
+        }
+      },
+      "gate": {
+        "fold": "2",
+        "seed": 29,
+        "task": "gate",
+        "model": "lightgbm",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "prev_cycle_time",
+          "max_cycle_previous_5"
+        ],
+        "path": "reports/oct03_queue/models/2__gate__lightgbm__29.joblib",
+        "sha256": "ecb5e3ad1e7f97226b2034ab69bfb57f0c3d5969191e49d92a65b6ac139aa5bf",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.148
+          ],
+          "Velocity_2": [
+            0.164,
+            0.174
+          ],
+          "Velocity_3": [
+            0.172,
+            0.19
+          ],
+          "High_Velocity": [
+            0.0,
+            2.23
+          ],
+          "Cylinder_Pressure": [
+            108.0,
+            219.0
+          ],
+          "Rapid_Rise_Time": [
+            0.0,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            10.0,
+            17.0
+          ],
+          "Clamping_Force": [
+            222.0,
+            262.0
+          ],
+          "Cycle_Time": [
+            20.4,
+            652.3
+          ],
+          "Pressure_Rise_Time": [
+            0.0,
+            1.49
+          ],
+          "Casting_Pressure": [
+            522.0,
+            1058.0
+          ],
+          "Spray_Time": [
+            7.8,
+            8.1
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.0
+          ],
+          "Spray_2_Time": [
+            0.8,
+            0.8
+          ],
+          "prev_cycle_time": [
+            20.4,
+            652.3
+          ],
+          "max_cycle_previous_5": [
+            20.6,
+            652.3
+          ]
+        },
+        "encoded_target": "Machine_Status_numeric_code_1_semantics_unverified",
+        "threshold": {
+          "threshold": null,
+          "disabled": true,
+          "reason": "insufficient_validation_episodes"
+        },
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 775,
+          "run_ids": [
+            0
+          ],
+          "fit_row_ids_sha256": "8c5189e981ff3efad28f40a373b4abc234aa5d7bf420e28466f52a0d653952dc",
+          "products": null,
+          "product_mapping": "not_recorded_for_all_state_training_rows"
+        }
+      }
+    },
+    "queue-fold2-seed43": {
+      "quality": {
+        "fold": "2",
+        "seed": 43,
+        "task": "quality",
+        "model": "logistic",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "Melting_Furnace_Temp",
+          "Air_Pressure",
+          "Coolant_Temp",
+          "Coolant_Pressure",
+          "Factory_Temp",
+          "Factory_Humidity",
+          "Product_Type",
+          "shot_position"
+        ],
+        "path": "reports/oct03_queue/models/2__quality__logistic__43.joblib",
+        "sha256": "dc71dbc8dd23a45e78c67cd044099a9c39c6d05adc99adf8d2a5efad0ed7b5a1",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.148
+          ],
+          "Velocity_2": [
+            0.164,
+            0.174
+          ],
+          "Velocity_3": [
+            0.172,
+            0.19
+          ],
+          "High_Velocity": [
+            2.084,
+            2.23
+          ],
+          "Cylinder_Pressure": [
+            214.0,
+            219.0
+          ],
+          "Rapid_Rise_Time": [
+            0.005,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            10.0,
+            17.0
+          ],
+          "Clamping_Force": [
+            250.0,
+            262.0
+          ],
+          "Cycle_Time": [
+            20.4,
+            89.1
+          ],
+          "Pressure_Rise_Time": [
+            0.033,
+            0.045
+          ],
+          "Casting_Pressure": [
+            1035.0,
+            1058.0
+          ],
+          "Spray_Time": [
+            7.8,
+            8.1
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.0
+          ],
+          "Spray_2_Time": [
+            0.8,
+            0.8
+          ],
+          "Melting_Furnace_Temp": [
+            671.4,
+            720.0
+          ],
+          "Air_Pressure": [
+            5.3,
+            7.0
+          ],
+          "Coolant_Temp": [
+            26.0,
+            27.1
+          ],
+          "Coolant_Pressure": [
+            2.66,
+            2.74
+          ],
+          "Factory_Temp": [
+            32.8,
+            37.0
+          ],
+          "Factory_Humidity": [
+            45.5,
+            58.5
+          ],
+          "Product_Type": [
+            1.0,
+            1.0
+          ],
+          "shot_position": [
+            0.0,
+            768.0
+          ]
+        },
+        "encoded_target": "any_recorded_quality_defect_equals_1",
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 769,
+          "run_ids": [
+            0
+          ],
+          "fit_row_ids_sha256": "7c41dbdf9e03513679aa5044ef2616ea8a37f57183d3eb496beaf0aedae23099",
+          "products": [
+            1
+          ]
+        }
+      },
+      "gate": {
+        "fold": "2",
+        "seed": 43,
+        "task": "gate",
+        "model": "lightgbm",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "prev_cycle_time",
+          "max_cycle_previous_5"
+        ],
+        "path": "reports/oct03_queue/models/2__gate__lightgbm__43.joblib",
+        "sha256": "a6420451d2d9197fe1b51bb7ab632ac6a6da264b56349a933bb6923aa5b7de3b",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.148
+          ],
+          "Velocity_2": [
+            0.164,
+            0.174
+          ],
+          "Velocity_3": [
+            0.172,
+            0.19
+          ],
+          "High_Velocity": [
+            0.0,
+            2.23
+          ],
+          "Cylinder_Pressure": [
+            108.0,
+            219.0
+          ],
+          "Rapid_Rise_Time": [
+            0.0,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            10.0,
+            17.0
+          ],
+          "Clamping_Force": [
+            222.0,
+            262.0
+          ],
+          "Cycle_Time": [
+            20.4,
+            652.3
+          ],
+          "Pressure_Rise_Time": [
+            0.0,
+            1.49
+          ],
+          "Casting_Pressure": [
+            522.0,
+            1058.0
+          ],
+          "Spray_Time": [
+            7.8,
+            8.1
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.0
+          ],
+          "Spray_2_Time": [
+            0.8,
+            0.8
+          ],
+          "prev_cycle_time": [
+            20.4,
+            652.3
+          ],
+          "max_cycle_previous_5": [
+            20.6,
+            652.3
+          ]
+        },
+        "encoded_target": "Machine_Status_numeric_code_1_semantics_unverified",
+        "threshold": {
+          "threshold": null,
+          "disabled": true,
+          "reason": "insufficient_validation_episodes"
+        },
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 775,
+          "run_ids": [
+            0
+          ],
+          "fit_row_ids_sha256": "8c5189e981ff3efad28f40a373b4abc234aa5d7bf420e28466f52a0d653952dc",
+          "products": null,
+          "product_mapping": "not_recorded_for_all_state_training_rows"
+        }
+      }
+    },
+    "queue-fold2-seed71": {
+      "quality": {
+        "fold": "2",
+        "seed": 71,
+        "task": "quality",
+        "model": "logistic",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "Melting_Furnace_Temp",
+          "Air_Pressure",
+          "Coolant_Temp",
+          "Coolant_Pressure",
+          "Factory_Temp",
+          "Factory_Humidity",
+          "Product_Type",
+          "shot_position"
+        ],
+        "path": "reports/oct03_queue/models/2__quality__logistic__71.joblib",
+        "sha256": "974a4773c5988d8294541051b6e466dd61bdf2787a243cb4e2eea8fc399c5e57",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.148
+          ],
+          "Velocity_2": [
+            0.164,
+            0.174
+          ],
+          "Velocity_3": [
+            0.172,
+            0.19
+          ],
+          "High_Velocity": [
+            2.084,
+            2.23
+          ],
+          "Cylinder_Pressure": [
+            214.0,
+            219.0
+          ],
+          "Rapid_Rise_Time": [
+            0.005,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            10.0,
+            17.0
+          ],
+          "Clamping_Force": [
+            250.0,
+            262.0
+          ],
+          "Cycle_Time": [
+            20.4,
+            89.1
+          ],
+          "Pressure_Rise_Time": [
+            0.033,
+            0.045
+          ],
+          "Casting_Pressure": [
+            1035.0,
+            1058.0
+          ],
+          "Spray_Time": [
+            7.8,
+            8.1
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.0
+          ],
+          "Spray_2_Time": [
+            0.8,
+            0.8
+          ],
+          "Melting_Furnace_Temp": [
+            671.4,
+            720.0
+          ],
+          "Air_Pressure": [
+            5.3,
+            7.0
+          ],
+          "Coolant_Temp": [
+            26.0,
+            27.1
+          ],
+          "Coolant_Pressure": [
+            2.66,
+            2.74
+          ],
+          "Factory_Temp": [
+            32.8,
+            37.0
+          ],
+          "Factory_Humidity": [
+            45.5,
+            58.5
+          ],
+          "Product_Type": [
+            1.0,
+            1.0
+          ],
+          "shot_position": [
+            0.0,
+            768.0
+          ]
+        },
+        "encoded_target": "any_recorded_quality_defect_equals_1",
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 769,
+          "run_ids": [
+            0
+          ],
+          "fit_row_ids_sha256": "7c41dbdf9e03513679aa5044ef2616ea8a37f57183d3eb496beaf0aedae23099",
+          "products": [
+            1
+          ]
+        }
+      },
+      "gate": {
+        "fold": "2",
+        "seed": 71,
+        "task": "gate",
+        "model": "lightgbm",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "prev_cycle_time",
+          "max_cycle_previous_5"
+        ],
+        "path": "reports/oct03_queue/models/2__gate__lightgbm__71.joblib",
+        "sha256": "2554974bee6f9b94783eb52d5498a802b857c7c577e4036211934af4b5fe5617",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.148
+          ],
+          "Velocity_2": [
+            0.164,
+            0.174
+          ],
+          "Velocity_3": [
+            0.172,
+            0.19
+          ],
+          "High_Velocity": [
+            0.0,
+            2.23
+          ],
+          "Cylinder_Pressure": [
+            108.0,
+            219.0
+          ],
+          "Rapid_Rise_Time": [
+            0.0,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            10.0,
+            17.0
+          ],
+          "Clamping_Force": [
+            222.0,
+            262.0
+          ],
+          "Cycle_Time": [
+            20.4,
+            652.3
+          ],
+          "Pressure_Rise_Time": [
+            0.0,
+            1.49
+          ],
+          "Casting_Pressure": [
+            522.0,
+            1058.0
+          ],
+          "Spray_Time": [
+            7.8,
+            8.1
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.0
+          ],
+          "Spray_2_Time": [
+            0.8,
+            0.8
+          ],
+          "prev_cycle_time": [
+            20.4,
+            652.3
+          ],
+          "max_cycle_previous_5": [
+            20.6,
+            652.3
+          ]
+        },
+        "encoded_target": "Machine_Status_numeric_code_1_semantics_unverified",
+        "threshold": {
+          "threshold": null,
+          "disabled": true,
+          "reason": "insufficient_validation_episodes"
+        },
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 775,
+          "run_ids": [
+            0
+          ],
+          "fit_row_ids_sha256": "8c5189e981ff3efad28f40a373b4abc234aa5d7bf420e28466f52a0d653952dc",
+          "products": null,
+          "product_mapping": "not_recorded_for_all_state_training_rows"
+        }
+      }
+    },
+    "queue-fold2-seed101": {
+      "quality": {
+        "fold": "2",
+        "seed": 101,
+        "task": "quality",
+        "model": "logistic",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "Melting_Furnace_Temp",
+          "Air_Pressure",
+          "Coolant_Temp",
+          "Coolant_Pressure",
+          "Factory_Temp",
+          "Factory_Humidity",
+          "Product_Type",
+          "shot_position"
+        ],
+        "path": "reports/oct03_queue/models/2__quality__logistic__101.joblib",
+        "sha256": "2fbbc2797b03b639378c760f035a31fdbe25446bcf1bd29d6cf1ef08f283b2bb",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.148
+          ],
+          "Velocity_2": [
+            0.164,
+            0.174
+          ],
+          "Velocity_3": [
+            0.172,
+            0.19
+          ],
+          "High_Velocity": [
+            2.084,
+            2.23
+          ],
+          "Cylinder_Pressure": [
+            214.0,
+            219.0
+          ],
+          "Rapid_Rise_Time": [
+            0.005,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            10.0,
+            17.0
+          ],
+          "Clamping_Force": [
+            250.0,
+            262.0
+          ],
+          "Cycle_Time": [
+            20.4,
+            89.1
+          ],
+          "Pressure_Rise_Time": [
+            0.033,
+            0.045
+          ],
+          "Casting_Pressure": [
+            1035.0,
+            1058.0
+          ],
+          "Spray_Time": [
+            7.8,
+            8.1
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.0
+          ],
+          "Spray_2_Time": [
+            0.8,
+            0.8
+          ],
+          "Melting_Furnace_Temp": [
+            671.4,
+            720.0
+          ],
+          "Air_Pressure": [
+            5.3,
+            7.0
+          ],
+          "Coolant_Temp": [
+            26.0,
+            27.1
+          ],
+          "Coolant_Pressure": [
+            2.66,
+            2.74
+          ],
+          "Factory_Temp": [
+            32.8,
+            37.0
+          ],
+          "Factory_Humidity": [
+            45.5,
+            58.5
+          ],
+          "Product_Type": [
+            1.0,
+            1.0
+          ],
+          "shot_position": [
+            0.0,
+            768.0
+          ]
+        },
+        "encoded_target": "any_recorded_quality_defect_equals_1",
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 769,
+          "run_ids": [
+            0
+          ],
+          "fit_row_ids_sha256": "7c41dbdf9e03513679aa5044ef2616ea8a37f57183d3eb496beaf0aedae23099",
+          "products": [
+            1
+          ]
+        }
+      },
+      "gate": {
+        "fold": "2",
+        "seed": 101,
+        "task": "gate",
+        "model": "lightgbm",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "prev_cycle_time",
+          "max_cycle_previous_5"
+        ],
+        "path": "reports/oct03_queue/models/2__gate__lightgbm__101.joblib",
+        "sha256": "cdbd52b544114ed7c1939508b5fd2cc11bce677afe0457c9bb8cf7301aeff0e8",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.148
+          ],
+          "Velocity_2": [
+            0.164,
+            0.174
+          ],
+          "Velocity_3": [
+            0.172,
+            0.19
+          ],
+          "High_Velocity": [
+            0.0,
+            2.23
+          ],
+          "Cylinder_Pressure": [
+            108.0,
+            219.0
+          ],
+          "Rapid_Rise_Time": [
+            0.0,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            10.0,
+            17.0
+          ],
+          "Clamping_Force": [
+            222.0,
+            262.0
+          ],
+          "Cycle_Time": [
+            20.4,
+            652.3
+          ],
+          "Pressure_Rise_Time": [
+            0.0,
+            1.49
+          ],
+          "Casting_Pressure": [
+            522.0,
+            1058.0
+          ],
+          "Spray_Time": [
+            7.8,
+            8.1
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.0
+          ],
+          "Spray_2_Time": [
+            0.8,
+            0.8
+          ],
+          "prev_cycle_time": [
+            20.4,
+            652.3
+          ],
+          "max_cycle_previous_5": [
+            20.6,
+            652.3
+          ]
+        },
+        "encoded_target": "Machine_Status_numeric_code_1_semantics_unverified",
+        "threshold": {
+          "threshold": null,
+          "disabled": true,
+          "reason": "insufficient_validation_episodes"
+        },
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 775,
+          "run_ids": [
+            0
+          ],
+          "fit_row_ids_sha256": "8c5189e981ff3efad28f40a373b4abc234aa5d7bf420e28466f52a0d653952dc",
+          "products": null,
+          "product_mapping": "not_recorded_for_all_state_training_rows"
+        }
+      }
+    },
+    "queue-fold3-seed17": {
+      "quality": {
+        "fold": "3",
+        "seed": 17,
+        "task": "quality",
+        "model": "logistic",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "Melting_Furnace_Temp",
+          "Air_Pressure",
+          "Coolant_Temp",
+          "Coolant_Pressure",
+          "Factory_Temp",
+          "Factory_Humidity",
+          "Product_Type",
+          "shot_position"
+        ],
+        "path": "reports/oct03_queue/models/3__quality__logistic__17.joblib",
+        "sha256": "c367272860cf7bb4cb4e76ae2190ecbd08ee54b2d1d6abfc37738264e92d9119",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.148
+          ],
+          "Velocity_2": [
+            0.164,
+            0.174
+          ],
+          "Velocity_3": [
+            0.172,
+            0.19
+          ],
+          "High_Velocity": [
+            2.084,
+            2.23
+          ],
+          "Cylinder_Pressure": [
+            214.0,
+            219.0
+          ],
+          "Rapid_Rise_Time": [
+            0.005,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            10.0,
+            17.0
+          ],
+          "Clamping_Force": [
+            247.0,
+            262.0
+          ],
+          "Cycle_Time": [
+            20.4,
+            89.1
+          ],
+          "Pressure_Rise_Time": [
+            0.033,
+            0.045
+          ],
+          "Casting_Pressure": [
+            1035.0,
+            1058.0
+          ],
+          "Spray_Time": [
+            7.8,
+            8.1
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.0
+          ],
+          "Spray_2_Time": [
+            0.8,
+            0.8
+          ],
+          "Melting_Furnace_Temp": [
+            671.4,
+            720.0
+          ],
+          "Air_Pressure": [
+            5.3,
+            7.0
+          ],
+          "Coolant_Temp": [
+            26.0,
+            27.4
+          ],
+          "Coolant_Pressure": [
+            2.66,
+            2.74
+          ],
+          "Factory_Temp": [
+            32.8,
+            37.0
+          ],
+          "Factory_Humidity": [
+            45.5,
+            58.5
+          ],
+          "Product_Type": [
+            1.0,
+            1.0
+          ],
+          "shot_position": [
+            0.0,
+            1098.0
+          ]
+        },
+        "encoded_target": "any_recorded_quality_defect_equals_1",
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 1099,
+          "run_ids": [
+            0
+          ],
+          "fit_row_ids_sha256": "d4b4ae3bcf01411741cd44fe74f80e0cdf613db90df3e34196a6970de14b085d",
+          "products": [
+            1
+          ]
+        }
+      },
+      "gate": {
+        "fold": "3",
+        "seed": 17,
+        "task": "gate",
+        "model": "lightgbm",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "prev_cycle_time",
+          "max_cycle_previous_5"
+        ],
+        "path": "reports/oct03_queue/models/3__gate__lightgbm__17.joblib",
+        "sha256": "f9df0710fd026fc1f4e7fa023447a82469cd734643438bf484944772d04229cf",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.148
+          ],
+          "Velocity_2": [
+            0.164,
+            0.174
+          ],
+          "Velocity_3": [
+            0.172,
+            0.19
+          ],
+          "High_Velocity": [
+            0.0,
+            2.23
+          ],
+          "Cylinder_Pressure": [
+            108.0,
+            219.0
+          ],
+          "Rapid_Rise_Time": [
+            0.0,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            10.0,
+            17.0
+          ],
+          "Clamping_Force": [
+            222.0,
+            262.0
+          ],
+          "Cycle_Time": [
+            20.4,
+            652.3
+          ],
+          "Pressure_Rise_Time": [
+            0.0,
+            1.49
+          ],
+          "Casting_Pressure": [
+            522.0,
+            1058.0
+          ],
+          "Spray_Time": [
+            7.8,
+            8.1
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.0
+          ],
+          "Spray_2_Time": [
+            0.8,
+            0.8
+          ],
+          "prev_cycle_time": [
+            20.4,
+            652.3
+          ],
+          "max_cycle_previous_5": [
+            20.6,
+            652.3
+          ]
+        },
+        "encoded_target": "Machine_Status_numeric_code_1_semantics_unverified",
+        "threshold": {
+          "threshold": 0.001012407074245573,
+          "disabled": false,
+          "reason": "eligible"
+        },
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 1105,
+          "run_ids": [
+            0
+          ],
+          "fit_row_ids_sha256": "f100f02b545105acaed68913153f946455eb0a8cfcb251324499734b195d90e1",
+          "products": null,
+          "product_mapping": "not_recorded_for_all_state_training_rows"
+        }
+      }
+    },
+    "queue-fold3-seed29": {
+      "quality": {
+        "fold": "3",
+        "seed": 29,
+        "task": "quality",
+        "model": "logistic",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "Melting_Furnace_Temp",
+          "Air_Pressure",
+          "Coolant_Temp",
+          "Coolant_Pressure",
+          "Factory_Temp",
+          "Factory_Humidity",
+          "Product_Type",
+          "shot_position"
+        ],
+        "path": "reports/oct03_queue/models/3__quality__logistic__29.joblib",
+        "sha256": "d27cd91d7a4965ded31d7151c662bfd8cd681ffc93b5cf8496e6932e9a622a18",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.148
+          ],
+          "Velocity_2": [
+            0.164,
+            0.174
+          ],
+          "Velocity_3": [
+            0.172,
+            0.19
+          ],
+          "High_Velocity": [
+            2.084,
+            2.23
+          ],
+          "Cylinder_Pressure": [
+            214.0,
+            219.0
+          ],
+          "Rapid_Rise_Time": [
+            0.005,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            10.0,
+            17.0
+          ],
+          "Clamping_Force": [
+            247.0,
+            262.0
+          ],
+          "Cycle_Time": [
+            20.4,
+            89.1
+          ],
+          "Pressure_Rise_Time": [
+            0.033,
+            0.045
+          ],
+          "Casting_Pressure": [
+            1035.0,
+            1058.0
+          ],
+          "Spray_Time": [
+            7.8,
+            8.1
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.0
+          ],
+          "Spray_2_Time": [
+            0.8,
+            0.8
+          ],
+          "Melting_Furnace_Temp": [
+            671.4,
+            720.0
+          ],
+          "Air_Pressure": [
+            5.3,
+            7.0
+          ],
+          "Coolant_Temp": [
+            26.0,
+            27.4
+          ],
+          "Coolant_Pressure": [
+            2.66,
+            2.74
+          ],
+          "Factory_Temp": [
+            32.8,
+            37.0
+          ],
+          "Factory_Humidity": [
+            45.5,
+            58.5
+          ],
+          "Product_Type": [
+            1.0,
+            1.0
+          ],
+          "shot_position": [
+            0.0,
+            1098.0
+          ]
+        },
+        "encoded_target": "any_recorded_quality_defect_equals_1",
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 1099,
+          "run_ids": [
+            0
+          ],
+          "fit_row_ids_sha256": "d4b4ae3bcf01411741cd44fe74f80e0cdf613db90df3e34196a6970de14b085d",
+          "products": [
+            1
+          ]
+        }
+      },
+      "gate": {
+        "fold": "3",
+        "seed": 29,
+        "task": "gate",
+        "model": "lightgbm",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "prev_cycle_time",
+          "max_cycle_previous_5"
+        ],
+        "path": "reports/oct03_queue/models/3__gate__lightgbm__29.joblib",
+        "sha256": "1005f03d2d5bb6ece9aedea580818af582281df9e93c2d6618da445cec0276db",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.148
+          ],
+          "Velocity_2": [
+            0.164,
+            0.174
+          ],
+          "Velocity_3": [
+            0.172,
+            0.19
+          ],
+          "High_Velocity": [
+            0.0,
+            2.23
+          ],
+          "Cylinder_Pressure": [
+            108.0,
+            219.0
+          ],
+          "Rapid_Rise_Time": [
+            0.0,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            10.0,
+            17.0
+          ],
+          "Clamping_Force": [
+            222.0,
+            262.0
+          ],
+          "Cycle_Time": [
+            20.4,
+            652.3
+          ],
+          "Pressure_Rise_Time": [
+            0.0,
+            1.49
+          ],
+          "Casting_Pressure": [
+            522.0,
+            1058.0
+          ],
+          "Spray_Time": [
+            7.8,
+            8.1
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.0
+          ],
+          "Spray_2_Time": [
+            0.8,
+            0.8
+          ],
+          "prev_cycle_time": [
+            20.4,
+            652.3
+          ],
+          "max_cycle_previous_5": [
+            20.6,
+            652.3
+          ]
+        },
+        "encoded_target": "Machine_Status_numeric_code_1_semantics_unverified",
+        "threshold": {
+          "threshold": 0.000566981706929823,
+          "disabled": false,
+          "reason": "eligible"
+        },
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 1105,
+          "run_ids": [
+            0
+          ],
+          "fit_row_ids_sha256": "f100f02b545105acaed68913153f946455eb0a8cfcb251324499734b195d90e1",
+          "products": null,
+          "product_mapping": "not_recorded_for_all_state_training_rows"
+        }
+      }
+    },
+    "queue-fold3-seed43": {
+      "quality": {
+        "fold": "3",
+        "seed": 43,
+        "task": "quality",
+        "model": "logistic",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "Melting_Furnace_Temp",
+          "Air_Pressure",
+          "Coolant_Temp",
+          "Coolant_Pressure",
+          "Factory_Temp",
+          "Factory_Humidity",
+          "Product_Type",
+          "shot_position"
+        ],
+        "path": "reports/oct03_queue/models/3__quality__logistic__43.joblib",
+        "sha256": "1b1b4f99a95a78af99977f19d02b6ec9b3ee74870d9ade83585cbf0d350d4815",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.148
+          ],
+          "Velocity_2": [
+            0.164,
+            0.174
+          ],
+          "Velocity_3": [
+            0.172,
+            0.19
+          ],
+          "High_Velocity": [
+            2.084,
+            2.23
+          ],
+          "Cylinder_Pressure": [
+            214.0,
+            219.0
+          ],
+          "Rapid_Rise_Time": [
+            0.005,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            10.0,
+            17.0
+          ],
+          "Clamping_Force": [
+            247.0,
+            262.0
+          ],
+          "Cycle_Time": [
+            20.4,
+            89.1
+          ],
+          "Pressure_Rise_Time": [
+            0.033,
+            0.045
+          ],
+          "Casting_Pressure": [
+            1035.0,
+            1058.0
+          ],
+          "Spray_Time": [
+            7.8,
+            8.1
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.0
+          ],
+          "Spray_2_Time": [
+            0.8,
+            0.8
+          ],
+          "Melting_Furnace_Temp": [
+            671.4,
+            720.0
+          ],
+          "Air_Pressure": [
+            5.3,
+            7.0
+          ],
+          "Coolant_Temp": [
+            26.0,
+            27.4
+          ],
+          "Coolant_Pressure": [
+            2.66,
+            2.74
+          ],
+          "Factory_Temp": [
+            32.8,
+            37.0
+          ],
+          "Factory_Humidity": [
+            45.5,
+            58.5
+          ],
+          "Product_Type": [
+            1.0,
+            1.0
+          ],
+          "shot_position": [
+            0.0,
+            1098.0
+          ]
+        },
+        "encoded_target": "any_recorded_quality_defect_equals_1",
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 1099,
+          "run_ids": [
+            0
+          ],
+          "fit_row_ids_sha256": "d4b4ae3bcf01411741cd44fe74f80e0cdf613db90df3e34196a6970de14b085d",
+          "products": [
+            1
+          ]
+        }
+      },
+      "gate": {
+        "fold": "3",
+        "seed": 43,
+        "task": "gate",
+        "model": "lightgbm",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "prev_cycle_time",
+          "max_cycle_previous_5"
+        ],
+        "path": "reports/oct03_queue/models/3__gate__lightgbm__43.joblib",
+        "sha256": "8241cfbd246353c08dea4d57a8f986f1d9206d0a818b745764089c021b7be1ee",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.148
+          ],
+          "Velocity_2": [
+            0.164,
+            0.174
+          ],
+          "Velocity_3": [
+            0.172,
+            0.19
+          ],
+          "High_Velocity": [
+            0.0,
+            2.23
+          ],
+          "Cylinder_Pressure": [
+            108.0,
+            219.0
+          ],
+          "Rapid_Rise_Time": [
+            0.0,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            10.0,
+            17.0
+          ],
+          "Clamping_Force": [
+            222.0,
+            262.0
+          ],
+          "Cycle_Time": [
+            20.4,
+            652.3
+          ],
+          "Pressure_Rise_Time": [
+            0.0,
+            1.49
+          ],
+          "Casting_Pressure": [
+            522.0,
+            1058.0
+          ],
+          "Spray_Time": [
+            7.8,
+            8.1
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.0
+          ],
+          "Spray_2_Time": [
+            0.8,
+            0.8
+          ],
+          "prev_cycle_time": [
+            20.4,
+            652.3
+          ],
+          "max_cycle_previous_5": [
+            20.6,
+            652.3
+          ]
+        },
+        "encoded_target": "Machine_Status_numeric_code_1_semantics_unverified",
+        "threshold": {
+          "threshold": 0.0002484858994117321,
+          "disabled": false,
+          "reason": "eligible"
+        },
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 1105,
+          "run_ids": [
+            0
+          ],
+          "fit_row_ids_sha256": "f100f02b545105acaed68913153f946455eb0a8cfcb251324499734b195d90e1",
+          "products": null,
+          "product_mapping": "not_recorded_for_all_state_training_rows"
+        }
+      }
+    },
+    "queue-fold3-seed71": {
+      "quality": {
+        "fold": "3",
+        "seed": 71,
+        "task": "quality",
+        "model": "logistic",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "Melting_Furnace_Temp",
+          "Air_Pressure",
+          "Coolant_Temp",
+          "Coolant_Pressure",
+          "Factory_Temp",
+          "Factory_Humidity",
+          "Product_Type",
+          "shot_position"
+        ],
+        "path": "reports/oct03_queue/models/3__quality__logistic__71.joblib",
+        "sha256": "49a315dadb6eb2466634881d2c7316fab534ba0572dd4e1d36f7d3b3a64caf43",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.148
+          ],
+          "Velocity_2": [
+            0.164,
+            0.174
+          ],
+          "Velocity_3": [
+            0.172,
+            0.19
+          ],
+          "High_Velocity": [
+            2.084,
+            2.23
+          ],
+          "Cylinder_Pressure": [
+            214.0,
+            219.0
+          ],
+          "Rapid_Rise_Time": [
+            0.005,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            10.0,
+            17.0
+          ],
+          "Clamping_Force": [
+            247.0,
+            262.0
+          ],
+          "Cycle_Time": [
+            20.4,
+            89.1
+          ],
+          "Pressure_Rise_Time": [
+            0.033,
+            0.045
+          ],
+          "Casting_Pressure": [
+            1035.0,
+            1058.0
+          ],
+          "Spray_Time": [
+            7.8,
+            8.1
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.0
+          ],
+          "Spray_2_Time": [
+            0.8,
+            0.8
+          ],
+          "Melting_Furnace_Temp": [
+            671.4,
+            720.0
+          ],
+          "Air_Pressure": [
+            5.3,
+            7.0
+          ],
+          "Coolant_Temp": [
+            26.0,
+            27.4
+          ],
+          "Coolant_Pressure": [
+            2.66,
+            2.74
+          ],
+          "Factory_Temp": [
+            32.8,
+            37.0
+          ],
+          "Factory_Humidity": [
+            45.5,
+            58.5
+          ],
+          "Product_Type": [
+            1.0,
+            1.0
+          ],
+          "shot_position": [
+            0.0,
+            1098.0
+          ]
+        },
+        "encoded_target": "any_recorded_quality_defect_equals_1",
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 1099,
+          "run_ids": [
+            0
+          ],
+          "fit_row_ids_sha256": "d4b4ae3bcf01411741cd44fe74f80e0cdf613db90df3e34196a6970de14b085d",
+          "products": [
+            1
+          ]
+        }
+      },
+      "gate": {
+        "fold": "3",
+        "seed": 71,
+        "task": "gate",
+        "model": "lightgbm",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "prev_cycle_time",
+          "max_cycle_previous_5"
+        ],
+        "path": "reports/oct03_queue/models/3__gate__lightgbm__71.joblib",
+        "sha256": "3f5e7dc337270bd3cd2bb9623a32b4356f8ca08e23a7f67adf7abd6e2396b1c8",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.148
+          ],
+          "Velocity_2": [
+            0.164,
+            0.174
+          ],
+          "Velocity_3": [
+            0.172,
+            0.19
+          ],
+          "High_Velocity": [
+            0.0,
+            2.23
+          ],
+          "Cylinder_Pressure": [
+            108.0,
+            219.0
+          ],
+          "Rapid_Rise_Time": [
+            0.0,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            10.0,
+            17.0
+          ],
+          "Clamping_Force": [
+            222.0,
+            262.0
+          ],
+          "Cycle_Time": [
+            20.4,
+            652.3
+          ],
+          "Pressure_Rise_Time": [
+            0.0,
+            1.49
+          ],
+          "Casting_Pressure": [
+            522.0,
+            1058.0
+          ],
+          "Spray_Time": [
+            7.8,
+            8.1
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.0
+          ],
+          "Spray_2_Time": [
+            0.8,
+            0.8
+          ],
+          "prev_cycle_time": [
+            20.4,
+            652.3
+          ],
+          "max_cycle_previous_5": [
+            20.6,
+            652.3
+          ]
+        },
+        "encoded_target": "Machine_Status_numeric_code_1_semantics_unverified",
+        "threshold": {
+          "threshold": 0.0002668539196511396,
+          "disabled": false,
+          "reason": "eligible"
+        },
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 1105,
+          "run_ids": [
+            0
+          ],
+          "fit_row_ids_sha256": "f100f02b545105acaed68913153f946455eb0a8cfcb251324499734b195d90e1",
+          "products": null,
+          "product_mapping": "not_recorded_for_all_state_training_rows"
+        }
+      }
+    },
+    "queue-fold3-seed101": {
+      "quality": {
+        "fold": "3",
+        "seed": 101,
+        "task": "quality",
+        "model": "logistic",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "Melting_Furnace_Temp",
+          "Air_Pressure",
+          "Coolant_Temp",
+          "Coolant_Pressure",
+          "Factory_Temp",
+          "Factory_Humidity",
+          "Product_Type",
+          "shot_position"
+        ],
+        "path": "reports/oct03_queue/models/3__quality__logistic__101.joblib",
+        "sha256": "bb9713940ecb02f7a1741cc84b4001c1d056227b9c85b65b94a17f4f7334bd6a",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.148
+          ],
+          "Velocity_2": [
+            0.164,
+            0.174
+          ],
+          "Velocity_3": [
+            0.172,
+            0.19
+          ],
+          "High_Velocity": [
+            2.084,
+            2.23
+          ],
+          "Cylinder_Pressure": [
+            214.0,
+            219.0
+          ],
+          "Rapid_Rise_Time": [
+            0.005,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            10.0,
+            17.0
+          ],
+          "Clamping_Force": [
+            247.0,
+            262.0
+          ],
+          "Cycle_Time": [
+            20.4,
+            89.1
+          ],
+          "Pressure_Rise_Time": [
+            0.033,
+            0.045
+          ],
+          "Casting_Pressure": [
+            1035.0,
+            1058.0
+          ],
+          "Spray_Time": [
+            7.8,
+            8.1
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.0
+          ],
+          "Spray_2_Time": [
+            0.8,
+            0.8
+          ],
+          "Melting_Furnace_Temp": [
+            671.4,
+            720.0
+          ],
+          "Air_Pressure": [
+            5.3,
+            7.0
+          ],
+          "Coolant_Temp": [
+            26.0,
+            27.4
+          ],
+          "Coolant_Pressure": [
+            2.66,
+            2.74
+          ],
+          "Factory_Temp": [
+            32.8,
+            37.0
+          ],
+          "Factory_Humidity": [
+            45.5,
+            58.5
+          ],
+          "Product_Type": [
+            1.0,
+            1.0
+          ],
+          "shot_position": [
+            0.0,
+            1098.0
+          ]
+        },
+        "encoded_target": "any_recorded_quality_defect_equals_1",
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 1099,
+          "run_ids": [
+            0
+          ],
+          "fit_row_ids_sha256": "d4b4ae3bcf01411741cd44fe74f80e0cdf613db90df3e34196a6970de14b085d",
+          "products": [
+            1
+          ]
+        }
+      },
+      "gate": {
+        "fold": "3",
+        "seed": 101,
+        "task": "gate",
+        "model": "lightgbm",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "prev_cycle_time",
+          "max_cycle_previous_5"
+        ],
+        "path": "reports/oct03_queue/models/3__gate__lightgbm__101.joblib",
+        "sha256": "a83dc7d1be15db3e726f1193c2e93dac35a5a55014b1578663c86e38064cae4d",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.148
+          ],
+          "Velocity_2": [
+            0.164,
+            0.174
+          ],
+          "Velocity_3": [
+            0.172,
+            0.19
+          ],
+          "High_Velocity": [
+            0.0,
+            2.23
+          ],
+          "Cylinder_Pressure": [
+            108.0,
+            219.0
+          ],
+          "Rapid_Rise_Time": [
+            0.0,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            10.0,
+            17.0
+          ],
+          "Clamping_Force": [
+            222.0,
+            262.0
+          ],
+          "Cycle_Time": [
+            20.4,
+            652.3
+          ],
+          "Pressure_Rise_Time": [
+            0.0,
+            1.49
+          ],
+          "Casting_Pressure": [
+            522.0,
+            1058.0
+          ],
+          "Spray_Time": [
+            7.8,
+            8.1
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.0
+          ],
+          "Spray_2_Time": [
+            0.8,
+            0.8
+          ],
+          "prev_cycle_time": [
+            20.4,
+            652.3
+          ],
+          "max_cycle_previous_5": [
+            20.6,
+            652.3
+          ]
+        },
+        "encoded_target": "Machine_Status_numeric_code_1_semantics_unverified",
+        "threshold": {
+          "threshold": 0.018026772740948622,
+          "disabled": false,
+          "reason": "eligible"
+        },
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 1105,
+          "run_ids": [
+            0
+          ],
+          "fit_row_ids_sha256": "f100f02b545105acaed68913153f946455eb0a8cfcb251324499734b195d90e1",
+          "products": null,
+          "product_mapping": "not_recorded_for_all_state_training_rows"
+        }
+      }
+    },
+    "queue-fold4-seed17": {
+      "quality": {
+        "fold": "4",
+        "seed": 17,
+        "task": "quality",
+        "model": "lightgbm",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "Melting_Furnace_Temp",
+          "Air_Pressure",
+          "Coolant_Temp",
+          "Coolant_Pressure",
+          "Factory_Temp",
+          "Factory_Humidity",
+          "Product_Type",
+          "shot_position"
+        ],
+        "path": "reports/oct03_queue/models/4__quality__lightgbm__17.joblib",
+        "sha256": "d9f4138552a3c3f962cd3d61725caf29a3b943f063e44ba107a5800f526466b5",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.148
+          ],
+          "Velocity_2": [
+            0.162,
+            0.174
+          ],
+          "Velocity_3": [
+            0.172,
+            0.19
+          ],
+          "High_Velocity": [
+            0.0,
+            2.23
+          ],
+          "Cylinder_Pressure": [
+            108.0,
+            219.0
+          ],
+          "Rapid_Rise_Time": [
+            0.0,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            0.0,
+            22.0
+          ],
+          "Clamping_Force": [
+            238.0,
+            263.0
+          ],
+          "Cycle_Time": [
+            20.4,
+            173.0
+          ],
+          "Pressure_Rise_Time": [
+            0.0,
+            0.046
+          ],
+          "Casting_Pressure": [
+            525.0,
+            1060.0
+          ],
+          "Spray_Time": [
+            7.8,
+            8.5
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.0
+          ],
+          "Spray_2_Time": [
+            0.8,
+            1.0
+          ],
+          "Melting_Furnace_Temp": [
+            671.0,
+            730.0
+          ],
+          "Air_Pressure": [
+            4.9,
+            7.0
+          ],
+          "Coolant_Temp": [
+            25.9,
+            27.4
+          ],
+          "Coolant_Pressure": [
+            2.66,
+            2.79
+          ],
+          "Factory_Temp": [
+            30.6,
+            37.0
+          ],
+          "Factory_Humidity": [
+            45.5,
+            69.5
+          ],
+          "Product_Type": [
+            1.0,
+            1.0
+          ],
+          "shot_position": [
+            0.0,
+            1156.0
+          ]
+        },
+        "encoded_target": "any_recorded_quality_defect_equals_1",
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 2256,
+          "run_ids": [
+            0,
+            1
+          ],
+          "fit_row_ids_sha256": "e0faebf797db1cfac6a71ffcb19b22f303359ff126321e81d26b78c26553e4a7",
+          "products": [
+            1
+          ]
+        }
+      },
+      "gate": {
+        "fold": "4",
+        "seed": 17,
+        "task": "gate",
+        "model": "logistic",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "prev_cycle_time",
+          "max_cycle_previous_5"
+        ],
+        "path": "reports/oct03_queue/models/4__gate__logistic__17.joblib",
+        "sha256": "9b86efd669ea0654966c925913b73b04e89f58475243600195af96651dcce65d",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.148
+          ],
+          "Velocity_2": [
+            0.162,
+            0.174
+          ],
+          "Velocity_3": [
+            0.172,
+            0.19
+          ],
+          "High_Velocity": [
+            0.0,
+            2.23
+          ],
+          "Cylinder_Pressure": [
+            108.0,
+            219.0
+          ],
+          "Rapid_Rise_Time": [
+            0.0,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            0.0,
+            22.0
+          ],
+          "Clamping_Force": [
+            222.0,
+            263.0
+          ],
+          "Cycle_Time": [
+            20.4,
+            652.3
+          ],
+          "Pressure_Rise_Time": [
+            0.0,
+            1.49
+          ],
+          "Casting_Pressure": [
+            522.0,
+            1062.0
+          ],
+          "Spray_Time": [
+            7.8,
+            8.5
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.0
+          ],
+          "Spray_2_Time": [
+            0.8,
+            1.0
+          ],
+          "prev_cycle_time": [
+            20.4,
+            652.3
+          ],
+          "max_cycle_previous_5": [
+            20.6,
+            652.3
+          ]
+        },
+        "encoded_target": "Machine_Status_numeric_code_1_semantics_unverified",
+        "threshold": {
+          "threshold": 1.0,
+          "disabled": false,
+          "reason": "eligible"
+        },
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 2288,
+          "run_ids": [
+            0,
+            1
+          ],
+          "fit_row_ids_sha256": "aac7eef9ad4b81d738aeb3ef559c5200cc6108039c44d22ce79d576f39e15012",
+          "products": null,
+          "product_mapping": "not_recorded_for_all_state_training_rows"
+        }
+      }
+    },
+    "queue-fold4-seed29": {
+      "quality": {
+        "fold": "4",
+        "seed": 29,
+        "task": "quality",
+        "model": "lightgbm",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "Melting_Furnace_Temp",
+          "Air_Pressure",
+          "Coolant_Temp",
+          "Coolant_Pressure",
+          "Factory_Temp",
+          "Factory_Humidity",
+          "Product_Type",
+          "shot_position"
+        ],
+        "path": "reports/oct03_queue/models/4__quality__lightgbm__29.joblib",
+        "sha256": "870cacce87f4d6237a903b38ddff31895989dd1d49310d7a29f95f52bafbcf76",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.148
+          ],
+          "Velocity_2": [
+            0.162,
+            0.174
+          ],
+          "Velocity_3": [
+            0.172,
+            0.19
+          ],
+          "High_Velocity": [
+            0.0,
+            2.23
+          ],
+          "Cylinder_Pressure": [
+            108.0,
+            219.0
+          ],
+          "Rapid_Rise_Time": [
+            0.0,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            0.0,
+            22.0
+          ],
+          "Clamping_Force": [
+            238.0,
+            263.0
+          ],
+          "Cycle_Time": [
+            20.4,
+            173.0
+          ],
+          "Pressure_Rise_Time": [
+            0.0,
+            0.046
+          ],
+          "Casting_Pressure": [
+            525.0,
+            1060.0
+          ],
+          "Spray_Time": [
+            7.8,
+            8.5
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.0
+          ],
+          "Spray_2_Time": [
+            0.8,
+            1.0
+          ],
+          "Melting_Furnace_Temp": [
+            671.0,
+            730.0
+          ],
+          "Air_Pressure": [
+            4.9,
+            7.0
+          ],
+          "Coolant_Temp": [
+            25.9,
+            27.4
+          ],
+          "Coolant_Pressure": [
+            2.66,
+            2.79
+          ],
+          "Factory_Temp": [
+            30.6,
+            37.0
+          ],
+          "Factory_Humidity": [
+            45.5,
+            69.5
+          ],
+          "Product_Type": [
+            1.0,
+            1.0
+          ],
+          "shot_position": [
+            0.0,
+            1156.0
+          ]
+        },
+        "encoded_target": "any_recorded_quality_defect_equals_1",
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 2256,
+          "run_ids": [
+            0,
+            1
+          ],
+          "fit_row_ids_sha256": "e0faebf797db1cfac6a71ffcb19b22f303359ff126321e81d26b78c26553e4a7",
+          "products": [
+            1
+          ]
+        }
+      },
+      "gate": {
+        "fold": "4",
+        "seed": 29,
+        "task": "gate",
+        "model": "logistic",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "prev_cycle_time",
+          "max_cycle_previous_5"
+        ],
+        "path": "reports/oct03_queue/models/4__gate__logistic__29.joblib",
+        "sha256": "c31d13fe9361a90b24cde4637fe0254f5579fdf6f94160155301d46c942e751f",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.148
+          ],
+          "Velocity_2": [
+            0.162,
+            0.174
+          ],
+          "Velocity_3": [
+            0.172,
+            0.19
+          ],
+          "High_Velocity": [
+            0.0,
+            2.23
+          ],
+          "Cylinder_Pressure": [
+            108.0,
+            219.0
+          ],
+          "Rapid_Rise_Time": [
+            0.0,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            0.0,
+            22.0
+          ],
+          "Clamping_Force": [
+            222.0,
+            263.0
+          ],
+          "Cycle_Time": [
+            20.4,
+            652.3
+          ],
+          "Pressure_Rise_Time": [
+            0.0,
+            1.49
+          ],
+          "Casting_Pressure": [
+            522.0,
+            1062.0
+          ],
+          "Spray_Time": [
+            7.8,
+            8.5
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.0
+          ],
+          "Spray_2_Time": [
+            0.8,
+            1.0
+          ],
+          "prev_cycle_time": [
+            20.4,
+            652.3
+          ],
+          "max_cycle_previous_5": [
+            20.6,
+            652.3
+          ]
+        },
+        "encoded_target": "Machine_Status_numeric_code_1_semantics_unverified",
+        "threshold": {
+          "threshold": 1.0,
+          "disabled": false,
+          "reason": "eligible"
+        },
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 2288,
+          "run_ids": [
+            0,
+            1
+          ],
+          "fit_row_ids_sha256": "aac7eef9ad4b81d738aeb3ef559c5200cc6108039c44d22ce79d576f39e15012",
+          "products": null,
+          "product_mapping": "not_recorded_for_all_state_training_rows"
+        }
+      }
+    },
+    "queue-fold4-seed43": {
+      "quality": {
+        "fold": "4",
+        "seed": 43,
+        "task": "quality",
+        "model": "lightgbm",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "Melting_Furnace_Temp",
+          "Air_Pressure",
+          "Coolant_Temp",
+          "Coolant_Pressure",
+          "Factory_Temp",
+          "Factory_Humidity",
+          "Product_Type",
+          "shot_position"
+        ],
+        "path": "reports/oct03_queue/models/4__quality__lightgbm__43.joblib",
+        "sha256": "0cc8daef38c0911ad14f7ec75efb3b40a3595cbecbe2fc2a4cfc9d1d263d462c",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.148
+          ],
+          "Velocity_2": [
+            0.162,
+            0.174
+          ],
+          "Velocity_3": [
+            0.172,
+            0.19
+          ],
+          "High_Velocity": [
+            0.0,
+            2.23
+          ],
+          "Cylinder_Pressure": [
+            108.0,
+            219.0
+          ],
+          "Rapid_Rise_Time": [
+            0.0,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            0.0,
+            22.0
+          ],
+          "Clamping_Force": [
+            238.0,
+            263.0
+          ],
+          "Cycle_Time": [
+            20.4,
+            173.0
+          ],
+          "Pressure_Rise_Time": [
+            0.0,
+            0.046
+          ],
+          "Casting_Pressure": [
+            525.0,
+            1060.0
+          ],
+          "Spray_Time": [
+            7.8,
+            8.5
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.0
+          ],
+          "Spray_2_Time": [
+            0.8,
+            1.0
+          ],
+          "Melting_Furnace_Temp": [
+            671.0,
+            730.0
+          ],
+          "Air_Pressure": [
+            4.9,
+            7.0
+          ],
+          "Coolant_Temp": [
+            25.9,
+            27.4
+          ],
+          "Coolant_Pressure": [
+            2.66,
+            2.79
+          ],
+          "Factory_Temp": [
+            30.6,
+            37.0
+          ],
+          "Factory_Humidity": [
+            45.5,
+            69.5
+          ],
+          "Product_Type": [
+            1.0,
+            1.0
+          ],
+          "shot_position": [
+            0.0,
+            1156.0
+          ]
+        },
+        "encoded_target": "any_recorded_quality_defect_equals_1",
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 2256,
+          "run_ids": [
+            0,
+            1
+          ],
+          "fit_row_ids_sha256": "e0faebf797db1cfac6a71ffcb19b22f303359ff126321e81d26b78c26553e4a7",
+          "products": [
+            1
+          ]
+        }
+      },
+      "gate": {
+        "fold": "4",
+        "seed": 43,
+        "task": "gate",
+        "model": "logistic",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "prev_cycle_time",
+          "max_cycle_previous_5"
+        ],
+        "path": "reports/oct03_queue/models/4__gate__logistic__43.joblib",
+        "sha256": "dddcb3db263b1e7a57dd0a17828c660c1b7011aed87eeac8c53cfb545ecebe37",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.148
+          ],
+          "Velocity_2": [
+            0.162,
+            0.174
+          ],
+          "Velocity_3": [
+            0.172,
+            0.19
+          ],
+          "High_Velocity": [
+            0.0,
+            2.23
+          ],
+          "Cylinder_Pressure": [
+            108.0,
+            219.0
+          ],
+          "Rapid_Rise_Time": [
+            0.0,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            0.0,
+            22.0
+          ],
+          "Clamping_Force": [
+            222.0,
+            263.0
+          ],
+          "Cycle_Time": [
+            20.4,
+            652.3
+          ],
+          "Pressure_Rise_Time": [
+            0.0,
+            1.49
+          ],
+          "Casting_Pressure": [
+            522.0,
+            1062.0
+          ],
+          "Spray_Time": [
+            7.8,
+            8.5
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.0
+          ],
+          "Spray_2_Time": [
+            0.8,
+            1.0
+          ],
+          "prev_cycle_time": [
+            20.4,
+            652.3
+          ],
+          "max_cycle_previous_5": [
+            20.6,
+            652.3
+          ]
+        },
+        "encoded_target": "Machine_Status_numeric_code_1_semantics_unverified",
+        "threshold": {
+          "threshold": 1.0,
+          "disabled": false,
+          "reason": "eligible"
+        },
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 2288,
+          "run_ids": [
+            0,
+            1
+          ],
+          "fit_row_ids_sha256": "aac7eef9ad4b81d738aeb3ef559c5200cc6108039c44d22ce79d576f39e15012",
+          "products": null,
+          "product_mapping": "not_recorded_for_all_state_training_rows"
+        }
+      }
+    },
+    "queue-fold4-seed71": {
+      "quality": {
+        "fold": "4",
+        "seed": 71,
+        "task": "quality",
+        "model": "lightgbm",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "Melting_Furnace_Temp",
+          "Air_Pressure",
+          "Coolant_Temp",
+          "Coolant_Pressure",
+          "Factory_Temp",
+          "Factory_Humidity",
+          "Product_Type",
+          "shot_position"
+        ],
+        "path": "reports/oct03_queue/models/4__quality__lightgbm__71.joblib",
+        "sha256": "dc7b4a29c26a0ac170ea6dacfa52dd2a934b0a4491544955e385656ab3746c1f",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.148
+          ],
+          "Velocity_2": [
+            0.162,
+            0.174
+          ],
+          "Velocity_3": [
+            0.172,
+            0.19
+          ],
+          "High_Velocity": [
+            0.0,
+            2.23
+          ],
+          "Cylinder_Pressure": [
+            108.0,
+            219.0
+          ],
+          "Rapid_Rise_Time": [
+            0.0,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            0.0,
+            22.0
+          ],
+          "Clamping_Force": [
+            238.0,
+            263.0
+          ],
+          "Cycle_Time": [
+            20.4,
+            173.0
+          ],
+          "Pressure_Rise_Time": [
+            0.0,
+            0.046
+          ],
+          "Casting_Pressure": [
+            525.0,
+            1060.0
+          ],
+          "Spray_Time": [
+            7.8,
+            8.5
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.0
+          ],
+          "Spray_2_Time": [
+            0.8,
+            1.0
+          ],
+          "Melting_Furnace_Temp": [
+            671.0,
+            730.0
+          ],
+          "Air_Pressure": [
+            4.9,
+            7.0
+          ],
+          "Coolant_Temp": [
+            25.9,
+            27.4
+          ],
+          "Coolant_Pressure": [
+            2.66,
+            2.79
+          ],
+          "Factory_Temp": [
+            30.6,
+            37.0
+          ],
+          "Factory_Humidity": [
+            45.5,
+            69.5
+          ],
+          "Product_Type": [
+            1.0,
+            1.0
+          ],
+          "shot_position": [
+            0.0,
+            1156.0
+          ]
+        },
+        "encoded_target": "any_recorded_quality_defect_equals_1",
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 2256,
+          "run_ids": [
+            0,
+            1
+          ],
+          "fit_row_ids_sha256": "e0faebf797db1cfac6a71ffcb19b22f303359ff126321e81d26b78c26553e4a7",
+          "products": [
+            1
+          ]
+        }
+      },
+      "gate": {
+        "fold": "4",
+        "seed": 71,
+        "task": "gate",
+        "model": "logistic",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "prev_cycle_time",
+          "max_cycle_previous_5"
+        ],
+        "path": "reports/oct03_queue/models/4__gate__logistic__71.joblib",
+        "sha256": "e84093e085be2063942dbf8c1115fe9456244229195112f23d3f6f94610259e5",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.148
+          ],
+          "Velocity_2": [
+            0.162,
+            0.174
+          ],
+          "Velocity_3": [
+            0.172,
+            0.19
+          ],
+          "High_Velocity": [
+            0.0,
+            2.23
+          ],
+          "Cylinder_Pressure": [
+            108.0,
+            219.0
+          ],
+          "Rapid_Rise_Time": [
+            0.0,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            0.0,
+            22.0
+          ],
+          "Clamping_Force": [
+            222.0,
+            263.0
+          ],
+          "Cycle_Time": [
+            20.4,
+            652.3
+          ],
+          "Pressure_Rise_Time": [
+            0.0,
+            1.49
+          ],
+          "Casting_Pressure": [
+            522.0,
+            1062.0
+          ],
+          "Spray_Time": [
+            7.8,
+            8.5
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.0
+          ],
+          "Spray_2_Time": [
+            0.8,
+            1.0
+          ],
+          "prev_cycle_time": [
+            20.4,
+            652.3
+          ],
+          "max_cycle_previous_5": [
+            20.6,
+            652.3
+          ]
+        },
+        "encoded_target": "Machine_Status_numeric_code_1_semantics_unverified",
+        "threshold": {
+          "threshold": 1.0,
+          "disabled": false,
+          "reason": "eligible"
+        },
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 2288,
+          "run_ids": [
+            0,
+            1
+          ],
+          "fit_row_ids_sha256": "aac7eef9ad4b81d738aeb3ef559c5200cc6108039c44d22ce79d576f39e15012",
+          "products": null,
+          "product_mapping": "not_recorded_for_all_state_training_rows"
+        }
+      }
+    },
+    "queue-fold4-seed101": {
+      "quality": {
+        "fold": "4",
+        "seed": 101,
+        "task": "quality",
+        "model": "lightgbm",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "Melting_Furnace_Temp",
+          "Air_Pressure",
+          "Coolant_Temp",
+          "Coolant_Pressure",
+          "Factory_Temp",
+          "Factory_Humidity",
+          "Product_Type",
+          "shot_position"
+        ],
+        "path": "reports/oct03_queue/models/4__quality__lightgbm__101.joblib",
+        "sha256": "5ee6970648b5647e3665da3604b878de16c5d5f08d572b6fb5a76455559512ef",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.148
+          ],
+          "Velocity_2": [
+            0.162,
+            0.174
+          ],
+          "Velocity_3": [
+            0.172,
+            0.19
+          ],
+          "High_Velocity": [
+            0.0,
+            2.23
+          ],
+          "Cylinder_Pressure": [
+            108.0,
+            219.0
+          ],
+          "Rapid_Rise_Time": [
+            0.0,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            0.0,
+            22.0
+          ],
+          "Clamping_Force": [
+            238.0,
+            263.0
+          ],
+          "Cycle_Time": [
+            20.4,
+            173.0
+          ],
+          "Pressure_Rise_Time": [
+            0.0,
+            0.046
+          ],
+          "Casting_Pressure": [
+            525.0,
+            1060.0
+          ],
+          "Spray_Time": [
+            7.8,
+            8.5
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.0
+          ],
+          "Spray_2_Time": [
+            0.8,
+            1.0
+          ],
+          "Melting_Furnace_Temp": [
+            671.0,
+            730.0
+          ],
+          "Air_Pressure": [
+            4.9,
+            7.0
+          ],
+          "Coolant_Temp": [
+            25.9,
+            27.4
+          ],
+          "Coolant_Pressure": [
+            2.66,
+            2.79
+          ],
+          "Factory_Temp": [
+            30.6,
+            37.0
+          ],
+          "Factory_Humidity": [
+            45.5,
+            69.5
+          ],
+          "Product_Type": [
+            1.0,
+            1.0
+          ],
+          "shot_position": [
+            0.0,
+            1156.0
+          ]
+        },
+        "encoded_target": "any_recorded_quality_defect_equals_1",
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 2256,
+          "run_ids": [
+            0,
+            1
+          ],
+          "fit_row_ids_sha256": "e0faebf797db1cfac6a71ffcb19b22f303359ff126321e81d26b78c26553e4a7",
+          "products": [
+            1
+          ]
+        }
+      },
+      "gate": {
+        "fold": "4",
+        "seed": 101,
+        "task": "gate",
+        "model": "logistic",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "prev_cycle_time",
+          "max_cycle_previous_5"
+        ],
+        "path": "reports/oct03_queue/models/4__gate__logistic__101.joblib",
+        "sha256": "b6c3762c6b1be390b2d20587223f40d56e50c2c94aed535b58ca656583b4d438",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.148
+          ],
+          "Velocity_2": [
+            0.162,
+            0.174
+          ],
+          "Velocity_3": [
+            0.172,
+            0.19
+          ],
+          "High_Velocity": [
+            0.0,
+            2.23
+          ],
+          "Cylinder_Pressure": [
+            108.0,
+            219.0
+          ],
+          "Rapid_Rise_Time": [
+            0.0,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            0.0,
+            22.0
+          ],
+          "Clamping_Force": [
+            222.0,
+            263.0
+          ],
+          "Cycle_Time": [
+            20.4,
+            652.3
+          ],
+          "Pressure_Rise_Time": [
+            0.0,
+            1.49
+          ],
+          "Casting_Pressure": [
+            522.0,
+            1062.0
+          ],
+          "Spray_Time": [
+            7.8,
+            8.5
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.0
+          ],
+          "Spray_2_Time": [
+            0.8,
+            1.0
+          ],
+          "prev_cycle_time": [
+            20.4,
+            652.3
+          ],
+          "max_cycle_previous_5": [
+            20.6,
+            652.3
+          ]
+        },
+        "encoded_target": "Machine_Status_numeric_code_1_semantics_unverified",
+        "threshold": {
+          "threshold": 1.0,
+          "disabled": false,
+          "reason": "eligible"
+        },
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 2288,
+          "run_ids": [
+            0,
+            1
+          ],
+          "fit_row_ids_sha256": "aac7eef9ad4b81d738aeb3ef559c5200cc6108039c44d22ce79d576f39e15012",
+          "products": null,
+          "product_mapping": "not_recorded_for_all_state_training_rows"
+        }
+      }
+    },
+    "queue-fold6-seed17": {
+      "quality": {
+        "fold": "6",
+        "seed": 17,
+        "task": "quality",
+        "model": "logistic",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "Melting_Furnace_Temp",
+          "Air_Pressure",
+          "Coolant_Temp",
+          "Coolant_Pressure",
+          "Factory_Temp",
+          "Factory_Humidity",
+          "Product_Type",
+          "shot_position"
+        ],
+        "path": "reports/oct03_queue/models/6__quality__logistic__17.joblib",
+        "sha256": "977454557a3c2ec5c175d2e3cc8b9e5ef0492ae5e67bf7fd1bd6027dbbf011f5",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.18
+          ],
+          "Velocity_2": [
+            0.162,
+            0.212
+          ],
+          "Velocity_3": [
+            0.172,
+            0.234
+          ],
+          "High_Velocity": [
+            0.0,
+            2.285
+          ],
+          "Cylinder_Pressure": [
+            107.0,
+            241.0
+          ],
+          "Rapid_Rise_Time": [
+            0.0,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            0.0,
+            22.0
+          ],
+          "Clamping_Force": [
+            238.0,
+            263.0
+          ],
+          "Cycle_Time": [
+            20.2,
+            218.6
+          ],
+          "Pressure_Rise_Time": [
+            0.0,
+            0.046
+          ],
+          "Casting_Pressure": [
+            516.0,
+            1164.0
+          ],
+          "Spray_Time": [
+            7.0,
+            10.8
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.2
+          ],
+          "Spray_2_Time": [
+            0.7,
+            1.0
+          ],
+          "Melting_Furnace_Temp": [
+            671.0,
+            730.0
+          ],
+          "Air_Pressure": [
+            4.6,
+            7.1
+          ],
+          "Coolant_Temp": [
+            25.9,
+            28.1
+          ],
+          "Coolant_Pressure": [
+            2.59,
+            2.79
+          ],
+          "Factory_Temp": [
+            30.6,
+            37.0
+          ],
+          "Factory_Humidity": [
+            45.5,
+            70.7
+          ],
+          "Product_Type": [
+            1.0,
+            1.0
+          ],
+          "shot_position": [
+            0.0,
+            1156.0
+          ]
+        },
+        "encoded_target": "any_recorded_quality_defect_equals_1",
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 2653,
+          "run_ids": [
+            0,
+            1,
+            2
+          ],
+          "fit_row_ids_sha256": "43fcb65904bf3efaa49f0bd2ea2807adfd76f04731ce5b6d65e279c45868f719",
+          "products": [
+            1
+          ]
+        }
+      },
+      "gate": {
+        "fold": "6",
+        "seed": 17,
+        "task": "gate",
+        "model": "lightgbm",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "prev_cycle_time",
+          "max_cycle_previous_5"
+        ],
+        "path": "reports/oct03_queue/models/6__gate__lightgbm__17.joblib",
+        "sha256": "3c094a402623747e69ae8006f1e1a1591e43f8e1b271e2add6eebfecb10b2e87",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.18
+          ],
+          "Velocity_2": [
+            0.162,
+            0.212
+          ],
+          "Velocity_3": [
+            0.172,
+            0.234
+          ],
+          "High_Velocity": [
+            0.0,
+            2.285
+          ],
+          "Cylinder_Pressure": [
+            107.0,
+            241.0
+          ],
+          "Rapid_Rise_Time": [
+            0.0,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            0.0,
+            22.0
+          ],
+          "Clamping_Force": [
+            222.0,
+            263.0
+          ],
+          "Cycle_Time": [
+            20.2,
+            6170.0
+          ],
+          "Pressure_Rise_Time": [
+            0.0,
+            1.49
+          ],
+          "Casting_Pressure": [
+            516.0,
+            1164.0
+          ],
+          "Spray_Time": [
+            7.0,
+            10.8
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.2
+          ],
+          "Spray_2_Time": [
+            0.7,
+            1.0
+          ],
+          "prev_cycle_time": [
+            20.2,
+            6170.0
+          ],
+          "max_cycle_previous_5": [
+            20.3,
+            6170.0
+          ]
+        },
+        "encoded_target": "Machine_Status_numeric_code_1_semantics_unverified",
+        "threshold": {
+          "threshold": 0.25749819833831167,
+          "disabled": false,
+          "reason": "eligible"
+        },
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 2705,
+          "run_ids": [
+            0,
+            1,
+            2
+          ],
+          "fit_row_ids_sha256": "363537c40dee37ec013ab4cd19e53183396379002f327f2422f0607489288a33",
+          "products": null,
+          "product_mapping": "not_recorded_for_all_state_training_rows"
+        }
+      }
+    },
+    "queue-fold6-seed29": {
+      "quality": {
+        "fold": "6",
+        "seed": 29,
+        "task": "quality",
+        "model": "logistic",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "Melting_Furnace_Temp",
+          "Air_Pressure",
+          "Coolant_Temp",
+          "Coolant_Pressure",
+          "Factory_Temp",
+          "Factory_Humidity",
+          "Product_Type",
+          "shot_position"
+        ],
+        "path": "reports/oct03_queue/models/6__quality__logistic__29.joblib",
+        "sha256": "0399559da82395bb9802fbbc406766ce009941bf2db469abd24f283923fcd90c",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.18
+          ],
+          "Velocity_2": [
+            0.162,
+            0.212
+          ],
+          "Velocity_3": [
+            0.172,
+            0.234
+          ],
+          "High_Velocity": [
+            0.0,
+            2.285
+          ],
+          "Cylinder_Pressure": [
+            107.0,
+            241.0
+          ],
+          "Rapid_Rise_Time": [
+            0.0,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            0.0,
+            22.0
+          ],
+          "Clamping_Force": [
+            238.0,
+            263.0
+          ],
+          "Cycle_Time": [
+            20.2,
+            218.6
+          ],
+          "Pressure_Rise_Time": [
+            0.0,
+            0.046
+          ],
+          "Casting_Pressure": [
+            516.0,
+            1164.0
+          ],
+          "Spray_Time": [
+            7.0,
+            10.8
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.2
+          ],
+          "Spray_2_Time": [
+            0.7,
+            1.0
+          ],
+          "Melting_Furnace_Temp": [
+            671.0,
+            730.0
+          ],
+          "Air_Pressure": [
+            4.6,
+            7.1
+          ],
+          "Coolant_Temp": [
+            25.9,
+            28.1
+          ],
+          "Coolant_Pressure": [
+            2.59,
+            2.79
+          ],
+          "Factory_Temp": [
+            30.6,
+            37.0
+          ],
+          "Factory_Humidity": [
+            45.5,
+            70.7
+          ],
+          "Product_Type": [
+            1.0,
+            1.0
+          ],
+          "shot_position": [
+            0.0,
+            1156.0
+          ]
+        },
+        "encoded_target": "any_recorded_quality_defect_equals_1",
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 2653,
+          "run_ids": [
+            0,
+            1,
+            2
+          ],
+          "fit_row_ids_sha256": "43fcb65904bf3efaa49f0bd2ea2807adfd76f04731ce5b6d65e279c45868f719",
+          "products": [
+            1
+          ]
+        }
+      },
+      "gate": {
+        "fold": "6",
+        "seed": 29,
+        "task": "gate",
+        "model": "lightgbm",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "prev_cycle_time",
+          "max_cycle_previous_5"
+        ],
+        "path": "reports/oct03_queue/models/6__gate__lightgbm__29.joblib",
+        "sha256": "a2be5f481e80583905ec2684693619e5a79ec041a7dcab9aee6ff6a22072755a",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.18
+          ],
+          "Velocity_2": [
+            0.162,
+            0.212
+          ],
+          "Velocity_3": [
+            0.172,
+            0.234
+          ],
+          "High_Velocity": [
+            0.0,
+            2.285
+          ],
+          "Cylinder_Pressure": [
+            107.0,
+            241.0
+          ],
+          "Rapid_Rise_Time": [
+            0.0,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            0.0,
+            22.0
+          ],
+          "Clamping_Force": [
+            222.0,
+            263.0
+          ],
+          "Cycle_Time": [
+            20.2,
+            6170.0
+          ],
+          "Pressure_Rise_Time": [
+            0.0,
+            1.49
+          ],
+          "Casting_Pressure": [
+            516.0,
+            1164.0
+          ],
+          "Spray_Time": [
+            7.0,
+            10.8
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.2
+          ],
+          "Spray_2_Time": [
+            0.7,
+            1.0
+          ],
+          "prev_cycle_time": [
+            20.2,
+            6170.0
+          ],
+          "max_cycle_previous_5": [
+            20.3,
+            6170.0
+          ]
+        },
+        "encoded_target": "Machine_Status_numeric_code_1_semantics_unverified",
+        "threshold": {
+          "threshold": 0.10573547299975876,
+          "disabled": false,
+          "reason": "eligible"
+        },
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 2705,
+          "run_ids": [
+            0,
+            1,
+            2
+          ],
+          "fit_row_ids_sha256": "363537c40dee37ec013ab4cd19e53183396379002f327f2422f0607489288a33",
+          "products": null,
+          "product_mapping": "not_recorded_for_all_state_training_rows"
+        }
+      }
+    },
+    "queue-fold6-seed43": {
+      "quality": {
+        "fold": "6",
+        "seed": 43,
+        "task": "quality",
+        "model": "logistic",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "Melting_Furnace_Temp",
+          "Air_Pressure",
+          "Coolant_Temp",
+          "Coolant_Pressure",
+          "Factory_Temp",
+          "Factory_Humidity",
+          "Product_Type",
+          "shot_position"
+        ],
+        "path": "reports/oct03_queue/models/6__quality__logistic__43.joblib",
+        "sha256": "e9ab460dc8b57534edeaba20cbd3a981cb922a3e300c3e4be0fcb88e06999fa3",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.18
+          ],
+          "Velocity_2": [
+            0.162,
+            0.212
+          ],
+          "Velocity_3": [
+            0.172,
+            0.234
+          ],
+          "High_Velocity": [
+            0.0,
+            2.285
+          ],
+          "Cylinder_Pressure": [
+            107.0,
+            241.0
+          ],
+          "Rapid_Rise_Time": [
+            0.0,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            0.0,
+            22.0
+          ],
+          "Clamping_Force": [
+            238.0,
+            263.0
+          ],
+          "Cycle_Time": [
+            20.2,
+            218.6
+          ],
+          "Pressure_Rise_Time": [
+            0.0,
+            0.046
+          ],
+          "Casting_Pressure": [
+            516.0,
+            1164.0
+          ],
+          "Spray_Time": [
+            7.0,
+            10.8
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.2
+          ],
+          "Spray_2_Time": [
+            0.7,
+            1.0
+          ],
+          "Melting_Furnace_Temp": [
+            671.0,
+            730.0
+          ],
+          "Air_Pressure": [
+            4.6,
+            7.1
+          ],
+          "Coolant_Temp": [
+            25.9,
+            28.1
+          ],
+          "Coolant_Pressure": [
+            2.59,
+            2.79
+          ],
+          "Factory_Temp": [
+            30.6,
+            37.0
+          ],
+          "Factory_Humidity": [
+            45.5,
+            70.7
+          ],
+          "Product_Type": [
+            1.0,
+            1.0
+          ],
+          "shot_position": [
+            0.0,
+            1156.0
+          ]
+        },
+        "encoded_target": "any_recorded_quality_defect_equals_1",
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 2653,
+          "run_ids": [
+            0,
+            1,
+            2
+          ],
+          "fit_row_ids_sha256": "43fcb65904bf3efaa49f0bd2ea2807adfd76f04731ce5b6d65e279c45868f719",
+          "products": [
+            1
+          ]
+        }
+      },
+      "gate": {
+        "fold": "6",
+        "seed": 43,
+        "task": "gate",
+        "model": "lightgbm",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "prev_cycle_time",
+          "max_cycle_previous_5"
+        ],
+        "path": "reports/oct03_queue/models/6__gate__lightgbm__43.joblib",
+        "sha256": "c9d10f6f205969afbc6cea6daa0b4153482b29a627e329f403cc9b5dc82087a5",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.18
+          ],
+          "Velocity_2": [
+            0.162,
+            0.212
+          ],
+          "Velocity_3": [
+            0.172,
+            0.234
+          ],
+          "High_Velocity": [
+            0.0,
+            2.285
+          ],
+          "Cylinder_Pressure": [
+            107.0,
+            241.0
+          ],
+          "Rapid_Rise_Time": [
+            0.0,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            0.0,
+            22.0
+          ],
+          "Clamping_Force": [
+            222.0,
+            263.0
+          ],
+          "Cycle_Time": [
+            20.2,
+            6170.0
+          ],
+          "Pressure_Rise_Time": [
+            0.0,
+            1.49
+          ],
+          "Casting_Pressure": [
+            516.0,
+            1164.0
+          ],
+          "Spray_Time": [
+            7.0,
+            10.8
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.2
+          ],
+          "Spray_2_Time": [
+            0.7,
+            1.0
+          ],
+          "prev_cycle_time": [
+            20.2,
+            6170.0
+          ],
+          "max_cycle_previous_5": [
+            20.3,
+            6170.0
+          ]
+        },
+        "encoded_target": "Machine_Status_numeric_code_1_semantics_unverified",
+        "threshold": {
+          "threshold": 0.18703455227672905,
+          "disabled": false,
+          "reason": "eligible"
+        },
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 2705,
+          "run_ids": [
+            0,
+            1,
+            2
+          ],
+          "fit_row_ids_sha256": "363537c40dee37ec013ab4cd19e53183396379002f327f2422f0607489288a33",
+          "products": null,
+          "product_mapping": "not_recorded_for_all_state_training_rows"
+        }
+      }
+    },
+    "queue-fold6-seed71": {
+      "quality": {
+        "fold": "6",
+        "seed": 71,
+        "task": "quality",
+        "model": "logistic",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "Melting_Furnace_Temp",
+          "Air_Pressure",
+          "Coolant_Temp",
+          "Coolant_Pressure",
+          "Factory_Temp",
+          "Factory_Humidity",
+          "Product_Type",
+          "shot_position"
+        ],
+        "path": "reports/oct03_queue/models/6__quality__logistic__71.joblib",
+        "sha256": "127407a9d9a6b82c0df8792e358c89ca9396c5bd7e3153fcf21044e34fc1d517",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.18
+          ],
+          "Velocity_2": [
+            0.162,
+            0.212
+          ],
+          "Velocity_3": [
+            0.172,
+            0.234
+          ],
+          "High_Velocity": [
+            0.0,
+            2.285
+          ],
+          "Cylinder_Pressure": [
+            107.0,
+            241.0
+          ],
+          "Rapid_Rise_Time": [
+            0.0,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            0.0,
+            22.0
+          ],
+          "Clamping_Force": [
+            238.0,
+            263.0
+          ],
+          "Cycle_Time": [
+            20.2,
+            218.6
+          ],
+          "Pressure_Rise_Time": [
+            0.0,
+            0.046
+          ],
+          "Casting_Pressure": [
+            516.0,
+            1164.0
+          ],
+          "Spray_Time": [
+            7.0,
+            10.8
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.2
+          ],
+          "Spray_2_Time": [
+            0.7,
+            1.0
+          ],
+          "Melting_Furnace_Temp": [
+            671.0,
+            730.0
+          ],
+          "Air_Pressure": [
+            4.6,
+            7.1
+          ],
+          "Coolant_Temp": [
+            25.9,
+            28.1
+          ],
+          "Coolant_Pressure": [
+            2.59,
+            2.79
+          ],
+          "Factory_Temp": [
+            30.6,
+            37.0
+          ],
+          "Factory_Humidity": [
+            45.5,
+            70.7
+          ],
+          "Product_Type": [
+            1.0,
+            1.0
+          ],
+          "shot_position": [
+            0.0,
+            1156.0
+          ]
+        },
+        "encoded_target": "any_recorded_quality_defect_equals_1",
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 2653,
+          "run_ids": [
+            0,
+            1,
+            2
+          ],
+          "fit_row_ids_sha256": "43fcb65904bf3efaa49f0bd2ea2807adfd76f04731ce5b6d65e279c45868f719",
+          "products": [
+            1
+          ]
+        }
+      },
+      "gate": {
+        "fold": "6",
+        "seed": 71,
+        "task": "gate",
+        "model": "lightgbm",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "prev_cycle_time",
+          "max_cycle_previous_5"
+        ],
+        "path": "reports/oct03_queue/models/6__gate__lightgbm__71.joblib",
+        "sha256": "751c55f957a72fac00440a7faa7b8da09e902765157e5759e801513cb013a311",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.18
+          ],
+          "Velocity_2": [
+            0.162,
+            0.212
+          ],
+          "Velocity_3": [
+            0.172,
+            0.234
+          ],
+          "High_Velocity": [
+            0.0,
+            2.285
+          ],
+          "Cylinder_Pressure": [
+            107.0,
+            241.0
+          ],
+          "Rapid_Rise_Time": [
+            0.0,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            0.0,
+            22.0
+          ],
+          "Clamping_Force": [
+            222.0,
+            263.0
+          ],
+          "Cycle_Time": [
+            20.2,
+            6170.0
+          ],
+          "Pressure_Rise_Time": [
+            0.0,
+            1.49
+          ],
+          "Casting_Pressure": [
+            516.0,
+            1164.0
+          ],
+          "Spray_Time": [
+            7.0,
+            10.8
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.2
+          ],
+          "Spray_2_Time": [
+            0.7,
+            1.0
+          ],
+          "prev_cycle_time": [
+            20.2,
+            6170.0
+          ],
+          "max_cycle_previous_5": [
+            20.3,
+            6170.0
+          ]
+        },
+        "encoded_target": "Machine_Status_numeric_code_1_semantics_unverified",
+        "threshold": {
+          "threshold": 0.09249668967154892,
+          "disabled": false,
+          "reason": "eligible"
+        },
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 2705,
+          "run_ids": [
+            0,
+            1,
+            2
+          ],
+          "fit_row_ids_sha256": "363537c40dee37ec013ab4cd19e53183396379002f327f2422f0607489288a33",
+          "products": null,
+          "product_mapping": "not_recorded_for_all_state_training_rows"
+        }
+      }
+    },
+    "queue-fold6-seed101": {
+      "quality": {
+        "fold": "6",
+        "seed": 101,
+        "task": "quality",
+        "model": "logistic",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "Melting_Furnace_Temp",
+          "Air_Pressure",
+          "Coolant_Temp",
+          "Coolant_Pressure",
+          "Factory_Temp",
+          "Factory_Humidity",
+          "Product_Type",
+          "shot_position"
+        ],
+        "path": "reports/oct03_queue/models/6__quality__logistic__101.joblib",
+        "sha256": "12bbc09341ddb909d193dc0714bfad0505a35f4a6472d87490da23cc6b17ef2a",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.18
+          ],
+          "Velocity_2": [
+            0.162,
+            0.212
+          ],
+          "Velocity_3": [
+            0.172,
+            0.234
+          ],
+          "High_Velocity": [
+            0.0,
+            2.285
+          ],
+          "Cylinder_Pressure": [
+            107.0,
+            241.0
+          ],
+          "Rapid_Rise_Time": [
+            0.0,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            0.0,
+            22.0
+          ],
+          "Clamping_Force": [
+            238.0,
+            263.0
+          ],
+          "Cycle_Time": [
+            20.2,
+            218.6
+          ],
+          "Pressure_Rise_Time": [
+            0.0,
+            0.046
+          ],
+          "Casting_Pressure": [
+            516.0,
+            1164.0
+          ],
+          "Spray_Time": [
+            7.0,
+            10.8
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.2
+          ],
+          "Spray_2_Time": [
+            0.7,
+            1.0
+          ],
+          "Melting_Furnace_Temp": [
+            671.0,
+            730.0
+          ],
+          "Air_Pressure": [
+            4.6,
+            7.1
+          ],
+          "Coolant_Temp": [
+            25.9,
+            28.1
+          ],
+          "Coolant_Pressure": [
+            2.59,
+            2.79
+          ],
+          "Factory_Temp": [
+            30.6,
+            37.0
+          ],
+          "Factory_Humidity": [
+            45.5,
+            70.7
+          ],
+          "Product_Type": [
+            1.0,
+            1.0
+          ],
+          "shot_position": [
+            0.0,
+            1156.0
+          ]
+        },
+        "encoded_target": "any_recorded_quality_defect_equals_1",
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 2653,
+          "run_ids": [
+            0,
+            1,
+            2
+          ],
+          "fit_row_ids_sha256": "43fcb65904bf3efaa49f0bd2ea2807adfd76f04731ce5b6d65e279c45868f719",
+          "products": [
+            1
+          ]
+        }
+      },
+      "gate": {
+        "fold": "6",
+        "seed": 101,
+        "task": "gate",
+        "model": "lightgbm",
+        "features": [
+          "Velocity_1",
+          "Velocity_2",
+          "Velocity_3",
+          "High_Velocity",
+          "Cylinder_Pressure",
+          "Rapid_Rise_Time",
+          "Biscuit_Thickness",
+          "Clamping_Force",
+          "Cycle_Time",
+          "Pressure_Rise_Time",
+          "Casting_Pressure",
+          "Spray_Time",
+          "Spray_1_Time",
+          "Spray_2_Time",
+          "prev_cycle_time",
+          "max_cycle_previous_5"
+        ],
+        "path": "reports/oct03_queue/models/6__gate__lightgbm__101.joblib",
+        "sha256": "4c566e96b6b6ea8dc53f4953599b00fb4ca7f0563eaf383b79e09517e436d085",
+        "ranges": {
+          "Velocity_1": [
+            0.134,
+            0.18
+          ],
+          "Velocity_2": [
+            0.162,
+            0.212
+          ],
+          "Velocity_3": [
+            0.172,
+            0.234
+          ],
+          "High_Velocity": [
+            0.0,
+            2.285
+          ],
+          "Cylinder_Pressure": [
+            107.0,
+            241.0
+          ],
+          "Rapid_Rise_Time": [
+            0.0,
+            0.021
+          ],
+          "Biscuit_Thickness": [
+            0.0,
+            22.0
+          ],
+          "Clamping_Force": [
+            222.0,
+            263.0
+          ],
+          "Cycle_Time": [
+            20.2,
+            6170.0
+          ],
+          "Pressure_Rise_Time": [
+            0.0,
+            1.49
+          ],
+          "Casting_Pressure": [
+            516.0,
+            1164.0
+          ],
+          "Spray_Time": [
+            7.0,
+            10.8
+          ],
+          "Spray_1_Time": [
+            0.7,
+            1.2
+          ],
+          "Spray_2_Time": [
+            0.7,
+            1.0
+          ],
+          "prev_cycle_time": [
+            20.2,
+            6170.0
+          ],
+          "max_cycle_previous_5": [
+            20.3,
+            6170.0
+          ]
+        },
+        "encoded_target": "Machine_Status_numeric_code_1_semantics_unverified",
+        "threshold": {
+          "threshold": 0.19881373431987762,
+          "disabled": false,
+          "reason": "eligible"
+        },
+        "training_reference": {
+          "partition": "inner_fit_only",
+          "rows": 2705,
+          "run_ids": [
+            0,
+            1,
+            2
+          ],
+          "fit_row_ids_sha256": "363537c40dee37ec013ab4cd19e53183396379002f327f2422f0607489288a33",
+          "products": null,
+          "product_mapping": "not_recorded_for_all_state_training_rows"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "comparison": "S_FB vs S",
+  "seed": 17,
+  "method": "whole_run_cluster_bootstrap",
+  "runs": 6,
+  "replicates": 1000,
+  "ap_difference": 0.013165691610167285,
+  "lower": -0.036465134588467896,
+  "upper": 0.09134365647452874,
+  "interpretation": "exploratory on reused test; model selection and field shifts not included"
+}
