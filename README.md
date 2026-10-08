@@ -1,3 +1,13 @@
+## 10/8 연구 및 제출 산출물
+
+현재 제출 폴더에는 [보고서 PDF](submission/CastGuard_report.pdf), [발표 PDF](submission/CastGuard_presentation.pdf), [발표 PPTX](submission/CastGuard_presentation.pptx), [소스 ZIP](submission/CastGuard_source.zip)이 있습니다. 모델 탐색·데이터 교차 비교·시간 창 집계 실험 코드와 계획을 함께 보관합니다.
+
+추가 입력의 일관된 품질 개선은 입증되지 않아 기존 S_FB logistic 판독 모델을 유지합니다. 재사용 test의 AUC 0.7378/AP 0.3845는 독립·현장 검증 성과가 아닙니다. [실험 계획](docs/OCT08_CROSSED_SEARCH_PROTOCOL.md)을 참고하세요.
+
+서명 및 포털 접수 여부는 이번 Git 게시 작업에서 확인하지 않았습니다. 아래는 이전 회차의 기록으로 현재 파일 구성과 다를 수 있습니다.
+
+---
+
 # CastGuard · 소스와 검증 코드
 
 ## 제출 후보 완성 · 2026-10-06 23:55 KST

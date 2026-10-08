@@ -1,0 +1,2168 @@
+{
+  "candidates": [
+    {
+      "id": "xgboost_refine00_S_FB",
+      "family": "xgboost",
+      "representation": "S_FB",
+      "params": {
+        "max_depth": 1,
+        "learning_rate": 0.054577511205687344,
+        "min_child_weight": 1.0,
+        "reg_lambda": 0.16993199403708398,
+        "reg_alpha": 0.1,
+        "subsample": 1.0,
+        "colsample_bytree": 0.5,
+        "max_bin": 64
+      }
+    },
+    {
+      "id": "xgboost_refine00_SH_FB",
+      "family": "xgboost",
+      "representation": "SH_FB",
+      "params": {
+        "max_depth": 1,
+        "learning_rate": 0.054577511205687344,
+        "min_child_weight": 1.0,
+        "reg_lambda": 0.16993199403708398,
+        "reg_alpha": 0.1,
+        "subsample": 1.0,
+        "colsample_bytree": 0.5,
+        "max_bin": 64
+      }
+    },
+    {
+      "id": "xgboost_refine01_S_FB",
+      "family": "xgboost",
+      "representation": "S_FB",
+      "params": {
+        "max_depth": 4,
+        "learning_rate": 0.007420309753620262,
+        "min_child_weight": 15.0,
+        "reg_lambda": 0.5255643785724005,
+        "reg_alpha": 0.1,
+        "subsample": 0.8,
+        "colsample_bytree": 1.0,
+        "max_bin": 256
+      }
+    },
+    {
+      "id": "xgboost_refine01_SH_FB",
+      "family": "xgboost",
+      "representation": "SH_FB",
+      "params": {
+        "max_depth": 4,
+        "learning_rate": 0.007420309753620262,
+        "min_child_weight": 15.0,
+        "reg_lambda": 0.5255643785724005,
+        "reg_alpha": 0.1,
+        "subsample": 0.8,
+        "colsample_bytree": 1.0,
+        "max_bin": 256
+      }
+    },
+    {
+      "id": "xgboost_refine02_S_FB",
+      "family": "xgboost",
+      "representation": "S_FB",
+      "params": {
+        "max_depth": 2,
+        "learning_rate": 0.009337596402116708,
+        "min_child_weight": 8.0,
+        "reg_lambda": 17.821144856937334,
+        "reg_alpha": 0.1,
+        "subsample": 0.8,
+        "colsample_bytree": 0.5,
+        "max_bin": 128
+      }
+    },
+    {
+      "id": "xgboost_refine02_SH_FB",
+      "family": "xgboost",
+      "representation": "SH_FB",
+      "params": {
+        "max_depth": 2,
+        "learning_rate": 0.009337596402116708,
+        "min_child_weight": 8.0,
+        "reg_lambda": 17.821144856937334,
+        "reg_alpha": 0.1,
+        "subsample": 0.8,
+        "colsample_bytree": 0.5,
+        "max_bin": 128
+      }
+    },
+    {
+      "id": "xgboost_refine03_S_FB",
+      "family": "xgboost",
+      "representation": "S_FB",
+      "params": {
+        "max_depth": 3,
+        "learning_rate": 0.10575483939124393,
+        "min_child_weight": 3.0,
+        "reg_lambda": 0.0316337629766366,
+        "reg_alpha": 5.0,
+        "subsample": 0.8,
+        "colsample_bytree": 1.0,
+        "max_bin": 256
+      }
+    },
+    {
+      "id": "xgboost_refine03_SH_FB",
+      "family": "xgboost",
+      "representation": "SH_FB",
+      "params": {
+        "max_depth": 3,
+        "learning_rate": 0.10575483939124393,
+        "min_child_weight": 3.0,
+        "reg_lambda": 0.0316337629766366,
+        "reg_alpha": 5.0,
+        "subsample": 0.8,
+        "colsample_bytree": 1.0,
+        "max_bin": 256
+      }
+    },
+    {
+      "id": "xgboost_refine04_S_FB",
+      "family": "xgboost",
+      "representation": "S_FB",
+      "params": {
+        "max_depth": 2,
+        "learning_rate": 0.018580409895001426,
+        "min_child_weight": 1.0,
+        "reg_lambda": 0.11030922616679767,
+        "reg_alpha": 0.0,
+        "subsample": 0.8,
+        "colsample_bytree": 0.8,
+        "max_bin": 128
+      }
+    },
+    {
+      "id": "xgboost_refine04_SH_FB",
+      "family": "xgboost",
+      "representation": "SH_FB",
+      "params": {
+        "max_depth": 2,
+        "learning_rate": 0.018580409895001426,
+        "min_child_weight": 1.0,
+        "reg_lambda": 0.11030922616679767,
+        "reg_alpha": 0.0,
+        "subsample": 0.8,
+        "colsample_bytree": 0.8,
+        "max_bin": 128
+      }
+    },
+    {
+      "id": "xgboost_refine05_S_FB",
+      "family": "xgboost",
+      "representation": "S_FB",
+      "params": {
+        "max_depth": 6,
+        "learning_rate": 0.05161717256508892,
+        "min_child_weight": 3.0,
+        "reg_lambda": 67.95133045968804,
+        "reg_alpha": 0.01,
+        "subsample": 0.6,
+        "colsample_bytree": 1.0,
+        "max_bin": 64
+      }
+    },
+    {
+      "id": "xgboost_refine05_SH_FB",
+      "family": "xgboost",
+      "representation": "SH_FB",
+      "params": {
+        "max_depth": 6,
+        "learning_rate": 0.05161717256508892,
+        "min_child_weight": 3.0,
+        "reg_lambda": 67.95133045968804,
+        "reg_alpha": 0.01,
+        "subsample": 0.6,
+        "colsample_bytree": 1.0,
+        "max_bin": 64
+      }
+    },
+    {
+      "id": "xgboost_refine06_S_FB",
+      "family": "xgboost",
+      "representation": "S_FB",
+      "params": {
+        "max_depth": 4,
+        "learning_rate": 0.032650398866502006,
+        "min_child_weight": 15.0,
+        "reg_lambda": 0.3160998694213525,
+        "reg_alpha": 0.1,
+        "subsample": 0.6,
+        "colsample_bytree": 0.5,
+        "max_bin": 32
+      }
+    },
+    {
+      "id": "xgboost_refine06_SH_FB",
+      "family": "xgboost",
+      "representation": "SH_FB",
+      "params": {
+        "max_depth": 4,
+        "learning_rate": 0.032650398866502006,
+        "min_child_weight": 15.0,
+        "reg_lambda": 0.3160998694213525,
+        "reg_alpha": 0.1,
+        "subsample": 0.6,
+        "colsample_bytree": 0.5,
+        "max_bin": 32
+      }
+    },
+    {
+      "id": "xgboost_refine07_S_FB",
+      "family": "xgboost",
+      "representation": "S_FB",
+      "params": {
+        "max_depth": 3,
+        "learning_rate": 0.17745172905902432,
+        "min_child_weight": 8.0,
+        "reg_lambda": 0.0564150608713587,
+        "reg_alpha": 5.0,
+        "subsample": 1.0,
+        "colsample_bytree": 0.5,
+        "max_bin": 64
+      }
+    },
+    {
+      "id": "xgboost_refine07_SH_FB",
+      "family": "xgboost",
+      "representation": "SH_FB",
+      "params": {
+        "max_depth": 3,
+        "learning_rate": 0.17745172905902432,
+        "min_child_weight": 8.0,
+        "reg_lambda": 0.0564150608713587,
+        "reg_alpha": 5.0,
+        "subsample": 1.0,
+        "colsample_bytree": 0.5,
+        "max_bin": 64
+      }
+    },
+    {
+      "id": "xgboost_refine08_S_FB",
+      "family": "xgboost",
+      "representation": "S_FB",
+      "params": {
+        "max_depth": 6,
+        "learning_rate": 0.13349026873043301,
+        "min_child_weight": 8.0,
+        "reg_lambda": 0.028569130691394093,
+        "reg_alpha": 0.01,
+        "subsample": 0.8,
+        "colsample_bytree": 0.8,
+        "max_bin": 32
+      }
+    },
+    {
+      "id": "xgboost_refine08_SH_FB",
+      "family": "xgboost",
+      "representation": "SH_FB",
+      "params": {
+        "max_depth": 6,
+        "learning_rate": 0.13349026873043301,
+        "min_child_weight": 8.0,
+        "reg_lambda": 0.028569130691394093,
+        "reg_alpha": 0.01,
+        "subsample": 0.8,
+        "colsample_bytree": 0.8,
+        "max_bin": 32
+      }
+    },
+    {
+      "id": "xgboost_refine09_S_FB",
+      "family": "xgboost",
+      "representation": "S_FB",
+      "params": {
+        "max_depth": 8,
+        "learning_rate": 0.16456404460286433,
+        "min_child_weight": 30.0,
+        "reg_lambda": 0.21845992494567557,
+        "reg_alpha": 0.0,
+        "subsample": 0.8,
+        "colsample_bytree": 1.0,
+        "max_bin": 64
+      }
+    },
+    {
+      "id": "xgboost_refine09_SH_FB",
+      "family": "xgboost",
+      "representation": "SH_FB",
+      "params": {
+        "max_depth": 8,
+        "learning_rate": 0.16456404460286433,
+        "min_child_weight": 30.0,
+        "reg_lambda": 0.21845992494567557,
+        "reg_alpha": 0.0,
+        "subsample": 0.8,
+        "colsample_bytree": 1.0,
+        "max_bin": 64
+      }
+    },
+    {
+      "id": "xgboost_refine10_S_FB",
+      "family": "xgboost",
+      "representation": "S_FB",
+      "params": {
+        "max_depth": 4,
+        "learning_rate": 0.018672069791719967,
+        "min_child_weight": 30.0,
+        "reg_lambda": 5.897821702717166,
+        "reg_alpha": 0.01,
+        "subsample": 1.0,
+        "colsample_bytree": 1.0,
+        "max_bin": 32
+      }
+    },
+    {
+      "id": "xgboost_refine10_SH_FB",
+      "family": "xgboost",
+      "representation": "SH_FB",
+      "params": {
+        "max_depth": 4,
+        "learning_rate": 0.018672069791719967,
+        "min_child_weight": 30.0,
+        "reg_lambda": 5.897821702717166,
+        "reg_alpha": 0.01,
+        "subsample": 1.0,
+        "colsample_bytree": 1.0,
+        "max_bin": 32
+      }
+    },
+    {
+      "id": "xgboost_refine11_S_FB",
+      "family": "xgboost",
+      "representation": "S_FB",
+      "params": {
+        "max_depth": 4,
+        "learning_rate": 0.1848252470612504,
+        "min_child_weight": 30.0,
+        "reg_lambda": 0.2698700967030982,
+        "reg_alpha": 0.1,
+        "subsample": 0.8,
+        "colsample_bytree": 0.8,
+        "max_bin": 128
+      }
+    },
+    {
+      "id": "xgboost_refine11_SH_FB",
+      "family": "xgboost",
+      "representation": "SH_FB",
+      "params": {
+        "max_depth": 4,
+        "learning_rate": 0.1848252470612504,
+        "min_child_weight": 30.0,
+        "reg_lambda": 0.2698700967030982,
+        "reg_alpha": 0.1,
+        "subsample": 0.8,
+        "colsample_bytree": 0.8,
+        "max_bin": 128
+      }
+    },
+    {
+      "id": "xgboost_refine12_S_FB",
+      "family": "xgboost",
+      "representation": "S_FB",
+      "params": {
+        "max_depth": 4,
+        "learning_rate": 0.22285609965797906,
+        "min_child_weight": 3.0,
+        "reg_lambda": 0.01916690776233799,
+        "reg_alpha": 0.0,
+        "subsample": 1.0,
+        "colsample_bytree": 0.8,
+        "max_bin": 256
+      }
+    },
+    {
+      "id": "xgboost_refine12_SH_FB",
+      "family": "xgboost",
+      "representation": "SH_FB",
+      "params": {
+        "max_depth": 4,
+        "learning_rate": 0.22285609965797906,
+        "min_child_weight": 3.0,
+        "reg_lambda": 0.01916690776233799,
+        "reg_alpha": 0.0,
+        "subsample": 1.0,
+        "colsample_bytree": 0.8,
+        "max_bin": 256
+      }
+    },
+    {
+      "id": "xgboost_refine13_S_FB",
+      "family": "xgboost",
+      "representation": "S_FB",
+      "params": {
+        "max_depth": 1,
+        "learning_rate": 0.043797609833751514,
+        "min_child_weight": 8.0,
+        "reg_lambda": 32.66200515538851,
+        "reg_alpha": 1.0,
+        "subsample": 0.6,
+        "colsample_bytree": 0.8,
+        "max_bin": 128
+      }
+    },
+    {
+      "id": "xgboost_refine13_SH_FB",
+      "family": "xgboost",
+      "representation": "SH_FB",
+      "params": {
+        "max_depth": 1,
+        "learning_rate": 0.043797609833751514,
+        "min_child_weight": 8.0,
+        "reg_lambda": 32.66200515538851,
+        "reg_alpha": 1.0,
+        "subsample": 0.6,
+        "colsample_bytree": 0.8,
+        "max_bin": 128
+      }
+    },
+    {
+      "id": "xgboost_refine14_S_FB",
+      "family": "xgboost",
+      "representation": "S_FB",
+      "params": {
+        "max_depth": 8,
+        "learning_rate": 0.017083643001441436,
+        "min_child_weight": 1.0,
+        "reg_lambda": 1.7605932162070999,
+        "reg_alpha": 0.01,
+        "subsample": 0.6,
+        "colsample_bytree": 0.5,
+        "max_bin": 64
+      }
+    },
+    {
+      "id": "xgboost_refine14_SH_FB",
+      "family": "xgboost",
+      "representation": "SH_FB",
+      "params": {
+        "max_depth": 8,
+        "learning_rate": 0.017083643001441436,
+        "min_child_weight": 1.0,
+        "reg_lambda": 1.7605932162070999,
+        "reg_alpha": 0.01,
+        "subsample": 0.6,
+        "colsample_bytree": 0.5,
+        "max_bin": 64
+      }
+    },
+    {
+      "id": "xgboost_refine15_S_FB",
+      "family": "xgboost",
+      "representation": "S_FB",
+      "params": {
+        "max_depth": 2,
+        "learning_rate": 0.0067306383805392275,
+        "min_child_weight": 8.0,
+        "reg_lambda": 0.11957520587912956,
+        "reg_alpha": 1.0,
+        "subsample": 0.6,
+        "colsample_bytree": 1.0,
+        "max_bin": 128
+      }
+    },
+    {
+      "id": "xgboost_refine15_SH_FB",
+      "family": "xgboost",
+      "representation": "SH_FB",
+      "params": {
+        "max_depth": 2,
+        "learning_rate": 0.0067306383805392275,
+        "min_child_weight": 8.0,
+        "reg_lambda": 0.11957520587912956,
+        "reg_alpha": 1.0,
+        "subsample": 0.6,
+        "colsample_bytree": 1.0,
+        "max_bin": 128
+      }
+    },
+    {
+      "id": "catboost_refine00_S_FB",
+      "family": "catboost",
+      "representation": "S_FB",
+      "params": {
+        "depth": 4,
+        "learning_rate": 0.06693751769029359,
+        "l2_leaf_reg": 1.3087480304157084,
+        "random_strength": 5.0,
+        "bagging_temperature": 1.0,
+        "boosting_type": "Ordered",
+        "has_time": true,
+        "border_count": 64
+      }
+    },
+    {
+      "id": "catboost_refine00_SH_FB",
+      "family": "catboost",
+      "representation": "SH_FB",
+      "params": {
+        "depth": 4,
+        "learning_rate": 0.06693751769029359,
+        "l2_leaf_reg": 1.3087480304157084,
+        "random_strength": 5.0,
+        "bagging_temperature": 1.0,
+        "boosting_type": "Ordered",
+        "has_time": true,
+        "border_count": 64
+      }
+    },
+    {
+      "id": "catboost_refine01_S_FB",
+      "family": "catboost",
+      "representation": "S_FB",
+      "params": {
+        "depth": 6,
+        "learning_rate": 0.1489124281215154,
+        "l2_leaf_reg": 75.57925311294677,
+        "random_strength": 0.1,
+        "bagging_temperature": 3.0,
+        "boosting_type": "Plain",
+        "has_time": true,
+        "border_count": 128
+      }
+    },
+    {
+      "id": "catboost_refine01_SH_FB",
+      "family": "catboost",
+      "representation": "SH_FB",
+      "params": {
+        "depth": 6,
+        "learning_rate": 0.1489124281215154,
+        "l2_leaf_reg": 75.57925311294677,
+        "random_strength": 0.1,
+        "bagging_temperature": 3.0,
+        "boosting_type": "Plain",
+        "has_time": true,
+        "border_count": 128
+      }
+    },
+    {
+      "id": "catboost_refine02_S_FB",
+      "family": "catboost",
+      "representation": "S_FB",
+      "params": {
+        "depth": 2,
+        "learning_rate": 0.012369638748961,
+        "l2_leaf_reg": 15.254248264391268,
+        "random_strength": 0.1,
+        "bagging_temperature": 0.5,
+        "boosting_type": "Ordered",
+        "has_time": true,
+        "border_count": 32
+      }
+    },
+    {
+      "id": "catboost_refine02_SH_FB",
+      "family": "catboost",
+      "representation": "SH_FB",
+      "params": {
+        "depth": 2,
+        "learning_rate": 0.012369638748961,
+        "l2_leaf_reg": 15.254248264391268,
+        "random_strength": 0.1,
+        "bagging_temperature": 0.5,
+        "boosting_type": "Ordered",
+        "has_time": true,
+        "border_count": 32
+      }
+    },
+    {
+      "id": "catboost_refine03_S_FB",
+      "family": "catboost",
+      "representation": "S_FB",
+      "params": {
+        "depth": 8,
+        "learning_rate": 0.0087607971085996,
+        "l2_leaf_reg": 0.4602084840744278,
+        "random_strength": 0.1,
+        "bagging_temperature": 1.0,
+        "boosting_type": "Plain",
+        "has_time": true,
+        "border_count": 32
+      }
+    },
+    {
+      "id": "catboost_refine03_SH_FB",
+      "family": "catboost",
+      "representation": "SH_FB",
+      "params": {
+        "depth": 8,
+        "learning_rate": 0.0087607971085996,
+        "l2_leaf_reg": 0.4602084840744278,
+        "random_strength": 0.1,
+        "bagging_temperature": 1.0,
+        "boosting_type": "Plain",
+        "has_time": true,
+        "border_count": 32
+      }
+    },
+    {
+      "id": "catboost_refine04_S_FB",
+      "family": "catboost",
+      "representation": "S_FB",
+      "params": {
+        "depth": 7,
+        "learning_rate": 0.007733543751773823,
+        "l2_leaf_reg": 1.175218328461949,
+        "random_strength": 5.0,
+        "bagging_temperature": 0.5,
+        "boosting_type": "Ordered",
+        "has_time": true,
+        "border_count": 64
+      }
+    },
+    {
+      "id": "catboost_refine04_SH_FB",
+      "family": "catboost",
+      "representation": "SH_FB",
+      "params": {
+        "depth": 7,
+        "learning_rate": 0.007733543751773823,
+        "l2_leaf_reg": 1.175218328461949,
+        "random_strength": 5.0,
+        "bagging_temperature": 0.5,
+        "boosting_type": "Ordered",
+        "has_time": true,
+        "border_count": 64
+      }
+    },
+    {
+      "id": "catboost_refine05_S_FB",
+      "family": "catboost",
+      "representation": "S_FB",
+      "params": {
+        "depth": 3,
+        "learning_rate": 0.006929973485963884,
+        "l2_leaf_reg": 14.038467386407145,
+        "random_strength": 1.0,
+        "bagging_temperature": 0.0,
+        "boosting_type": "Plain",
+        "has_time": true,
+        "border_count": 32
+      }
+    },
+    {
+      "id": "catboost_refine05_SH_FB",
+      "family": "catboost",
+      "representation": "SH_FB",
+      "params": {
+        "depth": 3,
+        "learning_rate": 0.006929973485963884,
+        "l2_leaf_reg": 14.038467386407145,
+        "random_strength": 1.0,
+        "bagging_temperature": 0.0,
+        "boosting_type": "Plain",
+        "has_time": true,
+        "border_count": 32
+      }
+    },
+    {
+      "id": "catboost_refine06_S_FB",
+      "family": "catboost",
+      "representation": "S_FB",
+      "params": {
+        "depth": 5,
+        "learning_rate": 0.0712019651827374,
+        "l2_leaf_reg": 0.12629956135408169,
+        "random_strength": 5.0,
+        "bagging_temperature": 3.0,
+        "boosting_type": "Ordered",
+        "has_time": true,
+        "border_count": 32
+      }
+    },
+    {
+      "id": "catboost_refine06_SH_FB",
+      "family": "catboost",
+      "representation": "SH_FB",
+      "params": {
+        "depth": 5,
+        "learning_rate": 0.0712019651827374,
+        "l2_leaf_reg": 0.12629956135408169,
+        "random_strength": 5.0,
+        "bagging_temperature": 3.0,
+        "boosting_type": "Ordered",
+        "has_time": true,
+        "border_count": 32
+      }
+    },
+    {
+      "id": "catboost_refine07_S_FB",
+      "family": "catboost",
+      "representation": "S_FB",
+      "params": {
+        "depth": 3,
+        "learning_rate": 0.06873901716174569,
+        "l2_leaf_reg": 22.737522691999477,
+        "random_strength": 5.0,
+        "bagging_temperature": 0.5,
+        "boosting_type": "Plain",
+        "has_time": true,
+        "border_count": 128
+      }
+    },
+    {
+      "id": "catboost_refine07_SH_FB",
+      "family": "catboost",
+      "representation": "SH_FB",
+      "params": {
+        "depth": 3,
+        "learning_rate": 0.06873901716174569,
+        "l2_leaf_reg": 22.737522691999477,
+        "random_strength": 5.0,
+        "bagging_temperature": 0.5,
+        "boosting_type": "Plain",
+        "has_time": true,
+        "border_count": 128
+      }
+    },
+    {
+      "id": "catboost_refine08_S_FB",
+      "family": "catboost",
+      "representation": "S_FB",
+      "params": {
+        "depth": 4,
+        "learning_rate": 0.011190886759830166,
+        "l2_leaf_reg": 2.1639064581278236,
+        "random_strength": 0.0,
+        "bagging_temperature": 3.0,
+        "boosting_type": "Ordered",
+        "has_time": true,
+        "border_count": 64
+      }
+    },
+    {
+      "id": "catboost_refine08_SH_FB",
+      "family": "catboost",
+      "representation": "SH_FB",
+      "params": {
+        "depth": 4,
+        "learning_rate": 0.011190886759830166,
+        "l2_leaf_reg": 2.1639064581278236,
+        "random_strength": 0.0,
+        "bagging_temperature": 3.0,
+        "boosting_type": "Ordered",
+        "has_time": true,
+        "border_count": 64
+      }
+    },
+    {
+      "id": "catboost_refine09_S_FB",
+      "family": "catboost",
+      "representation": "S_FB",
+      "params": {
+        "depth": 4,
+        "learning_rate": 0.1119035780789206,
+        "l2_leaf_reg": 0.2095502774126119,
+        "random_strength": 0.0,
+        "bagging_temperature": 0.5,
+        "boosting_type": "Plain",
+        "has_time": true,
+        "border_count": 64
+      }
+    },
+    {
+      "id": "catboost_refine09_SH_FB",
+      "family": "catboost",
+      "representation": "SH_FB",
+      "params": {
+        "depth": 4,
+        "learning_rate": 0.1119035780789206,
+        "l2_leaf_reg": 0.2095502774126119,
+        "random_strength": 0.0,
+        "bagging_temperature": 0.5,
+        "boosting_type": "Plain",
+        "has_time": true,
+        "border_count": 64
+      }
+    },
+    {
+      "id": "catboost_refine10_S_FB",
+      "family": "catboost",
+      "representation": "S_FB",
+      "params": {
+        "depth": 4,
+        "learning_rate": 0.02145372102031922,
+        "l2_leaf_reg": 25.99624333283576,
+        "random_strength": 1.0,
+        "bagging_temperature": 0.5,
+        "boosting_type": "Ordered",
+        "has_time": true,
+        "border_count": 64
+      }
+    },
+    {
+      "id": "catboost_refine10_SH_FB",
+      "family": "catboost",
+      "representation": "SH_FB",
+      "params": {
+        "depth": 4,
+        "learning_rate": 0.02145372102031922,
+        "l2_leaf_reg": 25.99624333283576,
+        "random_strength": 1.0,
+        "bagging_temperature": 0.5,
+        "boosting_type": "Ordered",
+        "has_time": true,
+        "border_count": 64
+      }
+    },
+    {
+      "id": "catboost_refine11_S_FB",
+      "family": "catboost",
+      "representation": "S_FB",
+      "params": {
+        "depth": 5,
+        "learning_rate": 0.043701804102910656,
+        "l2_leaf_reg": 0.4669411407111482,
+        "random_strength": 0.1,
+        "bagging_temperature": 0.0,
+        "boosting_type": "Plain",
+        "has_time": true,
+        "border_count": 32
+      }
+    },
+    {
+      "id": "catboost_refine11_SH_FB",
+      "family": "catboost",
+      "representation": "SH_FB",
+      "params": {
+        "depth": 5,
+        "learning_rate": 0.043701804102910656,
+        "l2_leaf_reg": 0.4669411407111482,
+        "random_strength": 0.1,
+        "bagging_temperature": 0.0,
+        "boosting_type": "Plain",
+        "has_time": true,
+        "border_count": 32
+      }
+    },
+    {
+      "id": "catboost_refine12_S_FB",
+      "family": "catboost",
+      "representation": "S_FB",
+      "params": {
+        "depth": 7,
+        "learning_rate": 0.22953277569857378,
+        "l2_leaf_reg": 1.0950335603388652,
+        "random_strength": 0.1,
+        "bagging_temperature": 0.5,
+        "boosting_type": "Ordered",
+        "has_time": true,
+        "border_count": 32
+      }
+    },
+    {
+      "id": "catboost_refine12_SH_FB",
+      "family": "catboost",
+      "representation": "SH_FB",
+      "params": {
+        "depth": 7,
+        "learning_rate": 0.22953277569857378,
+        "l2_leaf_reg": 1.0950335603388652,
+        "random_strength": 0.1,
+        "bagging_temperature": 0.5,
+        "boosting_type": "Ordered",
+        "has_time": true,
+        "border_count": 32
+      }
+    },
+    {
+      "id": "catboost_refine13_S_FB",
+      "family": "catboost",
+      "representation": "S_FB",
+      "params": {
+        "depth": 2,
+        "learning_rate": 0.08406653981089446,
+        "l2_leaf_reg": 0.5066894924380451,
+        "random_strength": 0.1,
+        "bagging_temperature": 0.0,
+        "boosting_type": "Plain",
+        "has_time": true,
+        "border_count": 128
+      }
+    },
+    {
+      "id": "catboost_refine13_SH_FB",
+      "family": "catboost",
+      "representation": "SH_FB",
+      "params": {
+        "depth": 2,
+        "learning_rate": 0.08406653981089446,
+        "l2_leaf_reg": 0.5066894924380451,
+        "random_strength": 0.1,
+        "bagging_temperature": 0.0,
+        "boosting_type": "Plain",
+        "has_time": true,
+        "border_count": 128
+      }
+    },
+    {
+      "id": "catboost_refine14_S_FB",
+      "family": "catboost",
+      "representation": "S_FB",
+      "params": {
+        "depth": 8,
+        "learning_rate": 0.09567251537774951,
+        "l2_leaf_reg": 7.136378106025508,
+        "random_strength": 5.0,
+        "bagging_temperature": 0.5,
+        "boosting_type": "Ordered",
+        "has_time": true,
+        "border_count": 64
+      }
+    },
+    {
+      "id": "catboost_refine14_SH_FB",
+      "family": "catboost",
+      "representation": "SH_FB",
+      "params": {
+        "depth": 8,
+        "learning_rate": 0.09567251537774951,
+        "l2_leaf_reg": 7.136378106025508,
+        "random_strength": 5.0,
+        "bagging_temperature": 0.5,
+        "boosting_type": "Ordered",
+        "has_time": true,
+        "border_count": 64
+      }
+    },
+    {
+      "id": "catboost_refine15_S_FB",
+      "family": "catboost",
+      "representation": "S_FB",
+      "params": {
+        "depth": 7,
+        "learning_rate": 0.1471964017162214,
+        "l2_leaf_reg": 0.8297905511135615,
+        "random_strength": 5.0,
+        "bagging_temperature": 0.0,
+        "boosting_type": "Plain",
+        "has_time": true,
+        "border_count": 64
+      }
+    },
+    {
+      "id": "catboost_refine15_SH_FB",
+      "family": "catboost",
+      "representation": "SH_FB",
+      "params": {
+        "depth": 7,
+        "learning_rate": 0.1471964017162214,
+        "l2_leaf_reg": 0.8297905511135615,
+        "random_strength": 5.0,
+        "bagging_temperature": 0.0,
+        "boosting_type": "Plain",
+        "has_time": true,
+        "border_count": 64
+      }
+    },
+    {
+      "id": "lightgbm_refine00_S_FB",
+      "family": "lightgbm",
+      "representation": "S_FB",
+      "params": {
+        "num_leaves": 63,
+        "learning_rate": 0.007353429824833124,
+        "min_child_samples": 20,
+        "reg_lambda": 61.12739498218637,
+        "reg_alpha": 0.1,
+        "subsample": 1.0,
+        "colsample_bytree": 0.5,
+        "max_bin": 31
+      }
+    },
+    {
+      "id": "lightgbm_refine00_SH_FB",
+      "family": "lightgbm",
+      "representation": "SH_FB",
+      "params": {
+        "num_leaves": 63,
+        "learning_rate": 0.007353429824833124,
+        "min_child_samples": 20,
+        "reg_lambda": 61.12739498218637,
+        "reg_alpha": 0.1,
+        "subsample": 1.0,
+        "colsample_bytree": 0.5,
+        "max_bin": 31
+      }
+    },
+    {
+      "id": "lightgbm_refine01_S_FB",
+      "family": "lightgbm",
+      "representation": "S_FB",
+      "params": {
+        "num_leaves": 7,
+        "learning_rate": 0.009566071817300306,
+        "min_child_samples": 10,
+        "reg_lambda": 12.698305383042964,
+        "reg_alpha": 0.1,
+        "subsample": 0.6,
+        "colsample_bytree": 0.5,
+        "max_bin": 127
+      }
+    },
+    {
+      "id": "lightgbm_refine01_SH_FB",
+      "family": "lightgbm",
+      "representation": "SH_FB",
+      "params": {
+        "num_leaves": 7,
+        "learning_rate": 0.009566071817300306,
+        "min_child_samples": 10,
+        "reg_lambda": 12.698305383042964,
+        "reg_alpha": 0.1,
+        "subsample": 0.6,
+        "colsample_bytree": 0.5,
+        "max_bin": 127
+      }
+    },
+    {
+      "id": "lightgbm_refine02_S_FB",
+      "family": "lightgbm",
+      "representation": "S_FB",
+      "params": {
+        "num_leaves": 7,
+        "learning_rate": 0.01782858555000733,
+        "min_child_samples": 50,
+        "reg_lambda": 12.618993353719178,
+        "reg_alpha": 0.0,
+        "subsample": 0.8,
+        "colsample_bytree": 1.0,
+        "max_bin": 255
+      }
+    },
+    {
+      "id": "lightgbm_refine02_SH_FB",
+      "family": "lightgbm",
+      "representation": "SH_FB",
+      "params": {
+        "num_leaves": 7,
+        "learning_rate": 0.01782858555000733,
+        "min_child_samples": 50,
+        "reg_lambda": 12.618993353719178,
+        "reg_alpha": 0.0,
+        "subsample": 0.8,
+        "colsample_bytree": 1.0,
+        "max_bin": 255
+      }
+    },
+    {
+      "id": "lightgbm_refine03_S_FB",
+      "family": "lightgbm",
+      "representation": "S_FB",
+      "params": {
+        "num_leaves": 3,
+        "learning_rate": 0.17169630924440854,
+        "min_child_samples": 20,
+        "reg_lambda": 0.03223426748617456,
+        "reg_alpha": 0.01,
+        "subsample": 0.6,
+        "colsample_bytree": 1.0,
+        "max_bin": 255
+      }
+    },
+    {
+      "id": "lightgbm_refine03_SH_FB",
+      "family": "lightgbm",
+      "representation": "SH_FB",
+      "params": {
+        "num_leaves": 3,
+        "learning_rate": 0.17169630924440854,
+        "min_child_samples": 20,
+        "reg_lambda": 0.03223426748617456,
+        "reg_alpha": 0.01,
+        "subsample": 0.6,
+        "colsample_bytree": 1.0,
+        "max_bin": 255
+      }
+    },
+    {
+      "id": "lightgbm_refine04_S_FB",
+      "family": "lightgbm",
+      "representation": "S_FB",
+      "params": {
+        "num_leaves": 63,
+        "learning_rate": 0.10093169450217489,
+        "min_child_samples": 20,
+        "reg_lambda": 1.338377582204822,
+        "reg_alpha": 5.0,
+        "subsample": 1.0,
+        "colsample_bytree": 0.8,
+        "max_bin": 63
+      }
+    },
+    {
+      "id": "lightgbm_refine04_SH_FB",
+      "family": "lightgbm",
+      "representation": "SH_FB",
+      "params": {
+        "num_leaves": 63,
+        "learning_rate": 0.10093169450217489,
+        "min_child_samples": 20,
+        "reg_lambda": 1.338377582204822,
+        "reg_alpha": 5.0,
+        "subsample": 1.0,
+        "colsample_bytree": 0.8,
+        "max_bin": 63
+      }
+    },
+    {
+      "id": "lightgbm_refine05_S_FB",
+      "family": "lightgbm",
+      "representation": "S_FB",
+      "params": {
+        "num_leaves": 63,
+        "learning_rate": 0.016606688914807887,
+        "min_child_samples": 5,
+        "reg_lambda": 5.950291176665207,
+        "reg_alpha": 0.1,
+        "subsample": 0.6,
+        "colsample_bytree": 1.0,
+        "max_bin": 127
+      }
+    },
+    {
+      "id": "lightgbm_refine05_SH_FB",
+      "family": "lightgbm",
+      "representation": "SH_FB",
+      "params": {
+        "num_leaves": 63,
+        "learning_rate": 0.016606688914807887,
+        "min_child_samples": 5,
+        "reg_lambda": 5.950291176665207,
+        "reg_alpha": 0.1,
+        "subsample": 0.6,
+        "colsample_bytree": 1.0,
+        "max_bin": 127
+      }
+    },
+    {
+      "id": "lightgbm_refine06_S_FB",
+      "family": "lightgbm",
+      "representation": "S_FB",
+      "params": {
+        "num_leaves": 63,
+        "learning_rate": 0.023054631837026173,
+        "min_child_samples": 20,
+        "reg_lambda": 0.5984497377780745,
+        "reg_alpha": 5.0,
+        "subsample": 0.6,
+        "colsample_bytree": 0.5,
+        "max_bin": 255
+      }
+    },
+    {
+      "id": "lightgbm_refine06_SH_FB",
+      "family": "lightgbm",
+      "representation": "SH_FB",
+      "params": {
+        "num_leaves": 63,
+        "learning_rate": 0.023054631837026173,
+        "min_child_samples": 20,
+        "reg_lambda": 0.5984497377780745,
+        "reg_alpha": 5.0,
+        "subsample": 0.6,
+        "colsample_bytree": 0.5,
+        "max_bin": 255
+      }
+    },
+    {
+      "id": "lightgbm_refine07_S_FB",
+      "family": "lightgbm",
+      "representation": "S_FB",
+      "params": {
+        "num_leaves": 7,
+        "learning_rate": 0.007531409820635716,
+        "min_child_samples": 50,
+        "reg_lambda": 5.063985141119951,
+        "reg_alpha": 0.01,
+        "subsample": 1.0,
+        "colsample_bytree": 1.0,
+        "max_bin": 127
+      }
+    },
+    {
+      "id": "lightgbm_refine07_SH_FB",
+      "family": "lightgbm",
+      "representation": "SH_FB",
+      "params": {
+        "num_leaves": 7,
+        "learning_rate": 0.007531409820635716,
+        "min_child_samples": 50,
+        "reg_lambda": 5.063985141119951,
+        "reg_alpha": 0.01,
+        "subsample": 1.0,
+        "colsample_bytree": 1.0,
+        "max_bin": 127
+      }
+    },
+    {
+      "id": "lightgbm_refine08_S_FB",
+      "family": "lightgbm",
+      "representation": "S_FB",
+      "params": {
+        "num_leaves": 3,
+        "learning_rate": 0.0834213998989097,
+        "min_child_samples": 100,
+        "reg_lambda": 17.604199206836725,
+        "reg_alpha": 5.0,
+        "subsample": 0.6,
+        "colsample_bytree": 0.5,
+        "max_bin": 255
+      }
+    },
+    {
+      "id": "lightgbm_refine08_SH_FB",
+      "family": "lightgbm",
+      "representation": "SH_FB",
+      "params": {
+        "num_leaves": 3,
+        "learning_rate": 0.0834213998989097,
+        "min_child_samples": 100,
+        "reg_lambda": 17.604199206836725,
+        "reg_alpha": 5.0,
+        "subsample": 0.6,
+        "colsample_bytree": 0.5,
+        "max_bin": 255
+      }
+    },
+    {
+      "id": "lightgbm_refine09_S_FB",
+      "family": "lightgbm",
+      "representation": "S_FB",
+      "params": {
+        "num_leaves": 7,
+        "learning_rate": 0.010581680168562846,
+        "min_child_samples": 50,
+        "reg_lambda": 0.032109771809252924,
+        "reg_alpha": 0.01,
+        "subsample": 1.0,
+        "colsample_bytree": 0.8,
+        "max_bin": 127
+      }
+    },
+    {
+      "id": "lightgbm_refine09_SH_FB",
+      "family": "lightgbm",
+      "representation": "SH_FB",
+      "params": {
+        "num_leaves": 7,
+        "learning_rate": 0.010581680168562846,
+        "min_child_samples": 50,
+        "reg_lambda": 0.032109771809252924,
+        "reg_alpha": 0.01,
+        "subsample": 1.0,
+        "colsample_bytree": 0.8,
+        "max_bin": 127
+      }
+    },
+    {
+      "id": "lightgbm_refine10_S_FB",
+      "family": "lightgbm",
+      "representation": "S_FB",
+      "params": {
+        "num_leaves": 3,
+        "learning_rate": 0.020314732992046093,
+        "min_child_samples": 20,
+        "reg_lambda": 20.209901011556795,
+        "reg_alpha": 0.0,
+        "subsample": 0.8,
+        "colsample_bytree": 1.0,
+        "max_bin": 127
+      }
+    },
+    {
+      "id": "lightgbm_refine10_SH_FB",
+      "family": "lightgbm",
+      "representation": "SH_FB",
+      "params": {
+        "num_leaves": 3,
+        "learning_rate": 0.020314732992046093,
+        "min_child_samples": 20,
+        "reg_lambda": 20.209901011556795,
+        "reg_alpha": 0.0,
+        "subsample": 0.8,
+        "colsample_bytree": 1.0,
+        "max_bin": 127
+      }
+    },
+    {
+      "id": "lightgbm_refine11_S_FB",
+      "family": "lightgbm",
+      "representation": "S_FB",
+      "params": {
+        "num_leaves": 7,
+        "learning_rate": 0.012389068357305614,
+        "min_child_samples": 100,
+        "reg_lambda": 0.13674854810414533,
+        "reg_alpha": 0.1,
+        "subsample": 1.0,
+        "colsample_bytree": 1.0,
+        "max_bin": 31
+      }
+    },
+    {
+      "id": "lightgbm_refine11_SH_FB",
+      "family": "lightgbm",
+      "representation": "SH_FB",
+      "params": {
+        "num_leaves": 7,
+        "learning_rate": 0.012389068357305614,
+        "min_child_samples": 100,
+        "reg_lambda": 0.13674854810414533,
+        "reg_alpha": 0.1,
+        "subsample": 1.0,
+        "colsample_bytree": 1.0,
+        "max_bin": 31
+      }
+    },
+    {
+      "id": "lightgbm_refine12_S_FB",
+      "family": "lightgbm",
+      "representation": "S_FB",
+      "params": {
+        "num_leaves": 7,
+        "learning_rate": 0.04144106283780088,
+        "min_child_samples": 10,
+        "reg_lambda": 0.033110569303641244,
+        "reg_alpha": 0.1,
+        "subsample": 1.0,
+        "colsample_bytree": 0.8,
+        "max_bin": 127
+      }
+    },
+    {
+      "id": "lightgbm_refine12_SH_FB",
+      "family": "lightgbm",
+      "representation": "SH_FB",
+      "params": {
+        "num_leaves": 7,
+        "learning_rate": 0.04144106283780088,
+        "min_child_samples": 10,
+        "reg_lambda": 0.033110569303641244,
+        "reg_alpha": 0.1,
+        "subsample": 1.0,
+        "colsample_bytree": 0.8,
+        "max_bin": 127
+      }
+    },
+    {
+      "id": "lightgbm_refine13_S_FB",
+      "family": "lightgbm",
+      "representation": "S_FB",
+      "params": {
+        "num_leaves": 15,
+        "learning_rate": 0.14744361727922237,
+        "min_child_samples": 5,
+        "reg_lambda": 0.051863564549195364,
+        "reg_alpha": 1.0,
+        "subsample": 0.6,
+        "colsample_bytree": 0.8,
+        "max_bin": 63
+      }
+    },
+    {
+      "id": "lightgbm_refine13_SH_FB",
+      "family": "lightgbm",
+      "representation": "SH_FB",
+      "params": {
+        "num_leaves": 15,
+        "learning_rate": 0.14744361727922237,
+        "min_child_samples": 5,
+        "reg_lambda": 0.051863564549195364,
+        "reg_alpha": 1.0,
+        "subsample": 0.6,
+        "colsample_bytree": 0.8,
+        "max_bin": 63
+      }
+    },
+    {
+      "id": "lightgbm_refine14_S_FB",
+      "family": "lightgbm",
+      "representation": "S_FB",
+      "params": {
+        "num_leaves": 15,
+        "learning_rate": 0.014287659863419991,
+        "min_child_samples": 50,
+        "reg_lambda": 0.011101538509841613,
+        "reg_alpha": 0.0,
+        "subsample": 0.8,
+        "colsample_bytree": 0.8,
+        "max_bin": 127
+      }
+    },
+    {
+      "id": "lightgbm_refine14_SH_FB",
+      "family": "lightgbm",
+      "representation": "SH_FB",
+      "params": {
+        "num_leaves": 15,
+        "learning_rate": 0.014287659863419991,
+        "min_child_samples": 50,
+        "reg_lambda": 0.011101538509841613,
+        "reg_alpha": 0.0,
+        "subsample": 0.8,
+        "colsample_bytree": 0.8,
+        "max_bin": 127
+      }
+    },
+    {
+      "id": "lightgbm_refine15_S_FB",
+      "family": "lightgbm",
+      "representation": "S_FB",
+      "params": {
+        "num_leaves": 3,
+        "learning_rate": 0.02266853525409976,
+        "min_child_samples": 10,
+        "reg_lambda": 0.4253314148492172,
+        "reg_alpha": 0.1,
+        "subsample": 1.0,
+        "colsample_bytree": 0.8,
+        "max_bin": 127
+      }
+    },
+    {
+      "id": "lightgbm_refine15_SH_FB",
+      "family": "lightgbm",
+      "representation": "SH_FB",
+      "params": {
+        "num_leaves": 3,
+        "learning_rate": 0.02266853525409976,
+        "min_child_samples": 10,
+        "reg_lambda": 0.4253314148492172,
+        "reg_alpha": 0.1,
+        "subsample": 1.0,
+        "colsample_bytree": 0.8,
+        "max_bin": 127
+      }
+    },
+    {
+      "id": "mlp_refine00_S_FB",
+      "family": "mlp",
+      "representation": "S_FB",
+      "params": {
+        "width": 64,
+        "depth": 3,
+        "dropout": 0.35,
+        "lr": 0.0039483853478326355,
+        "weight_decay": 5.0804899859955545e-06,
+        "batch_size": 256,
+        "k": 16,
+        "embeddings": false
+      }
+    },
+    {
+      "id": "mlp_refine00_SH_FB",
+      "family": "mlp",
+      "representation": "SH_FB",
+      "params": {
+        "width": 64,
+        "depth": 3,
+        "dropout": 0.35,
+        "lr": 0.0039483853478326355,
+        "weight_decay": 5.0804899859955545e-06,
+        "batch_size": 256,
+        "k": 16,
+        "embeddings": false
+      }
+    },
+    {
+      "id": "mlp_refine01_S_FB",
+      "family": "mlp",
+      "representation": "S_FB",
+      "params": {
+        "width": 128,
+        "depth": 4,
+        "dropout": 0.0,
+        "lr": 0.0012264056742386407,
+        "weight_decay": 3.611253265627698e-05,
+        "batch_size": 256,
+        "k": 16,
+        "embeddings": false
+      }
+    },
+    {
+      "id": "mlp_refine01_SH_FB",
+      "family": "mlp",
+      "representation": "SH_FB",
+      "params": {
+        "width": 128,
+        "depth": 4,
+        "dropout": 0.0,
+        "lr": 0.0012264056742386407,
+        "weight_decay": 3.611253265627698e-05,
+        "batch_size": 256,
+        "k": 16,
+        "embeddings": false
+      }
+    },
+    {
+      "id": "mlp_refine02_S_FB",
+      "family": "mlp",
+      "representation": "S_FB",
+      "params": {
+        "width": 512,
+        "depth": 1,
+        "dropout": 0.0,
+        "lr": 0.0016205332557593874,
+        "weight_decay": 5.7018854569855095e-06,
+        "batch_size": 512,
+        "k": 16,
+        "embeddings": false
+      }
+    },
+    {
+      "id": "mlp_refine02_SH_FB",
+      "family": "mlp",
+      "representation": "SH_FB",
+      "params": {
+        "width": 512,
+        "depth": 1,
+        "dropout": 0.0,
+        "lr": 0.0016205332557593874,
+        "weight_decay": 5.7018854569855095e-06,
+        "batch_size": 512,
+        "k": 16,
+        "embeddings": false
+      }
+    },
+    {
+      "id": "mlp_refine03_S_FB",
+      "family": "mlp",
+      "representation": "S_FB",
+      "params": {
+        "width": 128,
+        "depth": 1,
+        "dropout": 0.1,
+        "lr": 0.00015732571218508504,
+        "weight_decay": 0.004134162246481243,
+        "batch_size": 256,
+        "k": 32,
+        "embeddings": false
+      }
+    },
+    {
+      "id": "mlp_refine03_SH_FB",
+      "family": "mlp",
+      "representation": "SH_FB",
+      "params": {
+        "width": 128,
+        "depth": 1,
+        "dropout": 0.1,
+        "lr": 0.00015732571218508504,
+        "weight_decay": 0.004134162246481243,
+        "batch_size": 256,
+        "k": 32,
+        "embeddings": false
+      }
+    },
+    {
+      "id": "mlp_refine04_S_FB",
+      "family": "mlp",
+      "representation": "S_FB",
+      "params": {
+        "width": 512,
+        "depth": 1,
+        "dropout": 0.0,
+        "lr": 0.0005309287279494283,
+        "weight_decay": 0.03560821309845479,
+        "batch_size": 128,
+        "k": 32,
+        "embeddings": false
+      }
+    },
+    {
+      "id": "mlp_refine04_SH_FB",
+      "family": "mlp",
+      "representation": "SH_FB",
+      "params": {
+        "width": 512,
+        "depth": 1,
+        "dropout": 0.0,
+        "lr": 0.0005309287279494283,
+        "weight_decay": 0.03560821309845479,
+        "batch_size": 128,
+        "k": 32,
+        "embeddings": false
+      }
+    },
+    {
+      "id": "mlp_refine05_S_FB",
+      "family": "mlp",
+      "representation": "S_FB",
+      "params": {
+        "width": 512,
+        "depth": 3,
+        "dropout": 0.5,
+        "lr": 0.00018649485794948708,
+        "weight_decay": 0.07547130924468648,
+        "batch_size": 256,
+        "k": 16,
+        "embeddings": false
+      }
+    },
+    {
+      "id": "mlp_refine05_SH_FB",
+      "family": "mlp",
+      "representation": "SH_FB",
+      "params": {
+        "width": 512,
+        "depth": 3,
+        "dropout": 0.5,
+        "lr": 0.00018649485794948708,
+        "weight_decay": 0.07547130924468648,
+        "batch_size": 256,
+        "k": 16,
+        "embeddings": false
+      }
+    },
+    {
+      "id": "mlp_refine06_S_FB",
+      "family": "mlp",
+      "representation": "S_FB",
+      "params": {
+        "width": 64,
+        "depth": 2,
+        "dropout": 0.35,
+        "lr": 0.0010329155647795566,
+        "weight_decay": 0.00010946299831462672,
+        "batch_size": 256,
+        "k": 16,
+        "embeddings": false
+      }
+    },
+    {
+      "id": "mlp_refine06_SH_FB",
+      "family": "mlp",
+      "representation": "SH_FB",
+      "params": {
+        "width": 64,
+        "depth": 2,
+        "dropout": 0.35,
+        "lr": 0.0010329155647795566,
+        "weight_decay": 0.00010946299831462672,
+        "batch_size": 256,
+        "k": 16,
+        "embeddings": false
+      }
+    },
+    {
+      "id": "mlp_refine07_S_FB",
+      "family": "mlp",
+      "representation": "S_FB",
+      "params": {
+        "width": 512,
+        "depth": 4,
+        "dropout": 0.0,
+        "lr": 0.00042494023166971277,
+        "weight_decay": 0.00021898914141396105,
+        "batch_size": 256,
+        "k": 32,
+        "embeddings": false
+      }
+    },
+    {
+      "id": "mlp_refine07_SH_FB",
+      "family": "mlp",
+      "representation": "SH_FB",
+      "params": {
+        "width": 512,
+        "depth": 4,
+        "dropout": 0.0,
+        "lr": 0.00042494023166971277,
+        "weight_decay": 0.00021898914141396105,
+        "batch_size": 256,
+        "k": 32,
+        "embeddings": false
+      }
+    },
+    {
+      "id": "mlp_refine08_S_FB",
+      "family": "mlp",
+      "representation": "S_FB",
+      "params": {
+        "width": 128,
+        "depth": 1,
+        "dropout": 0.0,
+        "lr": 0.0005345738308971132,
+        "weight_decay": 0.049577798758401265,
+        "batch_size": 128,
+        "k": 16,
+        "embeddings": false
+      }
+    },
+    {
+      "id": "mlp_refine08_SH_FB",
+      "family": "mlp",
+      "representation": "SH_FB",
+      "params": {
+        "width": 128,
+        "depth": 1,
+        "dropout": 0.0,
+        "lr": 0.0005345738308971132,
+        "weight_decay": 0.049577798758401265,
+        "batch_size": 128,
+        "k": 16,
+        "embeddings": false
+      }
+    },
+    {
+      "id": "mlp_refine09_S_FB",
+      "family": "mlp",
+      "representation": "S_FB",
+      "params": {
+        "width": 256,
+        "depth": 1,
+        "dropout": 0.35,
+        "lr": 0.00035888886362250334,
+        "weight_decay": 0.0009607630013332376,
+        "batch_size": 256,
+        "k": 16,
+        "embeddings": false
+      }
+    },
+    {
+      "id": "mlp_refine09_SH_FB",
+      "family": "mlp",
+      "representation": "SH_FB",
+      "params": {
+        "width": 256,
+        "depth": 1,
+        "dropout": 0.35,
+        "lr": 0.00035888886362250334,
+        "weight_decay": 0.0009607630013332376,
+        "batch_size": 256,
+        "k": 16,
+        "embeddings": false
+      }
+    },
+    {
+      "id": "mlp_refine10_S_FB",
+      "family": "mlp",
+      "representation": "S_FB",
+      "params": {
+        "width": 64,
+        "depth": 1,
+        "dropout": 0.35,
+        "lr": 0.0002371817847580038,
+        "weight_decay": 0.008806622935651121,
+        "batch_size": 128,
+        "k": 32,
+        "embeddings": false
+      }
+    },
+    {
+      "id": "mlp_refine10_SH_FB",
+      "family": "mlp",
+      "representation": "SH_FB",
+      "params": {
+        "width": 64,
+        "depth": 1,
+        "dropout": 0.35,
+        "lr": 0.0002371817847580038,
+        "weight_decay": 0.008806622935651121,
+        "batch_size": 128,
+        "k": 32,
+        "embeddings": false
+      }
+    },
+    {
+      "id": "mlp_refine11_S_FB",
+      "family": "mlp",
+      "representation": "S_FB",
+      "params": {
+        "width": 512,
+        "depth": 1,
+        "dropout": 0.0,
+        "lr": 0.0001949667840161204,
+        "weight_decay": 4.888971210916466e-06,
+        "batch_size": 128,
+        "k": 32,
+        "embeddings": false
+      }
+    },
+    {
+      "id": "mlp_refine11_SH_FB",
+      "family": "mlp",
+      "representation": "SH_FB",
+      "params": {
+        "width": 512,
+        "depth": 1,
+        "dropout": 0.0,
+        "lr": 0.0001949667840161204,
+        "weight_decay": 4.888971210916466e-06,
+        "batch_size": 128,
+        "k": 32,
+        "embeddings": false
+      }
+    },
+    {
+      "id": "tabm_refine00_S_FB",
+      "family": "tabm",
+      "representation": "S_FB",
+      "params": {
+        "width": 128,
+        "depth": 2,
+        "dropout": 0.0,
+        "lr": 0.0038405623976675097,
+        "weight_decay": 0.0008104120287394647,
+        "batch_size": 256,
+        "k": 16,
+        "embeddings": true
+      }
+    },
+    {
+      "id": "tabm_refine00_SH_FB",
+      "family": "tabm",
+      "representation": "SH_FB",
+      "params": {
+        "width": 128,
+        "depth": 2,
+        "dropout": 0.0,
+        "lr": 0.0038405623976675097,
+        "weight_decay": 0.0008104120287394647,
+        "batch_size": 256,
+        "k": 16,
+        "embeddings": true
+      }
+    },
+    {
+      "id": "tabm_refine01_S_FB",
+      "family": "tabm",
+      "representation": "S_FB",
+      "params": {
+        "width": 512,
+        "depth": 3,
+        "dropout": 0.2,
+        "lr": 0.0020799172340120057,
+        "weight_decay": 7.335224777438441e-05,
+        "batch_size": 512,
+        "k": 16,
+        "embeddings": false
+      }
+    },
+    {
+      "id": "tabm_refine01_SH_FB",
+      "family": "tabm",
+      "representation": "SH_FB",
+      "params": {
+        "width": 512,
+        "depth": 3,
+        "dropout": 0.2,
+        "lr": 0.0020799172340120057,
+        "weight_decay": 7.335224777438441e-05,
+        "batch_size": 512,
+        "k": 16,
+        "embeddings": false
+      }
+    },
+    {
+      "id": "tabm_refine02_S_FB",
+      "family": "tabm",
+      "representation": "S_FB",
+      "params": {
+        "width": 512,
+        "depth": 3,
+        "dropout": 0.1,
+        "lr": 0.00012945464257259004,
+        "weight_decay": 0.009300773716424467,
+        "batch_size": 512,
+        "k": 32,
+        "embeddings": true
+      }
+    },
+    {
+      "id": "tabm_refine02_SH_FB",
+      "family": "tabm",
+      "representation": "SH_FB",
+      "params": {
+        "width": 512,
+        "depth": 3,
+        "dropout": 0.1,
+        "lr": 0.00012945464257259004,
+        "weight_decay": 0.009300773716424467,
+        "batch_size": 512,
+        "k": 32,
+        "embeddings": true
+      }
+    },
+    {
+      "id": "tabm_refine03_S_FB",
+      "family": "tabm",
+      "representation": "S_FB",
+      "params": {
+        "width": 128,
+        "depth": 1,
+        "dropout": 0.2,
+        "lr": 0.00013196683534244928,
+        "weight_decay": 0.002427694671011444,
+        "batch_size": 512,
+        "k": 16,
+        "embeddings": false
+      }
+    },
+    {
+      "id": "tabm_refine03_SH_FB",
+      "family": "tabm",
+      "representation": "SH_FB",
+      "params": {
+        "width": 128,
+        "depth": 1,
+        "dropout": 0.2,
+        "lr": 0.00013196683534244928,
+        "weight_decay": 0.002427694671011444,
+        "batch_size": 512,
+        "k": 16,
+        "embeddings": false
+      }
+    },
+    {
+      "id": "tabm_refine04_S_FB",
+      "family": "tabm",
+      "representation": "S_FB",
+      "params": {
+        "width": 256,
+        "depth": 4,
+        "dropout": 0.0,
+        "lr": 0.0042365191622716,
+        "weight_decay": 0.012444969713542921,
+        "batch_size": 512,
+        "k": 32,
+        "embeddings": true
+      }
+    },
+    {
+      "id": "tabm_refine04_SH_FB",
+      "family": "tabm",
+      "representation": "SH_FB",
+      "params": {
+        "width": 256,
+        "depth": 4,
+        "dropout": 0.0,
+        "lr": 0.0042365191622716,
+        "weight_decay": 0.012444969713542921,
+        "batch_size": 512,
+        "k": 32,
+        "embeddings": true
+      }
+    },
+    {
+      "id": "tabm_refine05_S_FB",
+      "family": "tabm",
+      "representation": "S_FB",
+      "params": {
+        "width": 64,
+        "depth": 1,
+        "dropout": 0.35,
+        "lr": 0.00017380064865928915,
+        "weight_decay": 0.0001541116087732715,
+        "batch_size": 256,
+        "k": 32,
+        "embeddings": false
+      }
+    },
+    {
+      "id": "tabm_refine05_SH_FB",
+      "family": "tabm",
+      "representation": "SH_FB",
+      "params": {
+        "width": 64,
+        "depth": 1,
+        "dropout": 0.35,
+        "lr": 0.00017380064865928915,
+        "weight_decay": 0.0001541116087732715,
+        "batch_size": 256,
+        "k": 32,
+        "embeddings": false
+      }
+    },
+    {
+      "id": "tabm_refine06_S_FB",
+      "family": "tabm",
+      "representation": "S_FB",
+      "params": {
+        "width": 64,
+        "depth": 1,
+        "dropout": 0.5,
+        "lr": 0.004240192282778656,
+        "weight_decay": 9.813887132773614e-06,
+        "batch_size": 512,
+        "k": 32,
+        "embeddings": true
+      }
+    },
+    {
+      "id": "tabm_refine06_SH_FB",
+      "family": "tabm",
+      "representation": "SH_FB",
+      "params": {
+        "width": 64,
+        "depth": 1,
+        "dropout": 0.5,
+        "lr": 0.004240192282778656,
+        "weight_decay": 9.813887132773614e-06,
+        "batch_size": 512,
+        "k": 32,
+        "embeddings": true
+      }
+    },
+    {
+      "id": "tabm_refine07_S_FB",
+      "family": "tabm",
+      "representation": "S_FB",
+      "params": {
+        "width": 64,
+        "depth": 4,
+        "dropout": 0.5,
+        "lr": 0.00038254814887297555,
+        "weight_decay": 1.012530097771544e-06,
+        "batch_size": 256,
+        "k": 32,
+        "embeddings": false
+      }
+    },
+    {
+      "id": "tabm_refine07_SH_FB",
+      "family": "tabm",
+      "representation": "SH_FB",
+      "params": {
+        "width": 64,
+        "depth": 4,
+        "dropout": 0.5,
+        "lr": 0.00038254814887297555,
+        "weight_decay": 1.012530097771544e-06,
+        "batch_size": 256,
+        "k": 32,
+        "embeddings": false
+      }
+    },
+    {
+      "id": "tabm_refine08_S_FB",
+      "family": "tabm",
+      "representation": "S_FB",
+      "params": {
+        "width": 512,
+        "depth": 4,
+        "dropout": 0.2,
+        "lr": 0.0005497114812682591,
+        "weight_decay": 0.0017520747388638327,
+        "batch_size": 256,
+        "k": 32,
+        "embeddings": true
+      }
+    },
+    {
+      "id": "tabm_refine08_SH_FB",
+      "family": "tabm",
+      "representation": "SH_FB",
+      "params": {
+        "width": 512,
+        "depth": 4,
+        "dropout": 0.2,
+        "lr": 0.0005497114812682591,
+        "weight_decay": 0.0017520747388638327,
+        "batch_size": 256,
+        "k": 32,
+        "embeddings": true
+      }
+    },
+    {
+      "id": "tabm_refine09_S_FB",
+      "family": "tabm",
+      "representation": "S_FB",
+      "params": {
+        "width": 128,
+        "depth": 3,
+        "dropout": 0.35,
+        "lr": 0.0003139684036670755,
+        "weight_decay": 0.0029546268380882187,
+        "batch_size": 512,
+        "k": 32,
+        "embeddings": false
+      }
+    },
+    {
+      "id": "tabm_refine09_SH_FB",
+      "family": "tabm",
+      "representation": "SH_FB",
+      "params": {
+        "width": 128,
+        "depth": 3,
+        "dropout": 0.35,
+        "lr": 0.0003139684036670755,
+        "weight_decay": 0.0029546268380882187,
+        "batch_size": 512,
+        "k": 32,
+        "embeddings": false
+      }
+    },
+    {
+      "id": "tabm_refine10_S_FB",
+      "family": "tabm",
+      "representation": "S_FB",
+      "params": {
+        "width": 256,
+        "depth": 4,
+        "dropout": 0.1,
+        "lr": 0.00016834426706805903,
+        "weight_decay": 9.052999678118091e-06,
+        "batch_size": 256,
+        "k": 16,
+        "embeddings": true
+      }
+    },
+    {
+      "id": "tabm_refine10_SH_FB",
+      "family": "tabm",
+      "representation": "SH_FB",
+      "params": {
+        "width": 256,
+        "depth": 4,
+        "dropout": 0.1,
+        "lr": 0.00016834426706805903,
+        "weight_decay": 9.052999678118091e-06,
+        "batch_size": 256,
+        "k": 16,
+        "embeddings": true
+      }
+    },
+    {
+      "id": "tabm_refine11_S_FB",
+      "family": "tabm",
+      "representation": "S_FB",
+      "params": {
+        "width": 64,
+        "depth": 2,
+        "dropout": 0.1,
+        "lr": 0.0015139013884732193,
+        "weight_decay": 1.1152232770500266e-06,
+        "batch_size": 128,
+        "k": 32,
+        "embeddings": false
+      }
+    },
+    {
+      "id": "tabm_refine11_SH_FB",
+      "family": "tabm",
+      "representation": "SH_FB",
+      "params": {
+        "width": 64,
+        "depth": 2,
+        "dropout": 0.1,
+        "lr": 0.0015139013884732193,
+        "weight_decay": 1.1152232770500266e-06,
+        "batch_size": 128,
+        "k": 32,
+        "embeddings": false
+      }
+    }
+  ],
+  "reason": "Initial 128 validation candidates show neural gains below adoption threshold; broaden tuning before any test evaluation",
+  "unchanged": "original objectives, success thresholds, folds, inner stopping, seeds, wall deadlines and finalist rules",
+  "adaptive_validation_search": true,
+  "test_used": false
+}

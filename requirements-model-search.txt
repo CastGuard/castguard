@@ -1,0 +1,7 @@
+# Separate experimental environment; existing base environment is unchanged.
+-r requirements.txt
+xgboost==3.4.1
+tabm==0.0.3
+rtdl_num_embeddings==0.0.12
+# Install CUDA torch separately from the official cu128 index:
+# python -m pip install torch==2.11.0+cu128 --index-url https://download.pytorch.org/whl/cu128

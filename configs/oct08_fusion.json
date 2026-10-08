@@ -1,0 +1,22 @@
+{
+  "protocol": "oct08_fusion_v1",
+  "seeds": [17, 29, 43],
+  "schemes": ["within_run", "forward_run"],
+  "representations": ["S", "SH", "S_T", "SH_T", "S_FB", "SH_FB", "S_T_FB", "SH_T_FB"],
+  "models": {
+    "random_forest": {"n_estimators": 300, "min_samples_leaf": 20, "max_features": 0.5},
+    "logistic": {"C": 0.3, "max_iter": 3000}
+  },
+  "mapping": {
+    "injection_pressure": "Casting_Pressure",
+    "facility_CycleTime": "Cycle_Time",
+    "mechanical_strength": "Clamping_Force",
+    "biscuit_thickness": "Biscuit_Thickness",
+    "cooling_water_temp": "Coolant_Temp"
+  },
+  "source_population": "normal_pressure",
+  "bootstrap_repetitions": 1000,
+  "bootstrap_seed": 20261008,
+  "max_target_fits": 240,
+  "deadline_kst": "2026-10-08T21:30:00+09:00"
+}
