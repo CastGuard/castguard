@@ -1,0 +1,57 @@
+# Source publication: existing tracked data are preserved; new data stay local.
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+.DS_Store
+Thumbs.db
+**/syscfg.json
+artifacts/
+*.egg-info/
+catboost_info/
+
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+.aws/
+.codex/
+.agents/
+
+# Local inputs, trained artifacts and generated outputs (no deletion)
+data/
+incoming/
+verification_runs/
+review_rebuilt/
+deliverables/
+review/
+reports/*
+!reports/today_closeout/
+reports/today_closeout/*
+!reports/today_closeout/EXPERIMENT_REVIEW.md
+*.zip
+*.joblib
+*.pkl
+*.pickle
+
+# Internal work records and copied external source material
+AGENTS.md
+PACKAGE_README.md
+ROUND*_README.md
+docs/archive/
+docs/daily/
+docs/sources/
+docs/COMPETITION_READINESS_ROUND10.md
+docs/DAILY_REVIEW.md
+docs/REVIEW_2026-10-02.md
+docs/ROADMAP.md
+docs/STRATEGY.md
+docs/SUBMISSION.md
+docs/SUBMISSION_EVIDENCE_STATUS.md
+docs/TEAM_HANDOFF_2026-10-03.md
+docs/TODAY_CLOSEOUT_2026-10-03.md
+docs/USER_SCOPE_2026-10-03.md

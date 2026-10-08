@@ -40,6 +40,8 @@ def run(cfg: dict) -> str:
     gate, gcov, types = _csv("gate_results.csv", dtype={"fold": str}), _csv("ablation_C_gate_coverage.csv"), _csv("defect_type_results.csv")
     e40, f40 = _csv("ablation_E_p40.csv"), _csv("ablation_F_physics_direction.csv")
     insp, cost = _csv("kpi_inspection.csv"), _csv("kpi_cost_sensitivity.csv")
+    qk = _csv("kpi_queue_slots.csv")
+    qk20 = qk[qk.budget == 0.2].set_index("policy")
     cond, shap = _csv("error_by_condition.csv"), _csv("shap_importance.csv")
     inter = _csv("shap_interactions.csv") if (T / "shap_interactions.csv").exists() else None
     ow = _csv("operating_window_candidates.csv")
@@ -231,6 +233,12 @@ def run(cfg: dict) -> str:
 
 {_md(cost)}
 
+**보조 KPI: 슬롯 기반 검사 대기열 (검사 능력 상한 스트레스 테스트).** 위 KPI는 Shot이 도착할 때 validation에서 정한 임계값으로 바로 판정하므로 인과적이지만, 실제 검사율이 목표와 조금 다르고 위험한 시기에 검사가 몰릴 수 있다. 검사 인력이 Shot마다 일정 비율 b만큼만 생긴다는 더 엄격한 제약을 따로 시험했다. 각 가동구간의 test 부분을 도착 순서(source_row)대로 흘리면서 도착 i마다 ⌊(i+1)b⌋−⌊ib⌋개의 슬롯을 만들고, 쓰지 않은 슬롯은 이월하지 않는다. 대기열 우선순위는 공정값 결측(보류) → Gate 경보(GQ만) → 품질위험이다. FIFO는 같은 조건에서 도착 순으로 검사한다. 정책 세 가지와 예산은 미리 정했고 test 결과를 보고 고르지 않았다.
+
+{_md(qk[["budget", "policy", "capacity", "inspections_used", "gate_reviews", "defects_caught", "capture_rate", "random_capture_rate", "gain_vs_fifo_pp", "warmup_episodes_reviewed_within_k", "mean_wait_records"]])}
+
+검사 {_pct(0.2, 0)} 상한에서 포착률은 품질위험 순(Q) {_pct(qk20.loc["Q", "capture_rate"])}, Gate 우선(GQ) {_pct(qk20.loc["GQ", "capture_rate"])}, 도착 순(FIFO) {_pct(qk20.loc["FIFO", "capture_rate"])}다. 같은 예산의 임계값 방식({_pct(i20.capture_rate)})보다 크게 낮고, FIFO보다도 낮다. 이유는 두 가지다. ① 슬롯이 구간마다 똑같이 나뉘므로 모델의 주된 힘인 "지금 위험한 시기인가"(구간 간 차이)를 쓸 수 없고, 구간 안 순위만 남는다(위 구간별 AUC 참고). ② test 구간 앞부분에 불량이 몰려 있어 도착 순 검사가 우연히 유리하다. GQ는 Gate 검토({int(qk20.loc["GQ", "gate_reviews"])}건)도 같은 검사 능력을 쓴다고 보수적으로 계산했다. 대신 예열 에피소드 {qk20.loc["GQ", "warmup_episodes_reviewed_within_k"]}를 첫 {cfg["gate_detect_within_shots"]} Shot 안에 검토한다. 결론적으로 CastGuard의 검사 KPI는 **위험한 시기에 검사를 늘릴 수 있는 유연한 검사 운영**을 전제로 하며, 검사 인력이 Shot마다 고정되어 있다면 품질위험 순위만으로는 이득이 작다. 같은 데이터에서 JH 브랜치의 대기열 실험도 같은 방향(품질 순 < 도착 순)을 보였다.
+
 **운전창 후보 (모델 기반, 인과 아님).** 고위험 상위 5% Shot {len(ow)}개에서 조정 가능한 변수 하나를 같은 제품의 관측 범위(p10~p90) 안에서 바꿨을 때 예상 위험이 평균 {(ow.risk_before - ow.risk_after).mean():.3f} 낮아졌다. 가장 자주 제안된 변수는 {ow.suggested_var.value_counts().index[0]}다. 현장 시험 전 후보로만 사용한다.
 
 ## 5. 창의성 · 확장성
@@ -266,6 +274,9 @@ Type 1 기준 약 7분, Type 2 기준 약 12분이다. 가정이 깨져도 지�
 
 **Q7. 운전창 추천은 믿을 수 있는가?**
 모델 기반 후보이지 인과효과가 아니다. 관측된 정상 범위 안에서만 제안하고, 현장 시험 전에는 조건 변경을 자동 적용하지 않는다.
+
+**Q8. 검사 인력이 고정되어 있으면 효과가 있나?**
+Shot마다 같은 비율로만 검사할 수 있는 대기열로 따로 시험했다. 검사 20% 상한에서 품질위험 순 포착률은 {_pct(qk20.loc["Q", "capture_rate"])}로 도착 순({_pct(qk20.loc["FIFO", "capture_rate"])})보다 낮았다. 모델의 힘이 구간 안 개별 Shot보다 위험한 시기를 가려내는 데 있기 때문이다. 그래서 도입안은 고위험 시기에 검사 인력을 늘리는 유연 운영(위 KPI, 검사 {_pct(i20.test_inspection_rate, 0)}로 불량 {_pct(i20.capture_rate, 0)})이고, 이 결과를 숨기지 않고 함께 제시한다.
 
 ## 출처
 

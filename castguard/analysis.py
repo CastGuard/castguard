@@ -289,6 +289,101 @@ def kpi_tables(fp, cfg):
     return insp, cost
 
 
+# ───────────────────────── 12b. 슬롯 기반 검사 대기열 KPI (JH 방식 보조 KPI) ─────────────────────────
+QUEUE_POLICIES = ("FIFO", "Q", "GQ")
+
+
+def queue_capacity(n: int, budget: float) -> int:
+    from fractions import Fraction
+    r = Fraction(budget).limit_denominator(1000)
+    return n * r.numerator // r.denominator
+
+
+def stream_queue(rows: pd.DataFrame, policy: str, budget: float) -> pd.DataFrame:
+    """한 가동구간의 Shot을 도착 순서(source_row)대로 흘려보내며 검사 슬롯을 배정한다.
+    - 도착 i마다 floor((i+1)b) - floor(ib)개의 슬롯이 생기고, 쓰지 않은 슬롯은 이월하지 않는다.
+    - 우선순위: 공정값 결측(보류) → Gate 경보(GQ만, Gate 확률 높은 순) → 품질위험(높은 순, FIFO는 도착 순).
+    - 입력은 점수·관측값뿐이며 정답 라벨과 미래 행은 읽지 않는다."""
+    import heapq
+    from fractions import Fraction
+    if policy not in QUEUE_POLICIES:
+        raise ValueError(policy)
+    r = Fraction(budget).limit_denominator(1000)
+    rows = rows.sort_values("source_row").reset_index(drop=True)
+    n = len(rows)
+    hold = rows.process_missing.to_numpy(bool)
+    alarm = rows.gate_alarm.to_numpy(bool) & ~hold & (policy == "GQ")
+    q = rows.quality_p.to_numpy(float)
+    inspected = np.zeros(n, bool)
+    served = np.full(n, -1)
+    reason = np.full(n, "none", dtype=object)
+    heap = []
+    for i in range(n):
+        if hold[i]:
+            key, reason[i] = (0, 0.0, i), "hold"
+        elif alarm[i]:
+            key, reason[i] = (1, -float(rows.gate_p.iat[i]), i), "gate"
+        elif np.isfinite(q[i]):
+            key, reason[i] = (2, 0.0 if policy == "FIFO" else -q[i], i), "quality"
+        else:
+            key = None
+        if key is not None:
+            heapq.heappush(heap, key)
+        for _ in range((i + 1) * r.numerator // r.denominator - i * r.numerator // r.denominator):
+            if heap:
+                j = heapq.heappop(heap)[-1]
+                inspected[j], served[j] = True, i
+    assert inspected.sum() <= queue_capacity(n, budget)
+    out = rows.assign(inspected=inspected, reason=reason, wait_records=np.where(inspected, served - np.arange(n), np.nan),
+                      left_in_queue=(reason != "none") & ~inspected)
+    return out
+
+
+def queue_kpi(fp, preds, joined, m41, folds, sel, cfg):
+    """운영 현실 보조 KPI: 검사 능력이 Shot마다 일정 비율로만 생긴다는 제약 하에서 실제로 잡히는 불량 비율.
+    오프라인 임계값 KPI(kpi_inspection.csv)는 test 전체를 본 뒤 상위 k%를 고르는 것과 같지만, 이 KPI는
+    도착 순서대로만 결정하므로 더 보수적이다. 정책·예산은 미리 정하고 test 결과로 고르지 않는다."""
+    ids = folds[(folds.dataset == "m41") & (folds.scheme == "within_run") & (folds.role == "test")].row_id
+    base = m41[m41.row_id.isin(ids)][["row_id", "run_id", "Shot", "source_row", "process_missing", "Machine_Status", "episode_id"]]
+    q = fp[fp.role == "test"].merge(joined[["row_id", "run_id", "Shot"]], on="row_id")
+    q = q.assign(m41_row_id="m41_r" + q.run_id.astype(str) + "_s" + q.Shot.astype(str))[["m41_row_id", "p", "y"]]
+    q.columns = ["row_id", "quality_p", "y_defect"]
+    g = seed_mean(preds, kind="gate", scheme="within_run", model=sel["gate_model"])
+    g = g[g.role == "test"].merge(m41[["row_id", "run_id", "source_row"]], on="row_id").sort_values("source_row")
+    g["gate_alarm"] = np.concatenate([adaptive_alarm(x, cfg) for _, x in g.groupby("run_id", sort=False)])
+    d = base.merge(q, on="row_id", how="left").merge(g[["row_id", "p", "gate_alarm"]].rename(columns={"p": "gate_p"}),
+                                                       on="row_id", how="left")
+    d["gate_alarm"] = d.gate_alarm.fillna(False).astype(bool)
+    rows, k = [], cfg["gate_detect_within_shots"]
+    for budget in cfg["inspection_rates"]:
+        for policy in QUEUE_POLICIES:
+            a = pd.concat([stream_queue(x, policy, budget) for _, x in d.groupby("run_id", sort=True)], ignore_index=True)
+            cap = sum(queue_capacity(len(x), budget) for _, x in d.groupby("run_id"))
+            labeled = a.y_defect.notna()
+            pos = a.y_defect == 1
+            qi = a.inspected & labeled
+            eps = a[a.episode_id.notna()].groupby("episode_id")
+            reach = sum(bool((e.inspected & (e.reason == "gate")).to_numpy()[:k].any()) for _, e in eps)
+            capture = float((a.inspected & pos).sum() / pos.sum())
+            rnd = float(qi.sum() / labeled.sum())
+            rows.append({"budget": budget, "policy": policy, "arrivals": len(a), "capacity": int(cap),
+                         "inspections_used": int(a.inspected.sum()),
+                         "quality_inspections": int(qi.sum()), "gate_reviews": int((a.inspected & (a.reason == "gate")).sum()),
+                         "defects_caught": int((a.inspected & pos).sum()), "defects_total": int(pos.sum()),
+                         "capture_rate": round(capture, 4), "random_capture_rate": round(rnd, 4),
+                         "lift_vs_random": round(capture / max(rnd, 1e-9), 2),
+                         "precision": round(float(a.y_defect[qi].mean()), 4) if qi.any() else np.nan,
+                         "warmup_episodes_reviewed_within_k": f"{reach} / {eps.ngroups}",
+                         "mean_wait_records": round(float(a.wait_records.mean()), 2),
+                         "p90_wait_records": round(float(a.wait_records.quantile(0.9)), 1),
+                         "left_in_queue": int(a.left_in_queue.sum())})
+    out = pd.DataFrame(rows)
+    for b in cfg["inspection_rates"]:
+        f = out[(out.budget == b) & (out.policy == "FIFO")].capture_rate.iloc[0]
+        out.loc[out.budget == b, "gain_vs_fifo_pp"] = (100 * (out.loc[out.budget == b, "capture_rate"] - f)).round(1)
+    return _save(out, "kpi_queue_slots.csv")
+
+
 def condition_table(fp, joined, folds):
     t = fp[fp.role == "test"].merge(joined, on="row_id", suffixes=("", "_j"))
     train = joined[joined.row_id.isin(folds[(folds.dataset == "q42") & (folds.scheme == "within_run") & (folds.role == "train")].row_id)]
@@ -453,7 +548,8 @@ def run(cfg: dict, log=print) -> dict:
     gs = gate_tables(metrics, preds, m41, cfg, sel); log("  Gate·적용범위(C)")
     type_table(metrics); p40_table(metrics); physics_table(joined, p40, folds, cfg); log("  유형·#40(E)·물리방향(F)")
     fp = final_predictions(preds, sel)
-    kpi_tables(fp, cfg); condition_table(fp, joined, folds); log("  KPI·조건별 오류분석")
+    kpi_tables(fp, cfg); queue_kpi(fp, preds, joined, m41, folds, sel, cfg); condition_table(fp, joined, folds)
+    log("  KPI·슬롯 대기열 KPI·조건별 오류분석")
     imp, inter, ow = explain(joined, folds, sel, cfg); log("  SHAP·상호작용·운전창")
     submission_predictions(fp, preds, joined, m41, sel, cfg); log("  제출용 test 예측")
     figures(fp, comp, pd.read_csv(paths.TABLES / "failure_conditions.csv", dtype={"fold": str}),

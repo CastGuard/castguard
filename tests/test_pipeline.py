@@ -83,3 +83,26 @@ def test_warmup_episode_never_split_across_roles():
     f = pd.read_csv(paths.FOLDS, dtype={"fold": str, "episode_id": str, "order": str})
     m = f[(f.dataset == "m41") & (f.role != "excluded") & f.episode_id.notna()]
     assert (m.groupby(["scheme", "fold", "episode_id"]).role.nunique() == 1).all()
+
+
+def test_slot_queue_capacity_priority_and_no_banking():
+    import pandas as pd
+    from castguard.analysis import stream_queue, queue_capacity
+    n = 20
+    rows = pd.DataFrame({"row_id": [f"r{i}" for i in range(n)], "source_row": range(n), "Shot": range(1, n + 1),
+                         "process_missing": [False] * n, "gate_alarm": [False] * n, "gate_p": [0.0] * n,
+                         "quality_p": [0.1] * n})
+    rows.loc[3, "quality_p"] = 0.9
+    rows.loc[4, "process_missing"] = True
+    rows.loc[5, ["gate_alarm", "gate_p"]] = [True, 0.8]
+    for policy in ["FIFO", "Q", "GQ"]:
+        a = stream_queue(rows, policy, 0.2)
+        assert a.inspected.sum() <= queue_capacity(n, 0.2) == 4
+        assert (a.wait_records.dropna() >= 0).all()          # 도착 전에 검사하지 않는다
+        assert a.loc[4, "inspected"]                         # 결측 보류는 모든 정책에서 최우선
+    assert stream_queue(rows, "Q", 0.2).loc[3, "inspected"]
+    assert stream_queue(rows, "GQ", 0.2).loc[5, "inspected"]
+    # 슬롯은 이월되지 않는다: 앞쪽이 비어 있으면 그 슬롯은 사라진다
+    empty = rows.assign(quality_p=float("nan"), process_missing=False, gate_alarm=False)
+    empty.loc[n - 1, "quality_p"] = 0.5
+    assert stream_queue(empty, "Q", 0.2).inspected.sum() == 1
